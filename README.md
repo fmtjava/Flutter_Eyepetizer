@@ -1,16 +1,6 @@
-# flutter_eyepetizer
+# OpenGitHub
+一款基于Flutter实现的精美开眼视频跨平台App,适合新手入门，快速掌握flutter开发。<br />
 
-A new Flutter application.
+**开源不易，如果喜欢的话希望给个 `Star` 或 `Fork` ^_^ ，谢谢**
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# 项目截图
