@@ -24,8 +24,9 @@
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1551567911741_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1621567911767_.pic.jpg" width="270"/>
 </div>
+
 # 下载体验(Android版本) 
  - 点击[![](https://img.shields.io/badge/Download-apk-green.svg)](https://fir.im/r734) 下载
  - 下方二维码下载(每日上限100次，如达到上限，还是 clone 源码吧！✧(≖ ◡ ≖✿))）<br/>
-   <img src="https://github.com/fmtjava/OpenGitHub/blob/master/image/1564135578.png"/>
+   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1567913521.png"/>
  - ios请自行clone项目代码运行  
