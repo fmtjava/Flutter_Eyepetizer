@@ -69,7 +69,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(top: 15),
                           child: Text(
-                              '#${item.data.category} / ${item.data.author.name}',
+                              '#${item.data.category} / ${item.data.author?.name}',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,

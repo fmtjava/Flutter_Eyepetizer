@@ -21,14 +21,19 @@ class VideoDetailPage extends StatefulWidget {
 class _VideoDetailPageState extends State<VideoDetailPage>
     with WidgetsBindingObserver {
   List<Item> itemList = [];
+  String _videoUrl =
+      'http://jzvd.nathen.cn/35b3dc97fbc240219961bd1fccc6400b/8d9b76ab5a584bce84a8afce012b72d3-5287d2089db37e62345123a1be272f8bxxxx.mp4';
   VideoPlayerController _videoPlayerController;
-  ChewieController _chewieController;
+  ChewieController _cheWieController;
   bool _loading = true;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this); //监听页面可见与不可见
+    _videoPlayerController = VideoPlayerController.network(_videoUrl);
+    _cheWieController = ChewieController(
+        videoPlayerController: _videoPlayerController, autoPlay: true);
     initChewieController();
     _loadVideoRelateData();
   }
@@ -36,7 +41,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
-      _chewieController.pause();
+      _cheWieController.pause();
     }
   }
 
@@ -44,7 +49,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _videoPlayerController.dispose();
-    _chewieController.dispose();
+    _cheWieController.dispose();
     super.dispose();
   }
 
@@ -63,7 +68,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
             Container(
               height: 230,
               child: Chewie(
-                controller: _chewieController,
+                controller: _cheWieController,
               ),
             ),
             Expanded(
@@ -277,10 +282,15 @@ class _VideoDetailPageState extends State<VideoDetailPage>
       for (var playInfo in playInfoList) {
         if (playInfo.type == 'high') {
           _videoPlayerController = VideoPlayerController.network(playInfo.url);
-          _chewieController = ChewieController(
+          _cheWieController = ChewieController(
               videoPlayerController: _videoPlayerController, autoPlay: true);
+          break;
         }
       }
+    } else {
+      //默认播放初始化,防止Chewie报错
+      _videoPlayerController = VideoPlayerController.network(
+          'http://jzvd.nathen.cn/35b3dc97fbc240219961bd1fccc6400b/8d9b76ab5a584bce84a8afce012b72d3-5287d2089db37e62345123a1be272f8bxxxx.mp4');
     }
   }
 }
