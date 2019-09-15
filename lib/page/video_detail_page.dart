@@ -21,8 +21,6 @@ class VideoDetailPage extends StatefulWidget {
 class _VideoDetailPageState extends State<VideoDetailPage>
     with WidgetsBindingObserver {
   List<Item> itemList = [];
-  String _videoUrl =
-      'http://jzvd.nathen.cn/35b3dc97fbc240219961bd1fccc6400b/8d9b76ab5a584bce84a8afce012b72d3-5287d2089db37e62345123a1be272f8bxxxx.mp4';
   VideoPlayerController _videoPlayerController;
   ChewieController _cheWieController;
   bool _loading = true;
@@ -31,10 +29,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this); //监听页面可见与不可见
-    _videoPlayerController = VideoPlayerController.network(_videoUrl);
-    _cheWieController = ChewieController(
-        videoPlayerController: _videoPlayerController, autoPlay: true);
-    initChewieController();
+    initController();
     _loadVideoRelateData();
   }
 
@@ -276,7 +271,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     }
   }
 
-  void initChewieController() {
+  void initController() {
     List<PlayInfo> playInfoList = widget.item.data.playInfo;
     if (playInfoList.length > 1) {
       for (var playInfo in playInfoList) {
@@ -288,9 +283,11 @@ class _VideoDetailPageState extends State<VideoDetailPage>
         }
       }
     } else {
-      //默认播放初始化,防止Chewie报错
-      _videoPlayerController = VideoPlayerController.network(
-          'http://jzvd.nathen.cn/35b3dc97fbc240219961bd1fccc6400b/8d9b76ab5a584bce84a8afce012b72d3-5287d2089db37e62345123a1be272f8bxxxx.mp4');
+      //若无高清视频，则取默认视频地址
+      _videoPlayerController =
+          VideoPlayerController.network(widget.item.data.playUrl);
+      _cheWieController = ChewieController(
+          videoPlayerController: _videoPlayerController, autoPlay: true);
     }
   }
 }

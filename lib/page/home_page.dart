@@ -16,7 +16,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   List<Item> _bannerList = [];
   List<Item> _itemList = [];
   int _currentIndex = 0;
@@ -34,31 +35,29 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: MediaQuery.removePadding(
-            context: context,
-            child: LoadingContainer(
-              loading: _loading,
-              child: SmartRefresher(
-                  controller: _refreshController,
-                  onRefresh: _refresh,
-                  onLoading: _loadMore,
-                  enablePullUp: true,
-                  child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        if (index == 0) {
-                          return _banner(context);
-                        } else {
-                          if (_itemList[index].type == 'textHeader') {
-                            return _titleItem(_itemList[index]);
-                          }
-                          return RankWidgetItem(item: _itemList[index]);
-                        }
-                      },
-                      separatorBuilder: (context, index) {
-                        return Divider(height: 0.5);
-                      },
-                      itemCount: _itemList.length)),
-            )));
+        body: LoadingContainer(
+      loading: _loading,
+      child: SmartRefresher(
+          controller: _refreshController,
+          onRefresh: _refresh,
+          onLoading: _loadMore,
+          enablePullUp: true,
+          child: ListView.separated(
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return _banner(context);
+                } else {
+                  if (_itemList[index].type == 'textHeader') {
+                    return _titleItem(_itemList[index]);
+                  }
+                  return RankWidgetItem(item: _itemList[index]);
+                }
+              },
+              separatorBuilder: (context, index) {
+                return Divider(height: 0.5);
+              },
+              itemCount: _itemList.length)),
+    ));
   }
 
   _banner(BuildContext context) {

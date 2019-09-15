@@ -30,24 +30,21 @@ class _FollowPageState extends State<FollowPage>
   @override
   // ignore: must_call_super
   Widget build(BuildContext context) {
-    return Container(
-        child: MediaQuery.removePadding(
-            context: context,
-            child: LoadingContainer(
-                loading: _loading,
-                child: SmartRefresher(
-                    controller: _refreshController,
-                    onRefresh: _refresh,
-                    onLoading: _loadMore,
-                    enablePullUp: true,
-                    child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          return FollowPageItem(item: _itemList[index]);
-                        },
-                        separatorBuilder: (context, index) {
-                          return Divider(height: 0.5);
-                        },
-                        itemCount: _itemList?.length ?? 0)))));
+    return LoadingContainer(
+        loading: _loading,
+        child: SmartRefresher(
+            controller: _refreshController,
+            onRefresh: _refresh,
+            onLoading: _loadMore,
+            enablePullUp: true,
+            child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return FollowPageItem(item: _itemList[index]);
+                },
+                separatorBuilder: (context, index) {
+                  return Divider(height: 0.5);
+                },
+                itemCount: _itemList?.length ?? 0)));
   }
 
   void _refresh() async {

@@ -4,6 +4,7 @@ import 'package:flutter_eyepetizer/repository/rank_repository.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/rank_widget_item.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RankListPage extends StatefulWidget {
   final String apiUrl;
@@ -18,6 +19,8 @@ class _RankListPageState extends State<RankListPage>
     with AutomaticKeepAliveClientMixin {
   List<Item> _itemList = [];
   bool _loading = true;
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -30,15 +33,15 @@ class _RankListPageState extends State<RankListPage>
   Widget build(BuildContext context) {
     return LoadingContainer(
       loading: _loading,
-      child: Container(
-          child: MediaQuery.removePadding(
-              removeTop: true,
-              context: context,
-              child: ListView.builder(
-                  itemCount: _itemList.length,
-                  itemBuilder: (context, index) {
-                    return RankWidgetItem(item: _itemList[index]);
-                  }))),
+      child: SmartRefresher(
+          controller: _refreshController,
+          enablePullDown: true,
+          onRefresh: _loadData,
+          child: ListView.builder(
+              itemCount: _itemList.length,
+              itemBuilder: (context, index) {
+                return RankWidgetItem(item: _itemList[index]);
+              })),
     );
   }
 
@@ -54,6 +57,7 @@ class _RankListPageState extends State<RankListPage>
           _loading = false;
         });
       }
+      _refreshController.refreshCompleted();
     } catch (e) {
       ToastUtil.showError(e.toString());
       setState(() {

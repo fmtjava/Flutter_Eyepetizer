@@ -27,19 +27,15 @@ class _CategoryPageState extends State<CategoryPage>
     return LoadingContainer(
       loading: _loading,
       child: Container(
-        padding: EdgeInsets.all(5),
-        decoration: BoxDecoration(color: Color(0xfff2f2f2)),
-        child: MediaQuery.removePadding(
-            removeTop: true,
-            context: context,
-            child: GridView.builder(
-                itemCount: _list?.length ?? 0,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, mainAxisSpacing: 5, crossAxisSpacing: 5),
-                itemBuilder: (context, index) {
-                  return CategoryWidgetItem(categoryModel: _list[index]);
-                })),
-      ),
+          padding: EdgeInsets.all(5),
+          decoration: BoxDecoration(color: Color(0xfff2f2f2)),
+          child: GridView.builder(
+              itemCount: _list?.length ?? 0,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, mainAxisSpacing: 5, crossAxisSpacing: 5),
+              itemBuilder: (context, index) {
+                return CategoryWidgetItem(categoryModel: _list[index]);
+              })),
     );
   }
 
