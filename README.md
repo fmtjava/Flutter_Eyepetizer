@@ -31,6 +31,9 @@
    <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1567913521.png"/>
  - ios请自行clone项目代码运行  
  # 更新日志
+ ### v1.0.1
+   * 热门页面添加下拉刷新功能
+   * 修复bug和优化代码，后续持续完善中...
  ### v1.0.0
    * 初始化项目，完成开眼视频App核心功能，目前实现首页、发现、热门、分类、我的、视频详情、视频播放等功能，后续持续完善中...
 # Thanks
