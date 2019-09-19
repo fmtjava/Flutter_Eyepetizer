@@ -31,6 +31,9 @@
    <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1567913521.png"/>
  - ios请自行clone项目代码运行  
  # 更新日志
+  ### v1.0.2
+   * 实现观看记录功能包含添加观看记录、观看记录列表展示、观看记录列表侧滑删除
+   * 修复bug和优化代码，后续持续完善中...
  ### v1.0.1
    * 热门页面添加下拉刷新功能
    * 修复bug和优化代码，后续持续完善中...
@@ -44,6 +47,7 @@
   - [flustars](https://github.com/Sky24n/flustars) 工具类集合
   - [pull_to_refresh](https://github.com/peng8350/flutter_pulltorefresh) 上拉刷新，下拉加载框架
   - [chewie](https://github.com/brianegan/chewie) 视频播放器框架
+  - [shared_preferences](https://github.com/flutter/plugins) 本地缓存框架
   - [flutter_splash_screen](https://github.com/crazycodeboy/flutter_splash_screen) 启动白屏处理框架
   
  # 关于我
