@@ -51,6 +51,9 @@
   - Email：2694746499@qq.com
   - Github：https://github.com/fmtjava
   
+ # 声明
+  项目中的 API 均来自开眼视频，纯属学习交流使用，不得用于商业用途！
+  
   # License 
   
   
