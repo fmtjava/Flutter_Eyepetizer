@@ -63,7 +63,7 @@ flutter:
     - images/ic_like.png
     - images/ic_share_white.png
     - images/icon_comment.png
-      - images/ic_img_avatar.png
+    - images/ic_img_avatar.png
     - images/icon_like_grey.png
     - images/icon_comment_grey.png
   #  - images/a_dot_ham.jpeg
