@@ -8,6 +8,8 @@ import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
 import 'package:video_player/video_player.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class VideoDetailPage extends StatefulWidget {
   final Item item;
@@ -30,12 +32,14 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     super.initState();
     WidgetsBinding.instance.addObserver(this); //监听页面可见与不可见
     initController();
+    _saveWatchHistory();
     _loadVideoRelateData();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
+      //页面不可见时,暂停视频
       _cheWieController.pause();
     }
   }
@@ -232,6 +236,9 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                 item: itemList[index],
                                 callBack: () {
                                   _videoPlayerController.pause();
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => VideoDetailPage(
+                                          item: itemList[index])));
                                 });
                           }
                           return Padding(
@@ -251,6 +258,20 @@ class _VideoDetailPageState extends State<VideoDetailPage>
         ),
       ),
     );
+  }
+
+  void _saveWatchHistory() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> watchList = prefs.getStringList("watch_history_list");
+    if (watchList == null) {
+      watchList = List();
+    }
+    var jsonParam = widget.item.toJson();
+    var jsonStr = json.encode(jsonParam);
+    if (!watchList.contains(jsonStr)) {
+      watchList.add(json.encode(jsonParam));
+      prefs.setStringList("watch_history_list", watchList);
+    }
   }
 
   void _loadVideoRelateData() async {

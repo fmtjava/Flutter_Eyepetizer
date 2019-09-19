@@ -31,6 +31,7 @@ dependencies:
   pull_to_refresh: ^1.5.5
   chewie: ^0.9.7
   flutter_splash_screen: ^0.1.0
+  shared_preferences: ^0.5.3+4
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,7 @@ flutter:
     - images/ic_img_avatar.png
     - images/icon_like_grey.png
     - images/icon_comment_grey.png
+    - images/ic_no_data.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

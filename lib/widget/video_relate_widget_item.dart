@@ -2,13 +2,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
-import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 
 class VideoRelateWidgetItem extends StatelessWidget {
   final Item item;
   final VoidCallback callBack;
+  final Color titleColor;
+  final Color categoryColor;
 
-  const VideoRelateWidgetItem({Key key, this.item, this.callBack})
+  const VideoRelateWidgetItem(
+      {Key key,
+      this.item,
+      this.callBack,
+      this.titleColor = Colors.white,
+      this.categoryColor = Colors.white})
       : super(key: key);
 
   @override
@@ -16,8 +22,6 @@ class VideoRelateWidgetItem extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           callBack();
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => VideoDetailPage(item: item)));
         },
         child: Container(
           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -62,7 +66,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
                       children: <Widget>[
                         Text(item.data.title,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: titleColor,
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             )),
@@ -71,7 +75,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
                           child: Text(
                               '#${item.data.category} / ${item.data.author?.name}',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: categoryColor,
                                 fontSize: 12,
                               )),
                         ),

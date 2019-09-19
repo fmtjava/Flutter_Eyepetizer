@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/page/watch_history_page.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -63,7 +64,10 @@ class _MinePageState extends State<MinePage> {
           _settingWidget('我的消息'),
           _settingWidget('我的记录'),
           _settingWidget('我的缓存'),
-          _settingWidget('观看记录'),
+          _settingWidget('观看记录', callback: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => WatchHistoryPage()));
+          }),
           _settingWidget('意见反馈')
         ],
       )),
@@ -85,12 +89,15 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
-  Widget _settingWidget(String text) {
-    return Padding(
-      padding: EdgeInsets.only(top: 30),
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 16, color: Colors.black87),
+  Widget _settingWidget(String text, {VoidCallback callback}) {
+    return GestureDetector(
+      onTap: callback,
+      child: Padding(
+        padding: EdgeInsets.only(top: 30),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 16, color: Colors.black87),
+        ),
       ),
     );
   }
