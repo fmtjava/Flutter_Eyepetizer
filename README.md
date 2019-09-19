@@ -25,6 +25,10 @@
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1621567911767_.pic.jpg" width="270"/>
 </div>
 
+<div style="float:right">
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1641568882379_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
+</div>
+
 # 下载体验(Android版本) 
  - 点击[![](https://img.shields.io/badge/Download-apk-green.svg)](https://fir.im/r734) 下载
  - 下方二维码下载(每日上限100次，如达到上限，还是 clone 源码吧！✧(≖ ◡ ≖✿))）<br/>
