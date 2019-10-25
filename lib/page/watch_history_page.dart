@@ -49,7 +49,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
               offstage: _itemList == null || _itemList.length == 0,
               child: ListView.separated(
                   itemBuilder: (context, index) {
-                    return Dismissible(
+                    return Dismissible(//滑动删除控件
                       //列表侧滑删除'
                       key: Key(_itemList[index].toString()),
                       child: VideoRelateWidgetItem(
@@ -65,7 +65,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                       background: Container(
                         color: Colors.red,
                       ),
-                      onDismissed: (direction) {
+                      onDismissed: (direction) {//滑动删除事件
                         _remove(index);
                         setState(() {
                           _itemList.removeAt(index);
