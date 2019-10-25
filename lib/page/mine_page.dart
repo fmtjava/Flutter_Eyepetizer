@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/page/watch_history_page.dart';
+import 'package:flutter_eyepetizer/page/web_page.dart';
+
+const USER_INFO_URL = 'https://github.com/fmtjava/';
 
 class MinePage extends StatefulWidget {
   @override
@@ -33,12 +36,16 @@ class _MinePageState extends State<MinePage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: Text(
-              '查看个人主页 >',
-              style: TextStyle(fontSize: 12, color: Colors.grey),
-            ),
-          ),
+              padding: EdgeInsets.only(top: 10),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => WebPage(url: USER_INFO_URL)));
+                  },
+                  child: Text(
+                    '查看个人主页 >',
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  ))),
           Padding(
             padding: EdgeInsets.only(top: 20),
             child: Row(
