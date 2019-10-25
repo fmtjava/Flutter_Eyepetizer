@@ -50,6 +50,7 @@
   - [cached_network_image](https://github.com/renefloor/flutter_cached_network_image) 图片缓存框架
   - [http](https://github.com/dart-lang/http) 网络请求框架
   - [fluttertoast](https://github.com/PonnamKarthik/FlutterToast) 吐司提示框架
+  - [flutter_webview_plugin](https://github.com/fluttercommunity/flutter_webview_plugin) webView框架
   - [flutter_swiper](https://github.com/best-flutter/flutter_swiper) 轮播图框架
   - [flustars](https://github.com/Sky24n/flustars) 工具类集合
   - [pull_to_refresh](https://github.com/peng8350/flutter_pulltorefresh) 上拉刷新，下拉加载框架
