@@ -78,6 +78,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                   },
                   itemCount: _itemList?.length ?? 0)),
           Offstage(
+            //控制控件显示或隐藏
             offstage: _itemList != null && _itemList.length > 0,
             child: Center(
               child: Image.asset('images/ic_no_data.png'),
