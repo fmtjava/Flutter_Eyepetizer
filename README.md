@@ -35,6 +35,9 @@
    <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1567913521.png"/>
  - ios请自行clone项目代码运行  
  # 更新日志
+  ### v1.0.3
+   * 实现个人主页功能
+   * 修复bug和优化代码，后续持续完善中...
   ### v1.0.2
    * 实现观看记录功能包含添加观看记录、观看记录列表展示、观看记录列表侧滑删除
    * 修复bug和优化代码，后续持续完善中...
