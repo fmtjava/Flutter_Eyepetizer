@@ -60,6 +60,7 @@
   - [flutter_splash_screen](https://github.com/crazycodeboy/flutter_splash_screen) 启动白屏处理框架
   
  # 关于我
+  - WX：fmtjava
   - QQ：2694746499
   - Email：2694746499@qq.com
   - Github：https://github.com/fmtjava
