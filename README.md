@@ -5,7 +5,7 @@
 
 # 项目截图
 <div style="float:right">
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1561567911748_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1911576051895_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1581567911754_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1601567911762_.pic.jpg" width="270"/>
 </div>
@@ -27,7 +27,8 @@
 
 <div style="float:right">
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1641568882379_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1791574408537_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1901576051894_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1891576051893_.pic.jpg" width="270"/>
 </div>
 
 # 下载体验(Android版本) 
@@ -36,6 +37,9 @@
    <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1567913521.png"/>
  - ios请自行clone项目代码运行  
  # 更新日志
+  ### v1.0.4
+   * 添加头像修改功能
+   * 修复观看记录侧滑删除key值无法匹配以及子页面跳转后返回首页重新绘制bug，后续持续完善中...
   ### v1.0.3
    * 实现个人主页功能
    * 修复bug和优化代码，后续持续完善中...
@@ -58,6 +62,7 @@
   - [chewie](https://github.com/brianegan/chewie) 视频播放器框架
   - [shared_preferences](https://github.com/flutter/plugins) 本地缓存框架
   - [flutter_splash_screen](https://github.com/crazycodeboy/flutter_splash_screen) 启动白屏处理框架
+  - [image_picker](https://github.com/flutter/plugins/tree/master/packages/image_picker) 相册取图/拍照框架
   
  # 关于我
   - WX：fmtjava
