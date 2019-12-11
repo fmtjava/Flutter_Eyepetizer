@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:flutter_eyepetizer/util/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
@@ -30,7 +30,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
               Navigator.of(context).pop();
             },
             child: Icon(
-              Icons.arrow_back_ios,
+              Icons.arrow_back,
               size: 20,
               color: Colors.black,
             ),
@@ -49,9 +49,9 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
               offstage: _itemList == null || _itemList.length == 0,
               child: ListView.separated(
                   itemBuilder: (context, index) {
-                    return Dismissible(//滑动删除控件
-                      //列表侧滑删除'
-                      key: Key(_itemList[index].toString()),
+                    return Dismissible(
+                      //滑动删除控件
+                      key: Key("key_${_itemList[index].data.id}"), //删除的唯一标示
                       child: VideoRelateWidgetItem(
                         item: _itemList[index],
                         callBack: () {
@@ -65,11 +65,12 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                       background: Container(
                         color: Colors.red,
                       ),
-                      onDismissed: (direction) {//滑动删除事件
-                        _remove(index);
+                      onDismissed: (direction) {
+                        //滑动删除事件
                         setState(() {
                           _itemList.removeAt(index);
                         });
+                        _remove(index);
                       },
                     );
                   },
@@ -91,13 +92,13 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
 
   void _loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    _watchList = prefs.getStringList("watch_history_list");
+    _watchList = prefs.getStringList(Constant.watchHistoryList);
     if (_watchList != null && _watchList.length > 0) {
+      var list = _watchList.map((value) {
+        return Item.fromJson(json.decode(value));
+      }).toList();
       setState(() {
-        _itemList = _watchList.map((value) {
-          var jsonStr = json.decode(value);
-          return Item.fromJson(jsonStr);
-        }).toList();
+        _itemList = list;
       });
     }
   }
@@ -105,6 +106,6 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
   void _remove(int index) async {
     _watchList.removeAt(index);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('watch_history_list', _watchList);
+    prefs.setStringList(Constant.watchHistoryList, _watchList);
   }
 }

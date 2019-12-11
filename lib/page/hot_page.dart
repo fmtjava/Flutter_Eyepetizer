@@ -10,6 +10,7 @@ class HotPage extends StatefulWidget {
 class _HotPageState extends State<HotPage> with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return RankPage();
   }
 

@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="launch_screen" highlightedImage="landing_background" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="launch_screen_bg" highlightedImage="landing_background" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
@@ -43,6 +43,6 @@
     </scenes>
     <resources>
         <image name="landing_background" width="720" height="1280"/>
-        <image name="launch_screen" width="313" height="553"/>
+        <image name="launch_screen_bg" width="750" height="1334"/>
     </resources>
 </document>

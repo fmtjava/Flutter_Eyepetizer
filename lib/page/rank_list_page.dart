@@ -29,8 +29,8 @@ class _RankListPageState extends State<RankListPage>
   }
 
   @override
-  // ignore: must_call_super
   Widget build(BuildContext context) {
+    super.build(context);
     return LoadingContainer(
       loading: _loading,
       child: SmartRefresher(

@@ -23,8 +23,7 @@ class _HomePageState extends State<HomePage>
   int _currentIndex = 0;
   String _nextPageUrl;
   bool _loading = true;
-  RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController _refreshController = RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -34,6 +33,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         body: LoadingContainer(
       loading: _loading,

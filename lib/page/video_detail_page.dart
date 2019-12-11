@@ -4,6 +4,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/repository/video_repository.dart';
+import 'package:flutter_eyepetizer/util/constant.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
@@ -30,14 +31,14 @@ class _VideoDetailPageState extends State<VideoDetailPage>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this); //监听页面可见与不可见
+    WidgetsBinding.instance.addObserver(this); //监听页面可见与不可见状态
     initController();
     _saveWatchHistory();
     _loadVideoRelateData();
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
+  void didChangeAppLifecycleState(AppLifecycleState state) {//AppLifecycleState当前页面的状态(是否可见)
     if (state == AppLifecycleState.paused) {
       //页面不可见时,暂停视频
       _cheWieController.pause();
@@ -46,7 +47,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);//移除监听页面可见与不可见状态
     _videoPlayerController.dispose();
     _cheWieController.dispose();
     super.dispose();
@@ -262,7 +263,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
 
   void _saveWatchHistory() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> watchList = prefs.getStringList("watch_history_list");
+    List<String> watchList = prefs.getStringList(Constant.watchHistoryList);
     if (watchList == null) {
       watchList = List();
     }
@@ -270,14 +271,13 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     var jsonStr = json.encode(jsonParam);
     if (!watchList.contains(jsonStr)) {
       watchList.add(json.encode(jsonParam));
-      prefs.setStringList("watch_history_list", watchList);
+      prefs.setStringList(Constant.watchHistoryList, watchList);
     }
   }
 
   void _loadVideoRelateData() async {
     try {
-      Issue issue =
-          await VideoRepository.getVideoRelateList(widget.item.data.id);
+      Issue issue = await VideoRepository.getVideoRelateList(widget.item.data.id);
       if (mounted) {
         setState(() {
           itemList = issue.itemList;

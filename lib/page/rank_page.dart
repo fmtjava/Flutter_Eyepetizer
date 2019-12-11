@@ -69,6 +69,7 @@ class _RankPageState extends State<RankPage> with TickerProviderStateMixin {
     try {
       TabInfoModel tabInfoModel = await RankRepository.getTabInfo();
       if (mounted) {
+        //判断是否渲染完成，防止数据还没有获取到，此时setState触发的控件渲染就会报错
         setState(() {
           _tabList = tabInfoModel.tabInfo.tabList;
           _tabController = TabController(length: _tabList.length, vsync: this);

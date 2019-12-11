@@ -6,7 +6,7 @@ import 'package:flutter_eyepetizer/navigation/tab_navigation.dart';
 import 'package:flutter_splash_screen/flutter_splash_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(App());
   //设置透明状态栏
   if (Platform.isAndroid) {
     SystemUiOverlayStyle systemUiOverlayStyle =
@@ -15,16 +15,16 @@ void main() {
   }
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    hideScreen();
+    hideSplashScreen();
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: MaterialApp(title: '开眼', home: TabNavigation()));
   }
 
-  Future<void> hideScreen() async {
+  Future<void> hideSplashScreen() async {
     Future.delayed(Duration(milliseconds: 2000), () {
       FlutterSplashScreen.hide();
     });

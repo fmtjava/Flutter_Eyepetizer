@@ -22,8 +22,8 @@ class _CategoryPageState extends State<CategoryPage>
   }
 
   @override
-  // ignore: must_call_super
   Widget build(BuildContext context) {
+    super.build(context);
     return LoadingContainer(
       loading: _loading,
       child: Container(
