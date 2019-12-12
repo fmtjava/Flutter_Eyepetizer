@@ -37,6 +37,9 @@
    <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1567913521.png"/>
  - ios请自行clone项目代码运行  
  # 更新日志
+  ### v1.0.5
+   * 修复进入查看个人主页加载中无法返回我的页面的bug
+   * 修复列表图片在不同分辨率的手机上无法填充父容器bug，后续持续完善中...
   ### v1.0.4
    * 添加头像修改功能
    * 修复观看记录侧滑删除key值无法匹配以及子页面跳转后返回首页重新绘制bug，后续持续完善中...
