@@ -22,15 +22,13 @@ class RankWidgetItem extends StatelessWidget {
           },
           child: Stack(
             children: <Widget>[
-              FractionallySizedBox(
-                widthFactor: 1,
-                child: CachedNetworkImage(
-                    imageUrl: item.data.cover.feed,
-                    errorWidget: (context, url, error) =>
-                        Image.asset('images/img_load_fail.png'),
-                    height: 225,
-                    fit: BoxFit.fitWidth),
-              ),
+              ConstrainedBox(
+                  constraints: BoxConstraints.expand(height: 225),
+                  child: CachedNetworkImage(
+                      imageUrl: item.data.cover.feed,
+                      errorWidget: (context, url, error) =>
+                          Image.asset('images/img_load_fail.png'),
+                      fit: BoxFit.fitHeight)),
               Positioned(
                   left: 15,
                   top: 10,
