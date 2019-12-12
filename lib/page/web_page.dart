@@ -48,7 +48,7 @@ class _State extends State<WebPage> {
     return AppBar(
       leading: GestureDetector(
         onTap: () {
-          if (widget.url == currentUrl) {
+          if (widget.url == currentUrl || currentUrl.isEmpty) {
             Navigator.pop(context);
           } else {
             flutterWebViewPlugin.goBack();
