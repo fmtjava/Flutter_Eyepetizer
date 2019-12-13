@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'package:flutter_eyepetizer/util/constant.dart';
+import 'package:flutter_eyepetizer/repository/history_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class WatchHistoryPage extends StatefulWidget {
   @override
@@ -91,8 +90,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
   }
 
   void _loadData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _watchList = prefs.getStringList(Constant.watchHistoryList);
+    _watchList = await HistoryRepository.loadHistoryData();
     if (_watchList != null && _watchList.length > 0) {
       var list = _watchList.map((value) {
         return Item.fromJson(json.decode(value));
@@ -105,7 +103,6 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
 
   void _remove(int index) async {
     _watchList.removeAt(index);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList(Constant.watchHistoryList, _watchList);
+    HistoryRepository.saveHistoryData(_watchList);
   }
 }

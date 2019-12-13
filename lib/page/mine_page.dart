@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/page/watch_history_page.dart';
 import 'package:flutter_eyepetizer/page/web_page.dart';
-import 'package:flutter_eyepetizer/util/constant.dart';
+import 'package:flutter_eyepetizer/repository/mine_repository.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 const USER_INFO_URL = 'https://github.com/fmtjava/';
 
@@ -14,7 +13,11 @@ class MinePage extends StatefulWidget {
   _MinePageState createState() => _MinePageState();
 }
 
-class _MinePageState extends State<MinePage> {
+class _MinePageState extends State<MinePage>
+    with AutomaticKeepAliveClientMixin {
+
+  var _imageFile;
+
   @override
   void initState() {
     super.initState();
@@ -23,6 +26,7 @@ class _MinePageState extends State<MinePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       decoration: BoxDecoration(color: Colors.white),
       child: SafeArea(
@@ -127,8 +131,6 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
-  var _imageFile;
-
   _showSelectPhotoDialog(BuildContext context) {
     showModalBottomSheet(
         context: context,
@@ -136,48 +138,45 @@ class _MinePageState extends State<MinePage> {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              ListTile(
-                  title: Text('拍照', textAlign: TextAlign.center),
-                  onTap: () async {
-                    Navigator.pop(context);
-                    _getImage(ImageSource.camera);
-                  }),
-              ListTile(
-                  title: Text('相册', textAlign: TextAlign.center),
-                  onTap: () async {
-                    Navigator.pop(context);
-                    _getImage(ImageSource.gallery);
-                  }),
-              ListTile(
-                  title: Text('取消', textAlign: TextAlign.center),
-                  onTap: () {
-                    Navigator.pop(context);
-                  })
+              _bottomWidget('拍照', () {
+                Navigator.pop(context);
+                _getImage(ImageSource.camera);
+              }),
+              _bottomWidget('相册', () {
+                Navigator.pop(context);
+                _getImage(ImageSource.gallery);
+              }),
+              _bottomWidget('取消', () {
+                Navigator.pop(context);
+              })
             ],
           );
         });
   }
+
+  Widget _bottomWidget(String text, VoidCallback callback) {
+    return ListTile(
+        title: Text(text, textAlign: TextAlign.center), onTap: callback);
+  }
+
   //模拟头像选择修改，目前存储在本地，实际开发应当上传到云存储平台
   Future _getImage(ImageSource source) async {
     var imageFile = await ImagePicker.pickImage(source: source);
     setState(() {
       _imageFile = imageFile;
     });
-    _saveAvatarPath(imageFile);
-  }
-
-  _saveAvatarPath(File file) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(Constant.userAvatarPath, file.path);
+    MineRepository.saveAvatarPath(imageFile);
   }
 
   _getAvatarPath() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var userAvatarPath = prefs.getString(Constant.userAvatarPath);
+    var userAvatarPath = await MineRepository.getAvatarPath();
     if (userAvatarPath != null && userAvatarPath.isNotEmpty) {
       setState(() {
         _imageFile = File(userAvatarPath);
       });
     }
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

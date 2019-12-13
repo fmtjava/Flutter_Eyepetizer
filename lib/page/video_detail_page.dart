@@ -4,13 +4,10 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/repository/video_repository.dart';
-import 'package:flutter_eyepetizer/util/constant.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
 import 'package:video_player/video_player.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 
 class VideoDetailPage extends StatefulWidget {
   final Item item;
@@ -33,7 +30,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     super.initState();
     WidgetsBinding.instance.addObserver(this); //监听页面可见与不可见状态
     initController();
-    _saveWatchHistory();
+    VideoRepository.saveWatchHistory(widget.item);
     _loadVideoRelateData();
   }
 
@@ -259,20 +256,6 @@ class _VideoDetailPageState extends State<VideoDetailPage>
         ),
       ),
     );
-  }
-
-  void _saveWatchHistory() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> watchList = prefs.getStringList(Constant.watchHistoryList);
-    if (watchList == null) {
-      watchList = List();
-    }
-    var jsonParam = widget.item.toJson();
-    var jsonStr = json.encode(jsonParam);
-    if (!watchList.contains(jsonStr)) {
-      watchList.add(json.encode(jsonParam));
-      prefs.setStringList(Constant.watchHistoryList, watchList);
-    }
   }
 
   void _loadVideoRelateData() async {

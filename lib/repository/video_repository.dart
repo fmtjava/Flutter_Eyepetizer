@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
+import 'package:flutter_eyepetizer/util/constant.dart';
 import 'package:flutter_eyepetizer/util/http_constant.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class VideoRepository {
   static Future<Issue> getVideoRelateList(int id) async {
@@ -13,6 +15,20 @@ class VideoRepository {
       return Issue.fromJson(result);
     } else {
       throw Exception('"Request failed with status: ${response.statusCode}"');
+    }
+  }
+
+  static saveWatchHistory(Item item) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> watchList = prefs.getStringList(Constant.watchHistoryList);
+    if (watchList == null) {
+      watchList = List();
+    }
+    var jsonParam = item.toJson();
+    var jsonStr = json.encode(jsonParam);
+    if (!watchList.contains(jsonStr)) {
+      watchList.add(json.encode(jsonParam));
+      prefs.setStringList(Constant.watchHistoryList, watchList);
     }
   }
 }
