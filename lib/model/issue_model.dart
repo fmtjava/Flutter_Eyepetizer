@@ -113,23 +113,6 @@ class Item {
   }
 }
 
-//{
-//                    "actionUrl": "eyepetizer://pgc/detail/4058/?title=%E6%91%84%E5%BD%B1%E9%A3%8E%E6%9A%B4&userType=PGC&tabIndex=1",
-//                    "description": "摄影没有捷径，一起多看、多学、多拍！",
-//                    "expert": false,
-//                    "follow": {
-//                        "followed": false,
-//                        "itemId": 4058,
-//                        "itemType": "author"
-//                    },
-//                    "icon": "http://img.kaiyanapp.com/3674ba7a61f8d21fd1a675a35e6daffa.jpeg?imageMogr2/quality/60/format/jpg",
-//                    "iconType": "round",
-//                    "id": 4058,
-//                    "ifPgc": true,
-//                    "ifShowNotificationIcon": false,
-//                    "title": "摄影风暴",
-//                    "uid": 0
-//                }
 class Header {
   String actionUrl;
   String description;
