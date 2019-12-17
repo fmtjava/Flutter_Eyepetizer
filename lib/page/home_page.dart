@@ -43,6 +43,8 @@ class _HomePageState extends State<HomePage>
                   fontSize: 18,
                   color: Colors.black,
                   fontWeight: FontWeight.bold)),
+          brightness: Brightness.light,
+          //设置状态栏字体
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white,

@@ -36,6 +36,7 @@ class _RankPageState extends State<RankPage> with TickerProviderStateMixin {
                   fontSize: 18,
                   color: Colors.black,
                   fontWeight: FontWeight.bold)),
+          brightness: Brightness.light,
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white,

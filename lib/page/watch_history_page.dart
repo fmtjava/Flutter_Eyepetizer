@@ -39,6 +39,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
             style: TextStyle(
                 fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
           ),
+          brightness: Brightness.light,
           backgroundColor: Colors.white,
           centerTitle: true,
           elevation: 0),

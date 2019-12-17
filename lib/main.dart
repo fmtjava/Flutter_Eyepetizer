@@ -19,9 +19,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     hideSplashScreen();
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: MaterialApp(title: '开眼', home: TabNavigation()));
+    return MaterialApp(title: '开眼', home: TabNavigation());
   }
 
   Future<void> hideSplashScreen() async {

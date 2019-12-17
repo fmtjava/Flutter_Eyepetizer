@@ -36,6 +36,7 @@ class _DiscoveryPageState extends State<DiscoveryPage>
                   fontSize: 18,
                   color: Colors.black,
                   fontWeight: FontWeight.bold)),
+          brightness: Brightness.light,
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white,
