@@ -62,7 +62,6 @@ flutter:
     - images/ic_mine_normal.png
     - images/ic_mine_selected.png
     - images/img_load_fail.png
-    - images/icon_share.png
     - images/ic_like.png
     - images/ic_share_white.png
     - images/icon_comment.png

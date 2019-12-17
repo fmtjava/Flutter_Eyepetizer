@@ -46,37 +46,43 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
         children: <Widget>[
           Offstage(
               offstage: _itemList == null || _itemList.length == 0,
-              child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    return Dismissible(
-                      //滑动删除控件
-                      key: Key("key_${_itemList[index].data.id}"), //删除的唯一标示
-                      child: VideoRelateWidgetItem(
-                        item: _itemList[index],
-                        callBack: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  VideoDetailPage(item: _itemList[index])));
+              child: Container(
+                child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                        //滑动删除控件
+                        key: Key("key_${_itemList[index].data.id}"), //删除的唯一标示
+                        child: VideoRelateWidgetItem(
+                          item: _itemList[index],
+                          callBack: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    VideoDetailPage(item: _itemList[index])));
+                          },
+                          titleColor: Colors.black87,
+                          categoryColor: Colors.black26,
+                        ),
+                        background: Container(
+                          color: Colors.red,
+                        ),
+                        onDismissed: (direction) {
+                          //滑动删除事件
+                          setState(() {
+                            _itemList.removeAt(index);
+                          });
+                          _remove(index);
                         },
-                        titleColor: Colors.black87,
-                        categoryColor: Colors.black26,
-                      ),
-                      background: Container(
-                        color: Colors.red,
-                      ),
-                      onDismissed: (direction) {
-                        //滑动删除事件
-                        setState(() {
-                          _itemList.removeAt(index);
-                        });
-                        _remove(index);
-                      },
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return Divider(height: 0.5);
-                  },
-                  itemCount: _itemList?.length ?? 0)),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return Padding(
+                          padding:
+                              EdgeInsets.only(left: 15, top: 5, right: 15),
+                          child: Divider(height: 0.5));
+                    },
+                    itemCount: _itemList?.length ?? 0),
+                decoration: BoxDecoration(color: Colors.white),
+              )),
           Offstage(
             //控制控件显示或隐藏
             offstage: _itemList != null && _itemList.length > 0,

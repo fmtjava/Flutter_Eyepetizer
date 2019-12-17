@@ -29,6 +29,7 @@ class _RankPageState extends State<RankPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text('人气榜',
               style: TextStyle(
@@ -41,20 +42,17 @@ class _RankPageState extends State<RankPage> with TickerProviderStateMixin {
         ),
         body: Column(
           children: <Widget>[
-            Container(
-              decoration: BoxDecoration(color: Colors.white),
-              child: TabBar(
-                  controller: _tabController,
-                  labelColor: Colors.black,
-                  unselectedLabelColor: Color(0xff9a9a9a),
-                  labelStyle: TextStyle(fontSize: 14),
-                  unselectedLabelStyle: TextStyle(fontSize: 14),
-                  indicatorColor: Colors.black,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  tabs: _tabList.map((TabInfoItem tabInfoItem) {
-                    return Tab(text: tabInfoItem.name);
-                  }).toList()),
-            ),
+            TabBar(
+                controller: _tabController,
+                labelColor: Colors.black,
+                unselectedLabelColor: Color(0xff9a9a9a),
+                labelStyle: TextStyle(fontSize: 14),
+                unselectedLabelStyle: TextStyle(fontSize: 14),
+                indicatorColor: Colors.black,
+                indicatorSize: TabBarIndicatorSize.label,
+                tabs: _tabList.map((TabInfoItem tabInfoItem) {
+                  return Tab(text: tabInfoItem.name);
+                }).toList()),
             Expanded(
                 child: TabBarView(
                     controller: _tabController,

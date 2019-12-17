@@ -20,8 +20,8 @@ class FollowPageItem extends StatelessWidget {
               children: <Widget>[
                 ClipOval(
                     child: CachedNetworkImage(
-                  width: 44,
-                  height: 44,
+                  width: 40,
+                  height: 40,
                   imageUrl: item.data.header.icon,
                 )),
                 Expanded(
@@ -34,11 +34,14 @@ class FollowPageItem extends StatelessWidget {
                             Text(item.data.header.title,
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 14)),
-                            Text(item.data.header.description,
-                                style: TextStyle(
-                                    color: Colors.black26, fontSize: 12),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis)
+                            Padding(
+                              padding: EdgeInsets.only(top: 3),
+                              child: Text(item.data.header.description,
+                                  style: TextStyle(
+                                      color: Colors.black26, fontSize: 12),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis),
+                            )
                           ],
                         ))),
                 ClipRRect(
@@ -56,7 +59,7 @@ class FollowPageItem extends StatelessWidget {
             ),
           ),
           Container(
-            height: 240,
+            height: 230,
             child: ListView.builder(
                 itemCount: item.data.itemList.length,
                 scrollDirection: Axis.horizontal,

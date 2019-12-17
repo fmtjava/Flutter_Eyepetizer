@@ -7,8 +7,10 @@ import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 class RankWidgetItem extends StatelessWidget {
   final Item item;
   final bool showCategory;
+  final bool showDivider;
 
-  const RankWidgetItem({Key key, this.item, this.showCategory = true})
+  const RankWidgetItem(
+      {Key key, this.item, this.showCategory = true, this.showDivider = true})
       : super(key: key);
 
   @override
@@ -20,57 +22,63 @@ class RankWidgetItem extends StatelessWidget {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => VideoDetailPage(item: item)));
           },
-          child: Stack(
-            children: <Widget>[
-              CachedNetworkImage(
-                  width: MediaQuery.of(context).size.width,
-                  height: 225,
-                  imageUrl: item.data.cover.feed,
-                  errorWidget: (context, url, error) =>
-                      Image.asset('images/img_load_fail.png'),
-                  fit: BoxFit.cover),
-              Positioned(
-                  left: 15,
-                  top: 10,
-                  child: Opacity(
-                      opacity: showCategory ? 1.0 : 0.0, //处理控件显示或隐藏
-                      child: ClipOval(
-                          child: Container(
-                              decoration: BoxDecoration(color: Colors.white54),
-                              height: 44,
-                              width: 44,
-                              alignment: AlignmentDirectional.center,
-                              child: Text(item.data.category,
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.white)))))),
-              Positioned(
-                  right: 15,
-                  bottom: 10,
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Container(
-                          decoration: BoxDecoration(color: Colors.black54),
-                          padding: EdgeInsets.all(5),
-                          child: Text(
-                            DateUtil.formatDateMs(item.data.duration * 1000,
-                                format: 'mm:ss'),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold),
-                          ))))
-            ],
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+            child: Stack(
+              children: <Widget>[
+                ClipRRect(
+                    child: CachedNetworkImage(
+                        width: MediaQuery.of(context).size.width,
+                        height: 200,
+                        imageUrl: item.data.cover.feed,
+                        errorWidget: (context, url, error) =>
+                            Image.asset('images/img_load_fail.png'),
+                        fit: BoxFit.cover), //充满容器，可能会被截断
+                    borderRadius: BorderRadius.circular(4)),
+                Positioned(
+                    left: 15,
+                    top: 10,
+                    child: Opacity(
+                        opacity: showCategory ? 1.0 : 0.0, //处理控件显示或隐藏
+                        child: ClipOval(
+                            child: Container(
+                                decoration:
+                                    BoxDecoration(color: Colors.white54),
+                                height: 44,
+                                width: 44,
+                                alignment: AlignmentDirectional.center,
+                                child: Text(item.data.category,
+                                    style: TextStyle(
+                                        fontSize: 14, color: Colors.white)))))),
+                Positioned(
+                    right: 15,
+                    bottom: 10,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Container(
+                            decoration: BoxDecoration(color: Colors.black54),
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              DateUtil.formatDateMs(item.data.duration * 1000,
+                                  format: 'mm:ss'),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold),
+                            ))))
+              ],
+            ),
           ),
         ),
         Container(
           decoration: BoxDecoration(color: Colors.white),
-          padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+          padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
           child: Row(
             children: <Widget>[
               ClipOval(
                   child: CachedNetworkImage(
-                width: 44,
-                height: 44,
+                width: 40,
+                height: 40,
                 imageUrl: item.data.author.icon,
               )),
               Expanded(
@@ -81,20 +89,27 @@ class RankWidgetItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(item.data.title,
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 14)),
-                          Text(item.data.author.name,
                               style: TextStyle(
-                                  color: Color(0xff9a9a9a), fontSize: 12))
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis),
+                          Padding(
+                              padding: EdgeInsets.only(top: 2),
+                              child: Text(item.data.author.name,
+                                  style: TextStyle(
+                                      color: Color(0xff9a9a9a), fontSize: 12)))
                         ],
                       ))),
-              Image.asset(
-                'images/icon_share.png',
-                width: 30,
-                height: 30,
-              ),
+              Icon(Icons.share, color: Colors.black38)
             ],
           ),
+        ),
+        Offstage(
+          offstage: showDivider,
+          child: Padding(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: Divider(height: 0.5)),
         )
       ],
     );

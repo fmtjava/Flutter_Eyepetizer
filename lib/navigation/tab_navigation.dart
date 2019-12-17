@@ -31,7 +31,7 @@ class _TabNavigationState extends State<TabNavigation> {
           },
           type: BottomNavigationBarType.fixed, //显示标题
           items: [
-            _bottomItem('每日精选', 'images/ic_home_normal.png',
+            _bottomItem('日报', 'images/ic_home_normal.png',
                 'images/ic_home_selected.png', 0),
             _bottomItem('发现', 'images/ic_discovery_normal.png',
                 'images/ic_discovery_selected.png', 1),

@@ -24,7 +24,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
           callBack();
         },
         child: Container(
-          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+          padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
           child: Row(
             children: <Widget>[
               Stack(
@@ -41,18 +41,18 @@ class VideoRelateWidgetItem extends StatelessWidget {
                   ),
                   Positioned(
                       right: 5,
-                      bottom: 8,
+                      bottom: 5,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: Container(
                               decoration: BoxDecoration(color: Colors.black54),
-                              padding: EdgeInsets.all(5),
+                              padding: EdgeInsets.all(3),
                               child: Text(
                                 DateUtil.formatDateMs(item.data.duration * 1000,
                                     format: 'mm:ss'),
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 12,
+                                    fontSize: 10,
                                     fontWeight: FontWeight.bold),
                               ))))
                 ],

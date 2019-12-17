@@ -23,7 +23,8 @@ class _HomePageState extends State<HomePage>
   int _currentIndex = 0;
   String _nextPageUrl;
   bool _loading = true;
-  RefreshController _refreshController = RefreshController(initialRefresh: false);
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -35,42 +36,68 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text('日报',
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold)),
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Colors.white,
+        ),
         body: LoadingContainer(
-      loading: _loading,
-      child: SmartRefresher(
-          controller: _refreshController,
-          onRefresh: _refresh,
-          onLoading: _loadMore,
-          enablePullUp: true,
-          child: ListView.separated(
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return _banner(context);
-                } else {
-                  if (_itemList[index].type == 'textHeader') {
-                    return _titleItem(_itemList[index]);
-                  }
-                  return RankWidgetItem(item: _itemList[index]);
-                }
-              },
-              separatorBuilder: (context, index) {
-                return Divider(height: 0.5);
-              },
-              itemCount: _itemList.length)),
-    ));
+          loading: _loading,
+          child: SmartRefresher(
+              controller: _refreshController,
+              onRefresh: _refresh,
+              onLoading: _loadMore,
+              enablePullUp: true,
+              child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return _banner(context);
+                    } else {
+                      if (_itemList[index].type == 'textHeader') {
+                        return _titleItem(_itemList[index]);
+                      }
+                      return RankWidgetItem(item: _itemList[index]);
+                    }
+                  },
+                  separatorBuilder: (context, index) {
+                    return Padding(
+                        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        child: Divider(
+                            height: _itemList[index].type == 'textHeader' ||
+                                    index == 0
+                                ? 0
+                                : 0.5,
+                            color: _itemList[index].type == 'textHeader' ||
+                                    index == 0
+                                ? Colors.transparent
+                                : Color(0xffe6e6e6)));
+                  },
+                  itemCount: _itemList.length)),
+        ));
   }
 
   _banner(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          height: 200,
-          child: Swiper(
+    return Container(
+      height: 200,
+      padding: EdgeInsets.only(left: 15, top: 15, right: 15),
+      child: Stack(
+        children: <Widget>[
+          Swiper(
               autoplay: true,
               itemBuilder: (BuildContext context, int index) {
-                return CachedNetworkImage(
-                  imageUrl: _bannerList[index].data.cover.feed,
-                  fit: BoxFit.fitWidth,
+                return Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: CachedNetworkImageProvider(
+                              _bannerList[index].data.cover.feed),
+                          fit: BoxFit.cover),
+                      borderRadius: BorderRadius.circular(4)),
                 );
               },
               onIndexChanged: (index) {
@@ -88,23 +115,27 @@ class _HomePageState extends State<HomePage>
                   alignment: Alignment.bottomRight,
                   builder: DotSwiperPaginationBuilder(
                       activeColor: Colors.white, color: Colors.white24))),
-        ),
-        Positioned(
-            bottom: 0,
-            child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
-                decoration: BoxDecoration(color: Colors.black12),
-                child: Text(_bannerList[_currentIndex].data.title,
-                    style: TextStyle(color: Colors.white, fontSize: 14))))
-      ],
+          Positioned(
+              width: MediaQuery.of(context).size.width - 30,
+              bottom: 0,
+              child: Container(
+                  padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
+                  decoration: BoxDecoration(
+                      color: Colors.black12,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(4),
+                          bottomRight: Radius.circular(4))),
+                  child: Text(_bannerList[_currentIndex].data.title,
+                      style: TextStyle(color: Colors.white, fontSize: 12))))
+        ],
+      ),
     );
   }
 
   _titleItem(Item item) {
     return Container(
         decoration: BoxDecoration(color: Colors.white24),
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.only(top: 15, bottom: 5),
         child: Center(
             child: Text(item.data.text,
                 style: TextStyle(

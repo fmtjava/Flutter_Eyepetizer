@@ -37,11 +37,17 @@ class _RankListPageState extends State<RankListPage>
           controller: _refreshController,
           enablePullDown: true,
           onRefresh: _loadData,
-          child: ListView.builder(
-              itemCount: _itemList.length,
-              itemBuilder: (context, index) {
-                return RankWidgetItem(item: _itemList[index]);
-              })),
+          child: ListView.separated(
+            itemCount: _itemList.length,
+            itemBuilder: (context, index) {
+              return RankWidgetItem(item: _itemList[index]);
+            },
+            separatorBuilder: (context, index) {
+              return Padding(
+                  padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  child: Divider(height: 0.5));
+            },
+          )),
     );
   }
 

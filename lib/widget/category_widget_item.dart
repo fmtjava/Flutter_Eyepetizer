@@ -18,7 +18,7 @@ class CategoryWidgetItem extends StatelessWidget {
         },
         child: Stack(children: <Widget>[
           ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(4),
               child: CachedNetworkImage(imageUrl: categoryModel.bgPicture)),
           Center(
               child: Text('#${categoryModel.name}',

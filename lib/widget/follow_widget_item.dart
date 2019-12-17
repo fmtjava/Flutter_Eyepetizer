@@ -23,11 +23,14 @@ class FollowWidgetItem extends StatelessWidget {
             children: <Widget>[
               Stack(
                 children: <Widget>[
-                  CachedNetworkImage(
-                    width: 300,
-                    height: 180,
-                    imageUrl: item.data.cover.feed,
-                    fit: BoxFit.fitWidth,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: CachedNetworkImage(
+                      width: 300,
+                      height: 180,
+                      imageUrl: item.data.cover.feed,
+                      fit: BoxFit.fitHeight,
+                    ),
                   ),
                   Positioned(
                       right: 8,
@@ -50,7 +53,10 @@ class FollowWidgetItem extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 3),
                 child: Text(item.data.title,
-                    style: TextStyle(fontSize: 14, color: Colors.black)),
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold)),
               ),
               Container(
                 padding: EdgeInsets.only(top: 3),

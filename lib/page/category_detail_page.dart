@@ -50,33 +50,36 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         body: LoadingContainer(
-      loading: _loading,
-      child: CustomScrollView(
-        controller: _scrollController,
-        //CustomScrollView结合Sliver家族控件实现可折叠状态栏
-        slivers: <Widget>[
-          SliverAppBar(
-              elevation: 0,
-              expandedHeight: 200,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                  title: Text(widget.categoryModel.name),
-                  centerTitle: false,
-                  background: CachedNetworkImage(
-                      imageUrl: widget.categoryModel.bgPicture,
-                      fit: BoxFit.cover))),
-          SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-            if (index < _itemList.length) {
-              return RankWidgetItem(
-                  item: _itemList[index], showCategory: false);
-            }
-            return LoadMoreWidget(isLoadMore: _isLoadMore); //加载更多布局
-          }, childCount: _itemList.length + 1))
-        ],
-      ),
-    ));
+          loading: _loading,
+          child: CustomScrollView(
+            controller: _scrollController,
+            //CustomScrollView结合Sliver家族控件实现可折叠状态栏
+            slivers: <Widget>[
+              SliverAppBar(
+                  elevation: 0,
+                  expandedHeight: 200,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                      title: Text(widget.categoryModel.name),
+                      centerTitle: false,
+                      background: CachedNetworkImage(
+                          imageUrl: widget.categoryModel.bgPicture,
+                          fit: BoxFit.cover))),
+              SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                if (index < _itemList.length) {
+                  return RankWidgetItem(
+                      item: _itemList[index],
+                      showCategory: false,
+                      showDivider: false);
+                }
+                return LoadMoreWidget(isLoadMore: _isLoadMore); //加载更多布局
+              }, childCount: _itemList.length + 1))
+            ],
+          ),
+        ));
   }
 
   void _loadMore({loadMore = true}) async {
