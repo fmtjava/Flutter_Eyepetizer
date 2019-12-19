@@ -20,15 +20,15 @@
 <br/>
 
 <div style="float:right">
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1961576565881_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1941576565879_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2081576569019_.pic.jpg" width="270"/>
+ <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2081576569019_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2141576721487_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1941576565879_.pic.jpg" width="270"/>
 </div>
 
 <div style="float:right">
+ <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2081576569019_.pic.jpg" width="270"/>
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2071576569018_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2021576568582_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1891576051893_.pic.jpg" width="270"/>
 </div>
 
 # 下载体验(Android版本) 
