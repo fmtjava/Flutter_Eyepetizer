@@ -3,6 +3,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
+import 'package:share/share.dart';
 
 class RankWidgetItem extends StatelessWidget {
   final Item item;
@@ -101,7 +102,12 @@ class RankWidgetItem extends StatelessWidget {
                                       color: Color(0xff9a9a9a), fontSize: 12)))
                         ],
                       ))),
-              Icon(Icons.share, color: Colors.black38)
+              InkWell(
+                onTap: () {
+                  Share.share('${item.data.title}\n${_getShareVideoUrl()}');
+                },
+                child: Icon(Icons.share, color: Colors.black38),
+              )
             ],
           ),
         ),
@@ -113,5 +119,21 @@ class RankWidgetItem extends StatelessWidget {
         )
       ],
     );
+  }
+
+  String _getShareVideoUrl() {
+    var videoUrl;
+    List<PlayInfo> playInfoList = item.data.playInfo;
+    if (playInfoList.length > 1) {
+      for (var playInfo in playInfoList) {
+        if (playInfo.type == 'high') {
+          videoUrl = playInfo.url;
+          break;
+        }
+      }
+    } else {
+      videoUrl = item.data.playUrl;
+    }
+    return videoUrl;
   }
 }
