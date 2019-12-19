@@ -20,7 +20,7 @@
 <br/>
 
 <div style="float:right">
- <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2081576569019_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1961576565881_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2141576721487_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1941576565879_.pic.jpg" width="270"/>
 </div>
@@ -38,8 +38,8 @@
  - ios请自行clone项目代码运行  
  # 更新日志
   ### v1.0.6
-    * 添加视频分享功能
-    * 调整整体UI样式，后续持续完善中...
+   * 添加视频分享功能
+   * 调整整体UI样式，后续持续完善中...
   ### v1.0.5
    * 修复进入查看个人主页加载中无法返回我的页面的bug
    * 修复列表图片在不同分辨率的手机上无法填充父容器bug，后续持续完善中...
