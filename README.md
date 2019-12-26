@@ -37,6 +37,9 @@
    <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1567913521.png"/>
  - ios请自行clone项目代码运行  
  # 更新日志
+  ### v1.0.7
+    * 接入Provider状态管理框架，重构部分页面的逻辑，完成界面与数据的分离，提升代码可读性
+    * 调整整体UI样式，后续持续完善中...
   ### v1.0.6
    * 添加视频分享功能
    * 调整整体UI样式，后续持续完善中...
@@ -70,6 +73,7 @@
   - [flutter_splash_screen](https://github.com/crazycodeboy/flutter_splash_screen) 启动白屏处理框架
   - [image_picker](https://github.com/flutter/plugins/tree/master/packages/image_picker) 相册取图/拍照框架
   - [share](https://github.com/flutter/plugins/tree/master/packages/share) 分享框架
+  - [provider](https://github.com/rrousselGit/provider) 状态框架
   
  # 关于我
   - WX：fmtjava

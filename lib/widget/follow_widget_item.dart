@@ -29,7 +29,7 @@ class FollowWidgetItem extends StatelessWidget {
                       width: 300,
                       height: 180,
                       imageUrl: item.data.cover.feed,
-                      fit: BoxFit.fitHeight,
+                      fit: BoxFit.cover,
                     ),
                   ),
                   Positioned(
@@ -50,13 +50,16 @@ class FollowWidgetItem extends StatelessWidget {
                               ))))
                 ],
               ),
-              Padding(
+              Container(
+                width: 300,
                 padding: EdgeInsets.only(top: 3),
                 child: Text(item.data.title,
                     style: TextStyle(
                         fontSize: 14,
                         color: Colors.black,
-                        fontWeight: FontWeight.bold)),
+                        fontWeight: FontWeight.bold),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis),
               ),
               Container(
                 padding: EdgeInsets.only(top: 3),

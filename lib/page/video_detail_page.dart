@@ -3,9 +3,10 @@ import 'package:chewie/chewie.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
+import 'package:flutter_eyepetizer/provider/video_detail_page_model.dart';
 import 'package:flutter_eyepetizer/repository/video_repository.dart';
-import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
+import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
 import 'package:video_player/video_player.dart';
 
@@ -20,10 +21,8 @@ class VideoDetailPage extends StatefulWidget {
 
 class _VideoDetailPageState extends State<VideoDetailPage>
     with WidgetsBindingObserver {
-  List<Item> itemList = [];
   VideoPlayerController _videoPlayerController;
   ChewieController _cheWieController;
-  bool _loading = true;
 
   @override
   void initState() {
@@ -31,11 +30,11 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     WidgetsBinding.instance.addObserver(this); //监听页面可见与不可见状态
     initController();
     VideoRepository.saveWatchHistory(widget.item);
-    _loadVideoRelateData();
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {//AppLifecycleState当前页面的状态(是否可见)
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    //AppLifecycleState当前页面的状态(是否可见)
     if (state == AppLifecycleState.paused) {
       //页面不可见时,暂停视频
       _cheWieController.pause();
@@ -44,7 +43,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);//移除监听页面可见与不可见状态
+    WidgetsBinding.instance.removeObserver(this); //移除监听页面可见与不可见状态
     _videoPlayerController.dispose();
     _cheWieController.dispose();
     super.dispose();
@@ -52,227 +51,240 @@ class _VideoDetailPageState extends State<VideoDetailPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                //背景图片
-                fit: BoxFit.cover,
-                image: CachedNetworkImageProvider(
-                    '${widget.item.data.cover.blurred}}/thumbnail/${MediaQuery.of(context).size.height}x${MediaQuery.of(context).size.width}'))),
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 230,
-              child: Chewie(
-                controller: _cheWieController,
-              ),
-            ),
-            Expanded(
-                flex: 1,
-                child: LoadingContainer(
-                    loading: _loading,
-                    child: CustomScrollView(
-                      //CustomScrollView结合Sliver可以防止滚动冲突
-                      slivers: <Widget>[
-                        SliverToBoxAdapter(
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Padding(
-                                    padding: EdgeInsets.only(left: 10, top: 10),
-                                    child: Text(
-                                      widget.item.data.title,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 10, top: 10),
-                                    child: Text(
-                                        '#${widget.item.data.category} / ${DateUtil.formatDateMs(widget.item.data.author.latestReleaseTime, format: 'yyyy/MM/dd HH:mm')}',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12))),
-                                Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 10, top: 10, right: 10),
-                                    child: Text(widget.item.data.description,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14))),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 10, top: 10),
-                                    child: Row(
+    return ProviderWidget<VideoDetailPageModel>(
+        model: VideoDetailPageModel(),
+        onModelInit: (model) {
+          model.loadVideoRelateData(widget.item.data.id);
+        },
+        builder: (context, model, child) {
+          return Scaffold(
+              body: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          //背景图片
+                          fit: BoxFit.cover,
+                          image: CachedNetworkImageProvider(
+                              '${widget.item.data.cover.blurred}}/thumbnail/${MediaQuery.of(context).size.height}x${MediaQuery.of(context).size.width}'))),
+                  child: Column(children: <Widget>[
+                    Container(
+                      height: 230,
+                      child: Chewie(
+                        controller: _cheWieController,
+                      ),
+                    ),
+                    Expanded(
+                        flex: 1,
+                        child: LoadingContainer(
+                            loading: model.loading,
+                            child: CustomScrollView(
+                              //CustomScrollView结合Sliver可以防止滚动冲突
+                              slivers: <Widget>[
+                                SliverToBoxAdapter(
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Row(
-                                          children: <Widget>[
-                                            Image.asset(
-                                              'images/ic_like.png',
-                                              height: 22,
-                                              width: 22,
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(left: 3),
-                                              child: Text(
-                                                '${widget.item.data.consumption.collectionCount}',
+                                        Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 10, top: 10),
+                                            child: Text(
+                                              widget.item.data.title,
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 10, top: 10),
+                                            child: Text(
+                                                '#${widget.item.data.category} / ${DateUtil.formatDateMs(widget.item.data.author.latestReleaseTime, format: 'yyyy/MM/dd HH:mm')}',
                                                 style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 13),
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                                    fontSize: 12))),
                                         Padding(
-                                          padding: EdgeInsets.only(left: 30),
-                                          child: Row(
-                                            children: <Widget>[
-                                              Image.asset(
-                                                'images/ic_share_white.png',
-                                                height: 22,
-                                                width: 22,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(left: 3),
-                                                child: Text(
-                                                  '${widget.item.data.consumption.shareCount}',
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 13),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
+                                            padding: EdgeInsets.only(
+                                                left: 10, top: 10, right: 10),
+                                            child: Text(
+                                                widget.item.data.description,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14))),
                                         Padding(
-                                          padding: EdgeInsets.only(left: 30),
-                                          child: Row(
-                                            children: <Widget>[
-                                              Image.asset(
-                                                'images/icon_comment.png',
-                                                height: 22,
-                                                width: 22,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(left: 3),
-                                                child: Text(
-                                                  '${widget.item.data.consumption.replyCount}',
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 13),
+                                            padding: EdgeInsets.only(
+                                                left: 10, top: 10),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Row(
+                                                  children: <Widget>[
+                                                    Image.asset(
+                                                      'images/ic_like.png',
+                                                      height: 22,
+                                                      width: 22,
+                                                    ),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 3),
+                                                      child: Text(
+                                                        '${widget.item.data.consumption.collectionCount}',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 13),
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(top: 10),
-                                    child: Divider(
-                                        height: 0.5, color: Colors.white)),
-                                Row(children: <Widget>[
-                                  Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child: ClipOval(
-                                        child: CachedNetworkImage(
-                                            imageUrl:
-                                                widget.item.data.author.icon,
-                                            errorWidget: (context, url,
-                                                    error) =>
-                                                Image.asset(
-                                                    'images/img_load_fail.png'),
-                                            height: 40,
-                                            width: 40),
-                                      )),
-                                  Expanded(
-                                      flex: 1,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(widget.item.data.author.name,
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.white)),
+                                                Padding(
+                                                  padding:
+                                                      EdgeInsets.only(left: 30),
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      Image.asset(
+                                                        'images/ic_share_white.png',
+                                                        height: 22,
+                                                        width: 22,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 3),
+                                                        child: Text(
+                                                          '${widget.item.data.consumption.shareCount}',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 13),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      EdgeInsets.only(left: 30),
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      Image.asset(
+                                                        'images/icon_comment.png',
+                                                        height: 22,
+                                                        width: 22,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 3),
+                                                        child: Text(
+                                                          '${widget.item.data.consumption.replyCount}',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 13),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            )),
+                                        Padding(
+                                            padding: EdgeInsets.only(top: 10),
+                                            child: Divider(
+                                                height: 0.5,
+                                                color: Colors.white)),
+                                        Row(children: <Widget>[
                                           Padding(
-                                              padding: EdgeInsets.only(top: 3),
-                                              child: Text(
-                                                  widget.item.data.author
-                                                      .description,
-                                                  style: TextStyle(
-                                                      fontSize: 13,
-                                                      color: Colors.white)))
-                                        ],
-                                      )),
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 10),
-                                    child: Container(
-                                        decoration: BoxDecoration(
+                                              padding: EdgeInsets.all(10),
+                                              child: ClipOval(
+                                                child: CachedNetworkImage(
+                                                    imageUrl: widget
+                                                        .item.data.author.icon,
+                                                    errorWidget: (context, url,
+                                                            error) =>
+                                                        Image.asset(
+                                                            'images/img_load_fail.png'),
+                                                    height: 40,
+                                                    width: 40),
+                                              )),
+                                          Expanded(
+                                              flex: 1,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(
+                                                      widget.item.data.author
+                                                          .name,
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Colors.white)),
+                                                  Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 3),
+                                                      child: Text(
+                                                          widget
+                                                              .item
+                                                              .data
+                                                              .author
+                                                              .description,
+                                                          style: TextStyle(
+                                                              fontSize: 13,
+                                                              color: Colors
+                                                                  .white)))
+                                                ],
+                                              )),
+                                          Padding(
+                                            padding: EdgeInsets.only(right: 10),
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                padding: EdgeInsets.all(5),
+                                                child: Text('+ 关注',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.grey,
+                                                        fontSize: 12))),
+                                          ),
+                                        ]),
+                                        Divider(
+                                            height: 0.5, color: Colors.white)
+                                      ]),
+                                ),
+                                SliverList(
+                                    delegate: SliverChildBuilderDelegate(
+                                        (context, index) {
+                                  if (model.itemList[index].type ==
+                                      'videoSmallCard') {
+                                    return VideoRelateWidgetItem(
+                                        item: model.itemList[index],
+                                        callBack: () {
+                                          _videoPlayerController.pause();
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      VideoDetailPage(
+                                                          item: model.itemList[
+                                                              index])));
+                                        });
+                                  }
+                                  return Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Text(
+                                        model.itemList[index].data.text,
+                                        style: TextStyle(
                                             color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        padding: EdgeInsets.all(5),
-                                        child: Text('+ 关注',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.grey,
-                                                fontSize: 12))),
-                                  ),
-                                ]),
-                                Divider(height: 0.5, color: Colors.white)
-                              ]),
-                        ),
-                        SliverList(
-                            delegate:
-                                SliverChildBuilderDelegate((context, index) {
-                          if (itemList[index].type == 'videoSmallCard') {
-                            return VideoRelateWidgetItem(
-                                item: itemList[index],
-                                callBack: () {
-                                  _videoPlayerController.pause();
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => VideoDetailPage(
-                                          item: itemList[index])));
-                                });
-                          }
-                          return Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                itemList[index].data.text,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16),
-                              ));
-                          //return
-                        }, childCount: itemList.length))
-                      ],
-                    )))
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _loadVideoRelateData() async {
-    try {
-      Issue issue = await VideoRepository.getVideoRelateList(widget.item.data.id);
-      if (mounted) {
-        setState(() {
-          itemList = issue.itemList;
-          _loading = false;
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16),
+                                      ));
+                                  //return
+                                }, childCount: model.itemList.length))
+                              ],
+                            )))
+                  ])));
         });
-      }
-    } catch (e) {
-      ToastUtil.showError(e.toString());
-      setState(() {
-        _loading = false;
-      });
-    }
   }
 
   void initController() {
