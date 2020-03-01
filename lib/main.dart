@@ -7,7 +7,7 @@ import 'package:flutter_splash_screen/flutter_splash_screen.dart';
 
 void main() {
   runApp(App());
-  //设置透明状态栏
+  //Flutter沉浸式状态栏
   if (Platform.isAndroid) {
     SystemUiOverlayStyle systemUiOverlayStyle =
         SystemUiOverlayStyle(statusBarColor: Colors.transparent);

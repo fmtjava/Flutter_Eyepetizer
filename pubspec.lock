@@ -43,13 +43,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.2"
-  chewie:
-    dependency: "direct main"
-    description:
-      name: chewie
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.9.7"
   collection:
     dependency: transitive
     description:
@@ -118,6 +111,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.0.3"
+  flutter_slidable:
+    dependency: "direct main"
+    description:
+      name: flutter_slidable
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.5.4"
   flutter_splash_screen:
     dependency: "direct main"
     description:
@@ -134,6 +134,11 @@ packages:
     version: "1.1.6"
   flutter_test:
     dependency: "direct dev"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -194,7 +199,7 @@ packages:
     source: hosted
     version: "1.1.8"
   open_iconic_flutter:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: open_iconic_flutter
       url: "https://pub.flutter-io.cn"
@@ -257,7 +262,7 @@ packages:
     source: hosted
     version: "0.3.5"
   screen:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: screen
       url: "https://pub.flutter-io.cn"
@@ -367,12 +372,26 @@ packages:
     source: hosted
     version: "2.0.8"
   video_player:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: video_player
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.10.2+1"
+    version: "0.10.8+1"
+  video_player_platform_interface:
+    dependency: transitive
+    description:
+      name: video_player_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.5"
+  video_player_web:
+    dependency: transitive
+    description:
+      name: video_player_web
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.2+1"
   xml:
     dependency: transitive
     description:
@@ -382,4 +401,4 @@ packages:
     version: "3.5.0"
 sdks:
   dart: ">=2.4.0 <3.0.0"
-  flutter: ">=1.10.15-pre.148 <2.0.0"
+  flutter: ">=1.12.13+hotfix.4 <2.0.0"

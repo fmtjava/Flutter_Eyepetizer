@@ -29,10 +29,13 @@ dependencies:
   flutter_swiper: ^1.1.6
   flustars: ^0.2.6+1
   pull_to_refresh: ^1.5.5
-  chewie: ^0.9.7
+  video_player: ^0.10.8+1
+  screen: ^0.0.5
+  open_iconic_flutter: ^0.3.0
   flutter_splash_screen: ^0.1.0
   shared_preferences: ^0.5.3+4
   flutter_webview_plugin: ^0.3.8
+  flutter_slidable: ^0.5.4
   image_picker: ^0.6.2+2
   share: ^0.6.3+5
   provider: ^3.0.0+1

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class WatchHistoryPage extends StatefulWidget {
   @override
@@ -48,10 +49,8 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                     child: Container(
                       child: ListView.separated(
                           itemBuilder: (context, index) {
-                            return Dismissible(
-                              //滑动删除控件
-                              key: Key("key_${model.itemList[index].data.id}"),
-                              //删除的唯一标示
+                            return Slidable(
+                              actionPane: SlidableDrawerActionPane(),
                               child: VideoRelateWidgetItem(
                                 item: model.itemList[index],
                                 callBack: () {
@@ -62,13 +61,13 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                                 titleColor: Colors.black87,
                                 categoryColor: Colors.black26,
                               ),
-                              background: Container(
-                                color: Colors.red,
-                              ),
-                              onDismissed: (direction) {
-                                //滑动删除事件
-                                model.remove(index);
-                              },
+                              secondaryActions: <Widget>[
+                                IconSlideAction(
+                                  color: Colors.red,
+                                  icon: Icons.delete,
+                                  onTap: () => model.remove(index),
+                                )
+                              ],
                             );
                           },
                           separatorBuilder: (context, index) {

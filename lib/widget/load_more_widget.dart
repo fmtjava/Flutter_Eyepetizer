@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//封装加载更多控件
 class LoadMoreWidget extends StatefulWidget {
   final bool isLoadMore;
 

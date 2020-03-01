@@ -28,13 +28,15 @@ class RankWidgetItem extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 ClipRRect(
-                    child: CachedNetworkImage(
-                        width: MediaQuery.of(context).size.width,
-                        height: 200,
-                        imageUrl: item.data.cover.feed,
-                        errorWidget: (context, url, error) =>
-                            Image.asset('images/img_load_fail.png'),
-                        fit: BoxFit.cover), //充满容器，可能会被截断
+                    child: Hero(
+                        tag: item.data.id,
+                        child: CachedNetworkImage(
+                            width: MediaQuery.of(context).size.width,
+                            height: 200,
+                            imageUrl: item.data.cover.feed,
+                            errorWidget: (context, url, error) =>
+                                Image.asset('images/img_load_fail.png'),
+                            fit: BoxFit.cover)), //充满容器，可能会被截断
                     borderRadius: BorderRadius.circular(4)),
                 Positioned(
                     left: 15,

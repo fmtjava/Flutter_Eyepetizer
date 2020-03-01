@@ -88,14 +88,16 @@ class _HomePageState extends State<HomePage>
           Swiper(
               autoplay: true,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: CachedNetworkImageProvider(
-                              model.bannerList[index].data.cover.feed),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(4)),
-                );
+                return Hero(
+                    tag: model.bannerList[index].data.id,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: CachedNetworkImageProvider(
+                                  model.bannerList[index].data.cover.feed),
+                              fit: BoxFit.cover),
+                          borderRadius: BorderRadius.circular(4)),
+                    ));
               },
               onIndexChanged: (index) {
                 model.changeBannerIndex(index);

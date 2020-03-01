@@ -25,12 +25,14 @@ class FollowWidgetItem extends StatelessWidget {
                 children: <Widget>[
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
-                    child: CachedNetworkImage(
-                      width: 300,
-                      height: 180,
-                      imageUrl: item.data.cover.feed,
-                      fit: BoxFit.cover,
-                    ),
+                    child: Hero(
+                        tag: item.data.id,
+                        child: CachedNetworkImage(
+                          width: 300,
+                          height: 180,
+                          imageUrl: item.data.cover.feed,
+                          fit: BoxFit.cover,
+                        )),
                   ),
                   Positioned(
                       right: 8,

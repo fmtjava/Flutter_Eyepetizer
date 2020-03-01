@@ -27,7 +27,7 @@ class _MinePageState extends State<MinePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return AnnotatedRegion<SystemUiOverlayStyle>(
+    return AnnotatedRegion<SystemUiOverlayStyle>(//Flutter修改状态栏字体颜色
       value: SystemUiOverlayStyle.dark, //设置状态栏字体颜色
       child: Container(
         decoration: BoxDecoration(color: Colors.white),

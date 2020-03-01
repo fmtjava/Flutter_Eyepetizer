@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//状态管理组件封装
 class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget {
   final T model;
   final Widget child;
   final Widget Function(BuildContext context, T value, Widget child) builder;
-  final Function(T) onModelInit;//初始化数据
+  final Function(T) onModelInit; //初始化数据
 
   const ProviderWidget(
       {Key key,
@@ -36,6 +37,8 @@ class _ProviderWidgetState<T extends ChangeNotifier>
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (_) => model,
-        child: Consumer<T>(builder: widget.builder, child: widget.child));
+        child: Consumer<T>(
+            builder: widget.builder,
+            child: widget.child)); //Consumer只会ReBuild对应的child
   }
 }
