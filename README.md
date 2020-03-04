@@ -32,9 +32,9 @@
 </div>
 
 # 下载体验(Android版本) 
- - 点击[![](https://img.shields.io/badge/Download-apk-green.svg)](https://fir.im/r734) 下载
+ - 点击[![](https://img.shields.io/badge/Download-apk-green.svg)](https://www.pgyer.com/nVnf) 下载(密码:123456)
  - 下方二维码下载(每日上限100次，如达到上限，还是 clone 源码吧！✧(≖ ◡ ≖✿))）<br/>
-   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1567913521.png"/>
+   <img src="https://www.pgyer.com/app/qrcode/nVnf"/>
  - ios请自行clone项目代码运行  
  # 更新日志
   ### v1.0.7
