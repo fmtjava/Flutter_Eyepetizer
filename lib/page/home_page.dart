@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
+import 'package:flutter_eyepetizer/page/video_search_page.dart';
 import 'package:flutter_eyepetizer/provider/home_page_model.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
@@ -29,10 +30,21 @@ class _HomePageState extends State<HomePage>
                   color: Colors.black,
                   fontWeight: FontWeight.bold)),
           brightness: Brightness.light,
+          backgroundColor: Colors.white,
           //设置状态栏字体
           centerTitle: true,
           elevation: 0,
-          backgroundColor: Colors.white,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.black87,
+                ),
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => VideoSearchPage()));
+                }),
+          ],
         ),
         body: ProviderWidget<HomePageModel>(
             model: HomePageModel(),

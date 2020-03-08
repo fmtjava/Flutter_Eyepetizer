@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-//状态管理组件封装
+//状态管理组件封装(MVVM)
 class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget {
   final T model;
   final Widget child;
