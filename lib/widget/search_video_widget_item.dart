@@ -19,7 +19,7 @@ class SearchVideoWidgetItem extends StatelessWidget {
         child: Container(
             child: Stack(alignment: Alignment.center, children: <Widget>[
           Hero(
-              tag: item.data.id,
+              tag: '${item.data.id}${item.data.time}',
               child: CachedNetworkImage(
                 width: double.infinity, //撑满整个屏幕
                 height: 220,

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
-import 'package:flutter_eyepetizer/repository/category_repository.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-const DEFAULT_URL = 'http://baobab.kaiyanapp.com/api/v4/categories/videoList?';
 
 class CategoryDetailModel extends ChangeNotifier {
   int category;
@@ -27,25 +25,26 @@ class CategoryDetailModel extends ChangeNotifier {
           "&udid=d2807c895f0348a180148c9dfa6f2feeac0781b5&deviceModel=Android";
       getData(url);
     } else {
-      url = DEFAULT_URL +
+      url = ApiService.category_video_url +
           "id=$category&udid=d2807c895f0348a180148c9dfa6f2feeac0781b5&deviceModel=Android";
       getData(url);
     }
   }
 
-  void getData(String url) async {
-    try {
-      Issue issue = await CategoryRepository.getCategoryDetailList(url);
-      loading = false;
-      itemList.addAll(issue.itemList);
-      _nextPageUrl = issue.nextPageUrl;
-      refreshController.loadComplete();
-    } catch (e) {
-      loading = false;
-      ToastUtil.showError(e.toString());
-      refreshController.loadFailed();
-    } finally {
-      notifyListeners();
-    }
+  void getData(String url) {
+    ApiService.getData(url,
+        success: (result) {
+          Issue issue = Issue.fromJson(result);
+          loading = false;
+          itemList.addAll(issue.itemList);
+          _nextPageUrl = issue.nextPageUrl;
+          refreshController.loadComplete();
+        },
+        fail: (e) {
+          loading = false;
+          ToastUtil.showError(e.toString());
+          refreshController.loadFailed();
+        },
+        complete: () => notifyListeners());
   }
 }

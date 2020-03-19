@@ -8,7 +8,8 @@ import 'package:flutter_eyepetizer/chewie/material_controls.dart';
 import 'package:video_player/video_player.dart';
 
 class PlayerWithControls extends StatelessWidget {
-  PlayerWithControls({Key key}) : super(key: key);
+  final bool hideBackArrow;
+  PlayerWithControls({Key key,this.hideBackArrow=false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,27 +21,19 @@ class PlayerWithControls extends StatelessWidget {
         child: AspectRatio(
           aspectRatio:
               chewieController.aspectRatio ?? _calculateAspectRatio(context),
-          child: _buildPlayerWithControls(chewieController, context),
+          child: _buildPlayerWithControls(chewieController, context,hideBackArrow),
         ),
       ),
     );
   }
 
   Container _buildPlayerWithControls(
-      ChewieController chewieController, BuildContext context) {
+      ChewieController chewieController, BuildContext context,bool hideBackArrow) {
     return Container(
       child: Stack(
         children: <Widget>[
           chewieController.placeholder ?? Container(),
           Center(
-            /*child: Hero(
-              tag: chewieController.videoPlayerController,
-              child: AspectRatio(
-                aspectRatio: chewieController.aspectRatio ??
-                    _calculateAspectRatio(context),
-                child: VideoPlayer(chewieController.videoPlayerController),
-              ),
-            ),*/
             child: AspectRatio(
               aspectRatio: chewieController.aspectRatio ??
                   _calculateAspectRatio(context),
@@ -48,7 +41,7 @@ class PlayerWithControls extends StatelessWidget {
             ),
           ),
           chewieController.overlay ?? Container(),
-          _buildControls(context, chewieController),
+          _buildControls(context, chewieController,hideBackArrow),
         ],
       ),
     );
@@ -57,12 +50,12 @@ class PlayerWithControls extends StatelessWidget {
   Widget _buildControls(
     BuildContext context,
     ChewieController chewieController,
-  ) {
+  bool hideBackArrow) {
     return chewieController.showControls
         ? chewieController.customControls != null
             ? chewieController.customControls
             : Theme.of(context).platform == TargetPlatform.android
-                ? MaterialControls()
+                ? MaterialControls(hideBackArrow: hideBackArrow)
                 : CupertinoControls(
                     backgroundColor: Color.fromRGBO(41, 41, 41, 0.7),
                     iconColor: Color.fromARGB(255, 200, 200, 200),

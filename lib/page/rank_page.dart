@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/tab_info_model.dart';
 import 'package:flutter_eyepetizer/page/rank_list_page.dart';
-import 'package:flutter_eyepetizer/repository/rank_repository.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 
 class RankPage extends StatefulWidget {
@@ -65,8 +65,8 @@ class _RankPageState extends State<RankPage> with TickerProviderStateMixin {
   }
 
   void _loadData() async {
-    try {
-      TabInfoModel tabInfoModel = await RankRepository.getTabInfo();
+    await ApiService.getData(ApiService.rank_url, success: (result) {
+      TabInfoModel tabInfoModel = TabInfoModel.fromJson(result);
       if (mounted) {
         //判断是否渲染完成，防止数据还没有获取到，此时setState触发的控件渲染就会报错
         setState(() {
@@ -74,8 +74,8 @@ class _RankPageState extends State<RankPage> with TickerProviderStateMixin {
           _tabController = TabController(length: _tabList.length, vsync: this);
         });
       }
-    } catch (e) {
+    }, fail: (e) {
       ToastUtil.showError(e.toString());
-    }
+    });
   }
 }

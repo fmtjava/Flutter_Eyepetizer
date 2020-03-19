@@ -11,7 +11,8 @@ const lightColor = Color.fromRGBO(255, 255, 255, 0.85);
 const darkColor = Color.fromRGBO(1, 1, 1, 0.35);
 
 class MaterialControls extends StatefulWidget {
-  const MaterialControls({Key key}) : super(key: key);
+  final bool hideBackArrow;
+  const MaterialControls({Key key,this.hideBackArrow=false}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -74,7 +75,7 @@ class _MaterialControlsState extends State<MaterialControls> {
               left: 8,
               top: 32,
               child: Offstage(
-                  offstage: chewieController.isFullScreen,
+                  offstage: chewieController.isFullScreen || widget.hideBackArrow,
                   child: _buildHeader(context)))
         ],
       ),

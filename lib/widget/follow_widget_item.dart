@@ -26,7 +26,7 @@ class FollowWidgetItem extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
                     child: Hero(
-                        tag: item.data.id,
+                        tag: '${item.data.id}${item.data.time}',
                         child: CachedNetworkImage(
                           width: 300,
                           height: 180,

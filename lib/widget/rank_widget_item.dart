@@ -29,7 +29,7 @@ class RankWidgetItem extends StatelessWidget {
               children: <Widget>[
                 ClipRRect(
                     child: Hero(
-                        tag: item.data.id,
+                        tag: '${item.data.id}${item.data.time}',
                         child: CachedNetworkImage(
                             width: MediaQuery.of(context).size.width,
                             height: 200,

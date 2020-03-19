@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
-import 'package:flutter_eyepetizer/repository/search_repository.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-const SEARCH_DEFAULT_URL =
-    "http://baobab.kaiyanapp.com/api/v1/search?&num=10&start=10&query=";
 
 class VideoSearchModel extends ChangeNotifier {
   bool loading = true;
@@ -20,16 +17,19 @@ class VideoSearchModel extends ChangeNotifier {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
-  void getKeyWords() async {
-    try {
-      keyWords = await SearchRepository.getKeyWordList();
+  getKeyWords() {
+    ApiService.getData(ApiService.keyword_url, success: (result) {
+      List responseList = result as List;
+      keyWords = responseList.map((value) {
+        return value.toString();
+      }).toList();
       notifyListeners();
-    } catch (e) {
+    }, fail: (e) {
       ToastUtil.showError(e.toString());
-    }
+    });
   }
 
-  void loadMore({loadMore = true}) {
+  loadMore({loadMore = true}) {
     String url;
     if (loadMore) {
       if (_nextPageUrl == null) {
@@ -40,35 +40,36 @@ class VideoSearchModel extends ChangeNotifier {
       getData(loadMore, url);
     } else {
       loading = true;
-      url = SEARCH_DEFAULT_URL + query;
+      url = ApiService.search_url + query;
       getData(loadMore, url);
     }
   }
 
-  void getData(bool loadMore, String url) async {
-    try {
-      Issue issue = await SearchRepository.getSearchVideoList(url);
+  getData(bool loadMore, String url) {
+    ApiService.getData(url,
+        success: (result) {
+          Issue issue = Issue.fromJson(result);
 
-      loading = false;
-      total = issue.total;
-      if (!loadMore) {
-        dataList.clear();
-        dataList.addAll(issue.itemList);
-        hideEmpty = dataList.length > 0;
-      } else {
-        dataList.addAll(issue.itemList);
-        hideEmpty = true;
-      }
-      _nextPageUrl = issue.nextPageUrl;
-      hideKeyWord = true;
+          loading = false;
+          total = issue.total;
+          if (!loadMore) {
+            dataList.clear();
+            dataList.addAll(issue.itemList);
+            hideEmpty = dataList.length > 0;
+          } else {
+            dataList.addAll(issue.itemList);
+            hideEmpty = true;
+          }
+          _nextPageUrl = issue.nextPageUrl;
+          hideKeyWord = true;
 
-      refreshController.loadComplete();
-    } catch (e) {
-      ToastUtil.showError(e.toString());
-      loading = false;
-      refreshController.loadFailed();
-    } finally {
-      notifyListeners();
-    }
+          refreshController.loadComplete();
+        },
+        fail: (e) {
+          ToastUtil.showError(e.toString());
+          loading = false;
+          refreshController.loadFailed();
+        },
+        complete: () => notifyListeners());
   }
 }

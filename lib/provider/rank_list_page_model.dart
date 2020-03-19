@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
-import 'package:flutter_eyepetizer/repository/rank_repository.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -15,20 +15,20 @@ class RankListPageModel with ChangeNotifier {
     this.apiUrl = apiUrl;
   }
 
-  void loadData() async {
-    try {
-      Issue issueModel = await RankRepository.getRankList(apiUrl);
+  void loadData(){
+    ApiService.getData(apiUrl,
+        success: (result) {
+          Issue issueModel = Issue.fromJson(result);
 
-      itemList = issueModel.itemList;
-      loading = false;
-
-      refreshController.refreshCompleted();
-    } catch (e) {
-      ToastUtil.showError(e.toString());
-      refreshController.refreshFailed();
-      loading = false;
-    } finally {
-      notifyListeners();
-    }
+          itemList = issueModel.itemList;
+          loading = false;
+          refreshController.refreshCompleted();
+        },
+        fail: (e) {
+          ToastUtil.showError(e.toString());
+          refreshController.refreshFailed();
+          loading = false;
+        },
+        complete: () => notifyListeners());
   }
 }

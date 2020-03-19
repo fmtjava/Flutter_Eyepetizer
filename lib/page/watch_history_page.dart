@@ -60,6 +60,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                                 },
                                 titleColor: Colors.black87,
                                 categoryColor: Colors.black26,
+                                openHero: true,
                               ),
                               secondaryActions: <Widget>[
                                 IconSlideAction(

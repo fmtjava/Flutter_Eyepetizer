@@ -9,9 +9,10 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class VideoSearchPage extends StatelessWidget {
   final focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
-    SpeechPlugin.requestPermissions();
+    requestPermissions();
     return Scaffold(
         body: Container(
             decoration: BoxDecoration(color: Colors.white),
@@ -33,6 +34,10 @@ class VideoSearchPage extends StatelessWidget {
                     }))));
   }
 
+  requestPermissions() {
+    if (Platform.isAndroid) SpeechPlugin.requestPermissions();
+  }
+
   Widget _searchBar(VideoSearchModel model, BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: 10, right: 16),
@@ -47,7 +52,7 @@ class VideoSearchPage extends StatelessWidget {
               onPressed: () => Navigator.of(context).pop()),
           Expanded(
               child: ConstrainedBox(
-                //通过ConstrainedBox修改TextField的高度
+                  //通过ConstrainedBox修改TextField的高度
                   constraints: BoxConstraints(maxHeight: 30),
                   child: TextField(
                     autofocus: true,
@@ -167,15 +172,15 @@ class VideoSearchPage extends StatelessWidget {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Icon(Icons.sentiment_dissatisfied,
-                      size: 60, color: Colors.black54),
-                  Padding(
-                      padding: EdgeInsets.only(top: 5),
-                      child: Text(
-                        '暂无数据',
-                        style: TextStyle(fontSize: 15, color: Colors.black54),
-                      ))
-                ])));
+              Icon(Icons.sentiment_dissatisfied,
+                  size: 60, color: Colors.black54),
+              Padding(
+                  padding: EdgeInsets.only(top: 5),
+                  child: Text(
+                    '暂无数据',
+                    style: TextStyle(fontSize: 15, color: Colors.black54),
+                  ))
+            ])));
   }
 
   _showSpeechDialog(VideoSearchModel model) {

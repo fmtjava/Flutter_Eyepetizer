@@ -8,13 +8,15 @@ class VideoRelateWidgetItem extends StatelessWidget {
   final VoidCallback callBack;
   final Color titleColor;
   final Color categoryColor;
+  final bool openHero;
 
   const VideoRelateWidgetItem(
       {Key key,
       this.item,
       this.callBack,
       this.titleColor = Colors.white,
-      this.categoryColor = Colors.white})
+      this.categoryColor = Colors.white,
+      this.openHero = false})
       : super(key: key);
 
   @override
@@ -31,13 +33,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
                 children: <Widget>[
                   ClipRRect(
                     borderRadius: BorderRadius.circular(5),
-                    child: CachedNetworkImage(
-                        imageUrl: item.data.cover.detail,
-                        errorWidget: (context, url, error) =>
-                            Image.asset('images/img_load_fail.png'),
-                        width: 135,
-                        height: 80,
-                        fit: BoxFit.cover),
+                    child: _coverWidget(),
                   ),
                   Positioned(
                       right: 5,
@@ -85,5 +81,24 @@ class VideoRelateWidgetItem extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  Widget _coverWidget() {
+    if (openHero) {
+      return Hero(
+          tag: '${item.data.id}${item.data.time}', child: _imageWidget());
+    } else {
+      return _imageWidget();
+    }
+  }
+
+  Widget _imageWidget() {
+    return CachedNetworkImage(
+        imageUrl: item.data.cover.detail,
+        errorWidget: (context, url, error) =>
+            Image.asset('images/img_load_fail.png'),
+        width: 135,
+        height: 80,
+        fit: BoxFit.cover);
   }
 }

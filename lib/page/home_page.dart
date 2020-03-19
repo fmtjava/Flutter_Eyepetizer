@@ -31,7 +31,6 @@ class _HomePageState extends State<HomePage>
                   fontWeight: FontWeight.bold)),
           brightness: Brightness.light,
           backgroundColor: Colors.white,
-          //设置状态栏字体
           centerTitle: true,
           elevation: 0,
           actions: <Widget>[
@@ -101,7 +100,8 @@ class _HomePageState extends State<HomePage>
               autoplay: true,
               itemBuilder: (BuildContext context, int index) {
                 return Hero(
-                    tag: model.bannerList[index].data.id,
+                    tag:
+                        '${model.bannerList[index].data.id}${model.bannerList[index].data.time}',
                     child: Container(
                       decoration: BoxDecoration(
                           image: DecorationImage(

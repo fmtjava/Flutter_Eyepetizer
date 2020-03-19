@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
-import 'package:flutter_eyepetizer/repository/follow_repository.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-const DEFAULT_URL = 'http://baobab.kaiyanapp.com/api/v4/tabs/follow';
 
 class FollowPageModel with ChangeNotifier {
   List<Item> itemList = [];
@@ -13,32 +11,30 @@ class FollowPageModel with ChangeNotifier {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
-  void refresh() async {
-    var url = DEFAULT_URL;
-    try {
-      Issue issueModel = await FollowRepository.getFollowList(url);
+  void refresh(){
+    ApiService.getData(ApiService.follow_url,success: (result){
+      Issue issueModel = Issue.fromJson(result);
 
       itemList = issueModel.itemList;
       loading = false;
       nextPageUrl = issueModel.nextPageUrl;
       refreshController.refreshCompleted();
       refreshController.footerMode.value = LoadStatus.canLoading;
-    } catch (e) {
+    },fail: (e){
       ToastUtil.showError(e.toString());
       refreshController.refreshFailed();
       loading = false;
-    } finally {
-      notifyListeners();
-    }
+    },complete: ()=>notifyListeners());
   }
 
-  void loadMore() async {
+  void loadMore(){
     if (nextPageUrl == null) {
       refreshController.loadNoData();
       return;
     }
-    try {
-      Issue issue = await FollowRepository.getFollowList(nextPageUrl);
+
+    ApiService.getData(nextPageUrl,success: (result){
+      Issue issue = Issue.fromJson(result);
 
       itemList.addAll(issue.itemList);
       loading = false;
@@ -46,9 +42,9 @@ class FollowPageModel with ChangeNotifier {
       refreshController.loadComplete();
 
       notifyListeners();
-    } catch (e) {
+    },fail: (e){
       ToastUtil.showError(e.toString());
       refreshController.loadFailed();
-    }
+    });
   }
 }

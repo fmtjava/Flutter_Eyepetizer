@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/chewie/chewie_player.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/provider/video_detail_page_model.dart';
-import 'package:flutter_eyepetizer/repository/video_repository.dart';
+import 'package:flutter_eyepetizer/repository/history_repository.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
@@ -30,7 +30,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     super.initState();
     WidgetsBinding.instance.addObserver(this); //监听页面可见与不可见状态
     initController();
-    VideoRepository.saveWatchHistory(widget.item);
+    HistoryRepository.saveWatchHistory(widget.item);
   }
 
   @override
@@ -69,7 +69,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                   '${widget.item.data.cover.blurred}}/thumbnail/${MediaQuery.of(context).size.height}x${MediaQuery.of(context).size.width}'))),
                       child: Column(children: <Widget>[
                         Hero(//Hero动画
-                            tag: widget.item.data.id,
+                            tag: '${widget.item.data.id}${widget.item.data.time}',
                             child: Chewie(
                               controller: _cheWieController,
                             )),

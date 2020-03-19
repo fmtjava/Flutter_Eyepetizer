@@ -398,41 +398,41 @@ class Data {
   String text;
   Header header;
   List<Item> itemList;
+  String time = DateTime.now().toString();
 
-  Data({
-    this.date,
-    this.releaseTime,
-    this.description,
-    this.collected,
-    this.remark,
-    this.title,
-    this.type,
-    this.playUrl,
-    this.cover,
-    this.duration,
-    this.descriptionEditor,
-    this.xLibrary,
-    this.provider,
-    this.id,
-    this.subtitles,
-    this.ad,
-    this.author,
-    this.dataType,
-    this.searchWeight,
-    this.consumption,
-    this.played,
-    this.tags,
-    this.labelList,
-    this.playInfo,
-    this.ifLimitVideo,
-    this.webUrl,
-    this.category,
-    this.idx,
-    this.resourceType,
-    this.text,
-    this.header,
-    this.itemList,
-  });
+  Data(
+      {this.date,
+      this.releaseTime,
+      this.description,
+      this.collected,
+      this.remark,
+      this.title,
+      this.type,
+      this.playUrl,
+      this.cover,
+      this.duration,
+      this.descriptionEditor,
+      this.xLibrary,
+      this.provider,
+      this.id,
+      this.subtitles,
+      this.ad,
+      this.author,
+      this.dataType,
+      this.searchWeight,
+      this.consumption,
+      this.played,
+      this.tags,
+      this.labelList,
+      this.playInfo,
+      this.ifLimitVideo,
+      this.webUrl,
+      this.category,
+      this.idx,
+      this.resourceType,
+      this.text,
+      this.header,
+      this.itemList});
 
   Data.fromJson(Map<String, dynamic> json) {
     date = json['date'];
@@ -558,8 +558,6 @@ class Data {
   String toString() {
     return 'Data{date: $date, releaseTime: $releaseTime, description: $description, collected: $collected, remark: $remark, title: $title, type: $type, playUrl: $playUrl, cover: $cover, duration: $duration, descriptionEditor: $descriptionEditor, xLibrary: $xLibrary, provider: $provider, id: $id, subtitles: $subtitles, ad: $ad, author: $author, dataType: $dataType, searchWeight: $searchWeight, consumption: $consumption, played: $played, tags: $tags, labelList: $labelList, playInfo: $playInfo, ifLimitVideo: $ifLimitVideo, webUrl: $webUrl, category: $category, idx: $idx, resourceType: $resourceType, text: $text, header: $header, itemList: $itemList}';
   }
-
-
 }
 
 class Cover {

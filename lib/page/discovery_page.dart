@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/page/recommend_page.dart';
 
 import 'category_page.dart';
 import 'follow_page.dart';
 
-const TAB_LABEL = ['关注', '分类'];
+const TAB_LABEL = ['关注', '分类', '推荐'];
 
 class DiscoveryPage extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class DiscoveryPage extends StatefulWidget {
 }
 
 class _DiscoveryPageState extends State<DiscoveryPage>
-    with SingleTickerProviderStateMixin,AutomaticKeepAliveClientMixin{
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _tabController;
 
   @override
@@ -52,7 +53,7 @@ class _DiscoveryPageState extends State<DiscoveryPage>
                   labelStyle: TextStyle(fontSize: 14),
                   unselectedLabelStyle: TextStyle(fontSize: 14),
                   indicatorColor: Colors.black,
-                  indicatorSize:TabBarIndicatorSize.label,
+                  indicatorSize: TabBarIndicatorSize.label,
                   tabs: TAB_LABEL.map((String label) {
                     return Tab(text: label);
                   }).toList()),
@@ -60,11 +61,12 @@ class _DiscoveryPageState extends State<DiscoveryPage>
             Expanded(
                 child: TabBarView(
                     controller: _tabController,
-                    children: [FollowPage(), CategoryPage()]))
+                    children: [FollowPage(), CategoryPage(), RecommendPage()]))
           ],
         ));
   }
 
   @override
   bool get wantKeepAlive => true;
+
 }
