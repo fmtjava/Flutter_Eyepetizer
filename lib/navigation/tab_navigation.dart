@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/page/discovery_page.dart';
 import 'package:flutter_eyepetizer/page/home_page.dart';
-import 'package:flutter_eyepetizer/page/hot_page.dart';
 import 'package:flutter_eyepetizer/page/mine_page.dart';
+import 'package:flutter_eyepetizer/page/rank_page.dart';
 
 class TabNavigation extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class _TabNavigationState extends State<TabNavigation> {
       body: PageView(
         controller: _pageController,
         physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[HomePage(), DiscoveryPage(), HotPage(), MinePage()],
+        children: <Widget>[HomePage(), DiscoveryPage(), RankPage(), MinePage()],
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,

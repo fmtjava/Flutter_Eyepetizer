@@ -9,25 +9,30 @@ class RankPage extends StatefulWidget {
   _RankPageState createState() => _RankPageState();
 }
 
-class _RankPageState extends State<RankPage> with TickerProviderStateMixin {
+class _RankPageState extends State<RankPage>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _tabController;
+  PageController _pageController;
   List<TabInfoItem> _tabList = [];
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: _tabList.length, vsync: this);
+    _pageController = PageController();
     _loadData();
   }
 
   @override
   void dispose() {
-    super.dispose();
     _tabController.dispose();
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -53,13 +58,16 @@ class _RankPageState extends State<RankPage> with TickerProviderStateMixin {
                 indicatorSize: TabBarIndicatorSize.label,
                 tabs: _tabList.map((TabInfoItem tabInfoItem) {
                   return Tab(text: tabInfoItem.name);
-                }).toList()),
+                }).toList(),
+                onTap: (index) => _pageController.animateToPage(index,
+                    duration: kTabScrollDuration, curve: Curves.ease)),
             Expanded(
-                child: TabBarView(
-                    controller: _tabController,
+                child: PageView(
+                    controller: _pageController,
+                    onPageChanged: (index) => _tabController.index = index,
                     children: _tabList.map((TabInfoItem tabInfoItem) {
                       return RankListPage(apiUrl: tabInfoItem.apiUrl);
-                    }).toList()))
+                    }).toList())),
           ],
         ));
   }
@@ -78,4 +86,7 @@ class _RankPageState extends State<RankPage> with TickerProviderStateMixin {
       ToastUtil.showError(e.toString());
     });
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

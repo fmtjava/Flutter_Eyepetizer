@@ -14,17 +14,20 @@ class DiscoveryPage extends StatefulWidget {
 class _DiscoveryPageState extends State<DiscoveryPage>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _tabController;
+  PageController _pageController;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: TAB_LABEL.length, vsync: this);
+    _pageController = PageController();
   }
 
   @override
   void dispose() {
-    super.dispose();
     _tabController.dispose();
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -56,17 +59,23 @@ class _DiscoveryPageState extends State<DiscoveryPage>
                   indicatorSize: TabBarIndicatorSize.label,
                   tabs: TAB_LABEL.map((String label) {
                     return Tab(text: label);
-                  }).toList()),
+                  }).toList(),
+                  onTap: (index) => _pageController.animateToPage(index,
+                      duration: kTabScrollDuration, curve: Curves.ease)),
             ),
             Expanded(
-                child: TabBarView(
-                    controller: _tabController,
-                    children: [FollowPage(), CategoryPage(), RecommendPage()]))
+                child: PageView(
+                    controller: _pageController,
+                    onPageChanged: (index) => _tabController.index = index,
+                    children: <Widget>[
+                  FollowPage(),
+                  CategoryPage(),
+                  RecommendPage()
+                ]))
           ],
         ));
   }
 
   @override
   bool get wantKeepAlive => true;
-
 }

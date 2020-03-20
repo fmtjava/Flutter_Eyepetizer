@@ -16,6 +16,7 @@ class RankListPage extends StatefulWidget {
 
 class _RankListPageState extends State<RankListPage>
     with AutomaticKeepAliveClientMixin {
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
