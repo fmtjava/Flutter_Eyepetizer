@@ -3,6 +3,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
+import 'package:get/get.dart';
 
 class FollowWidgetItem extends StatelessWidget {
   final Item item;
@@ -13,8 +14,7 @@ class FollowWidgetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => VideoDetailPage(item: item)));
+          Get.to(VideoDetailPage(item: item));
         },
         child: Container(
           padding: EdgeInsets.only(left: 15),

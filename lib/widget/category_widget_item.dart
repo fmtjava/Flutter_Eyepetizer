@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/category_model.dart';
 import 'package:flutter_eyepetizer/page/category_detail_page.dart';
+import 'package:get/get.dart';
 
 class CategoryWidgetItem extends StatelessWidget {
   final CategoryModel categoryModel;
@@ -12,9 +13,7 @@ class CategoryWidgetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  CategoryDetailPage(categoryModel: categoryModel)));
+          Get.to(CategoryDetailPage(categoryModel: categoryModel));
         },
         child: Stack(children: <Widget>[
           ClipRRect(

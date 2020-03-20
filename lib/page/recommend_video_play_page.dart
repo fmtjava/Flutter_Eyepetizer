@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/chewie/chewie_player.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class RecommendVideoPlayPage extends StatefulWidget {
@@ -46,7 +47,7 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
                   left: 10,
                   top: MediaQuery.of(context).padding.top + 10,
                   child: GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
+                    onTap: () => Get.back(),
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.grey,

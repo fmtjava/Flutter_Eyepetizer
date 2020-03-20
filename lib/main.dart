@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/navigation/tab_navigation.dart';
 import 'package:flutter_eyepetizer/util/app_manager.dart';
 import 'package:flutter_splash_screen/flutter_splash_screen.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(App());
@@ -20,7 +21,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     hideSplashScreen();
     AppManager.init();
-    return MaterialApp(title: '开眼', home: TabNavigation());
+    return MaterialApp(
+        title: '开眼', navigatorKey: Get.key, home: TabNavigation());
   }
 
   Future<void> hideSplashScreen() async {

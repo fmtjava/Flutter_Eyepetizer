@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/recommend_model.dart';
 import 'package:flutter_eyepetizer/page/recommend_photo_gallery_page.dart';
 import 'package:flutter_eyepetizer/page/recommend_video_play_page.dart';
+import 'package:get/get.dart';
 
 class RecommendWidgetItem extends StatelessWidget {
   final RecommendItem item;
@@ -13,16 +14,14 @@ class RecommendWidgetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          if (item.data.content.type == 'video') {
-            return RecommendVideoPlayPage(
-                playUrl: item.data.content.data.playUrl);
-          } else {
-            return RecommendPhotoGalleryPage(
-              galleryItems: item.data.content.data.urls,
-            );
-          }
-        }));
+        if (item.data.content.type == 'video') {
+          Get.to(
+              RecommendVideoPlayPage(playUrl: item.data.content.data.playUrl));
+        } else {
+          Get.to(RecommendPhotoGalleryPage(
+            galleryItems: item.data.content.data.urls,
+          ));
+        }
       },
       child: Card(
         child: PhysicalModel(

@@ -5,6 +5,7 @@ import 'package:flutter_eyepetizer/provider/video_search_model.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/search_video_widget_item.dart';
+import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class VideoSearchPage extends StatelessWidget {
@@ -49,7 +50,7 @@ class VideoSearchPage extends StatelessWidget {
                 size: 20,
                 color: Colors.black26,
               ),
-              onPressed: () => Navigator.of(context).pop()),
+              onPressed: () => Get.back()),
           Expanded(
               child: ConstrainedBox(
                   //通过ConstrainedBox修改TextField的高度

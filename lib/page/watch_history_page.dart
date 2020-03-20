@@ -4,6 +4,7 @@ import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 
 class WatchHistoryPage extends StatefulWidget {
   @override
@@ -16,9 +17,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
     return Scaffold(
         appBar: AppBar(
             leading: GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
+              onTap: () => Get.back(),
               child: Icon(
                 Icons.arrow_back,
                 size: 20,
@@ -54,9 +53,8 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                               child: VideoRelateWidgetItem(
                                 item: model.itemList[index],
                                 callBack: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => VideoDetailPage(
-                                          item: model.itemList[index])));
+                                  Get.to(VideoDetailPage(
+                                      item: model.itemList[index]));
                                 },
                                 titleColor: Colors.black87,
                                 categoryColor: Colors.black26,

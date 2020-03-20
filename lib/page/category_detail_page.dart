@@ -6,6 +6,7 @@ import 'package:flutter_eyepetizer/provider/category_detail_model.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/rank_widget_item.dart';
+import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class CategoryDetailPage extends StatefulWidget {
@@ -36,7 +37,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                       return [
                         SliverAppBar(
                             leading: GestureDetector(
-                                onTap: () => Navigator.of(context).pop(),
+                                onTap: () => Get.back(),
                                 child: Icon(Icons.arrow_back,
                                     color: Colors.black)),
                             elevation: 0,

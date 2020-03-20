@@ -3,6 +3,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
+import 'package:get/get.dart';
 import 'package:share/share.dart';
 
 class RankWidgetItem extends StatelessWidget {
@@ -20,8 +21,7 @@ class RankWidgetItem extends StatelessWidget {
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => VideoDetailPage(item: item)));
+            Get.to(VideoDetailPage(item: item));
           },
           child: Padding(
             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),

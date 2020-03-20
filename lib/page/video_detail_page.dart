@@ -9,6 +9,7 @@ import 'package:flutter_eyepetizer/repository/history_repository.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoDetailPage extends StatefulWidget {
@@ -68,8 +69,10 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                               image: CachedNetworkImageProvider(
                                   '${widget.item.data.cover.blurred}}/thumbnail/${MediaQuery.of(context).size.height}x${MediaQuery.of(context).size.width}'))),
                       child: Column(children: <Widget>[
-                        Hero(//Hero动画
-                            tag: '${widget.item.data.id}${widget.item.data.time}',
+                        Hero(
+                            //Hero动画
+                            tag:
+                                '${widget.item.data.id}${widget.item.data.time}',
                             child: Chewie(
                               controller: _cheWieController,
                             )),
@@ -275,13 +278,8 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                             item: model.itemList[index],
                                             callBack: () {
                                               _videoPlayerController.pause();
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          VideoDetailPage(
-                                                              item: model
-                                                                      .itemList[
-                                                                  index])));
+                                              Get.to(VideoDetailPage(
+                                                  item: model.itemList[index]));
                                             });
                                       }
                                       return Padding(

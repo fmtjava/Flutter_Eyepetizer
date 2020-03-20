@@ -5,6 +5,7 @@ import 'package:flutter_eyepetizer/chewie/chewie_player.dart';
 import 'package:flutter_eyepetizer/chewie/chewie_progress_colors.dart';
 import 'package:flutter_eyepetizer/chewie/material_progress_bar.dart';
 import 'package:flutter_eyepetizer/chewie/utils.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 const lightColor = Color.fromRGBO(255, 255, 255, 0.85);
@@ -12,7 +13,9 @@ const darkColor = Color.fromRGBO(1, 1, 1, 0.35);
 
 class MaterialControls extends StatefulWidget {
   final bool hideBackArrow;
-  const MaterialControls({Key key,this.hideBackArrow=false}) : super(key: key);
+
+  const MaterialControls({Key key, this.hideBackArrow = false})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -75,7 +78,8 @@ class _MaterialControlsState extends State<MaterialControls> {
               left: 8,
               top: 32,
               child: Offstage(
-                  offstage: chewieController.isFullScreen || widget.hideBackArrow,
+                  offstage:
+                      chewieController.isFullScreen || widget.hideBackArrow,
                   child: _buildHeader(context)))
         ],
       ),
@@ -381,9 +385,7 @@ class _MaterialControlsState extends State<MaterialControls> {
 
   Widget _buildHeader(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).pop();
-      },
+      onTap: () => Get.back(),
       child: Icon(Icons.arrow_back_ios, color: Colors.white),
     );
   }

@@ -16,13 +16,11 @@ class CategoryPageModel with ChangeNotifier {
               .toList();
           this.list = categoryList;
           loading = false;
-          notifyListeners();
         },
         fail: (e) {
           ToastUtil.showError(e.toString());
           loading = false;
-          notifyListeners();
         },
-        /*complete: () => notifyListeners()*/);
+        complete: () => notifyListeners());
   }
 }

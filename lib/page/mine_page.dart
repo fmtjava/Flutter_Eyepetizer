@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/page/watch_history_page.dart';
 import 'package:flutter_eyepetizer/page/web_page.dart';
 import 'package:flutter_eyepetizer/repository/mine_repository.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 const USER_INFO_URL = 'https://github.com/fmtjava/';
@@ -27,11 +28,13 @@ class _MinePageState extends State<MinePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return AnnotatedRegion<SystemUiOverlayStyle>(//Flutter修改状态栏字体颜色
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      //Flutter修改状态栏字体颜色
       value: SystemUiOverlayStyle.dark, //设置状态栏字体颜色
       child: Container(
         decoration: BoxDecoration(color: Colors.white),
-        child: SafeArea(//适配刘海屏
+        child: SafeArea(
+            //适配刘海屏
             child: Column(
           children: <Widget>[
             GestureDetector(
@@ -63,8 +66,7 @@ class _MinePageState extends State<MinePage>
                 padding: EdgeInsets.only(top: 10),
                 child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => WebPage(url: USER_INFO_URL)));
+                      Get.to(WebPage(url: USER_INFO_URL));
                     },
                     child: Text(
                       '查看个人主页 >',
@@ -96,8 +98,7 @@ class _MinePageState extends State<MinePage>
             _settingWidget('我的记录'),
             _settingWidget('我的缓存'),
             _settingWidget('观看记录', callback: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => WatchHistoryPage()));
+              Get.to(WatchHistoryPage());
             }),
             _settingWidget('意见反馈')
           ],
@@ -142,15 +143,15 @@ class _MinePageState extends State<MinePage>
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               _bottomWidget('拍照', () {
-                Navigator.pop(context);
+                 Get.back();
                 _getImage(ImageSource.camera);
               }),
               _bottomWidget('相册', () {
-                Navigator.pop(context);
+                Get.back();
                 _getImage(ImageSource.gallery);
               }),
               _bottomWidget('取消', () {
-                Navigator.pop(context);
+                Get.back();
               })
             ],
           );
