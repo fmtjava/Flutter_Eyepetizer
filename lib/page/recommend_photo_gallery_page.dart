@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/provider/photo_gallery_model.dart';
+import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
-import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -52,7 +52,7 @@ class RecommendPhotoGalleryPage extends StatelessWidget {
                               left: 10,
                               top: MediaQuery.of(context).padding.top + 10,
                               child: GestureDetector(
-                                onTap: () => Get.back(),
+                                onTap: () => NavigatorManager.back(),
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color: Colors.grey,

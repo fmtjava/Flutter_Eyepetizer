@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:get/get.dart';
 
 class WebPage extends StatefulWidget {
   final String url;
@@ -50,7 +50,7 @@ class _State extends State<WebPage> {
       leading: GestureDetector(
         onTap: () {
           if (widget.url == currentUrl || currentUrl.isEmpty) {
-            Get.back();
+            NavigatorManager.back();
           } else {
             flutterWebViewPlugin.goBack();
           }
@@ -64,7 +64,7 @@ class _State extends State<WebPage> {
 
   Future<bool> _onWillPop() {
     if (widget.url == currentUrl) {
-      Get.back();
+      NavigatorManager.back();
       return new Future.value(true); //点击返回键，页面正常返回
     } else {
       flutterWebViewPlugin.goBack();

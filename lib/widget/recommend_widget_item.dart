@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/recommend_model.dart';
 import 'package:flutter_eyepetizer/page/recommend_photo_gallery_page.dart';
 import 'package:flutter_eyepetizer/page/recommend_video_play_page.dart';
-import 'package:get/get.dart';
+import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 
 class RecommendWidgetItem extends StatelessWidget {
   final RecommendItem item;
@@ -15,10 +15,10 @@ class RecommendWidgetItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (item.data.content.type == 'video') {
-          Get.to(
+          NavigatorManager.to(
               RecommendVideoPlayPage(playUrl: item.data.content.data.playUrl));
         } else {
-          Get.to(RecommendPhotoGalleryPage(
+          NavigatorManager.to(RecommendPhotoGalleryPage(
             galleryItems: item.data.content.data.urls,
           ));
         }

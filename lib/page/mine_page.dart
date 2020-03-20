@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/page/watch_history_page.dart';
 import 'package:flutter_eyepetizer/page/web_page.dart';
 import 'package:flutter_eyepetizer/repository/mine_repository.dart';
-import 'package:get/get.dart';
+import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
 const USER_INFO_URL = 'https://github.com/fmtjava/';
@@ -66,7 +66,7 @@ class _MinePageState extends State<MinePage>
                 padding: EdgeInsets.only(top: 10),
                 child: GestureDetector(
                     onTap: () {
-                      Get.to(WebPage(url: USER_INFO_URL));
+                      NavigatorManager.to(WebPage(url: USER_INFO_URL));
                     },
                     child: Text(
                       '查看个人主页 >',
@@ -98,7 +98,7 @@ class _MinePageState extends State<MinePage>
             _settingWidget('我的记录'),
             _settingWidget('我的缓存'),
             _settingWidget('观看记录', callback: () {
-              Get.to(WatchHistoryPage());
+              NavigatorManager.to(WatchHistoryPage());
             }),
             _settingWidget('意见反馈')
           ],
@@ -143,15 +143,15 @@ class _MinePageState extends State<MinePage>
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               _bottomWidget('拍照', () {
-                 Get.back();
+                NavigatorManager.back();
                 _getImage(ImageSource.camera);
               }),
               _bottomWidget('相册', () {
-                Get.back();
+                NavigatorManager.back();
                 _getImage(ImageSource.gallery);
               }),
               _bottomWidget('取消', () {
-                Get.back();
+                NavigatorManager.back();
               })
             ],
           );

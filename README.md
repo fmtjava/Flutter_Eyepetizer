@@ -50,6 +50,9 @@
    <img src="https://www.pgyer.com/app/qrcode/nVnf"/>
  - ios请自行clone项目代码运行  
  # 更新日志
+  ### v1.0.9
+    * 新增推荐页面、图片画廊显示页面、推荐小视频播放页面
+    * 接入get轻量级路由框架简化页面调整，后续持续完善中...
   ### v1.0.8
    * 调整Chewie播放器样式，播放风格更加简洁
    * 页面跳转接入Hero动画提升用户体验
@@ -92,6 +95,7 @@
   - [image_picker](https://github.com/flutter/plugins/tree/master/packages/image_picker) 相册取图/拍照框架
   - [share](https://github.com/flutter/plugins/tree/master/packages/share) 分享框架
   - [provider](https://github.com/rrousselGit/provider) 状态框架
+  - [Get](https://github.com/jonataslaw/get) 路由框架
   
  # 关于我
   - WX：fmtjava

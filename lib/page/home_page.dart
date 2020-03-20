@@ -4,11 +4,11 @@ import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/page/video_search_page.dart';
 import 'package:flutter_eyepetizer/provider/home_page_model.dart';
+import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/rank_widget_item.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage>
                   color: Colors.black87,
                 ),
                 onPressed: () {
-                  Get.to(VideoSearchPage());
+                  NavigatorManager.to(VideoSearchPage());
                 }),
           ],
         ),
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage>
                 model.changeBannerIndex(index);
               },
               onTap: (index) {
-                Get.to(VideoDetailPage(item: model.bannerList[index]));
+                NavigatorManager.to(VideoDetailPage(item: model.bannerList[index]));
               },
               itemCount: model.bannerList?.length ?? 0,
               pagination: new SwiperPagination(

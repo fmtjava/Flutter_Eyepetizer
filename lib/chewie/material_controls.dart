@@ -5,7 +5,7 @@ import 'package:flutter_eyepetizer/chewie/chewie_player.dart';
 import 'package:flutter_eyepetizer/chewie/chewie_progress_colors.dart';
 import 'package:flutter_eyepetizer/chewie/material_progress_bar.dart';
 import 'package:flutter_eyepetizer/chewie/utils.dart';
-import 'package:get/get.dart';
+import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:video_player/video_player.dart';
 
 const lightColor = Color.fromRGBO(255, 255, 255, 0.85);
@@ -385,7 +385,7 @@ class _MaterialControlsState extends State<MaterialControls> {
 
   Widget _buildHeader(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.back(),
+      onTap: () => NavigatorManager.back(),
       child: Icon(Icons.arrow_back_ios, color: Colors.white),
     );
   }

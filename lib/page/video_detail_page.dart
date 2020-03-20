@@ -6,10 +6,10 @@ import 'package:flutter_eyepetizer/chewie/chewie_player.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/provider/video_detail_page_model.dart';
 import 'package:flutter_eyepetizer/repository/history_repository.dart';
+import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
-import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoDetailPage extends StatefulWidget {
@@ -278,7 +278,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                             item: model.itemList[index],
                                             callBack: () {
                                               _videoPlayerController.pause();
-                                              Get.to(VideoDetailPage(
+                                              NavigatorManager.to(VideoDetailPage(
                                                   item: model.itemList[index]));
                                             });
                                       }
