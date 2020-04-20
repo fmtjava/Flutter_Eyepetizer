@@ -28,7 +28,7 @@ class _ProviderWidgetState<T extends ChangeNotifier>
   void initState() {
     super.initState();
     model = widget.model;
-    if (widget.onModelInit != null && model !=null) {
+    if (widget.onModelInit != null && model != null) {
       widget.onModelInit(model);
     }
   }
@@ -39,6 +39,6 @@ class _ProviderWidgetState<T extends ChangeNotifier>
         create: (_) => model,
         child: Consumer<T>(
             builder: widget.builder,
-            child: widget.child)); //Consumer只会ReBuild对应的child
+            child: widget.child)); //可以控制刷新性能优化，当数据数据发生改变，不会重新build
   }
 }
