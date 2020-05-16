@@ -51,10 +51,10 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                             return Slidable(
                               actionPane: SlidableDrawerActionPane(),
                               child: VideoRelateWidgetItem(
-                                item: model.itemList[index],
+                                data: model.itemList[index],
                                 callBack: () {
                                   NavigatorManager.to(VideoDetailPage(
-                                      item: model.itemList[index]));
+                                      data: model.itemList[index]));
                                 },
                                 titleColor: Colors.black87,
                                 categoryColor: Colors.black26,

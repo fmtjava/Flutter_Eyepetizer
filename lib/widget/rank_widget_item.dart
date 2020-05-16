@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
+import 'package:flutter_eyepetizer/util/date_util.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
-import 'package:share/share.dart';
+import 'package:flutter_eyepetizer/util/share_util.dart';
 
 class RankWidgetItem extends StatelessWidget {
   final Item item;
@@ -21,7 +21,7 @@ class RankWidgetItem extends StatelessWidget {
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            NavigatorManager.to(VideoDetailPage(item: item));
+            NavigatorManager.to(VideoDetailPage(data: item.data));
           },
           child: Padding(
             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
@@ -62,8 +62,8 @@ class RankWidgetItem extends StatelessWidget {
                             decoration: BoxDecoration(color: Colors.black54),
                             padding: EdgeInsets.all(5),
                             child: Text(
-                              DateUtil.formatDateMs(item.data.duration * 1000,
-                                  format: 'mm:ss'),
+                              DateUtils.formatDateMsByMS(
+                                  item.data.duration * 1000),
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
@@ -105,9 +105,8 @@ class RankWidgetItem extends StatelessWidget {
                         ],
                       ))),
               InkWell(
-                onTap: () {
-                  Share.share('${item.data.title}\n${_getShareVideoUrl()}');
-                },
+                onTap: () =>
+                    ShareUtil.share(item.data.title, _getShareVideoUrl()),
                 child: Icon(Icons.share, color: Colors.black38),
               )
             ],

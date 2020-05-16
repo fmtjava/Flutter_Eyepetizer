@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
+import 'package:flutter_eyepetizer/util/date_util.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 
 class SearchVideoWidgetItem extends StatelessWidget {
@@ -14,7 +14,7 @@ class SearchVideoWidgetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          NavigatorManager.to(VideoDetailPage(item: item));
+          NavigatorManager.to(VideoDetailPage(data: item.data));
         },
         child: Container(
             child: Stack(alignment: Alignment.center, children: <Widget>[
@@ -44,8 +44,7 @@ class SearchVideoWidgetItem extends StatelessWidget {
                       decoration: BoxDecoration(color: Colors.black54),
                       padding: EdgeInsets.all(5),
                       child: Text(
-                        DateUtil.formatDateMs(item.data.duration * 1000,
-                            format: 'mm:ss'),
+                        DateUtils.formatDateMsByMS(item.data.duration * 1000),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,

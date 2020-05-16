@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/chewie/chewie_player.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/provider/video_detail_page_model.dart';
 import 'package:flutter_eyepetizer/repository/history_repository.dart';
+import 'package:flutter_eyepetizer/util/date_util.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
@@ -13,9 +13,9 @@ import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoDetailPage extends StatefulWidget {
-  final Item item;
+  final Data data;
 
-  const VideoDetailPage({Key key, this.item}) : super(key: key);
+  const VideoDetailPage({Key key, this.data}) : super(key: key);
 
   @override
   _VideoDetailPageState createState() => _VideoDetailPageState();
@@ -31,7 +31,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     super.initState();
     WidgetsBinding.instance.addObserver(this); //监听页面可见与不可见状态
     initController();
-    HistoryRepository.saveWatchHistory(widget.item);
+    HistoryRepository.saveWatchHistory(widget.data);
   }
 
   @override
@@ -56,7 +56,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     return ProviderWidget<VideoDetailPageModel>(
         model: VideoDetailPageModel(),
         onModelInit: (model) {
-          model.loadVideoRelateData(widget.item.data.id);
+          model.loadVideoRelateData(widget.data.id);
         },
         builder: (context, model, child) {
           return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -67,12 +67,12 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                               //背景图片
                               fit: BoxFit.cover,
                               image: CachedNetworkImageProvider(
-                                  '${widget.item.data.cover.blurred}}/thumbnail/${MediaQuery.of(context).size.height}x${MediaQuery.of(context).size.width}'))),
+                                  '${widget.data.cover.blurred}}/thumbnail/${MediaQuery.of(context).size.height}x${MediaQuery.of(context).size.width}'))),
                       child: Column(children: <Widget>[
                         Hero(
                             //Hero动画
                             tag:
-                                '${widget.item.data.id}${widget.item.data.time}',
+                                '${widget.data.id}${widget.data.time}',
                             child: Chewie(
                               controller: _cheWieController,
                             )),
@@ -92,7 +92,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                 padding: EdgeInsets.only(
                                                     left: 10, top: 10),
                                                 child: Text(
-                                                  widget.item.data.title,
+                                                  widget.data.title,
                                                   style: TextStyle(
                                                       fontSize: 18,
                                                       color: Colors.white,
@@ -103,7 +103,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                 padding: EdgeInsets.only(
                                                     left: 10, top: 10),
                                                 child: Text(
-                                                    '#${widget.item.data.category} / ${DateUtil.formatDateMs(widget.item.data.author.latestReleaseTime, format: 'yyyy/MM/dd HH:mm')}',
+                                                    '#${widget.data.category} / ${DateUtils.formatDateMsByYMDHM(widget.data.author.latestReleaseTime)}',
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12))),
@@ -113,8 +113,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                     top: 10,
                                                     right: 10),
                                                 child: Text(
-                                                    widget
-                                                        .item.data.description,
+                                                    widget.data.description,
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 14))),
@@ -135,7 +134,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                               EdgeInsets.only(
                                                                   left: 3),
                                                           child: Text(
-                                                            '${widget.item.data.consumption.collectionCount}',
+                                                            '${widget.data.consumption.collectionCount}',
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white,
@@ -159,7 +158,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                                 EdgeInsets.only(
                                                                     left: 3),
                                                             child: Text(
-                                                              '${widget.item.data.consumption.shareCount}',
+                                                              '${widget.data.consumption.shareCount}',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .white,
@@ -184,7 +183,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                                 EdgeInsets.only(
                                                                     left: 3),
                                                             child: Text(
-                                                              '${widget.item.data.consumption.replyCount}',
+                                                              '${widget.data.consumption.replyCount}',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .white,
@@ -207,8 +206,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                   padding: EdgeInsets.all(10),
                                                   child: ClipOval(
                                                     child: CachedNetworkImage(
-                                                        imageUrl: widget.item
-                                                            .data.author.icon,
+                                                        imageUrl: widget.data.author.icon,
                                                         errorWidget: (context,
                                                                 url, error) =>
                                                             Image.asset(
@@ -224,7 +222,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                             .start,
                                                     children: <Widget>[
                                                       Text(
-                                                          widget.item.data
+                                                          widget.data
                                                               .author.name,
                                                           style: TextStyle(
                                                               fontSize: 15,
@@ -236,7 +234,6 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                                   top: 3),
                                                           child: Text(
                                                               widget
-                                                                  .item
                                                                   .data
                                                                   .author
                                                                   .description,
@@ -275,11 +272,11 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                       if (model.itemList[index].type ==
                                           'videoSmallCard') {
                                         return VideoRelateWidgetItem(
-                                            item: model.itemList[index],
+                                            data: model.itemList[index].data,
                                             callBack: () {
                                               _videoPlayerController.pause();
                                               NavigatorManager.to(VideoDetailPage(
-                                                  item: model.itemList[index]));
+                                                  data: model.itemList[index].data));
                                             });
                                       }
                                       return Padding(
@@ -301,7 +298,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
   }
 
   void initController() {
-    List<PlayInfo> playInfoList = widget.item.data.playInfo;
+    List<PlayInfo> playInfoList = widget.data.playInfo;
     if (playInfoList.length > 1) {
       for (var playInfo in playInfoList) {
         if (playInfo.type == 'high') {
@@ -314,7 +311,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     } else {
       //若无高清视频，则取默认视频地址
       _videoPlayerController =
-          VideoPlayerController.network(widget.item.data.playUrl);
+          VideoPlayerController.network(widget.data.playUrl);
       _cheWieController = ChewieController(
           videoPlayerController: _videoPlayerController, autoPlay: true);
     }

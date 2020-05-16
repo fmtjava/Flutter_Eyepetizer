@@ -6,12 +6,12 @@ import 'package:flutter_eyepetizer/util/constant.dart';
 
 class HistoryRepository {
 
-  static saveWatchHistory(Item item) async {
+  static saveWatchHistory(Data data) async {
     List<String> watchList = AppManager.prefs.getStringList(Constant.watchHistoryList);
     if (watchList == null) {
       watchList = List();
     }
-    var jsonParam = item.toJson();
+    var jsonParam = data.toJson();
     var jsonStr = json.encode(jsonParam);
     if (!watchList.contains(jsonStr)) {
       watchList.add(json.encode(jsonParam));

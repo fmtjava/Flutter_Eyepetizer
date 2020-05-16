@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-//状态管理组件封装(MVVM)
+//状态管理组件封装(MVVM),核心组件(基于provider封装)
 class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget {
-  final T model;
+  final T model;//控件对应的数据
   final Widget child;
-  final Widget Function(BuildContext context, T value, Widget child) builder;
-  final Function(T) onModelInit; //初始化数据
+  final Widget Function(BuildContext context, T value, Widget child) builder;//绑定数据的控件
+  final Function(T) onModelInit; //数据初始化方法
 
   const ProviderWidget(
       {Key key,

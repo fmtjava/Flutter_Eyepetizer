@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
+import 'package:flutter_eyepetizer/util/date_util.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 
 class FollowWidgetItem extends StatelessWidget {
@@ -13,9 +13,7 @@ class FollowWidgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          NavigatorManager.to(VideoDetailPage(item: item));
-        },
+        onTap: () => NavigatorManager.to(VideoDetailPage(data: item.data)),
         child: Container(
           padding: EdgeInsets.only(left: 15),
           child: Column(
@@ -66,8 +64,8 @@ class FollowWidgetItem extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(top: 3),
                 child: Text(
-                    DateUtil.formatDateMs(item.data.author.latestReleaseTime,
-                        format: 'yyyy/MM/dd HH:mm'),
+                    DateUtils.formatDateMsByYMDHM(
+                        item.data.author.latestReleaseTime),
                     style: TextStyle(fontSize: 12, color: Colors.black26)),
               )
             ],

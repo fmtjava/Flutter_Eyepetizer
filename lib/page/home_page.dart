@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage>
                 model.changeBannerIndex(index);
               },
               onTap: (index) {
-                NavigatorManager.to(VideoDetailPage(item: model.bannerList[index]));
+                NavigatorManager.to(VideoDetailPage(data: model.bannerList[index].data));
               },
               itemCount: model.bannerList?.length ?? 0,
               pagination: new SwiperPagination(
