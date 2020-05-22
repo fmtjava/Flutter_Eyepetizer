@@ -1,12 +1,12 @@
-class RecommendModel {
-  List<RecommendItem> itemList;
+import 'package:flutter_eyepetizer/model/paging_model.dart';
+
+class RecommendModel extends PagingModel<RecommendItem>{
   int count;
   int total;
-  String nextPageUrl;
   bool adExist;
 
   RecommendModel(
-      {this.itemList, this.count, this.total, this.nextPageUrl, this.adExist});
+      {this.count, this.total, this.adExist});
 
   RecommendModel.fromJson(Map<String, dynamic> json) {
     if (json['itemList'] != null) {

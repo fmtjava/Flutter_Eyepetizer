@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/config/color.dart';
 import 'package:flutter_eyepetizer/page/recommend_page.dart';
 import 'package:flutter_eyepetizer/page/topics_page.dart';
 
 import 'category_page.dart';
 import 'follow_page.dart';
+import 'news_list_page.dart';
 
-const TAB_LABEL = ['关注', '分类', '专题', '推荐'];
+const TAB_LABEL = ['关注', '分类', '专题', '资讯', '推荐'];
 
 class DiscoveryPage extends StatefulWidget {
   @override
@@ -53,7 +55,7 @@ class _DiscoveryPageState extends State<DiscoveryPage>
               child: TabBar(
                   controller: _tabController,
                   labelColor: Colors.black,
-                  unselectedLabelColor: Color(0xff9a9a9a),
+                  unselectedLabelColor: DColor.hitTextColor,
                   labelStyle: TextStyle(fontSize: 14),
                   unselectedLabelStyle: TextStyle(fontSize: 14),
                   indicatorColor: Colors.black,
@@ -72,6 +74,7 @@ class _DiscoveryPageState extends State<DiscoveryPage>
                   FollowPage(),
                   CategoryPage(),
                   TopicsPage(),
+                  NewsListPage(),
                   RecommendPage()
                 ]))
           ],

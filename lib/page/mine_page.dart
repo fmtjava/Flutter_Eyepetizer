@@ -3,12 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/page/watch_history_page.dart';
-import 'package:flutter_eyepetizer/page/web_page.dart';
 import 'package:flutter_eyepetizer/repository/mine_repository.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:image_picker/image_picker.dart';
-
-const USER_INFO_URL = 'https://github.com/fmtjava/';
 
 class MinePage extends StatefulWidget {
   @override
@@ -64,14 +61,10 @@ class _MinePageState extends State<MinePage>
             ),
             Padding(
                 padding: EdgeInsets.only(top: 10),
-                child: GestureDetector(
-                    onTap: () {
-                      NavigatorManager.to(WebPage(url: USER_INFO_URL));
-                    },
-                    child: Text(
-                      '查看个人主页 >',
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
-                    ))),
+                child: Text(
+                  '查看个人主页 >',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                )),
             Padding(
               padding: EdgeInsets.only(top: 20),
               child: Row(

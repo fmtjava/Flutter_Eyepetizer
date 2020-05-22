@@ -1,16 +1,20 @@
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class ToastUtil{
-  static void showError(String errorMessage){
+class ToastUtil {
+  static void showTip(String tipMessage) {
+    Fluttertoast.showToast(
+        msg: tipMessage,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM);
+  }
+
+  static void showError(String errorMessage) {
     Fluttertoast.showToast(
         msg: errorMessage,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIos: 1,
         backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
+        textColor: Colors.white);
   }
 }

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/color.dart';
+import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/topic_detail_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/util/date_util.dart';
@@ -97,9 +98,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
   Widget _tagWidget() {
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
-      child: Wrap(
-        spacing: 5,
-        runAlignment: WrapAlignment.end,
+      child: Row(
         children: _getTagWidgetList(model),
       ),
     );
@@ -172,7 +171,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
             Icon(Icons.star_border, size: 20, color: DColor.hitTextColor),
             Padding(
               padding: EdgeInsets.only(left: 10),
-              child: Text('收藏',
+              child: Text(DString.collect_text,
                   style: TextStyle(fontSize: 12, color: DColor.hitTextColor)),
             )
           ],
@@ -197,14 +196,15 @@ class TopicDetailWidgetItem extends StatelessWidget {
   List<Widget> _getTagWidgetList(TopicDetailItemData itemData) {
     List<Widget> widgetList = itemData.data.content.data.tags.map((tag) {
       return Container(
-          height: 22,
+          margin: EdgeInsets.only(right: 5),
+          alignment: Alignment.center,
+          height: 20,
           padding: EdgeInsets.only(left: 5, right: 5),
           decoration: BoxDecoration(
               color: DColor.tabBgColor, borderRadius: BorderRadius.circular(4)),
           child: Text(
             tag.name,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 12, color: Colors.blue, height: 1.6),
+            style: TextStyle(fontSize: 12, color: Colors.blue),
           ));
     }).toList();
     return widgetList.length > 3 ? widgetList.sublist(0, 3) : widgetList;

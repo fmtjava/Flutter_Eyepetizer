@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'follow_widget_item.dart';
 
@@ -50,7 +51,7 @@ class FollowPageItem extends StatelessWidget {
                     padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(color: Color(0xFFF4F4F4)),
                     child: Text(
-                      '+ 关注',
+                      DString.add_follow,
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                   ),

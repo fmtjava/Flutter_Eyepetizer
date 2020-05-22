@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/provider/photo_gallery_model.dart';
@@ -29,7 +30,7 @@ class RecommendPhotoGalleryPage extends StatelessWidget {
                             builder: (BuildContext context, int index) =>
                                 PhotoViewGalleryPageOptions(
                                     imageProvider:
-                                        NetworkImage(galleryItems[index]),
+                                    CachedNetworkImageProvider(galleryItems[index]),
                                     initialScale:
                                         PhotoViewComputedScale.contained * 1,
                                     minScale:
@@ -42,6 +43,7 @@ class RecommendPhotoGalleryPage extends StatelessWidget {
                               ),
                             ),
                             itemCount: galleryItems.length,
+                            enableRotation: true,
                             backgroundDecoration:
                                 BoxDecoration(color: Colors.black),
                             onPageChanged: (index) {

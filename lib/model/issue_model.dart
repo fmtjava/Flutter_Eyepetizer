@@ -1,3 +1,5 @@
+import 'package:flutter_eyepetizer/model/paging_model.dart';
+
 class IssueEntity {
   int nextPublishTime;
   String newestIssueType;
@@ -34,15 +36,13 @@ class IssueEntity {
   }
 }
 
-class Issue {
+class Issue extends PagingModel<Item>{
   int total;
   int date;
   int publishTime;
   int releaseTime;
   int count;
-  List<Item> itemList;
   String type;
-  String nextPageUrl;
 
   Issue(
       {this.total,
@@ -50,9 +50,7 @@ class Issue {
       this.publishTime,
       this.releaseTime,
       this.count,
-      this.itemList,
-      this.type,
-      this.nextPageUrl});
+      this.type});
 
   Issue.fromJson(Map<String, dynamic> json) {
     total = json['total'];
@@ -380,7 +378,6 @@ class Data {
   String xLibrary;
   Provide provider;
   int id;
-  List<Null> subtitles;
   bool ad;
   Author author;
   String dataType;
@@ -388,7 +385,6 @@ class Data {
   Consumption consumption;
   bool played;
   List<Tag> tags;
-  List<Null> labelList;
   List<PlayInfo> playInfo;
   bool ifLimitVideo;
   WebUrl webUrl;
@@ -415,7 +411,6 @@ class Data {
       this.xLibrary,
       this.provider,
       this.id,
-      this.subtitles,
       this.ad,
       this.author,
       this.dataType,
@@ -423,7 +418,6 @@ class Data {
       this.consumption,
       this.played,
       this.tags,
-      this.labelList,
       this.playInfo,
       this.ifLimitVideo,
       this.webUrl,
@@ -451,9 +445,6 @@ class Data {
         ? new Provide.fromJson(json['provider'])
         : null;
     id = json['id'];
-    if (json['subtitles'] != null) {
-      subtitles = new List<Null>();
-    }
     ad = json['ad'];
     author =
         json['author'] != null ? new Author.fromJson(json['author']) : null;
@@ -468,9 +459,6 @@ class Data {
       (json['tags'] as List).forEach((v) {
         tags.add(new Tag.fromJson(v));
       });
-    }
-    if (json['labelList'] != null) {
-      labelList = new List<Null>();
     }
     if (json['playInfo'] != null) {
       playInfo = new List<PlayInfo>();
@@ -515,9 +503,6 @@ class Data {
       data['provider'] = this.provider.toJson();
     }
     data['id'] = this.id;
-    if (this.subtitles != null) {
-      data['subtitles'] = [];
-    }
     data['ad'] = this.ad;
     if (this.author != null) {
       data['author'] = this.author.toJson();
@@ -530,9 +515,6 @@ class Data {
     data['played'] = this.played;
     if (this.tags != null) {
       data['tags'] = this.tags.map((v) => v.toJson()).toList();
-    }
-    if (this.labelList != null) {
-      data['labelList'] = [];
     }
     if (this.playInfo != null) {
       data['playInfo'] = this.playInfo.map((v) => v.toJson()).toList();
@@ -552,11 +534,6 @@ class Data {
       data['itemList'] = this.itemList.map((v) => v.toJson()).toList();
     }
     return data;
-  }
-
-  @override
-  String toString() {
-    return 'Data{date: $date, releaseTime: $releaseTime, description: $description, collected: $collected, remark: $remark, title: $title, type: $type, playUrl: $playUrl, cover: $cover, duration: $duration, descriptionEditor: $descriptionEditor, xLibrary: $xLibrary, provider: $provider, id: $id, subtitles: $subtitles, ad: $ad, author: $author, dataType: $dataType, searchWeight: $searchWeight, consumption: $consumption, played: $played, tags: $tags, labelList: $labelList, playInfo: $playInfo, ifLimitVideo: $ifLimitVideo, webUrl: $webUrl, category: $category, idx: $idx, resourceType: $resourceType, text: $text, header: $header, itemList: $itemList}';
   }
 }
 

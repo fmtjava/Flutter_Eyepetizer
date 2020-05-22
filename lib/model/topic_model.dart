@@ -1,13 +1,13 @@
 
-class TopicModel {
-  List<TopicItemModel> itemList;
+import 'package:flutter_eyepetizer/model/paging_model.dart';
+
+class TopicModel extends PagingModel<TopicItemModel>{
   int count;
   int total;
-  String nextPageUrl;
   bool adExist;
 
   TopicModel(
-      {this.itemList, this.count, this.total, this.nextPageUrl, this.adExist});
+      {this.count, this.total, this.adExist});
 
   TopicModel.fromJson(Map<String, dynamic> json) {
     if (json['itemList'] != null) {

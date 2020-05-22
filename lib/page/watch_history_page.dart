@@ -1,3 +1,4 @@
+import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/provider/watch_history_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
@@ -25,7 +26,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
               ),
             ),
             title: Text(
-              '观看记录',
+              DString.watch_history,
               style: TextStyle(
                   fontSize: 18,
                   color: Colors.black,

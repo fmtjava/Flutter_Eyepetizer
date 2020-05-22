@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/plugin/speech_plugin.dart';
 import 'package:flutter_eyepetizer/provider/video_search_model.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
@@ -13,7 +14,6 @@ class VideoSearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    requestPermissions();
     return Scaffold(
         body: Container(
             decoration: BoxDecoration(color: Colors.white),
@@ -33,10 +33,6 @@ class VideoSearchPage extends StatelessWidget {
                             ]))
                       ]);
                     }))));
-  }
-
-  requestPermissions() {
-    if (Platform.isAndroid) SpeechPlugin.requestPermissions();
   }
 
   Widget _searchBar(VideoSearchModel model, BuildContext context) {
@@ -75,7 +71,7 @@ class VideoSearchPage extends StatelessWidget {
                         border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(20)),
-                        hintText: '帮你找到感兴趣的视频',
+                        hintText: DString.interest_video,
                         hintStyle: TextStyle(fontSize: 13)),
                   ))),
           Offstage(
@@ -99,7 +95,7 @@ class VideoSearchPage extends StatelessWidget {
             padding: EdgeInsets.only(top: 25),
             child: Center(
               child: Text(
-                '- 热搜关键字 -',
+                DString.hot_key_word,
                 style: TextStyle(fontSize: 16, color: Colors.black),
               ),
             ),
@@ -178,7 +174,7 @@ class VideoSearchPage extends StatelessWidget {
               Padding(
                   padding: EdgeInsets.only(top: 5),
                   child: Text(
-                    '暂无数据',
+                    DString.no_data,
                     style: TextStyle(fontSize: 15, color: Colors.black54),
                   ))
             ])));

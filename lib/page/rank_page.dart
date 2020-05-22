@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/api/api_service.dart';
+import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/tab_info_model.dart';
 import 'package:flutter_eyepetizer/page/rank_list_page.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
@@ -36,7 +37,7 @@ class _RankPageState extends State<RankPage>
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('人气榜',
+          title: Text(DString.popularity_list,
               style: TextStyle(
                   fontSize: 18,
                   color: Colors.black,

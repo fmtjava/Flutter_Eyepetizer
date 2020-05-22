@@ -12,6 +12,8 @@ class CategoryDetailModel extends ChangeNotifier {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
+  bool expend = true;
+
   CategoryDetailModel(this.category);
 
   void loadMore({loadMore = true}) async {
@@ -46,5 +48,17 @@ class CategoryDetailModel extends ChangeNotifier {
           refreshController.loadFailed();
         },
         complete: () => notifyListeners());
+  }
+
+  void changeExpendStatusByOffset(int statusBarHeight,int offset) {
+    if (offset > statusBarHeight && offset < 250) {
+      if (!expend) {
+        expend = true;
+      }
+    } else {
+      if (expend) {
+        expend = false;
+      }
+    }
   }
 }

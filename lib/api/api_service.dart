@@ -25,7 +25,10 @@ class ApiService {
 
   static const topics_detail_url = '${base_url}v3/lightTopics/internal/';
 
-  static const search_url = "${base_url}v1/search?&num=10&start=10&query=";
+  static const news_url =
+      '${base_url}v7/information/list?vc=6030000&deviceModel=';
+
+  static const search_url = "${base_url}v1/search?query=";
 
   static const category_video_url = '${base_url}v4/categories/videoList?';
 
@@ -35,7 +38,8 @@ class ApiService {
     try {
       var response = await http.get(url, headers: HttpConstant.httpHeader);
       if (response.statusCode == 200) {
-        var result = json.decode(AppManager.utf8decoder.convert(response.bodyBytes));
+        var result =
+            json.decode(AppManager.utf8decoder.convert(response.bodyBytes));
         success(result);
       } else {
         throw Exception('"Request failed with status: ${response.statusCode}"');

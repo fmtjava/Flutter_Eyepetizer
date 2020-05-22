@@ -45,16 +45,27 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                             backgroundColor: Colors.white,
                             expandedHeight: 200.0,
                             pinned: true,
-                            flexibleSpace: FlexibleSpaceBar(
-                                //可折叠状态栏
-                                title: Text(
-                                  widget.categoryModel.name,
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                centerTitle: false,
-                                background: CachedNetworkImage(
-                                    imageUrl: widget.categoryModel.bgPicture,
-                                    fit: BoxFit.cover)))
+                            flexibleSpace:
+                                LayoutBuilder(builder: (context, constraints) {
+                              model.changeExpendStatusByOffset(
+                                  (MediaQuery.of(context).padding.top).toInt() +
+                                      56,
+                                  constraints.biggest.height.toInt());
+                              return FlexibleSpaceBar(
+                                  //可折叠状态栏
+                                  title: Text(
+                                    widget.categoryModel.name,
+                                    style: TextStyle(
+                                        color: model.expend
+                                            ? Colors.white
+                                            : Colors.black),
+                                  ),
+                                  centerTitle: false,
+                                  background: CachedNetworkImage(
+                                      imageUrl:
+                                          widget.categoryModel.headerImage,
+                                      fit: BoxFit.cover));
+                            }))
                       ];
                     },
                     body: SmartRefresher(

@@ -60,6 +60,9 @@ class VideoSearchModel extends ChangeNotifier {
             dataList.addAll(issue.itemList);
             hideEmpty = true;
           }
+          dataList.removeWhere((item){
+            return item.data.cover == null;
+          });
           _nextPageUrl = issue.nextPageUrl;
           hideKeyWord = true;
 

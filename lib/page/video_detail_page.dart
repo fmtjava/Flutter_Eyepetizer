@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/chewie/chewie_player.dart';
+import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/provider/video_detail_page_model.dart';
 import 'package:flutter_eyepetizer/repository/history_repository.dart';
@@ -11,6 +12,10 @@ import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
 import 'package:video_player/video_player.dart';
+
+const VIDEO_SMALL_CARD_TYPE = 'videoSmallCard';
+
+const VIDEO_HIGH = 'high';
 
 class VideoDetailPage extends StatefulWidget {
   final Data data;
@@ -71,8 +76,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                       child: Column(children: <Widget>[
                         Hero(
                             //Hero动画
-                            tag:
-                                '${widget.data.id}${widget.data.time}',
+                            tag: '${widget.data.id}${widget.data.time}',
                             child: Chewie(
                               controller: _cheWieController,
                             )),
@@ -206,7 +210,8 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                   padding: EdgeInsets.all(10),
                                                   child: ClipOval(
                                                     child: CachedNetworkImage(
-                                                        imageUrl: widget.data.author.icon,
+                                                        imageUrl: widget
+                                                            .data.author.icon,
                                                         errorWidget: (context,
                                                                 url, error) =>
                                                             Image.asset(
@@ -222,8 +227,8 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                             .start,
                                                     children: <Widget>[
                                                       Text(
-                                                          widget.data
-                                                              .author.name,
+                                                          widget
+                                                              .data.author.name,
                                                           style: TextStyle(
                                                               fontSize: 15,
                                                               color: Colors
@@ -233,9 +238,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                               EdgeInsets.only(
                                                                   top: 3),
                                                           child: Text(
-                                                              widget
-                                                                  .data
-                                                                  .author
+                                                              widget.data.author
                                                                   .description,
                                                               style: TextStyle(
                                                                   fontSize: 13,
@@ -253,7 +256,8 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                             BorderRadius
                                                                 .circular(5)),
                                                     padding: EdgeInsets.all(5),
-                                                    child: Text('+ 关注',
+                                                    child: Text(
+                                                        DString.add_follow,
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -270,13 +274,16 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                         delegate: SliverChildBuilderDelegate(
                                             (context, index) {
                                       if (model.itemList[index].type ==
-                                          'videoSmallCard') {
+                                          VIDEO_SMALL_CARD_TYPE) {
                                         return VideoRelateWidgetItem(
                                             data: model.itemList[index].data,
                                             callBack: () {
                                               _videoPlayerController.pause();
-                                              NavigatorManager.to(VideoDetailPage(
-                                                  data: model.itemList[index].data));
+                                              NavigatorManager.to(
+                                                  VideoDetailPage(
+                                                      data: model
+                                                          .itemList[index]
+                                                          .data));
                                             });
                                       }
                                       return Padding(
@@ -301,7 +308,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     List<PlayInfo> playInfoList = widget.data.playInfo;
     if (playInfoList.length > 1) {
       for (var playInfo in playInfoList) {
-        if (playInfo.type == 'high') {
+        if (playInfo.type == VIDEO_HIGH) {
           _videoPlayerController = VideoPlayerController.network(playInfo.url);
           _cheWieController = ChewieController(
               videoPlayerController: _videoPlayerController, autoPlay: true);

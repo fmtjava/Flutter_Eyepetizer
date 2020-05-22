@@ -5,6 +5,8 @@ import 'package:flutter_eyepetizer/page/recommend_photo_gallery_page.dart';
 import 'package:flutter_eyepetizer/page/recommend_video_play_page.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 
+const VIDEO_TYPE = 'video';
+
 class RecommendWidgetItem extends StatelessWidget {
   final RecommendItem item;
 
@@ -14,7 +16,7 @@ class RecommendWidgetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (item.data.content.type == 'video') {
+        if (item.data.content.type == VIDEO_TYPE) {
           NavigatorManager.to(
               RecommendVideoPlayPage(playUrl: item.data.content.data.playUrl));
         } else {
@@ -43,10 +45,10 @@ class RecommendWidgetItem extends StatelessWidget {
 
   _imageItem(BuildContext context) {
     //等比缩放图片，防止加载图片拉伸
-    var maxWidth = MediaQuery.of(context).size.width / 2;
-    var maxHeight = MediaQuery.of(context).size.height / 2;
+    var maxWidth = (MediaQuery.of(context).size.width - 16) / 2;
+    var maxHeight = MediaQuery.of(context).size.height / 3;
     var height = (item.data.content.data.height == 0
-            ? maxHeight / 2
+            ? maxHeight
             : item.data.content.data.height) *
         (maxWidth / item.data.content.data.width);
     return ConstrainedBox(
@@ -65,7 +67,7 @@ class RecommendWidgetItem extends StatelessWidget {
                 offstage: item.data.content.data.urls != null &&
                     item.data.content.data.urls.length == 1,
                 child: Icon(
-                  item.data.content.type == 'video'
+                  item.data.content.type == VIDEO_TYPE
                       ? Icons.play_circle_outline
                       : Icons.photo_library,
                   color: Colors.white,
@@ -91,52 +93,51 @@ class RecommendWidgetItem extends StatelessWidget {
 
   _infoTextItem() {
     return Container(
-      padding: EdgeInsets.fromLTRB(6, 0, 6, 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              PhysicalModel(
-                //类似于ClipRRect
-                color: Colors.transparent,
-                clipBehavior: Clip.antiAlias,
-                borderRadius: BorderRadius.circular(12),
-                child: CachedNetworkImage(
-                    width: 24,
-                    height: 24,
-                    imageUrl: item.data.content.data.owner.avatar),
-              ),
-              Container(
-                padding: EdgeInsets.all(5),
-                width: 80,
-                child: Text(
-                  item.data.content.data.owner.nickname,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 12),
+        padding: EdgeInsets.fromLTRB(6, 0, 6, 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                PhysicalModel(
+                  //类似于ClipRRect
+                  color: Colors.transparent,
+                  clipBehavior: Clip.antiAlias,
+                  borderRadius: BorderRadius.circular(12),
+                  child: CachedNetworkImage(
+                      width: 24,
+                      height: 24,
+                      imageUrl: item.data.content.data.owner.avatar),
                 ),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Icon(
-                Icons.thumb_up,
-                size: 14,
-                color: Colors.grey,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 3),
-                child: Text(
-                  '${item.data.content.data.consumption.collectionCount}',
-                  style: TextStyle(fontSize: 12),
+                Container(
+                  padding: EdgeInsets.all(5),
+                  width: 80,
+                  child: Text(
+                    item.data.content.data.owner.nickname,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 12),
+                  ),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Icon(
+                  Icons.thumb_up,
+                  size: 14,
+                  color: Colors.grey,
                 ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
+                Padding(
+                  padding: EdgeInsets.only(left: 3),
+                  child: Text(
+                    '${item.data.content.data.consumption.collectionCount}',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                )
+              ],
+            )
+          ],
+        ));
   }
 }

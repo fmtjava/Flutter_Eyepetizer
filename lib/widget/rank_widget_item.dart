@@ -104,11 +104,10 @@ class RankWidgetItem extends StatelessWidget {
                                       color: Color(0xff9a9a9a), fontSize: 12)))
                         ],
                       ))),
-              InkWell(
-                onTap: () =>
-                    ShareUtil.share(item.data.title, _getShareVideoUrl()),
-                child: Icon(Icons.share, color: Colors.black38),
-              )
+              IconButton(
+                  icon: Icon(Icons.share, color: Colors.black38),
+                  onPressed: () =>
+                      ShareUtil.share(item.data.title, _getShareVideoUrl()))
             ],
           ),
         ),

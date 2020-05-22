@@ -22,7 +22,7 @@ class App extends StatelessWidget {
     hideSplashScreen();
     AppManager.init();
     return MaterialApp(
-        title: '开眼', navigatorKey: Get.key, home: TabNavigation());
+        title: 'Eyepetizer', navigatorKey: Get.key, home: TabNavigation());
   }
 
   Future<void> hideSplashScreen() async {

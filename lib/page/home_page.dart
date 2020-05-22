@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/page/video_search_page.dart';
@@ -11,6 +12,8 @@ import 'package:flutter_eyepetizer/widget/rank_widget_item.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:provider/provider.dart';
+
+const TEXT_HEADER_TYPE = 'textHeader';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,7 +28,7 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('日报',
+          title: Text(DString.daily_paper,
               style: TextStyle(
                   fontSize: 18,
                   color: Colors.black,
@@ -63,7 +66,8 @@ class _HomePageState extends State<HomePage>
                           if (index == 0) {
                             return _banner(context);
                           } else {
-                            if (model.itemList[index].type == 'textHeader') {
+                            if (model.itemList[index].type ==
+                                TEXT_HEADER_TYPE) {
                               return _titleItem(model.itemList[index]);
                             }
                             return RankWidgetItem(item: model.itemList[index]);
@@ -74,12 +78,12 @@ class _HomePageState extends State<HomePage>
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
                               child: Divider(
                                   height: model.itemList[index].type ==
-                                              'textHeader' ||
+                                              TEXT_HEADER_TYPE ||
                                           index == 0
                                       ? 0
                                       : 0.5,
                                   color: model.itemList[index].type ==
-                                              'textHeader' ||
+                                              TEXT_HEADER_TYPE ||
                                           index == 0
                                       ? Colors.transparent
                                       : Color(0xffe6e6e6)));
@@ -115,7 +119,8 @@ class _HomePageState extends State<HomePage>
                 model.changeBannerIndex(index);
               },
               onTap: (index) {
-                NavigatorManager.to(VideoDetailPage(data: model.bannerList[index].data));
+                NavigatorManager.to(
+                    VideoDetailPage(data: model.bannerList[index].data));
               },
               itemCount: model.bannerList?.length ?? 0,
               pagination: new SwiperPagination(

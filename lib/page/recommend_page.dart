@@ -22,31 +22,28 @@ class _RecommendPageState extends State<RecommendPage>
           model.refresh();
         },
         builder: (context, model, child) {
-          return Scaffold(
-            body: LoadingContainer(
-                loading: model.loading,
-                child: Container(
-                  decoration: BoxDecoration(color: Color(0xfff2f2f2)),
-                  child: SmartRefresher(
-                      controller: model.refreshController,
-                      onRefresh: model.refresh,
-                      onLoading: model.loadMore,
-                      enablePullUp: true,
-                      child: StaggeredGridView.countBuilder(
-                        crossAxisCount: 4,
-                        itemCount: model.itemList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return RecommendWidgetItem(
-                              item: model.itemList[index]);
-                        },
-                        staggeredTileBuilder: (int index) {
-                          return StaggeredTile.fit(2);
-                        },
-                        mainAxisSpacing: 4.0,
-                        crossAxisSpacing: 4.0,
-                      )),
-                )),
-          );
+          return LoadingContainer(
+              loading: model.loading,
+              child: Container(
+                decoration: BoxDecoration(color: Color(0xfff2f2f2)),
+                child: SmartRefresher(
+                    controller: model.refreshController,
+                    onRefresh: model.refresh,
+                    onLoading: model.loadMore,
+                    enablePullUp: true,
+                    child: StaggeredGridView.countBuilder(
+                      crossAxisCount: 4,
+                      itemCount: model.itemList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return RecommendWidgetItem(item: model.itemList[index]);
+                      },
+                      staggeredTileBuilder: (int index) {
+                        return StaggeredTile.fit(2);
+                      },
+                      mainAxisSpacing: 4.0,
+                      crossAxisSpacing: 4.0,
+                    )),
+              ));
         });
   }
 
