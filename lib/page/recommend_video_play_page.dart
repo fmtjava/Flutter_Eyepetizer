@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/chewie/chewie_player.dart';
+import 'package:flutter_eyepetizer/model/recommend_model.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:video_player/video_player.dart';
 
 class RecommendVideoPlayPage extends StatefulWidget {
-  final String playUrl;
+  final RecommendItem item;
 
-  const RecommendVideoPlayPage({Key key, @required this.playUrl})
-      : super(key: key);
+  const RecommendVideoPlayPage({Key key, this.item}) : super(key: key);
 
   @override
   _RecommendVideoPlayPageState createState() => _RecommendVideoPlayPageState();
@@ -22,9 +22,8 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.network(widget.playUrl);
-    _cheWieController = ChewieController(
-        videoPlayerController: _videoPlayerController, autoPlay: true);
+    _videoPlayerController =
+        VideoPlayerController.network(widget.item.data.content.data.playUrl);
   }
 
   @override
@@ -43,6 +42,11 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
           decoration: BoxDecoration(color: Colors.black),
           child: Stack(
             children: <Widget>[
+              Align(
+                  child: Chewie(
+                controller: _getCheWieController(),
+                hideBackArrow: true,
+              )),
               Positioned(
                   left: 10,
                   top: MediaQuery.of(context).padding.top + 10,
@@ -60,16 +64,30 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
                       ),
                     ),
                   )),
-              Align(
-                  child: Chewie(
-                controller: _cheWieController,
-                hideBackArrow: true,
-              ))
             ],
           ),
         ),
       ),
     );
+  }
+
+  ChewieController _getCheWieController() {
+    double aspectRatio;
+    bool allowFullScreen = widget.item.data.content.data.height >
+        widget.item.data.content.data.width;
+    if (allowFullScreen) {
+      final size = MediaQuery.of(context).size;
+      final width = size.width;
+      final height = size.height;
+      aspectRatio = width / height;
+    }
+    _cheWieController = ChewieController(
+        videoPlayerController: _videoPlayerController,
+        aspectRatio: aspectRatio,
+        autoPlay: true,
+        looping: true,
+        allowFullScreen: !allowFullScreen);
+    return _cheWieController;
   }
 
   @override

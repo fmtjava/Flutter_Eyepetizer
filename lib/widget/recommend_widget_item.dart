@@ -17,8 +17,7 @@ class RecommendWidgetItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (item.data.content.type == VIDEO_TYPE) {
-          NavigatorManager.to(
-              RecommendVideoPlayPage(playUrl: item.data.content.data.playUrl));
+          NavigatorManager.to(RecommendVideoPlayPage(item: item));
         } else {
           NavigatorManager.to(RecommendPhotoGalleryPage(
             galleryItems: item.data.content.data.urls,
