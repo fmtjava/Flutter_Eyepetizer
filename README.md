@@ -50,6 +50,8 @@
    <img src="https://www.pgyer.com/app/qrcode/nVnf"/>
  - ios请自行clone项目代码运行  
  # 更新日志
+ ### v1.1.3
+     * Flutter升级适配v1.17.0(升级中遇到问题可借鉴:https://www.jianshu.com/p/171a9660e1f9)
  ### v1.1.2
     * 优化推荐小视频播放页面，根据视频的宽高设置播放器的宽高比，防止视频播放变形
  ### v1.1.1

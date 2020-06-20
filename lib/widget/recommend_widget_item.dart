@@ -4,6 +4,7 @@ import 'package:flutter_eyepetizer/model/recommend_model.dart';
 import 'package:flutter_eyepetizer/page/recommend_photo_gallery_page.dart';
 import 'package:flutter_eyepetizer/page/recommend_video_play_page.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 const VIDEO_TYPE = 'video';
 
@@ -54,8 +55,9 @@ class RecommendWidgetItem extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
       child: Stack(
         children: <Widget>[
-          CachedNetworkImage(
-              imageUrl: item.data.content.data.cover.feed,
+          FadeInImage.memoryNetwork(
+              placeholder: kTransparentImage,
+              image: item.data.content.data.cover.feed,
               fit: BoxFit.cover,
               width: maxWidth,
               height: height),

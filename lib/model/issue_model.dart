@@ -160,6 +160,7 @@ class Header {
     data['ifShowNotificationIcon'] = this.ifShowNotificationIcon;
     data['title'] = this.title;
     data['uid'] = this.uid;
+    return data;
   }
 }
 
