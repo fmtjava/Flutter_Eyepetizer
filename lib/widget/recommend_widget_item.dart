@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/recommend_model.dart';
 import 'package:flutter_eyepetizer/page/recommend_photo_gallery_page.dart';
 import 'package:flutter_eyepetizer/page/recommend_video_play_page.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 const VIDEO_TYPE = 'video';
 
@@ -26,58 +26,73 @@ class RecommendWidgetItem extends StatelessWidget {
         }
       },
       child: Card(
-        child: PhysicalModel(
-          color: Colors.white,
-          clipBehavior: Clip.antiAlias,
-          borderRadius: BorderRadius.circular(5),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _imageItem(context),
-              _contentTextItem(),
-              _infoTextItem()
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _imageItem(context),
+            _contentTextItem(),
+            _infoTextItem()
+          ],
         ),
       ),
     );
   }
 
   _imageItem(BuildContext context) {
-    //等比缩放图片，防止加载图片拉伸
-    var maxWidth = (MediaQuery.of(context).size.width - 16) / 2;
-    var maxHeight = MediaQuery.of(context).size.height / 3;
-    var height = (item.data.content.data.height == 0
-            ? maxHeight
-            : item.data.content.data.height) *
-        (maxWidth / item.data.content.data.width);
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
-      child: Stack(
-        children: <Widget>[
-          FadeInImage.memoryNetwork(
-              placeholder: kTransparentImage,
-              image: item.data.content.data.cover.feed,
-              fit: BoxFit.cover,
-              width: maxWidth,
-              height: height),
-          Positioned(
-              top: 5,
-              right: 5,
-              child: Offstage(
-                offstage: item.data.content.data.urls != null &&
-                    item.data.content.data.urls.length == 1,
-                child: Icon(
-                  item.data.content.type == VIDEO_TYPE
-                      ? Icons.play_circle_outline
-                      : Icons.photo_library,
-                  color: Colors.white,
-                  size: 18,
+    var maxWidth = MediaQuery.of(context).size.width;
+    var width = item.data.content.data.width == 0
+        ? maxWidth
+        : item.data.content.data.width;
+    var height = item.data.content.data.height == 0
+        ? maxWidth
+        : item.data.content.data.height;
+
+    Widget image = Stack(
+      children: <Widget>[
+        ExtendedImage.network(
+          item.data.content.data.cover.feed,
+          shape: BoxShape.rectangle,
+          width: maxWidth,
+          fit: BoxFit.cover,
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
+          clearMemoryCacheWhenDispose: true, //图片从 tree 中移除，清掉内存缓存，以减少内存压力
+          loadStateChanged: (ExtendedImageState value) {
+            if (value.extendedImageLoadState == LoadState.loading) {
+              return Container(
+                alignment: Alignment.center,
+                color: Colors.grey.withOpacity(0.8),
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.0,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).primaryColor),
                 ),
-              ))
-        ],
-      ),
+              );
+            }
+            return null;
+          },
+        ),
+        Positioned(
+            top: 5,
+            right: 5,
+            child: Offstage(
+              offstage: item.data.content.data.urls != null &&
+                  item.data.content.data.urls.length == 1,
+              child: Icon(
+                item.data.content.type == VIDEO_TYPE
+                    ? Icons.play_circle_outline
+                    : Icons.photo_library,
+                color: Colors.white,
+                size: 18,
+              ),
+            ))
+      ],
     );
+    image = AspectRatio(//约束控件的宽高比
+      aspectRatio: width / height,
+      child: image,
+    );
+    return image;
   }
 
   _contentTextItem() {

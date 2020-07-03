@@ -50,6 +50,8 @@
    <img src="https://www.pgyer.com/app/qrcode/nVnf"/>
  - ios请自行clone项目代码运行  
  # 更新日志
+ ### v1.1.4
+     * 优化推荐列表,向下滑动图片加载异常，闪烁，卡顿，然后多向下滑动几屏会crash问题
  ### v1.1.3
      * Flutter升级适配v1.17.0(升级中遇到问题可借鉴:https://www.jianshu.com/p/171a9660e1f9)
  ### v1.1.2
