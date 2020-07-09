@@ -57,20 +57,6 @@ class RecommendWidgetItem extends StatelessWidget {
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
           clearMemoryCacheWhenDispose: true, //图片从 tree 中移除，清掉内存缓存，以减少内存压力
-          loadStateChanged: (ExtendedImageState value) {
-            if (value.extendedImageLoadState == LoadState.loading) {
-              return Container(
-                alignment: Alignment.center,
-                color: Colors.grey.withOpacity(0.8),
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.0,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).primaryColor),
-                ),
-              );
-            }
-            return null;
-          },
         ),
         Positioned(
             top: 5,
