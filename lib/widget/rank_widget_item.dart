@@ -78,12 +78,7 @@ class RankWidgetItem extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
           child: Row(
             children: <Widget>[
-              ClipOval(
-                  child: CachedNetworkImage(
-                width: 40,
-                height: 40,
-                imageUrl: item.data.author.icon,
-              )),
+              _authorHeaderImage(item),
               Expanded(
                   flex: 1,
                   child: Container(
@@ -99,7 +94,10 @@ class RankWidgetItem extends StatelessWidget {
                               overflow: TextOverflow.ellipsis),
                           Padding(
                               padding: EdgeInsets.only(top: 2),
-                              child: Text(item.data.author.name,
+                              child: Text(
+                                  item.data.author == null
+                                      ? item.data.tags[0].name
+                                      : item.data.author.name,
                                   style: TextStyle(
                                       color: Color(0xff9a9a9a), fontSize: 12)))
                         ],
@@ -119,6 +117,27 @@ class RankWidgetItem extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Widget _authorHeaderImage(Item item) {
+    if (item.data.author == null) {
+      return ClipRRect(
+        clipBehavior: Clip.antiAlias,
+        child: CachedNetworkImage(
+            width: 40,
+            height: 40,
+            imageUrl: item.data.tags[0].headerImage,
+            fit: BoxFit.cover),
+        borderRadius: BorderRadius.circular(5),
+      );
+    } else {
+      return ClipOval(
+          child: CachedNetworkImage(
+        width: 40,
+        height: 40,
+        imageUrl: item.data.author.icon,
+      ));
+    }
   }
 
   String _getShareVideoUrl() {
