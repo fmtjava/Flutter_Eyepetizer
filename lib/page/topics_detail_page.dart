@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/topic_detail_model.dart';
 import 'package:flutter_eyepetizer/provider/topic_detail_page_model.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/topic_detail_widget_item.dart';
 
@@ -27,15 +28,21 @@ class _TopicDetailPageState extends State<TopicDetailPage> {
           return Scaffold(
               backgroundColor: Colors.white,
               appBar: _appBar(model.topicDetailModel),
-              body: CustomScrollView(
-                slivers: <Widget>[
-                  _headWidget(model.topicDetailModel),
-                  SliverList(
-                      delegate: SliverChildBuilderDelegate((context, index) {
-                    return TopicDetailWidgetItem(model: model.itemList[index]);
-                  }, childCount: model.itemList.length))
-                ],
-              ));
+              body: LoadingContainer(
+                  loading: model.loading,
+                  error: model.error,
+                  child: CustomScrollView(
+                    slivers: <Widget>[
+                      _headWidget(model.topicDetailModel),
+                      SliverList(
+                          delegate:
+                              SliverChildBuilderDelegate((context, index) {
+                        return TopicDetailWidgetItem(
+                            model: model.itemList[index]);
+                      }, childCount: model.itemList.length))
+                    ],
+                  ),
+                  retry: model.retry));
         });
   }
 

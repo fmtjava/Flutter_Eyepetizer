@@ -23,6 +23,8 @@ class _FollowPageState extends State<FollowPage>
         builder: (context, model, child) {
           return LoadingContainer(
               loading: model.loading,
+              error: model.error,
+              retry: model.retry,
               child: SmartRefresher(
                   controller: model.refreshController,
                   onRefresh: model.refresh,

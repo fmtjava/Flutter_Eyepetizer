@@ -6,18 +6,26 @@ import 'package:flutter_eyepetizer/util/toast_util.dart';
 class VideoDetailPageModel with ChangeNotifier {
   List<Item> itemList = [];
   bool loading = true;
+  bool error = false;
+  int _videoId;
 
   void loadVideoRelateData(int id) {
-    ApiService.getData('${ApiService.video_related_url}$id',
-        success: (result) {
-          Issue issue = Issue.fromJson(result);
-          itemList = issue.itemList;
-          loading = false;
-        },
-        fail: (e) {
-          ToastUtil.showError(e.toString());
-          loading = false;
-        },
-        complete: () => notifyListeners());
+    _videoId = id;
+    ApiService.requestData('${ApiService.video_related_url}$id').then((res) {
+      Issue issue = Issue.fromJson(res);
+      itemList = issue.itemList;
+      loading = false;
+      error = false;
+    }).catchError((e) {
+      ToastUtil.showError(e.toString());
+      loading = false;
+      error = true;
+    }).whenComplete(() => notifyListeners());
+  }
+
+  void retry() {
+    loading = true;
+    notifyListeners();
+    loadVideoRelateData(_videoId);
   }
 }

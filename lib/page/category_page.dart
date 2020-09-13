@@ -22,6 +22,8 @@ class _CategoryPageState extends State<CategoryPage>
       builder: (context, model, child) {
         return LoadingContainer(
           loading: model.loading,
+          error: model.error,
+          retry: model.retry,
           child: Container(
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(color: Color(0xfff2f2f2)),

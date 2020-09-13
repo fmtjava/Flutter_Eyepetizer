@@ -8,18 +8,26 @@ class TopicDetailPageModel with ChangeNotifier {
   List<TopicDetailItemData> itemList = [];
 
   bool loading = true;
+  bool error = false;
+  int _id;
 
   void loadTopicDetailData(int id) {
-    ApiService.getData('${ApiService.topics_detail_url}$id',
-        success: (result) {
-          topicDetailModel = TopicDetailModel.fromJson(result);
-          itemList = topicDetailModel.itemList;
-          loading = false;
-        },
-        fail: (e) {
-          ToastUtil.showError(e.toString());
-          loading = false;
-        },
-        complete: () => notifyListeners());
+    _id = id;
+    ApiService.requestData('${ApiService.topics_detail_url}$id').then((res) {
+      topicDetailModel = TopicDetailModel.fromJson(res);
+      itemList = topicDetailModel.itemList;
+      loading = false;
+      error = false;
+    }).catchError((e) {
+      ToastUtil.showError(e.toString());
+      loading = false;
+      error = true;
+    }).whenComplete(() => notifyListeners());
+  }
+
+  retry() {
+    loading = true;
+    notifyListeners();
+    loadTopicDetailData(_id);
   }
 }

@@ -4,11 +4,13 @@ import 'package:flutter_eyepetizer/model/paging_model.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+//分页模型抽取
 abstract class PagingListModel<T, M extends PagingModel<T>>
     with ChangeNotifier {
   List<T> itemList = [];
   String nextPageUrl;
   bool loading = true;
+  bool error = false;
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
@@ -19,6 +21,7 @@ abstract class PagingListModel<T, M extends PagingModel<T>>
           itemList = model.itemList;
           doExtraAfterRefresh();
           loading = false;
+          error = false;
           nextPageUrl = getNextUrl(model);
           refreshController.refreshCompleted();
           refreshController.footerMode.value = LoadStatus.canLoading;
@@ -27,6 +30,7 @@ abstract class PagingListModel<T, M extends PagingModel<T>>
           ToastUtil.showError(e.toString());
           refreshController.refreshFailed();
           loading = false;
+          error = true;
         },
         complete: () => notifyListeners());
   }
@@ -49,6 +53,12 @@ abstract class PagingListModel<T, M extends PagingModel<T>>
       ToastUtil.showError(e.toString());
       refreshController.loadFailed();
     });
+  }
+
+  retry(){
+    loading = true;
+    notifyListeners();
+    refresh();
   }
 
   void doExtraAfterRefresh() {

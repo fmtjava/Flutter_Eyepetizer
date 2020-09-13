@@ -26,6 +26,8 @@ class _NewsListPageState extends State<NewsListPage>
         builder: (context, model, child) {
           return LoadingContainer(
               loading: model.loading,
+              error: model.error,
+              retry: model.retry,
               child: Container(
                   color: Colors.white,
                   child: SmartRefresher(

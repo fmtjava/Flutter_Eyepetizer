@@ -20,11 +20,9 @@ typedef Widget ChewieRoutePageBuilder(
 /// make it easy to use!
 class Chewie extends StatefulWidget {
   final bool hideBackArrow;
-  Chewie({
-    Key key,
-    this.controller,
-    this.hideBackArrow=false
-  })  : assert(controller != null, 'You must provide a chewie controller'),
+
+  Chewie({Key key, this.controller, this.hideBackArrow = false})
+      : assert(controller != null, 'You must provide a chewie controller'),
         super(key: key);
 
   /// The [ChewieController]
@@ -194,7 +192,7 @@ class ChewieController extends ChangeNotifier {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ],
-    this.routePageBuilder = null,
+    this.routePageBuilder,
   }) : assert(videoPlayerController != null,
             'You must provide a controller to play a video') {
     _initialize();
@@ -273,8 +271,7 @@ class ChewieController extends ChangeNotifier {
 
   static ChewieController of(BuildContext context) {
     final chewieControllerProvider =
-        context.inheritFromWidgetOfExactType(_ChewieControllerProvider)
-            as _ChewieControllerProvider;
+        context.dependOnInheritedWidgetOfExactType<_ChewieControllerProvider>();
 
     return chewieControllerProvider.controller;
   }

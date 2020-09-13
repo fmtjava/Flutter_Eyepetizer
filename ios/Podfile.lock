@@ -57,7 +57,7 @@ DEPENDENCIES:
   - video_player_web (from `.symlinks/plugins/video_player_web/ios`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - FMDB
 
 EXTERNAL SOURCES:

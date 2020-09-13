@@ -4,16 +4,18 @@ import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+//将首页的逻辑抽离到Provider中进行处理，M与V分离
 class HomePageModel with ChangeNotifier {
   List<Item> bannerList = [];
   List<Item> itemList = [];
   int currentIndex = 0;
   String nextPageUrl;
   bool loading = true;
+  bool error = false;
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
-  refresh() async {
+  refresh({bool retry = false}) async {
     ApiService.getData(ApiService.feed_url,
         success: (result) async {
           IssueEntity issueEntity = IssueEntity.fromJson(result);
@@ -26,6 +28,7 @@ class HomePageModel with ChangeNotifier {
           itemList.add(Item()); //为Banner占位
           bannerList = list;
           loading = false;
+          error = false;
 
           nextPageUrl = issueEntity.nextPageUrl;
           refreshController.refreshCompleted();
@@ -36,6 +39,7 @@ class HomePageModel with ChangeNotifier {
           ToastUtil.showError(e.toString());
           refreshController.refreshFailed();
           loading = false;
+          error = true;
         },
         complete: () => notifyListeners());
   }
@@ -61,6 +65,12 @@ class HomePageModel with ChangeNotifier {
       ToastUtil.showError(e.toString());
       refreshController.loadFailed();
     });
+  }
+
+  retry(){
+    loading = true;
+    notifyListeners();
+    refresh();
   }
 
   changeBannerIndex(int index) {

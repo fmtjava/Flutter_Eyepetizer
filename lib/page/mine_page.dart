@@ -15,6 +15,7 @@ class MinePage extends StatefulWidget {
 class _MinePageState extends State<MinePage>
     with AutomaticKeepAliveClientMixin {
   var _imageFile;
+  final picker = ImagePicker();
 
   @override
   void initState() {
@@ -157,12 +158,12 @@ class _MinePageState extends State<MinePage>
   }
 
   //模拟头像选择修改，目前存储在本地，实际开发应当上传到云存储平台
-  Future _getImage(ImageSource source) async {
-    var imageFile = await ImagePicker.pickImage(source: source);
+  _getImage(ImageSource source) async {
+    var imageFile = await picker.getImage(source: source);
     setState(() {
-      _imageFile = imageFile;
+      _imageFile = File(imageFile.path);
     });
-    MineRepository.saveAvatarPath(imageFile);
+    MineRepository.saveAvatarPath(_imageFile);
   }
 
   _getAvatarPath() async {

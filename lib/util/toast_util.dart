@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ToastUtil {
+
+  ToastUtil._();
+
   static void showTip(String tipMessage) {
     Fluttertoast.showToast(
         msg: tipMessage,

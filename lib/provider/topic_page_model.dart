@@ -12,7 +12,7 @@ class TopicPageModel extends PagingListModel<TopicItemModel,TopicModel>{
 
   @override
   TopicModel getModel(Map<String, dynamic> json) {
-    return  TopicModel.fromJson(json);
+    return TopicModel.fromJson(json);
   }
 
 }

@@ -6,6 +6,7 @@ import 'package:flutter_eyepetizer/util/toast_util.dart';
 class CategoryPageModel with ChangeNotifier {
   List<CategoryModel> list = [];
   bool loading = true;
+  bool error = false;
 
   void loadData() async {
     ApiService.getData(ApiService.category_url,
@@ -16,11 +17,18 @@ class CategoryPageModel with ChangeNotifier {
               .toList();
           this.list = categoryList;
           loading = false;
+          error = false;
         },
         fail: (e) {
           ToastUtil.showError(e.toString());
           loading = false;
+          error = true;
         },
         complete: () => notifyListeners());
+  }
+  retry(){
+    loading = true;
+    notifyListeners();
+    loadData();
   }
 }

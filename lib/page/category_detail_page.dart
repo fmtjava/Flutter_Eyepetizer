@@ -31,6 +31,8 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
             builder: (context, model, child) {
               return LoadingContainer(
                   loading: model.loading,
+                  error: model.error,
+                  retry: model.retry,
                   child: NestedScrollView(
                     //支持嵌套滚动
                     headerSliverBuilder: (context, innerBoxIsScrolled) {

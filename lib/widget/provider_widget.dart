@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 //状态管理组件封装(MVVM),核心组件(基于provider封装)
+//provider状态管理，可以比喻成电台与听众的关系，电台 --》ChangeNotifierProvider 听众 --》Consumer  model -->维护了一系列状态数据
 class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget {
   final T model;//控件对应的数据
   final Widget child;

@@ -23,6 +23,8 @@ class _TopicsPageState extends State<TopicsPage>
         builder: (context, model, child) {
           return LoadingContainer(
               loading: model.loading,
+              error: model.error,
+              retry: model.retry,
               child: SmartRefresher(
                   controller: model.refreshController,
                   onRefresh: model.refresh,

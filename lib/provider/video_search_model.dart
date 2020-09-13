@@ -6,6 +6,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class VideoSearchModel extends ChangeNotifier {
   bool loading = true;
+  bool error = false;
   bool hideKeyWord = false;
   bool hideEmpty = true;
   List<Item> dataList = [];
@@ -39,7 +40,7 @@ class VideoSearchModel extends ChangeNotifier {
       url = _nextPageUrl;
       getData(loadMore, url);
     } else {
-      loading = true;
+      _reset();
       url = ApiService.search_url + query;
       getData(loadMore, url);
     }
@@ -51,6 +52,7 @@ class VideoSearchModel extends ChangeNotifier {
           Issue issue = Issue.fromJson(result);
 
           loading = false;
+          error = false;
           total = issue.total;
           if (!loadMore) {
             dataList.clear();
@@ -60,7 +62,7 @@ class VideoSearchModel extends ChangeNotifier {
             dataList.addAll(issue.itemList);
             hideEmpty = true;
           }
-          dataList.removeWhere((item){
+          dataList.removeWhere((item) {
             return item.data.cover == null;
           });
           _nextPageUrl = issue.nextPageUrl;
@@ -71,8 +73,18 @@ class VideoSearchModel extends ChangeNotifier {
         fail: (e) {
           ToastUtil.showError(e.toString());
           loading = false;
+          if (!loadMore) error = true;
           refreshController.loadFailed();
         },
         complete: () => notifyListeners());
+  }
+
+  _reset() {
+    loading = true;
+    notifyListeners();
+  }
+
+  retry() {
+    loadMore(loadMore: false);
   }
 }

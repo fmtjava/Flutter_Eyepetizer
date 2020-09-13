@@ -7,6 +7,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class RankListPageModel with ChangeNotifier {
   List<Item> itemList = [];
   bool loading = true;
+  bool error = false;
   String apiUrl;
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
@@ -22,13 +23,21 @@ class RankListPageModel with ChangeNotifier {
 
           itemList = issueModel.itemList;
           loading = false;
+          error = false;
           refreshController.refreshCompleted();
         },
         fail: (e) {
           ToastUtil.showError(e.toString());
           refreshController.refreshFailed();
           loading = false;
+          error = true;
         },
         complete: () => notifyListeners());
+  }
+
+  retry(){
+    loading = true;
+    notifyListeners();
+    loadData();
   }
 }
