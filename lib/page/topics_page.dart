@@ -1,4 +1,6 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/page/topics_detail_page.dart';
 import 'package:flutter_eyepetizer/provider/topic_page_model.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
@@ -32,8 +34,13 @@ class _TopicsPageState extends State<TopicsPage>
                   enablePullUp: true,
                   child: ListView.builder(
                       itemBuilder: (context, index) {
-                        return TopicWidgetItem(
-                            itemModel: model.itemList[index]);
+                        return OpenContainer(closedBuilder: (context, action) {
+                          return TopicWidgetItem(
+                              itemModel: model.itemList[index]);
+                        }, openBuilder: (context, action) {
+                          return TopicDetailPage(
+                              detailId: model.itemList[index].data.id);
+                        });
                       },
                       itemCount: model.itemList.length)));
         });

@@ -43,6 +43,7 @@ dependencies:
   get: ^2.14.1
   loading_more_list: ^3.0.0
   extended_image: ^0.9.0
+  animations: ^1.1.1
 
 dev_dependencies:
   flutter_test:

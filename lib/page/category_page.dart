@@ -1,4 +1,6 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/page/category_detail_page.dart';
 import 'package:flutter_eyepetizer/provider/category_page_model.dart';
 import 'package:flutter_eyepetizer/widget/category_widget_item.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
@@ -34,7 +36,13 @@ class _CategoryPageState extends State<CategoryPage>
                       mainAxisSpacing: 5,
                       crossAxisSpacing: 5),
                   itemBuilder: (context, index) {
-                    return CategoryWidgetItem(categoryModel: model.list[index]);
+                    return OpenContainer(closedBuilder: (context, action) {
+                      return CategoryWidgetItem(
+                          categoryModel: model.list[index]);
+                    }, openBuilder: (context, action) {
+                      return CategoryDetailPage(
+                          categoryModel: model.list[index]);
+                    });
                   })),
         );
       },

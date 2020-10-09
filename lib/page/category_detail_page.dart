@@ -29,48 +29,47 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
               model.loadMore(loadMore: false);
             },
             builder: (context, model, child) {
-              return LoadingContainer(
-                  loading: model.loading,
-                  error: model.error,
-                  retry: model.retry,
-                  child: NestedScrollView(
-                    //支持嵌套滚动
-                    headerSliverBuilder: (context, innerBoxIsScrolled) {
-                      return [
-                        SliverAppBar(
-                            leading: GestureDetector(
-                                onTap: () => NavigatorManager.back(),
-                                child: Icon(Icons.arrow_back,
-                                    color: Colors.black)),
-                            elevation: 0,
-                            brightness: Brightness.light,
-                            backgroundColor: Colors.white,
-                            expandedHeight: 200.0,
-                            pinned: true,
-                            flexibleSpace:
-                                LayoutBuilder(builder: (context, constraints) {
-                              model.changeExpendStatusByOffset(
-                                  (MediaQuery.of(context).padding.top).toInt() +
-                                      56,
-                                  constraints.biggest.height.toInt());
-                              return FlexibleSpaceBar(
-                                  //可折叠状态栏
-                                  title: Text(
-                                    widget.categoryModel.name,
-                                    style: TextStyle(
-                                        color: model.expend
-                                            ? Colors.white
-                                            : Colors.black),
-                                  ),
-                                  centerTitle: false,
-                                  background: CachedNetworkImage(
-                                      imageUrl:
-                                          widget.categoryModel.headerImage,
-                                      fit: BoxFit.cover));
-                            }))
-                      ];
-                    },
-                    body: SmartRefresher(
+              return NestedScrollView(
+                  //支持嵌套滚动
+                  headerSliverBuilder: (context, innerBoxIsScrolled) {
+                    return [
+                      SliverAppBar(
+                          leading: GestureDetector(
+                              onTap: () => NavigatorManager.back(),
+                              child:
+                                  Icon(Icons.arrow_back, color: Colors.black)),
+                          elevation: 0,
+                          brightness: Brightness.light,
+                          backgroundColor: Colors.white,
+                          expandedHeight: 200.0,
+                          pinned: true,
+                          flexibleSpace:
+                              LayoutBuilder(builder: (context, constraints) {
+                            model.changeExpendStatusByOffset(
+                                (MediaQuery.of(context).padding.top).toInt() +
+                                    56,
+                                constraints.biggest.height.toInt());
+                            return FlexibleSpaceBar(
+                                //可折叠状态栏
+                                title: Text(
+                                  widget.categoryModel.name,
+                                  style: TextStyle(
+                                      color: model.expend
+                                          ? Colors.white
+                                          : Colors.black),
+                                ),
+                                centerTitle: false,
+                                background: CachedNetworkImage(
+                                    imageUrl: widget.categoryModel.headerImage,
+                                    fit: BoxFit.cover));
+                          }))
+                    ];
+                  },
+                  body: LoadingContainer(
+                    loading: model.loading,
+                    error: model.error,
+                    retry: model.retry,
+                    child: SmartRefresher(
                         enablePullDown: false,
                         enablePullUp: true,
                         onLoading: model.loadMore,
