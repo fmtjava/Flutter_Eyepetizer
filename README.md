@@ -39,10 +39,15 @@
 </div>
 
 <div style="float:right">
- <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2081576569019_.pic.jpg" width="270"/>
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2081576569019_.pic.jpg" width="270"/>
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2071576569018_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2021576568582_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
 </div>
+
+# 功能模块
+<div>
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/function.png"/>
+</div>  
 
 # 下载体验(Android版本) 
  - 点击[![](https://img.shields.io/badge/Download-apk-green.svg)](https://www.pgyer.com/nVnf) 下载(密码:123456)
