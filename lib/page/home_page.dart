@@ -39,14 +39,17 @@ class _HomePageState extends State<HomePage>
           centerTitle: true,
           elevation: 0,
           actions: <Widget>[
-            OpenContainer(closedBuilder: (context, action) {
-              return Icon(
-                Icons.search,
-                color: Colors.black87,
-              );
-            }, openBuilder: (context, action) {
-              return VideoSearchPage();
-            })
+            Padding(
+              padding: EdgeInsets.only(right: 15),
+              child: OpenContainer(closedElevation:0.0,closedBuilder: (context, action) {
+                return Icon(
+                  Icons.search,
+                  color: Colors.black87,
+                );
+              }, openBuilder: (context, action) {
+                return VideoSearchPage();
+              }),
+            )
           ],
         ),
         body: ProviderWidget<HomePageModel>(
