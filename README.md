@@ -44,7 +44,7 @@
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2021576568582_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
 </div>
 
-# 功能模块
+# 核心功能
 <div>
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/function.png"/>
 </div>  
