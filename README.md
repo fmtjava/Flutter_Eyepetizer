@@ -7,7 +7,7 @@
 <div style="float:right">
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1911576051895_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2061576568586_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2051576568585_.pic.jpg" width="270"/>
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2051576568585_.pic.jpg" width="260"/>
 </div>
 
 <br/>
