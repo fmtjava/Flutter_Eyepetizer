@@ -7,15 +7,16 @@ import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 
 class FollowWidgetItem extends StatelessWidget {
   final Item item;
+  final bool last;
 
-  const FollowWidgetItem({Key key, this.item}) : super(key: key);
+  const FollowWidgetItem({Key key, this.item, this.last}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => NavigatorManager.to(VideoDetailPage(data: item.data)),
         child: Container(
-          padding: EdgeInsets.only(left: 15),
+          padding: EdgeInsets.only(left: 15,right: last ? 15 : 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

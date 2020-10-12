@@ -65,7 +65,9 @@ class FollowPageItem extends StatelessWidget {
                 itemCount: item.data.itemList.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return FollowWidgetItem(item: item.data.itemList[index]);
+                  return FollowWidgetItem(
+                      item: item.data.itemList[index],
+                      last: index == item.data.itemList.length - 1);
                 }),
           )
         ],

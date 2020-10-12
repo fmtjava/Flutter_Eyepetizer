@@ -47,7 +47,12 @@
 # 核心功能
 <div>
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/function.png"/>
-</div>  
+</div>
+
+# 核心技术点
+<div>
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/technology.png"/>
+</div>
 
 # 下载体验(Android版本) 
  - 点击[![](https://img.shields.io/badge/Download-apk-green.svg)](https://www.pgyer.com/nVnf) 下载(密码:123456)

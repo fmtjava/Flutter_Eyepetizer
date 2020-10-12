@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
@@ -38,14 +39,14 @@ class _HomePageState extends State<HomePage>
           centerTitle: true,
           elevation: 0,
           actions: <Widget>[
-            IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.black87,
-                ),
-                onPressed: () {
-                  NavigatorManager.to(VideoSearchPage());
-                }),
+            OpenContainer(closedBuilder: (context, action) {
+              return Icon(
+                Icons.search,
+                color: Colors.black87,
+              );
+            }, openBuilder: (context, action) {
+              return VideoSearchPage();
+            })
           ],
         ),
         body: ProviderWidget<HomePageModel>(
