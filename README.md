@@ -7,7 +7,7 @@
 <div style="float:right">
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1911576051895_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2061576568586_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2051576568585_.pic.jpg" width="270"/>
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2051576568585_.pic.jpg" width="260"/>
 </div>
 
 <br/>
@@ -15,27 +15,27 @@
 <div style="float:right">
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2041576568584_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2621584689733_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2611584689732_.pic.jpg" width="270"/>
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2611584689732_.pic.jpg" width="260"/>
 </div>
 <br/>
 
 <div style="float:right">
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2601584689731_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2031576568583_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1981576565883_.pic.jpg" width="270"/>
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1981576565883_.pic.jpg" width="260"/>
 </div>
 <br/>
 
 <div style="float:right">
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1961576565881_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2141576721487_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1941576565879_.pic.jpg" width="270"/>
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1941576565879_.pic.jpg" width="260"/>
 </div>
 
 <div style="float:right">
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2541583645461_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2531583645460_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2521583645458_.pic.jpg" width="270"/>
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2521583645458_.pic.jpg" width="260"/>
 </div>
 
 <div style="float:right">
