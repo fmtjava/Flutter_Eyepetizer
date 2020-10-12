@@ -22,7 +22,7 @@
 <div style="float:right">
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2601584689731_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/2031576568583_.pic.jpg" width="270"/>&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1981576565883_.pic.jpg" width="270"/>
+  <img src="https://github.com/fmtjava/flutter_eyepetizer/blob/master/images/1981576565883_.pic.jpg" width="260"/>
 </div>
 <br/>
 
