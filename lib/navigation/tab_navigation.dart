@@ -5,7 +5,9 @@ import 'package:flutter_eyepetizer/page/discovery_page.dart';
 import 'package:flutter_eyepetizer/page/home_page.dart';
 import 'package:flutter_eyepetizer/page/mine_page.dart';
 import 'package:flutter_eyepetizer/page/rank_page.dart';
+import 'package:flutter_eyepetizer/provider/tab_navigation_model.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
+import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 
 class TabNavigation extends StatefulWidget {
   @override
@@ -14,7 +16,6 @@ class TabNavigation extends StatefulWidget {
 
 class _TabNavigationState extends State<TabNavigation> {
   PageController _pageController = PageController(initialPage: 0);
-  int _currentIndex = 0;
   DateTime lastTime;
 
   @override
@@ -31,25 +32,37 @@ class _TabNavigationState extends State<TabNavigation> {
               MinePage()
             ],
           ),
-          bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _currentIndex,
-              onTap: (index) {
-                _pageController.jumpToPage(index); //跳转到指定页面
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-              type: BottomNavigationBarType.fixed, //显示标题
-              items: [
-                _bottomItem(DString.daily_paper, 'images/ic_home_normal.png',
-                    'images/ic_home_selected.png', 0),
-                _bottomItem(DString.discover, 'images/ic_discovery_normal.png',
-                    'images/ic_discovery_selected.png', 1),
-                _bottomItem(DString.hot, 'images/ic_hot_normal.png',
-                    'images/ic_hot_selected.png', 2),
-                _bottomItem(DString.mime, 'images/ic_mine_normal.png',
-                    'images/ic_mine_selected.png', 3)
-              ]),
+          bottomNavigationBar: ProviderWidget<TabNavigationModel>(
+              model: TabNavigationModel(),
+              builder: (context, model, child) {
+                return BottomNavigationBar(
+                    currentIndex: model.currentIndex,
+                    onTap: (index) {
+                      if(model.currentIndex !=index){
+                        _pageController.jumpToPage(index);
+                        model.changeBottomTabIndex(index);
+                      }
+                    },
+                    type: BottomNavigationBarType.fixed, //显示标题
+                    items: [
+                      _bottomItem(
+                          DString.daily_paper,
+                          'images/ic_home_normal.png',
+                          'images/ic_home_selected.png',
+                          model.currentIndex,
+                          0),
+                      _bottomItem(
+                          DString.discover,
+                          'images/ic_discovery_normal.png',
+                          'images/ic_discovery_selected.png',
+                          model.currentIndex,
+                          1),
+                      _bottomItem(DString.hot, 'images/ic_hot_normal.png',
+                          'images/ic_hot_selected.png', model.currentIndex, 2),
+                      _bottomItem(DString.mime, 'images/ic_mine_normal.png',
+                          'images/ic_mine_selected.png', model.currentIndex, 3)
+                    ]);
+              }),
         ),
         onWillPop: _onWillPop);
   }
@@ -66,7 +79,8 @@ class _TabNavigationState extends State<TabNavigation> {
     }
   }
 
-  _bottomItem(String title, String normalIcon, String selectIcon, int index) {
+  _bottomItem(String title, String normalIcon, String selectIcon,
+      int currentIndex, int index) {
     return BottomNavigationBarItem(
       icon: Image.asset(normalIcon, width: 24, height: 24),
       activeIcon: Image.asset(selectIcon, width: 24, height: 24),
@@ -74,8 +88,7 @@ class _TabNavigationState extends State<TabNavigation> {
           padding: EdgeInsets.only(top: 5),
           child: Text(title,
               style: TextStyle(
-                  color:
-                      Color(_currentIndex == index ? 0xff000000 : 0xff9a9a9a),
+                  color: Color(currentIndex == index ? 0xff000000 : 0xff9a9a9a),
                   fontSize: 14))),
     );
   }
