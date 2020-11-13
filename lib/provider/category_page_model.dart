@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/category_model.dart';
+import 'package:flutter_eyepetizer/provider/base_change_notifier_model.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 
-class CategoryPageModel with ChangeNotifier {
+class CategoryPageModel extends BaseChangeNotifierModel {
   List<CategoryModel> list = [];
   bool loading = true;
   bool error = false;

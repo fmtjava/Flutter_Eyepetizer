@@ -111,7 +111,8 @@ class TopicDetailWidgetItem extends StatelessWidget {
         children: <Widget>[
           ClipRRect(
               child: Hero(
-                  tag: '${model.id}${model.data.content.data.time}',
+                  tag:
+                      '${model.data.content.data.id}${model.data.content.data.time}',
                   child: CachedNetworkImage(
                       width: MediaQuery.of(context).size.width,
                       height: 200,

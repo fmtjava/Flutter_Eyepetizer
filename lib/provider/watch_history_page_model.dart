@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
+import 'package:flutter_eyepetizer/provider/base_change_notifier_model.dart';
 import 'package:flutter_eyepetizer/repository/history_repository.dart';
 
-class WatchHistoryPageModel with ChangeNotifier {
+class WatchHistoryPageModel extends BaseChangeNotifierModel {
   List<Data> itemList = [];
   List<String> watchList = [];
 

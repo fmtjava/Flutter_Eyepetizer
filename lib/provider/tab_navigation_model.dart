@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/provider/base_change_notifier_model.dart';
 
-class TabNavigationModel with ChangeNotifier {
+class TabNavigationModel extends BaseChangeNotifierModel {
   int currentIndex = 0;
 
   changeBottomTabIndex(int index) {

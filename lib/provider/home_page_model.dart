@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
+import 'package:flutter_eyepetizer/provider/base_change_notifier_model.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 //将首页的逻辑抽离到Provider中进行处理，M与V分离
-class HomePageModel with ChangeNotifier {
+class HomePageModel extends BaseChangeNotifierModel {
   List<Item> bannerList = [];
   List<Item> itemList = [];
   int currentIndex = 0;

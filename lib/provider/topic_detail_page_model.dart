@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/topic_detail_model.dart';
+import 'package:flutter_eyepetizer/provider/base_change_notifier_model.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 
-class TopicDetailPageModel with ChangeNotifier {
+class TopicDetailPageModel extends BaseChangeNotifierModel {
   TopicDetailModel topicDetailModel = TopicDetailModel();
   List<TopicDetailItemData> itemList = [];
 

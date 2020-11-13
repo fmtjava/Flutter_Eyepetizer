@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/plugin/speech_plugin.dart';
 import 'package:flutter_eyepetizer/provider/video_search_model.dart';
@@ -10,8 +11,6 @@ import 'package:flutter_eyepetizer/widget/search_video_widget_item.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class VideoSearchPage extends StatelessWidget {
-  final focusNode = FocusNode();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +52,6 @@ class VideoSearchPage extends StatelessWidget {
                   constraints: BoxConstraints(maxHeight: 30),
                   child: TextField(
                     autofocus: true,
-                    focusNode: focusNode,
                     onSubmitted: (value) {
                       model.query = value;
                       model.loadMore(loadMore: false);
@@ -115,7 +113,7 @@ class VideoSearchPage extends StatelessWidget {
     return model.keyWords.map((keyword) {
       return GestureDetector(
           onTap: () {
-            focusNode.unfocus();
+            _hideTextInput();
             model.query = keyword;
             model.loadMore(loadMore: false);
           },
@@ -185,10 +183,14 @@ class VideoSearchPage extends StatelessWidget {
   _showSpeechDialog(VideoSearchModel model) {
     SpeechPlugin.start().then((result) {
       if (result.isNotEmpty) {
-        focusNode.unfocus();
+        _hideTextInput();
         model.query = result;
         model.loadMore(loadMore: false);
       }
     });
+  }
+
+  _hideTextInput() {
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
   }
 }

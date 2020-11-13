@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/paging_model.dart';
+import 'package:flutter_eyepetizer/provider/base_change_notifier_model.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 //分页模型抽取
 abstract class PagingListModel<T, M extends PagingModel<T>>
-    with ChangeNotifier {
+    extends BaseChangeNotifierModel {
   List<T> itemList = [];
   String nextPageUrl;
   bool loading = true;

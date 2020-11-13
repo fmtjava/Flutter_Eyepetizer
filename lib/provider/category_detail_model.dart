@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
+import 'package:flutter_eyepetizer/provider/base_change_notifier_model.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class CategoryDetailModel extends ChangeNotifier {
+class CategoryDetailModel extends BaseChangeNotifierModel {
   int category;
   List<Item> itemList = [];
   String _nextPageUrl;
