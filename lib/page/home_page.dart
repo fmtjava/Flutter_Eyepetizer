@@ -12,7 +12,6 @@ import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/rank_widget_item.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:provider/provider.dart';
 
 const TEXT_HEADER_TYPE = 'textHeader';
 
@@ -73,7 +72,7 @@ class _HomePageState extends State<HomePage>
                     child: ListView.separated(
                         itemBuilder: (context, index) {
                           if (index == 0) {
-                            return _banner(context);
+                            return _banner(model);
                           } else {
                             if (model.itemList[index].type ==
                                 TEXT_HEADER_TYPE) {
@@ -102,8 +101,7 @@ class _HomePageState extends State<HomePage>
             }));
   }
 
-  _banner(BuildContext context) {
-    HomePageModel model = Provider.of(context);
+  _banner(HomePageModel model) {
     return Container(
       height: 200,
       padding: EdgeInsets.only(left: 15, top: 15, right: 15),
@@ -126,7 +124,7 @@ class _HomePageState extends State<HomePage>
                       ));
                 },
                 onIndexChanged: (index) {
-                  //model.changeBannerIndex(index);
+                  model.changeBannerIndex(index);
                 },
                 onTap: (index) {
                   NavigatorManager.to(

@@ -15,7 +15,7 @@ class TabNavigation extends StatefulWidget {
 }
 
 class _TabNavigationState extends State<TabNavigation> {
-  PageController _pageController = PageController(initialPage: 0);
+  PageController _pageController = PageController();
   DateTime lastTime;
 
   @override
