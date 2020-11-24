@@ -8,7 +8,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class HomePageModel extends BaseChangeNotifierModel {
   List<Item> bannerList = [];
   List<Item> itemList = [];
-  int currentIndex = 0;
   String nextPageUrl;
   bool loading = true;
   bool error = false;
@@ -71,10 +70,5 @@ class HomePageModel extends BaseChangeNotifierModel {
     loading = true;
     notifyListeners();
     refresh();
-  }
-
-  changeBannerIndex(int index) {
-    currentIndex = index;
-    notifyListeners();
   }
 }

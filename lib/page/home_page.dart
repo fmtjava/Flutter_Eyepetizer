@@ -107,12 +107,12 @@ class _HomePageState extends State<HomePage>
       padding: EdgeInsets.only(left: 15, top: 15, right: 15),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4),
-        child: Stack(
-          children: <Widget>[
-            Swiper(
-                autoplay: true,
-                itemBuilder: (BuildContext context, int index) {
-                  return Hero(
+        child: Swiper(
+            autoplay: true,
+            itemBuilder: (BuildContext context, int index) {
+              return Stack(
+                children: <Widget>[
+                  Hero(
                       tag:
                           '${model.bannerList[index].data.id}${model.bannerList[index].data.time}',
                       child: Container(
@@ -121,30 +121,28 @@ class _HomePageState extends State<HomePage>
                                 image: CachedNetworkImageProvider(
                                     model.bannerList[index].data.cover.feed),
                                 fit: BoxFit.cover)),
-                      ));
-                },
-                onIndexChanged: (index) {
-                  model.changeBannerIndex(index);
-                },
-                onTap: (index) {
-                  NavigatorManager.to(
-                      VideoDetailPage(data: model.bannerList[index].data));
-                },
-                itemCount: model.bannerList?.length ?? 0,
-                pagination: new SwiperPagination(
-                    alignment: Alignment.bottomRight,
-                    builder: DotSwiperPaginationBuilder(
-                        activeColor: Colors.white, color: Colors.white24))),
-            Positioned(
-                width: MediaQuery.of(context).size.width - 30,
-                bottom: 0,
-                child: Container(
-                    padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
-                    decoration: BoxDecoration(color: Colors.black12),
-                    child: Text(model.bannerList[model.currentIndex].data.title,
-                        style: TextStyle(color: Colors.white, fontSize: 12))))
-          ],
-        ),
+                      )),
+                  Positioned(
+                      width: MediaQuery.of(context).size.width - 30,
+                      bottom: 0,
+                      child: Container(
+                          padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
+                          decoration: BoxDecoration(color: Colors.black12),
+                          child: Text(model.bannerList[index].data.title,
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 12))))
+                ],
+              );
+            },
+            onTap: (index) {
+              NavigatorManager.to(
+                  VideoDetailPage(data: model.bannerList[index].data));
+            },
+            itemCount: model.bannerList?.length ?? 0,
+            pagination: new SwiperPagination(
+                alignment: Alignment.bottomRight,
+                builder: DotSwiperPaginationBuilder(
+                    activeColor: Colors.white, color: Colors.white24))),
       ),
     );
   }
