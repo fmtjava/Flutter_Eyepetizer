@@ -74,7 +74,7 @@ class RecommendWidgetItem extends StatelessWidget {
             ))
       ],
     );
-    image = AspectRatio(//约束控件的宽高比
+    image = AspectRatio(//约束控件的宽高比，保证控件等比缩放
       aspectRatio: width / height,
       child: image,
     );
