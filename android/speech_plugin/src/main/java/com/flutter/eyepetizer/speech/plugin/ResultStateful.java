@@ -4,6 +4,9 @@ import androidx.annotation.Nullable;
 
 import io.flutter.plugin.common.MethodChannel;
 
+/**
+ * 采用装饰者模式优化回掉方法
+ */
 public class ResultStateful implements MethodChannel.Result {
 
     private MethodChannel.Result result;
@@ -42,6 +45,5 @@ public class ResultStateful implements MethodChannel.Result {
         }
         called = true;
         result.notImplemented();
-
     }
 }
