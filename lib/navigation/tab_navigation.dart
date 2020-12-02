@@ -36,32 +36,32 @@ class _TabNavigationState extends State<TabNavigation> {
               model: TabNavigationModel(),
               builder: (context, model, child) {
                 return BottomNavigationBar(
-                    currentIndex: model.currentIndex,
-                    onTap: (index) {
-                      if(model.currentIndex !=index){
-                        _pageController.jumpToPage(index);
-                        model.changeBottomTabIndex(index);
-                      }
-                    },
-                    type: BottomNavigationBarType.fixed, //显示标题
-                    items: [
-                      _bottomItem(
-                          DString.daily_paper,
-                          'images/ic_home_normal.png',
-                          'images/ic_home_selected.png',
-                          model.currentIndex,
-                          0),
-                      _bottomItem(
-                          DString.discover,
-                          'images/ic_discovery_normal.png',
-                          'images/ic_discovery_selected.png',
-                          model.currentIndex,
-                          1),
-                      _bottomItem(DString.hot, 'images/ic_hot_normal.png',
-                          'images/ic_hot_selected.png', model.currentIndex, 2),
-                      _bottomItem(DString.mime, 'images/ic_mine_normal.png',
-                          'images/ic_mine_selected.png', model.currentIndex, 3)
-                    ]);
+                  currentIndex: model.currentIndex,
+                  onTap: (index) {
+                    if (model.currentIndex != index) {
+                      _pageController.jumpToPage(index);
+                      model.changeBottomTabIndex(index);
+                    }
+                  },
+                  type: BottomNavigationBarType.fixed,
+                  //显示标题
+                  items: [
+                    _bottomItem(
+                        DString.daily_paper,
+                        'images/ic_home_normal.png',
+                        'images/ic_home_selected.png'),
+                    _bottomItem(
+                        DString.discover,
+                        'images/ic_discovery_normal.png',
+                        'images/ic_discovery_selected.png'),
+                    _bottomItem(DString.hot, 'images/ic_hot_normal.png',
+                        'images/ic_hot_selected.png'),
+                    _bottomItem(DString.mime, 'images/ic_mine_normal.png',
+                        'images/ic_mine_selected.png')
+                  ],
+                  selectedItemColor: Color(0xff000000),
+                  unselectedItemColor: Color(0xff9a9a9a),
+                );
               }),
         ),
         onWillPop: _onWillPop);
@@ -79,17 +79,10 @@ class _TabNavigationState extends State<TabNavigation> {
     }
   }
 
-  _bottomItem(String title, String normalIcon, String selectIcon,
-      int currentIndex, int index) {
+  _bottomItem(String title, String normalIcon, String selectIcon) {
     return BottomNavigationBarItem(
-      icon: Image.asset(normalIcon, width: 24, height: 24),
-      activeIcon: Image.asset(selectIcon, width: 24, height: 24),
-      title: Padding(
-          padding: EdgeInsets.only(top: 5),
-          child: Text(title,
-              style: TextStyle(
-                  color: Color(currentIndex == index ? 0xff000000 : 0xff9a9a9a),
-                  fontSize: 14))),
-    );
+        icon: Image.asset(normalIcon, width: 24, height: 24),
+        activeIcon: Image.asset(selectIcon, width: 24, height: 24),
+        label: title);
   }
 }

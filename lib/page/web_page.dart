@@ -35,7 +35,7 @@ class _State extends State<WebPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(routes: {
+    return MaterialApp(routes: {
       "/": (_) => WillPopScope(
           //处理返回键事件
           child: WebviewScaffold(
