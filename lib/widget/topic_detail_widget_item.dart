@@ -4,35 +4,55 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/color.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/topic_detail_model.dart';
-import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/util/date_util.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:flutter_eyepetizer/util/share_util.dart';
+import 'package:flutter_eyepetizer/widget/feed_video_widget.dart';
 
-class TopicDetailWidgetItem extends StatelessWidget {
+class TopicDetailWidgetItem extends StatefulWidget {
   final TopicDetailItemData model;
+  final ValueNotifier<double> scrollNotifier;
+  final ValueNotifier<int> playNotifier;
+  final int index;
+  final double aspectRatio;
 
-  const TopicDetailWidgetItem({Key key, this.model}) : super(key: key);
+  const TopicDetailWidgetItem(
+      {Key key,
+      this.model,
+      this.scrollNotifier,
+      this.playNotifier,
+      this.index,
+      this.aspectRatio})
+      : super(key: key);
+
+  @override
+  _TopicDetailWidgetItemState createState() => _TopicDetailWidgetItemState();
+}
+
+class _TopicDetailWidgetItemState extends State<TopicDetailWidgetItem> {
+  GlobalKey _listGlobalKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () =>
-            NavigatorManager.to(VideoDetailPage(data: model.data.content.data)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _headWidget(),
-            _desWidget(),
-            _tagWidget(),
-            _feedWidget(context),
-            _consumptionWidget(),
-            _dividerWidget()
-          ],
-        ));
+    return Column(
+      key: _listGlobalKey,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _headWidget(widget.model),
+        _desWidget(widget.model),
+        _tagWidget(widget.model),
+        FeedVideoWidget(
+            model: widget.model,
+            scrollNotifier: widget.scrollNotifier,
+            playNotifier: widget.playNotifier,
+            index: widget.index,
+            aspectRatio: widget.aspectRatio,
+            listGlobalKey: _listGlobalKey),
+        _consumptionWidget(widget.model),
+      ],
+    );
   }
 
-  Widget _headWidget() {
+  Widget _headWidget(TopicDetailItemData model) {
     return Row(
       children: <Widget>[
         Padding(
@@ -83,7 +103,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
     );
   }
 
-  Widget _desWidget() {
+  Widget _desWidget(TopicDetailItemData model) {
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
       child: Text(
@@ -95,7 +115,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
     );
   }
 
-  Widget _tagWidget() {
+  Widget _tagWidget(TopicDetailItemData model) {
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
       child: Row(
@@ -104,93 +124,61 @@ class TopicDetailWidgetItem extends StatelessWidget {
     );
   }
 
-  Widget _feedWidget(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 5),
-      child: Stack(
-        children: <Widget>[
-          ClipRRect(
-              child: Hero(
-                  tag:
-                      '${model.data.content.data.id}${model.data.content.data.time}',
-                  child: CachedNetworkImage(
-                      width: MediaQuery.of(context).size.width,
-                      height: 200,
-                      imageUrl: model.data.content.data.cover.feed,
-                      errorWidget: (context, url, error) =>
-                          Image.asset('images/img_load_fail.png'),
-                      fit: BoxFit.cover)), //充满容器，可能会被截断
-              borderRadius: BorderRadius.circular(4)),
-          Positioned(
-              right: 8,
-              bottom: 8,
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Container(
-                      decoration: BoxDecoration(color: Colors.black54),
-                      padding: EdgeInsets.all(5),
-                      child: Text(
-                        DateUtils.formatDateMsByMS(
-                            model.data.content.data.duration * 1000),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold),
-                      ))))
-        ],
-      ),
-    );
-  }
-
-  Widget _consumptionWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
+  Widget _consumptionWidget(TopicDetailItemData model) {
+    return Column(
+      children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Icon(Icons.favorite_border, size: 20, color: DColor.hitTextColor),
-            Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Text(
-                  '${model.data.content.data.consumption.collectionCount}',
-                  style: TextStyle(fontSize: 12, color: DColor.hitTextColor)),
-            )
+            Row(
+              children: <Widget>[
+                Icon(Icons.favorite_border,
+                    size: 20, color: DColor.hitTextColor),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text(
+                      '${model.data.content.data.consumption.collectionCount}',
+                      style:
+                          TextStyle(fontSize: 12, color: DColor.hitTextColor)),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Icon(Icons.message, size: 20, color: DColor.hitTextColor),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text(
+                      '${model.data.content.data.consumption.replyCount}',
+                      style:
+                          TextStyle(fontSize: 12, color: DColor.hitTextColor)),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Icon(Icons.star_border, size: 20, color: DColor.hitTextColor),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text(DString.collect_text,
+                      style:
+                          TextStyle(fontSize: 12, color: DColor.hitTextColor)),
+                )
+              ],
+            ),
+            IconButton(
+                icon: Icon(Icons.share, color: DColor.hitTextColor),
+                onPressed: () => ShareUtil.share(model.data.content.data.title,
+                    model.data.content.data.webUrl.forWeibo))
           ],
         ),
-        Row(
-          children: <Widget>[
-            Icon(Icons.message, size: 20, color: DColor.hitTextColor),
-            Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Text('${model.data.content.data.consumption.replyCount}',
-                  style: TextStyle(fontSize: 12, color: DColor.hitTextColor)),
-            )
-          ],
-        ),
-        Row(
-          children: <Widget>[
-            Icon(Icons.star_border, size: 20, color: DColor.hitTextColor),
-            Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Text(DString.collect_text,
-                  style: TextStyle(fontSize: 12, color: DColor.hitTextColor)),
-            )
-          ],
-        ),
-        IconButton(
-            icon: Icon(Icons.share, color: DColor.hitTextColor),
-            onPressed: () => ShareUtil.share(model.data.content.data.title,
-                model.data.content.data.webUrl.forWeibo))
+        Padding(
+          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: Divider(
+            height: 0.5,
+          ),
+        )
       ],
-    );
-  }
-
-  Widget _dividerWidget() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-      child: Divider(
-        height: 0.5,
-      ),
     );
   }
 

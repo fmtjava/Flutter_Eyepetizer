@@ -431,7 +431,8 @@ class _CupertinoControlsState extends State<CupertinoControls> {
     _updateState();
 
     if ((controller.value != null && controller.value.isPlaying) ||
-        chewieController.autoPlay) {
+        chewieController.autoPlay ||
+        chewieController.autoInitialize) {
       _startHideTimer();
     }
 

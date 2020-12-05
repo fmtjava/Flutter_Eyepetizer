@@ -17,6 +17,9 @@ class TopicDetailPage extends StatefulWidget {
 }
 
 class _TopicDetailPageState extends State<TopicDetailPage> {
+  ValueNotifier<double> _scrollNotifier = ValueNotifier(-1);
+  ValueNotifier<int> _playNotifier = ValueNotifier(-1);
+
   @override
   Widget build(BuildContext context) {
     return ProviderWidget<TopicDetailPageModel>(
@@ -31,16 +34,31 @@ class _TopicDetailPageState extends State<TopicDetailPage> {
               body: LoadingContainer(
                   loading: model.loading,
                   error: model.error,
-                  child: CustomScrollView(
-                    slivers: <Widget>[
-                      _headWidget(model.topicDetailModel),
-                      SliverList(
-                          delegate:
-                              SliverChildBuilderDelegate((context, index) {
-                        return TopicDetailWidgetItem(
-                            model: model.itemList[index]);
-                      }, childCount: model.itemList.length))
-                    ],
+                  child: NotificationListener(
+                    onNotification: (ScrollNotification notification) {
+                      print(notification.runtimeType.toString());
+                      if(notification is ScrollEndNotification){
+                        _scrollNotifier.value = notification.metrics.pixels;
+                      }
+                      return true;
+                    },
+                    child: CustomScrollView(
+                      slivers: <Widget>[
+                        _headWidget(model.topicDetailModel),
+                        SliverList(
+                            delegate:
+                                SliverChildBuilderDelegate((context, index) {
+                          return TopicDetailWidgetItem(
+                              model: model.itemList[index],
+                              scrollNotifier: _scrollNotifier,
+                              playNotifier: _playNotifier,
+                              index: index,
+                              aspectRatio:
+                                  (MediaQuery.of(context).size.width - 40) /
+                                      200);
+                        }, childCount: model.itemList.length))
+                      ],
+                    ),
                   ),
                   retry: model.retry));
         });

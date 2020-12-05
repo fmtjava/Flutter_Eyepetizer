@@ -22,6 +22,7 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _videoPlayerController =
         VideoPlayerController.network(widget.item.data.content.data.playUrl);
   }
@@ -30,6 +31,8 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
       _cheWieController.pause();
+    } else if (state == AppLifecycleState.resumed) {
+      _cheWieController.play();
     }
   }
 
@@ -92,6 +95,7 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _videoPlayerController.dispose();
     _cheWieController.dispose();
     super.dispose();

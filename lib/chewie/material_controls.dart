@@ -294,7 +294,8 @@ class _MaterialControlsState extends State<MaterialControls> {
     _updateState();
 
     if ((controller.value != null && controller.value.isPlaying) ||
-        chewieController.autoPlay) {
+        chewieController.autoPlay ||
+        chewieController.autoInitialize) {
       _startHideTimer();
     }
 
@@ -386,7 +387,10 @@ class _MaterialControlsState extends State<MaterialControls> {
   Widget _buildHeader(BuildContext context) {
     return GestureDetector(
       onTap: () => NavigatorManager.back(),
-      child: Icon(Icons.arrow_back_ios, color: Colors.white),
+      child: Padding(
+        padding: EdgeInsets.only(left: 5),
+        child: Icon(Icons.arrow_back_ios, color: Colors.white),
+      ),
     );
   }
 }
