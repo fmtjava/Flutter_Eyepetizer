@@ -62,7 +62,7 @@ Kotlin版本：[Kotlin_Eyepetizer](https://github.com/fmtjava/Kotlin_Eyepetizer)
  - ios请自行clone项目代码运行  
  # 更新日志
  ### v1.1.6
-   * 专题列表页面添加列表滚动视频自动播放功能
+   * 专题列表页面添加列表滚动视频自动播放功能以及跳转视频播放页面无缝续播功能
  ### v1.1.5
    * 完善多状态视图，添加加载失败重试功能
  ### v1.1.4

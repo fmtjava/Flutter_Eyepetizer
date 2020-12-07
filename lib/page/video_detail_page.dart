@@ -19,8 +19,10 @@ const VIDEO_HIGH = 'high';
 
 class VideoDetailPage extends StatefulWidget {
   final Data data;
+  final ChewieController chewieController; //无缝续播实现思路：共用列表传递过来的ChewieController
 
-  const VideoDetailPage({Key key, this.data}) : super(key: key);
+  const VideoDetailPage({Key key, @required this.data, this.chewieController})
+      : super(key: key);
 
   @override
   _VideoDetailPageState createState() => _VideoDetailPageState();
@@ -34,7 +36,8 @@ class _VideoDetailPageState extends State<VideoDetailPage>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this); //监听页面可见与不可见状态
+    //监听页面可见与不可见状态
+    WidgetsBinding.instance.addObserver(this);
     initController();
     HistoryRepository.saveWatchHistory(widget.data);
   }
@@ -44,15 +47,26 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     //AppLifecycleState当前页面的状态(是否可见)
     if (state == AppLifecycleState.paused) {
       //页面不可见时,暂停视频
-      _cheWieController.pause();
+      if (widget.chewieController == null) {
+        _cheWieController.pause();
+      } else {
+        widget.chewieController.pause();
+      }
+    } else if (state == AppLifecycleState.resumed) {
+      if (widget.chewieController == null) {
+        _cheWieController.play();
+      }
     }
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this); //移除监听页面可见与不可见状态
-    _videoPlayerController.dispose();
-    _cheWieController.dispose();
+    //移除监听页面可见与不可见状态
+    WidgetsBinding.instance.removeObserver(this);
+    if (widget.chewieController == null) {
+      _videoPlayerController.dispose();
+      _cheWieController.dispose();
+    }
     super.dispose();
   }
 
@@ -71,7 +85,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                     //Hero动画
                     tag: '${widget.data.id}${widget.data.time}',
                     child: Chewie(
-                      controller: _cheWieController,
+                      controller: widget.chewieController ?? _cheWieController,
                     )),
                 Expanded(
                     flex: 1,
@@ -265,7 +279,11 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                     return VideoRelateWidgetItem(
                                         data: model.itemList[index].data,
                                         callBack: () {
-                                          _videoPlayerController.pause();
+                                          if (widget.chewieController != null) {
+                                            widget.chewieController.pause();
+                                          } else {
+                                            _videoPlayerController.pause();
+                                          }
                                           NavigatorManager.to(VideoDetailPage(
                                               data:
                                                   model.itemList[index].data));
@@ -290,6 +308,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
   }
 
   void initController() {
+    if (widget.chewieController != null) return;
     List<PlayInfo> playInfoList = widget.data.playInfo;
     if (playInfoList.length > 1) {
       for (var playInfo in playInfoList) {

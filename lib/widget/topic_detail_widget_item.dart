@@ -30,25 +30,32 @@ class TopicDetailWidgetItem extends StatefulWidget {
 
 class _TopicDetailWidgetItemState extends State<TopicDetailWidgetItem> {
   GlobalKey _listGlobalKey = GlobalKey();
+  GlobalKey<FeedVideoWidgetState> _feedVideoKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      key: _listGlobalKey,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _headWidget(widget.model),
-        _desWidget(widget.model),
-        _tagWidget(widget.model),
-        FeedVideoWidget(
-            model: widget.model,
-            scrollNotifier: widget.scrollNotifier,
-            playNotifier: widget.playNotifier,
-            index: widget.index,
-            aspectRatio: widget.aspectRatio,
-            listGlobalKey: _listGlobalKey),
-        _consumptionWidget(widget.model),
-      ],
+    return InkWell(
+      onTap: () {
+        _feedVideoKey.currentState.go2VideoDetailPage();
+      },
+      child: Column(
+        key: _listGlobalKey,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _headWidget(widget.model),
+          _desWidget(widget.model),
+          _tagWidget(widget.model),
+          FeedVideoWidget(
+              key: _feedVideoKey,
+              model: widget.model,
+              scrollNotifier: widget.scrollNotifier,
+              playNotifier: widget.playNotifier,
+              index: widget.index,
+              aspectRatio: widget.aspectRatio,
+              listGlobalKey: _listGlobalKey),
+          _consumptionWidget(widget.model),
+        ],
+      ),
     );
   }
 

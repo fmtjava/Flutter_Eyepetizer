@@ -166,36 +166,37 @@ class ChewieState extends State<Chewie> {
 /// player, please use the standard information provided by the
 /// `VideoPlayerController`.
 class ChewieController extends ChangeNotifier {
-  ChewieController({
-    this.videoPlayerController,
-    this.aspectRatio,
-    this.autoInitialize = false,
-    this.autoPlay = false,
-    this.startAt,
-    this.looping = false,
-    this.fullScreenByDefault = false,
-    this.cupertinoProgressColors,
-    this.materialProgressColors,
-    this.placeholder,
-    this.overlay,
-    this.showControls = true,
-    this.customControls,
-    this.errorBuilder,
-    this.allowedScreenSleep = true,
-    this.isLive = false,
-    this.allowFullScreen = true,
-    this.allowMuting = true,
-    this.systemOverlaysAfterFullScreen = SystemUiOverlay.values,
-    this.deviceOrientationsAfterFullScreen = const [
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ],
-    this.routePageBuilder,
-  }) : assert(videoPlayerController != null,
+  ChewieController(
+      {this.videoPlayerController,
+      this.aspectRatio,
+      this.autoInitialize = false,
+      this.autoPlay = false,
+      this.startAt,
+      this.looping = false,
+      this.fullScreenByDefault = false,
+      this.cupertinoProgressColors,
+      this.materialProgressColors,
+      this.placeholder,
+      this.overlay,
+      this.showControls = true,
+      this.customControls,
+      this.errorBuilder,
+      this.allowedScreenSleep = true,
+      this.isLive = false,
+      this.allowFullScreen = true,
+      this.allowMuting = true,
+      this.systemOverlaysAfterFullScreen = SystemUiOverlay.values,
+      this.deviceOrientationsAfterFullScreen = const [
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ],
+      this.routePageBuilder,
+      this.initSuccessCallback})
+      : assert(videoPlayerController != null,
             'You must provide a controller to play a video') {
-    _initialize();
+    _initialize().then((value) => {initSuccessCallback?.call()});
   }
 
   /// The controller for the video you want to play
@@ -268,6 +269,9 @@ class ChewieController extends ChangeNotifier {
 
   /// Defines a custom RoutePageBuilder for the fullscreen
   final ChewieRoutePageBuilder routePageBuilder;
+
+  //初始化成功回掉函数
+  final VoidCallback initSuccessCallback;
 
   static ChewieController of(BuildContext context) {
     final chewieControllerProvider =

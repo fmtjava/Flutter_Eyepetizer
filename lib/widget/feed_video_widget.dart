@@ -2,10 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/chewie/chewie_player.dart';
 import 'package:flutter_eyepetizer/model/topic_detail_model.dart';
+import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/util/date_util.dart';
+import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:video_player/video_player.dart';
 
-/// 目前列表视频播放实现思路：
+/// 目前列表视频滚动自动播放实现思路：
 /// 1.NotificationListener监听列表在ScrollEndNotification时滚动的距离
 /// 2.使用ValueNotifier保存滚动的距离并在每一个Item中进行滚动事件的监听/移除
 /// 3.滚动的距离 / 列表Item的高度 计算出需要自动播放视频的Item,其它的Item暂时播放并显示视频封面
@@ -31,10 +33,10 @@ class FeedVideoWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  _FeedVideoWidgetState createState() => _FeedVideoWidgetState();
+  FeedVideoWidgetState createState() => FeedVideoWidgetState();
 }
 
-class _FeedVideoWidgetState extends State<FeedVideoWidget>
+class FeedVideoWidgetState extends State<FeedVideoWidget>
     with WidgetsBindingObserver {
   bool _showFeed = true; //是否显示封面
   bool _start = false; //是否播放中
@@ -54,7 +56,10 @@ class _FeedVideoWidgetState extends State<FeedVideoWidget>
         videoPlayerController: _videoPlayerController,
         autoInitialize: true,
         looping: true,
-        aspectRatio: widget.aspectRatio);
+        aspectRatio: widget.aspectRatio,
+        initSuccessCallback: () {
+          scrollListener(isResume: true);
+        });
     widget.scrollNotifier.addListener(scrollListener);
     widget.playNotifier.addListener(playListener);
   }
@@ -95,18 +100,30 @@ class _FeedVideoWidgetState extends State<FeedVideoWidget>
 
   void _changePlayState(int position) {
     if (_cheWieController != null && widget.index == position) {
+      if (!_cheWieController.videoPlayerController.value.initialized) {
+        setState(() {
+          _showFeed = false;
+        });
+        return;
+      }
       if (!_start) {
         _start = true;
-        _cheWieController.play().whenComplete(() => {
+        _cheWieController.play().then((value) => {
               setState(() {
                 _showFeed = false;
               })
             });
       }
     } else {
+      if (!_cheWieController.videoPlayerController.value.initialized) {
+        setState(() {
+          _showFeed = true;
+        });
+        return;
+      }
       if (_cheWieController != null && _start) {
         _start = false;
-        _videoPlayerController.pause().whenComplete(() => {
+        _videoPlayerController.pause().then((value) => {
               setState(() {
                 _showFeed = true;
               })
@@ -178,7 +195,7 @@ class _FeedVideoWidgetState extends State<FeedVideoWidget>
                             widget.playNotifier.value = widget.index;
                           }),
                     ),
-                  )
+                  ),
                 ],
                 alignment: Alignment.center,
               ),
@@ -194,6 +211,12 @@ class _FeedVideoWidgetState extends State<FeedVideoWidget>
         ],
       ),
     );
+  }
+
+  void go2VideoDetailPage() {
+    NavigatorManager.to(VideoDetailPage(
+        data: widget.model.data.content.data,
+        chewieController: _cheWieController));
   }
 
   @override
