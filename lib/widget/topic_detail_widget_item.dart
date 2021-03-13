@@ -4,113 +4,86 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/color.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/topic_detail_model.dart';
+import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/util/date_util.dart';
+import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:flutter_eyepetizer/util/share_util.dart';
-import 'package:flutter_eyepetizer/widget/feed_video_widget.dart';
 
-class TopicDetailWidgetItem extends StatefulWidget {
+class TopicDetailWidgetItem extends StatelessWidget {
   final TopicDetailItemData model;
-  final ValueNotifier<double> scrollNotifier;
-  final ValueNotifier<int> playNotifier;
-  final int index;
-  final double aspectRatio;
 
-  const TopicDetailWidgetItem(
-      {Key key,
-      this.model,
-      this.scrollNotifier,
-      this.playNotifier,
-      this.index,
-      this.aspectRatio})
-      : super(key: key);
-
-  @override
-  _TopicDetailWidgetItemState createState() => _TopicDetailWidgetItemState();
-}
-
-class _TopicDetailWidgetItemState extends State<TopicDetailWidgetItem> {
-  GlobalKey _listGlobalKey = GlobalKey();
-  GlobalKey<FeedVideoWidgetState> _feedVideoKey = GlobalKey();
+  const TopicDetailWidgetItem({Key key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        _feedVideoKey.currentState.go2VideoDetailPage();
-      },
-      child: Column(
-        key: _listGlobalKey,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _headWidget(widget.model),
-          _desWidget(widget.model),
-          _tagWidget(widget.model),
-          FeedVideoWidget(
-              key: _feedVideoKey,
-              model: widget.model,
-              scrollNotifier: widget.scrollNotifier,
-              playNotifier: widget.playNotifier,
-              index: widget.index,
-              aspectRatio: widget.aspectRatio,
-              listGlobalKey: _listGlobalKey),
-          _consumptionWidget(widget.model),
-        ],
-      ),
-    );
+    return GestureDetector(
+        onTap: () =>
+            NavigatorManager.to(VideoDetailPage(data: model.data.content.data)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _headWidget(),
+            _desWidget(),
+            _tagWidget(),
+            _feedWidget(context),
+            _consumptionWidget(),
+            _dividerWidget()
+          ],
+        ));
   }
 
-  Widget _headWidget(TopicDetailItemData model) {
+  Widget _headWidget() {
     return Row(
       children: <Widget>[
         Padding(
             padding: EdgeInsets.fromLTRB(20, 20, 10, 0),
             child: ClipOval(
                 child: CachedNetworkImage(
-              width: 45,
-              height: 45,
-              imageUrl:
+                  width: 45,
+                  height: 45,
+                  imageUrl:
                   model.data.header.icon == null ? '' : model.data.header.icon,
-            ))),
+                ))),
         Expanded(
             child: Padding(
-          padding: EdgeInsets.fromLTRB(0, 20, 20, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                model.data.header.issuerName == null
-                    ? ''
-                    : model.data.header.issuerName,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14),
-              ),
-              Row(
+              padding: EdgeInsets.fromLTRB(0, 20, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    '${DateWarpUtils.formatDateMsByYMD(model.data.header.time)}发布：',
-                    style: TextStyle(color: DColor.hitTextColor, fontSize: 12),
-                  ),
-                  Expanded(
-                      child: Text(
-                    model.data.content.data.title,
+                    model.data.header.issuerName == null
+                        ? ''
+                        : model.data.header.issuerName,
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold),
-                    overflow: TextOverflow.ellipsis,
-                  ))
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        '${DateWarpUtils.formatDateMsByYMD(model.data.header.time)}发布：',
+                        style: TextStyle(color: DColor.hitTextColor, fontSize: 12),
+                      ),
+                      Expanded(
+                          child: Text(
+                            model.data.content.data.title,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.ellipsis,
+                          ))
+                    ],
+                  )
                 ],
-              )
-            ],
-          ),
-        ))
+              ),
+            ))
       ],
     );
   }
 
-  Widget _desWidget(TopicDetailItemData model) {
+  Widget _desWidget() {
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
       child: Text(
@@ -122,7 +95,7 @@ class _TopicDetailWidgetItemState extends State<TopicDetailWidgetItem> {
     );
   }
 
-  Widget _tagWidget(TopicDetailItemData model) {
+  Widget _tagWidget() {
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
       child: Row(
@@ -131,61 +104,93 @@ class _TopicDetailWidgetItemState extends State<TopicDetailWidgetItem> {
     );
   }
 
-  Widget _consumptionWidget(TopicDetailItemData model) {
-    return Column(
-      children: [
+  Widget _feedWidget(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(20, 0, 20, 5),
+      child: Stack(
+        children: <Widget>[
+          ClipRRect(
+              child: Hero(
+                  tag:
+                  '${model.data.content.data.id}${model.data.content.data.time}',
+                  child: CachedNetworkImage(
+                      width: MediaQuery.of(context).size.width,
+                      height: 200,
+                      imageUrl: model.data.content.data.cover.feed,
+                      errorWidget: (context, url, error) =>
+                          Image.asset('images/img_load_fail.png'),
+                      fit: BoxFit.cover)), //充满容器，可能会被截断
+              borderRadius: BorderRadius.circular(4)),
+          Positioned(
+              right: 8,
+              bottom: 8,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Container(
+                      decoration: BoxDecoration(color: Colors.black54),
+                      padding: EdgeInsets.all(5),
+                      child: Text(
+                        DateWarpUtils.formatDateMsByMS(
+                            model.data.content.data.duration * 1000),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold),
+                      ))))
+        ],
+      ),
+    );
+  }
+
+  Widget _consumptionWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Icon(Icons.favorite_border,
-                    size: 20, color: DColor.hitTextColor),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(
-                      '${model.data.content.data.consumption.collectionCount}',
-                      style:
-                          TextStyle(fontSize: 12, color: DColor.hitTextColor)),
-                )
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Icon(Icons.message, size: 20, color: DColor.hitTextColor),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(
-                      '${model.data.content.data.consumption.replyCount}',
-                      style:
-                          TextStyle(fontSize: 12, color: DColor.hitTextColor)),
-                )
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Icon(Icons.star_border, size: 20, color: DColor.hitTextColor),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(DString.collect_text,
-                      style:
-                          TextStyle(fontSize: 12, color: DColor.hitTextColor)),
-                )
-              ],
-            ),
-            IconButton(
-                icon: Icon(Icons.share, color: DColor.hitTextColor),
-                onPressed: () => ShareUtil.share(model.data.content.data.title,
-                    model.data.content.data.webUrl.forWeibo))
+            Icon(Icons.favorite_border, size: 20, color: DColor.hitTextColor),
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(
+                  '${model.data.content.data.consumption.collectionCount}',
+                  style: TextStyle(fontSize: 12, color: DColor.hitTextColor)),
+            )
           ],
         ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: Divider(
-            height: 0.5,
-          ),
-        )
+        Row(
+          children: <Widget>[
+            Icon(Icons.message, size: 20, color: DColor.hitTextColor),
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text('${model.data.content.data.consumption.replyCount}',
+                  style: TextStyle(fontSize: 12, color: DColor.hitTextColor)),
+            )
+          ],
+        ),
+        Row(
+          children: <Widget>[
+            Icon(Icons.star_border, size: 20, color: DColor.hitTextColor),
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(DString.collect_text,
+                  style: TextStyle(fontSize: 12, color: DColor.hitTextColor)),
+            )
+          ],
+        ),
+        IconButton(
+            icon: Icon(Icons.share, color: DColor.hitTextColor),
+            onPressed: () => ShareUtil.share(model.data.content.data.title,
+                model.data.content.data.webUrl.forWeibo))
       ],
+    );
+  }
+
+  Widget _dividerWidget() {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+      child: Divider(
+        height: 0.5,
+      ),
     );
   }
 
