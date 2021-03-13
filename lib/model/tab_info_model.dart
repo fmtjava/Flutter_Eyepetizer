@@ -25,7 +25,7 @@ class TabInfo {
 
   TabInfo.fromJson(Map<String, dynamic> json) {
     if (json['tabList'] != null) {
-      tabList = new List<TabInfoItem>();
+      tabList = [];
       (json['tabList'] as List).forEach((v) {
         tabList.add(new TabInfoItem.fromJson(v));
       });

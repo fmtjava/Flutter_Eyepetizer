@@ -1,7 +1,7 @@
 import 'package:flustars/flustars.dart';
 
-class DateUtils {
-  DateUtils._();
+class DateWarpUtils {
+  DateWarpUtils._();
 
   static String formatDateMsByMS(int milliseconds) {
     return DateUtil.formatDateMs(milliseconds, format: 'mm:ss');

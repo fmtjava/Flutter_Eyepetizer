@@ -122,7 +122,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                             padding: EdgeInsets.only(
                                                 left: 10, top: 10),
                                             child: Text(
-                                                '#${widget.data.category} / ${DateUtils.formatDateMsByYMDHM(widget.data.author.latestReleaseTime)}',
+                                                '#${widget.data.category} / ${DateWarpUtils.formatDateMsByYMDHM(widget.data.author.latestReleaseTime)}',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 12))),

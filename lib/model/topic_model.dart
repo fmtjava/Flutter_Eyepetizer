@@ -11,7 +11,7 @@ class TopicModel extends PagingModel<TopicItemModel>{
 
   TopicModel.fromJson(Map<String, dynamic> json) {
     if (json['itemList'] != null) {
-      itemList = new List<TopicItemModel>();
+      itemList = [];
       json['itemList'].forEach((v) {
         itemList.add(new TopicItemModel.fromJson(v));
       });

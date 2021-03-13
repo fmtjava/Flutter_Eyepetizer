@@ -17,7 +17,7 @@ class IssueEntity {
     newestIssueType = json['newestIssueType'];
     nextPageUrl = json['nextPageUrl'];
     if (json['issueList'] != null) {
-      issueList = new List<Issue>();
+      issueList = [];
       (json['issueList'] as List).forEach((v) {
         issueList.add(new Issue.fromJson(v));
       });
@@ -59,7 +59,7 @@ class Issue extends PagingModel<Item>{
     releaseTime = json['releaseTime'];
     count = json['count'];
     if (json['itemList'] != null) {
-      itemList = new List<Item>();
+      itemList = [];
       (json['itemList'] as List).forEach((v) {
         itemList.add(new Item.fromJson(v));
       });
@@ -247,7 +247,7 @@ class FollowItemData {
         : null;
     id = json['id'];
     if (json['subtitles'] != null) {
-      subtitles = new List<Null>();
+      subtitles = [];
     }
     ad = json['ad'];
     author =
@@ -259,16 +259,16 @@ class FollowItemData {
         : null;
     played = json['played'];
     if (json['tags'] != null) {
-      tags = new List<Tag>();
+      tags = [];
       (json['tags'] as List).forEach((v) {
         tags.add(new Tag.fromJson(v));
       });
     }
     if (json['labelList'] != null) {
-      labelList = new List<Null>();
+      labelList = [];
     }
     if (json['playInfo'] != null) {
-      playInfo = new List<PlayInfo>();
+      playInfo = [];
       (json['playInfo'] as List).forEach((v) {
         playInfo.add(new PlayInfo.fromJson(v));
       });
@@ -456,13 +456,13 @@ class Data {
         : null;
     played = json['played'];
     if (json['tags'] != null) {
-      tags = new List<Tag>();
+      tags = [];
       (json['tags'] as List).forEach((v) {
         tags.add(new Tag.fromJson(v));
       });
     }
     if (json['playInfo'] != null) {
-      playInfo = new List<PlayInfo>();
+      playInfo = [];
       (json['playInfo'] as List).forEach((v) {
         playInfo.add(new PlayInfo.fromJson(v));
       });
@@ -477,7 +477,7 @@ class Data {
     header =
         json['header'] != null ? new Header.fromJson(json['header']) : null;
     if (json['itemList'] != null) {
-      itemList = new List<Item>();
+      itemList = [];
       (json['itemList'] as List).forEach((v) {
         itemList.add(new Item.fromJson(v));
       });
@@ -807,7 +807,7 @@ class PlayInfo {
     name = json['name'];
     width = json['width'];
     if (json['urlList'] != null) {
-      urlList = new List<IssueIssuelistItemlistDataPlayinfoUrllist>();
+      urlList = [];
       (json['urlList'] as List).forEach((v) {
         urlList.add(new IssueIssuelistItemlistDataPlayinfoUrllist.fromJson(v));
       });

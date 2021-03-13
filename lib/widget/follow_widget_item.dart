@@ -65,7 +65,7 @@ class FollowWidgetItem extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(top: 3),
                 child: Text(
-                    DateUtils.formatDateMsByYMDHM(
+                    DateWarpUtils.formatDateMsByYMDHM(
                         item.data.author.latestReleaseTime),
                     style: TextStyle(fontSize: 12, color: Colors.black26)),
               )

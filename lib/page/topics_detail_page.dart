@@ -36,6 +36,11 @@ class _TopicDetailPageState extends State<TopicDetailPage> {
                   error: model.error,
                   child: NotificationListener(
                     onNotification: (ScrollNotification notification) {
+
+                      switch(notification.runtimeType){
+
+                      }
+
                       if (notification is ScrollEndNotification) {
                         _scrollNotifier.value = notification.metrics.pixels;
                       }

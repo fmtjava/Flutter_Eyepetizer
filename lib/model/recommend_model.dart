@@ -10,7 +10,7 @@ class RecommendModel extends PagingModel<RecommendItem>{
 
   RecommendModel.fromJson(Map<String, dynamic> json) {
     if (json['itemList'] != null) {
-      itemList = new List<RecommendItem>();
+      itemList = [];
       json['itemList'].forEach((v) {
         itemList.add(new RecommendItem.fromJson(v));
       });
@@ -215,7 +215,7 @@ class ContentData {
     description = json['description'];
     library = json['library'];
     if (json['tags'] != null) {
-      tags = new List<Tags>();
+      tags = [];
       json['tags'].forEach((v) {
         tags.add(new Tags.fromJson(v));
       });

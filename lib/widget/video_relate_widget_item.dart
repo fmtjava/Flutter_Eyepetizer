@@ -44,7 +44,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
                               decoration: BoxDecoration(color: Colors.black54),
                               padding: EdgeInsets.all(3),
                               child: Text(
-                                DateUtils.formatDateMsByMS(
+                                DateWarpUtils.formatDateMsByMS(
                                     data.duration * 1000),
                                 style: TextStyle(
                                     color: Colors.white,

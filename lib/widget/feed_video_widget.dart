@@ -173,7 +173,7 @@ class FeedVideoWidgetState extends State<FeedVideoWidget>
                               decoration: BoxDecoration(color: Colors.black54),
                               padding: EdgeInsets.all(5),
                               child: Text(
-                                DateUtils.formatDateMsByMS(
+                                DateWarpUtils.formatDateMsByMS(
                                     widget.model.data.content.data.duration *
                                         1000),
                                 style: TextStyle(

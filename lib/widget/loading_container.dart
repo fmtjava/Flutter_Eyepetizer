@@ -19,7 +19,11 @@ class LoadingContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return !loading ? error ? _errorView : child : _loadView;
+    return !loading
+        ? error
+            ? _errorView
+            : child
+        : _loadView;
   }
 
   Widget get _errorView {
@@ -41,11 +45,15 @@ class LoadingContainer extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8),
-            child: OutlineButton(
+            child: OutlinedButton(
               onPressed: () => retry.call(),
-              child: Text(DString.reload_again),
-              highlightColor: Colors.white,
-              highlightedBorderColor: Colors.black12,
+              child: Text(
+                DString.reload_again,
+                style: TextStyle(color: Colors.black87),
+              ),
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                  overlayColor: MaterialStateProperty.all(Colors.black12)),
             ),
           )
         ],

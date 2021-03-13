@@ -35,7 +35,8 @@ class RecommendRepository extends LoadingMoreBase<RecommendItem> {
     bool isSuccess = true;
 
     try {
-      var response = await http.get(url, headers: HttpConstant.httpHeader);
+      var response =
+          await http.get(Uri.parse(url), headers: HttpConstant.httpHeader);
       if (response.statusCode == 200) {
         var result =
             json.decode(AppManager.utf8decoder.convert(response.bodyBytes));

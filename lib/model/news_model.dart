@@ -9,7 +9,7 @@ class NewsModel extends PagingModel<NewsItemModel> {
 
   NewsModel.fromJson(Map<String, dynamic> json) {
     if (json['itemList'] != null) {
-      itemList = new List<NewsItemModel>();
+      itemList = [];
       json['itemList'].forEach((v) {
         itemList.add(new NewsItemModel.fromJson(v));
       });

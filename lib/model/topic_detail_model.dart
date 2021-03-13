@@ -25,7 +25,7 @@ class TopicDetailModel {
     text = json['text'];
     shareLink = json['shareLink'];
     if (json['itemList'] != null) {
-      itemList = new List<TopicDetailItemData>();
+      itemList = [];
       json['itemList'].forEach((v) {
         itemList.add(new TopicDetailItemData.fromJson(v));
       });

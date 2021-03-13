@@ -89,7 +89,7 @@ class _TopicDetailWidgetItemState extends State<TopicDetailWidgetItem> {
               Row(
                 children: <Widget>[
                   Text(
-                    '${DateUtils.formatDateMsByYMD(model.data.header.time)}发布：',
+                    '${DateWarpUtils.formatDateMsByYMD(model.data.header.time)}发布：',
                     style: TextStyle(color: DColor.hitTextColor, fontSize: 12),
                   ),
                   Expanded(

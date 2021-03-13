@@ -39,7 +39,7 @@ class ApiService {
   static getData(String url,
       {Function success, Function fail, Function complete}) async {
     try {
-      var response = await http.get(url, headers: HttpConstant.httpHeader);
+      var response = await http.get(Uri.parse(url), headers: HttpConstant.httpHeader);
       if (response.statusCode == 200) {
         var result =
             json.decode(AppManager.utf8decoder.convert(response.bodyBytes));
@@ -59,7 +59,7 @@ class ApiService {
   //网络请求封装方式二：返回Future，结合 then ==> catchError ==>whenComplete,类似JS
   static Future requestData(String url) async {
     try {
-      var response = await http.get(url, headers: HttpConstant.httpHeader);
+      var response = await http.get(Uri.parse(url), headers: HttpConstant.httpHeader);
       if (response.statusCode == 200) {
         var result =
             json.decode(AppManager.utf8decoder.convert(response.bodyBytes));

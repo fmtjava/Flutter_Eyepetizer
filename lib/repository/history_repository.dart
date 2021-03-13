@@ -9,7 +9,7 @@ class HistoryRepository {
   static saveWatchHistory(Data data) async {
     List<String> watchList = AppManager.prefs.getStringList(Constant.watchHistoryList);
     if (watchList == null) {
-      watchList = List();
+      watchList = [];
     }
     var jsonParam = data.toJson();
     var jsonStr = json.encode(jsonParam);
