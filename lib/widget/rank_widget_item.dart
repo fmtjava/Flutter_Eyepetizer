@@ -96,7 +96,7 @@ class RankWidgetItem extends StatelessWidget {
                               padding: EdgeInsets.only(top: 2),
                               child: Text(
                                   item.data.author == null
-                                      ? item.data.tags[0].name
+                                      ? item.data.description
                                       : item.data.author.name,
                                   style: TextStyle(
                                       color: Color(0xff9a9a9a), fontSize: 12)))
@@ -105,7 +105,7 @@ class RankWidgetItem extends StatelessWidget {
               IconButton(
                   icon: Icon(Icons.share, color: Colors.black38),
                   onPressed: () =>
-                      ShareUtil.share(item.data.title, _getShareVideoUrl()))
+                      ShareUtil.share(item.data.title, item.data.playUrl))
             ],
           ),
         ),
@@ -120,39 +120,12 @@ class RankWidgetItem extends StatelessWidget {
   }
 
   Widget _authorHeaderImage(Item item) {
-    if (item.data.author == null) {
-      return ClipRRect(
+    return ClipOval(
         clipBehavior: Clip.antiAlias,
         child: CachedNetworkImage(
             width: 40,
             height: 40,
-            imageUrl: item.data.tags[0].headerImage,
-            fit: BoxFit.cover),
-        borderRadius: BorderRadius.circular(5),
-      );
-    } else {
-      return ClipOval(
-          child: CachedNetworkImage(
-        width: 40,
-        height: 40,
-        imageUrl: item.data.author.icon,
-      ));
-    }
-  }
-
-  String _getShareVideoUrl() {
-    var videoUrl;
-    List<PlayInfo> playInfoList = item.data.playInfo;
-    if (playInfoList.length > 1) {
-      for (var playInfo in playInfoList) {
-        if (playInfo.type == 'high') {
-          videoUrl = playInfo.url;
-          break;
-        }
-      }
-    } else {
-      videoUrl = item.data.playUrl;
-    }
-    return videoUrl;
+            imageUrl: item.data.author == null ? item.data.provider.icon : item.data.author.icon,
+            fit: BoxFit.cover));
   }
 }
