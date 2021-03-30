@@ -1,16 +1,13 @@
 import 'package:animations/animations.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
-import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/page/video_search_page.dart';
 import 'package:flutter_eyepetizer/provider/home_page_model.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:flutter_eyepetizer/widget/banner_widget.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/rank_widget_item.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 const TEXT_HEADER_TYPE = 'textHeader';
@@ -107,42 +104,7 @@ class _HomePageState extends State<HomePage>
       padding: EdgeInsets.only(left: 15, top: 15, right: 15),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4),
-        child: Swiper(
-            autoplay: true,
-            itemBuilder: (BuildContext context, int index) {
-              return Stack(
-                children: <Widget>[
-                  Hero(
-                      tag:
-                          '${model.bannerList[index].data.id}${model.bannerList[index].data.time}',
-                      child: Container(
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: CachedNetworkImageProvider(
-                                    model.bannerList[index].data.cover.feed),
-                                fit: BoxFit.cover)),
-                      )),
-                  Positioned(
-                      width: MediaQuery.of(context).size.width - 30,
-                      bottom: 0,
-                      child: Container(
-                          padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
-                          decoration: BoxDecoration(color: Colors.black12),
-                          child: Text(model.bannerList[index].data.title,
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 12))))
-                ],
-              );
-            },
-            onTap: (index) {
-              NavigatorManager.to(
-                  VideoDetailPage(data: model.bannerList[index].data));
-            },
-            itemCount: model.bannerList?.length ?? 0,
-            pagination: new SwiperPagination(
-                alignment: Alignment.bottomRight,
-                builder: DotSwiperPaginationBuilder(
-                    activeColor: Colors.white, color: Colors.white24))),
+        child: BannerWidget(model: model),
       ),
     );
   }

@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/category_model.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
 
 class CategoryWidgetItem extends StatelessWidget {
   final CategoryModel categoryModel;
@@ -12,7 +12,7 @@ class CategoryWidgetItem extends StatelessWidget {
     return Stack(children: <Widget>[
       ClipRRect(
           borderRadius: BorderRadius.circular(4),
-          child: CachedNetworkImage(imageUrl: categoryModel.bgPicture)),
+          child: cacheImage(categoryModel.bgPicture)),
       Center(
           child: Text('#${categoryModel.name}',
               style: TextStyle(

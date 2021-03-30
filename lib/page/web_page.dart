@@ -59,7 +59,7 @@ class _State extends State<WebPage> {
         leading: GestureDetector(
           onTap: () {
             if (widget.url == currentUrl || currentUrl.isEmpty) {
-              NavigatorManager.back();
+              back();
             } else {
               flutterWebViewPlugin.goBack();
             }
@@ -83,7 +83,7 @@ class _State extends State<WebPage> {
 
   Future<bool> _onWillPop() {
     if (widget.url == currentUrl) {
-      NavigatorManager.back();
+      back();
       return Future.value(true); //点击返回键，页面正常返回
     } else {
       flutterWebViewPlugin.goBack();

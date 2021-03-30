@@ -18,7 +18,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
     return Scaffold(
         appBar: AppBar(
             leading: GestureDetector(
-              onTap: () => NavigatorManager.back(),
+              onTap: () => back(),
               child: Icon(
                 Icons.arrow_back,
                 size: 20,
@@ -54,7 +54,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                               child: VideoRelateWidgetItem(
                                 data: model.itemList[index],
                                 callBack: () {
-                                  NavigatorManager.to(VideoDetailPage(
+                                  toPage(VideoDetailPage(
                                       data: model.itemList[index]));
                                 },
                                 titleColor: Colors.black87,

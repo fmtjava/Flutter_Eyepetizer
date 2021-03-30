@@ -1,28 +1,23 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_eyepetizer/chewie/chewie_player.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/provider/video_detail_page_model.dart';
 import 'package:flutter_eyepetizer/repository/history_repository.dart';
 import 'package:flutter_eyepetizer/util/date_util.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
-import 'package:video_player/video_player.dart';
+import 'package:flutter_eyepetizer/widget/video_widget.dart';
 
 const VIDEO_SMALL_CARD_TYPE = 'videoSmallCard';
 
-const VIDEO_HIGH = 'high';
-
 class VideoDetailPage extends StatefulWidget {
   final Data data;
-  final ChewieController chewieController; //无缝续播实现思路：共用列表传递过来的ChewieController
 
-  const VideoDetailPage({Key key, @required this.data, this.chewieController})
-      : super(key: key);
+  const VideoDetailPage({Key key, @required this.data}) : super(key: key);
 
   @override
   _VideoDetailPageState createState() => _VideoDetailPageState();
@@ -30,15 +25,13 @@ class VideoDetailPage extends StatefulWidget {
 
 class _VideoDetailPageState extends State<VideoDetailPage>
     with WidgetsBindingObserver {
-  VideoPlayerController _videoPlayerController;
-  ChewieController _cheWieController;
+  final GlobalKey<VideoWidgetState> videoKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
     //监听页面可见与不可见状态
     WidgetsBinding.instance.addObserver(this);
-    initController();
     HistoryRepository.saveWatchHistory(widget.data);
   }
 
@@ -47,15 +40,9 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     //AppLifecycleState当前页面的状态(是否可见)
     if (state == AppLifecycleState.paused) {
       //页面不可见时,暂停视频
-      if (widget.chewieController == null) {
-        _cheWieController.pause();
-      } else {
-        widget.chewieController.pause();
-      }
+      videoKey.currentState.pause();
     } else if (state == AppLifecycleState.resumed) {
-      if (widget.chewieController == null) {
-        _cheWieController.play();
-      }
+      videoKey.currentState.play();
     }
   }
 
@@ -63,10 +50,6 @@ class _VideoDetailPageState extends State<VideoDetailPage>
   void dispose() {
     //移除监听页面可见与不可见状态
     WidgetsBinding.instance.removeObserver(this);
-    if (widget.chewieController == null) {
-      _videoPlayerController.dispose();
-      _cheWieController.dispose();
-    }
     super.dispose();
   }
 
@@ -84,8 +67,9 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                 Hero(
                     //Hero动画
                     tag: '${widget.data.id}${widget.data.time}',
-                    child: Chewie(
-                      controller: widget.chewieController ?? _cheWieController,
+                    child: VideoWidget(
+                      key: videoKey,
+                      url: widget.data.playUrl,
                     )),
                 Expanded(
                     flex: 1,
@@ -98,7 +82,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                 image: DecorationImage(
                                     //背景图片
                                     fit: BoxFit.cover,
-                                    image: CachedNetworkImageProvider(
+                                    image: cachedNetworkImageProvider(
                                         '${widget.data.cover.blurred}}/thumbnail/${MediaQuery.of(context).size.height}x${MediaQuery.of(context).size.width}'))),
                             child: CustomScrollView(
                               //CustomScrollView结合Sliver可以防止滚动冲突
@@ -122,7 +106,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                             padding: EdgeInsets.only(
                                                 left: 10, top: 10),
                                             child: Text(
-                                                '#${widget.data.category} / ${DateWarpUtils.formatDateMsByYMDHM(widget.data.author.latestReleaseTime)}',
+                                                '#${widget.data.category} / ${formatDateMsByYMDHM(widget.data.author.latestReleaseTime)}',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 12))),
@@ -218,13 +202,8 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                           Padding(
                                               padding: EdgeInsets.all(10),
                                               child: ClipOval(
-                                                child: CachedNetworkImage(
-                                                    imageUrl:
-                                                        widget.data.author.icon,
-                                                    errorWidget: (context, url,
-                                                            error) =>
-                                                        Image.asset(
-                                                            'images/img_load_fail.png'),
+                                                child: cacheImage(
+                                                    widget.data.author.icon,
                                                     height: 40,
                                                     width: 40),
                                               )),
@@ -279,12 +258,8 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                     return VideoRelateWidgetItem(
                                         data: model.itemList[index].data,
                                         callBack: () {
-                                          if (widget.chewieController != null) {
-                                            widget.chewieController.pause();
-                                          } else {
-                                            _videoPlayerController.pause();
-                                          }
-                                          NavigatorManager.to(VideoDetailPage(
+                                          videoKey.currentState.pause();
+                                          toPage(VideoDetailPage(
                                               data:
                                                   model.itemList[index].data));
                                         });
@@ -305,26 +280,5 @@ class _VideoDetailPageState extends State<VideoDetailPage>
               ])),
               value: SystemUiOverlayStyle.light);
         });
-  }
-
-  void initController() {
-    if (widget.chewieController != null) return;
-    List<PlayInfo> playInfoList = widget.data.playInfo;
-    if (playInfoList.length > 1) {
-      for (var playInfo in playInfoList) {
-        if (playInfo.type == VIDEO_HIGH) {
-          _videoPlayerController = VideoPlayerController.network(playInfo.url);
-          _cheWieController = ChewieController(
-              videoPlayerController: _videoPlayerController, autoPlay: true);
-          break;
-        }
-      }
-    } else {
-      //若无高清视频，则取默认视频地址
-      _videoPlayerController =
-          VideoPlayerController.network(widget.data.playUrl);
-      _cheWieController = ChewieController(
-          videoPlayerController: _videoPlayerController, autoPlay: true);
-    }
   }
 }

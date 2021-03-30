@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_eyepetizer/util/app_manager.dart';
+import 'package:flutter_eyepetizer/util/app_initialize.dart';
 import 'package:flutter_eyepetizer/util/http_constant.dart';
 import 'package:http/http.dart' as http;
 
@@ -42,7 +42,7 @@ class ApiService {
       var response = await http.get(Uri.parse(url), headers: HttpConstant.httpHeader);
       if (response.statusCode == 200) {
         var result =
-            json.decode(AppManager.utf8decoder.convert(response.bodyBytes));
+            json.decode(AppInitialize.utf8decoder.convert(response.bodyBytes));
         success(result);
       } else {
         throw Exception('"Request failed with status: ${response.statusCode}"');
@@ -62,7 +62,7 @@ class ApiService {
       var response = await http.get(Uri.parse(url), headers: HttpConstant.httpHeader);
       if (response.statusCode == 200) {
         var result =
-            json.decode(AppManager.utf8decoder.convert(response.bodyBytes));
+            json.decode(AppInitialize.utf8decoder.convert(response.bodyBytes));
         return result;
       } else {
         throw Exception('"Request failed with status: ${response.statusCode}"');

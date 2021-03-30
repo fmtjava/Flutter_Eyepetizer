@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/util/date_util.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:flutter_eyepetizer/util/share_util.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
 
 class RankWidgetItem extends StatelessWidget {
   final Item item;
@@ -21,7 +21,7 @@ class RankWidgetItem extends StatelessWidget {
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            NavigatorManager.to(VideoDetailPage(data: item.data));
+            toPage(VideoDetailPage(data: item.data));
           },
           child: Padding(
             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
@@ -30,13 +30,9 @@ class RankWidgetItem extends StatelessWidget {
                 ClipRRect(
                     child: Hero(
                         tag: '${item.data.id}${item.data.time}',
-                        child: CachedNetworkImage(
+                        child: cacheImage(item.data.cover.feed,
                             width: MediaQuery.of(context).size.width,
-                            height: 200,
-                            imageUrl: item.data.cover.feed,
-                            errorWidget: (context, url, error) =>
-                                Image.asset('images/img_load_fail.png'),
-                            fit: BoxFit.cover)), //充满容器，可能会被截断
+                            height: 200)), //充满容器，可能会被截断
                     borderRadius: BorderRadius.circular(4)),
                 Positioned(
                     left: 15,
@@ -62,8 +58,7 @@ class RankWidgetItem extends StatelessWidget {
                             decoration: BoxDecoration(color: Colors.black54),
                             padding: EdgeInsets.all(5),
                             child: Text(
-                              DateWarpUtils.formatDateMsByMS(
-                                  item.data.duration * 1000),
+                              formatDateMsByMS(item.data.duration * 1000),
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
@@ -104,8 +99,7 @@ class RankWidgetItem extends StatelessWidget {
                       ))),
               IconButton(
                   icon: Icon(Icons.share, color: Colors.black38),
-                  onPressed: () =>
-                      ShareUtil.share(item.data.title, item.data.playUrl))
+                  onPressed: () => share(item.data.title, item.data.playUrl))
             ],
           ),
         ),
@@ -122,10 +116,11 @@ class RankWidgetItem extends StatelessWidget {
   Widget _authorHeaderImage(Item item) {
     return ClipOval(
         clipBehavior: Clip.antiAlias,
-        child: CachedNetworkImage(
+        child: cacheImage(
+            item.data.author == null
+                ? item.data.provider.icon
+                : item.data.author.icon,
             width: 40,
-            height: 40,
-            imageUrl: item.data.author == null ? item.data.provider.icon : item.data.author.icon,
-            fit: BoxFit.cover));
+            height: 40));
   }
 }

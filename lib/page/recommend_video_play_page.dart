@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_eyepetizer/chewie/chewie_player.dart';
 import 'package:flutter_eyepetizer/model/recommend_model.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
-import 'package:video_player/video_player.dart';
+import 'package:flutter_eyepetizer/widget/video_widget.dart';
 
 class RecommendVideoPlayPage extends StatefulWidget {
   final RecommendItem item;
@@ -16,23 +15,20 @@ class RecommendVideoPlayPage extends StatefulWidget {
 
 class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
     with WidgetsBindingObserver {
-  VideoPlayerController _videoPlayerController;
-  ChewieController _cheWieController;
+  final GlobalKey<VideoWidgetState> videoKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _videoPlayerController =
-        VideoPlayerController.network(widget.item.data.content.data.playUrl);
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
-      _cheWieController.pause();
+      videoKey.currentState.pause();
     } else if (state == AppLifecycleState.resumed) {
-      _cheWieController.play();
+      videoKey.currentState.play();
     }
   }
 
@@ -46,15 +42,18 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
           child: Stack(
             children: <Widget>[
               Align(
-                  child: Chewie(
-                controller: _getCheWieController(),
-                hideBackArrow: true,
+                  child: VideoWidget(
+                key: videoKey,
+                url: widget.item.data.content.data.playUrl,
+                aspectRatio: _getAspectRatio(),
+                allowFullScreen: !(widget.item.data.content.data.height >
+                    widget.item.data.content.data.width),
               )),
               Positioned(
                   left: 10,
                   top: MediaQuery.of(context).padding.top + 10,
                   child: GestureDetector(
-                    onTap: () => NavigatorManager.back(),
+                    onTap: () => back(),
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.grey,
@@ -74,8 +73,8 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
     );
   }
 
-  ChewieController _getCheWieController() {
-    double aspectRatio;
+  double _getAspectRatio() {
+    double aspectRatio = 16 / 9;
     bool allowFullScreen = widget.item.data.content.data.height >
         widget.item.data.content.data.width;
     if (allowFullScreen) {
@@ -84,20 +83,12 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
       final height = size.height;
       aspectRatio = width / height;
     }
-    _cheWieController = ChewieController(
-        videoPlayerController: _videoPlayerController,
-        aspectRatio: aspectRatio,
-        autoPlay: true,
-        looping: true,
-        allowFullScreen: !allowFullScreen);
-    return _cheWieController;
+    return aspectRatio;
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    _videoPlayerController.dispose();
-    _cheWieController.dispose();
     super.dispose();
   }
 }

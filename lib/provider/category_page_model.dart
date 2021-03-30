@@ -20,13 +20,14 @@ class CategoryPageModel extends BaseChangeNotifierModel {
           error = false;
         },
         fail: (e) {
-          ToastUtil.showError(e.toString());
+          showError(e.toString());
           loading = false;
           error = true;
         },
         complete: () => notifyListeners());
   }
-  retry(){
+
+  retry() {
     loading = true;
     notifyListeners();
     loadData();

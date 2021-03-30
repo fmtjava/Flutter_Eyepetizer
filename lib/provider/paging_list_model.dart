@@ -27,7 +27,7 @@ abstract class PagingListModel<T, M extends PagingModel<T>>
           refreshController.footerMode.value = LoadStatus.canLoading;
         },
         fail: (e) {
-          ToastUtil.showError(e.toString());
+          showError(e.toString());
           refreshController.refreshFailed();
           loading = false;
           error = true;
@@ -50,7 +50,7 @@ abstract class PagingListModel<T, M extends PagingModel<T>>
 
       notifyListeners();
     }, fail: (e) {
-      ToastUtil.showError(e.toString());
+      showError(e.toString());
       refreshController.loadFailed();
     });
   }

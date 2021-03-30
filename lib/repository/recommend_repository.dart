@@ -1,7 +1,7 @@
 import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/recommend_model.dart';
+import 'package:flutter_eyepetizer/util/app_initialize.dart';
 import 'package:loading_more_list/loading_more_list.dart';
-import 'package:flutter_eyepetizer/util/app_manager.dart';
 import 'package:flutter_eyepetizer/util/http_constant.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:http/http.dart' as http;
@@ -39,7 +39,7 @@ class RecommendRepository extends LoadingMoreBase<RecommendItem> {
           await http.get(Uri.parse(url), headers: HttpConstant.httpHeader);
       if (response.statusCode == 200) {
         var result =
-            json.decode(AppManager.utf8decoder.convert(response.bodyBytes));
+            json.decode(AppInitialize.utf8decoder.convert(response.bodyBytes));
         RecommendModel model = RecommendModel.fromJson(result);
         model.itemList.removeWhere((item) {
           return item.type == 'horizontalScrollCard';
@@ -56,7 +56,7 @@ class RecommendRepository extends LoadingMoreBase<RecommendItem> {
       }
     } catch (e) {
       isSuccess = false;
-      ToastUtil.showError(e.toString());
+      showError(e.toString());
     }
 
     return isSuccess;

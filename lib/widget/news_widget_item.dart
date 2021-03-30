@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/color.dart';
 import 'package:flutter_eyepetizer/model/news_model.dart';
 import 'package:flutter_eyepetizer/page/web_page.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
 
 class NewsTitleWidgetItem extends StatelessWidget {
   final NewsItemModel newsItemModel;
@@ -35,7 +35,7 @@ class NewsContentWidgetItem extends StatelessWidget {
           String url = Uri.decodeComponent(newsItemModel.data.actionUrl
               .substring(newsItemModel.data.actionUrl.indexOf("url")));
           url = url.substring(4, url.length);
-          NavigatorManager.to(WebPage(url: url));
+          toPage(WebPage(url: url));
         },
         child: Padding(
             padding: EdgeInsets.all(10),
@@ -50,12 +50,9 @@ class NewsContentWidgetItem extends StatelessWidget {
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.only(bottom: 10),
-                        child: CachedNetworkImage(
+                        child: cacheImage(newsItemModel.data.backgroundImage,
                             width: MediaQuery.of(context).size.width,
                             height: 140,
-                            imageUrl: newsItemModel.data.backgroundImage,
-                            errorWidget: (context, url, error) =>
-                                Image.asset('images/img_load_fail.png'),
                             fit: BoxFit.fill),
                       ),
                       Column(

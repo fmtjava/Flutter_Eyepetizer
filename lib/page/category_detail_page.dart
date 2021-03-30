@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/model/category_model.dart';
 import 'package:flutter_eyepetizer/provider/category_detail_model.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/rank_widget_item.dart';
@@ -35,7 +35,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                     return [
                       SliverAppBar(
                           leading: GestureDetector(
-                              onTap: () => NavigatorManager.back(),
+                              onTap: () => back(),
                               child:
                                   Icon(Icons.arrow_back, color: Colors.black)),
                           elevation: 0,
@@ -59,9 +59,8 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                           : Colors.black),
                                 ),
                                 centerTitle: false,
-                                background: CachedNetworkImage(
-                                    imageUrl: widget.categoryModel.headerImage,
-                                    fit: BoxFit.cover));
+                                background: cacheImage(
+                                    widget.categoryModel.headerImage));
                           }))
                     ];
                   },

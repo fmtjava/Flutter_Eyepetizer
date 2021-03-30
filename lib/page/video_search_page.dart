@@ -45,7 +45,7 @@ class VideoSearchPage extends StatelessWidget {
                 size: 20,
                 color: Colors.black26,
               ),
-              onPressed: () => NavigatorManager.back()),
+              onPressed: () => back()),
           Expanded(
               child: ConstrainedBox(
                   //通过ConstrainedBox修改TextField的高度

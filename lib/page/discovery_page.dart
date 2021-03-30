@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/config/color.dart';
 import 'package:flutter_eyepetizer/page/recommend_page.dart';
 import 'package:flutter_eyepetizer/page/topics_page.dart';
+import 'package:flutter_eyepetizer/widget/tab_bar_widget.dart';
 
 import 'category_page.dart';
 import 'follow_page.dart';
@@ -52,14 +52,8 @@ class _DiscoveryPageState extends State<DiscoveryPage>
           children: <Widget>[
             Container(
               decoration: BoxDecoration(color: Colors.white),
-              child: TabBar(
-                  controller: _tabController,
-                  labelColor: Colors.black,
-                  unselectedLabelColor: DColor.hitTextColor,
-                  labelStyle: TextStyle(fontSize: 14),
-                  unselectedLabelStyle: TextStyle(fontSize: 14),
-                  indicatorColor: Colors.black,
-                  indicatorSize: TabBarIndicatorSize.label,
+              child: TabBarWidget(
+                  tabController: _tabController,
                   tabs: TAB_LABEL.map((String label) {
                     return Tab(text: label);
                   }).toList(),

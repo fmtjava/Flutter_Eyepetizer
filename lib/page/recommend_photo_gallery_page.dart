@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/provider/photo_gallery_model.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -30,7 +30,7 @@ class RecommendPhotoGalleryPage extends StatelessWidget {
                             builder: (BuildContext context, int index) =>
                                 PhotoViewGalleryPageOptions(
                                     imageProvider:
-                                    CachedNetworkImageProvider(galleryItems[index]),
+                                    cachedNetworkImageProvider(galleryItems[index]),
                                     initialScale:
                                         PhotoViewComputedScale.contained * 1,
                                     minScale:
@@ -54,7 +54,7 @@ class RecommendPhotoGalleryPage extends StatelessWidget {
                               left: 10,
                               top: MediaQuery.of(context).padding.top + 10,
                               child: GestureDetector(
-                                onTap: () => NavigatorManager.back(),
+                                onTap: () => back(),
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color: Colors.grey,

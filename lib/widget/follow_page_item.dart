@@ -1,7 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
+
 import 'follow_widget_item.dart';
 
 class FollowPageItem extends StatelessWidget {
@@ -20,10 +21,10 @@ class FollowPageItem extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 ClipOval(
-                    child: CachedNetworkImage(
+                    child: cacheImage(
+                  item.data.header.icon,
                   width: 40,
                   height: 40,
-                  imageUrl: item.data.header.icon,
                 )),
                 Expanded(
                     flex: 1,

@@ -48,7 +48,7 @@ class CategoryDetailModel extends BaseChangeNotifierModel {
         fail: (e) {
           loading = false;
           if (!loadMore) error = true;
-          ToastUtil.showError(e.toString());
+          showError(e.toString());
           refreshController.loadFailed();
         },
         complete: () => notifyListeners());

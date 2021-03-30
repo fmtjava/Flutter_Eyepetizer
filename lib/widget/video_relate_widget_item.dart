@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/util/date_util.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
 
 class VideoRelateWidgetItem extends StatelessWidget {
   final Data data;
@@ -44,8 +44,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
                               decoration: BoxDecoration(color: Colors.black54),
                               padding: EdgeInsets.all(3),
                               child: Text(
-                                DateWarpUtils.formatDateMsByMS(
-                                    data.duration * 1000),
+                                formatDateMsByMS(data.duration * 1000),
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 10,
@@ -92,12 +91,10 @@ class VideoRelateWidgetItem extends StatelessWidget {
   }
 
   Widget _imageWidget() {
-    return CachedNetworkImage(
-        imageUrl: data.cover.detail,
-        errorWidget: (context, url, error) =>
-            Image.asset('images/img_load_fail.png'),
-        width: 135,
-        height: 80,
-        fit: BoxFit.cover);
+    return cacheImage(
+      data.cover.detail,
+      width: 135,
+      height: 80,
+    );
   }
 }

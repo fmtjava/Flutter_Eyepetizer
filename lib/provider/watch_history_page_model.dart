@@ -8,8 +8,8 @@ class WatchHistoryPageModel extends BaseChangeNotifierModel {
   List<Data> itemList = [];
   List<String> watchList = [];
 
-  void loadData() async {
-    watchList = await HistoryRepository.loadHistoryData();
+  void loadData() {
+    watchList = HistoryRepository.loadHistoryData();
     if (watchList != null) {
       var list = watchList.map((value) {
         return Data.fromJson(json.decode(value));
@@ -19,7 +19,7 @@ class WatchHistoryPageModel extends BaseChangeNotifierModel {
     }
   }
 
-  void remove(int index) async {
+  void remove(int index) {
     watchList.removeAt(index);
     HistoryRepository.saveHistoryData(watchList);
     loadData();

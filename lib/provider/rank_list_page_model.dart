@@ -27,7 +27,7 @@ class RankListPageModel extends BaseChangeNotifierModel {
           refreshController.refreshCompleted();
         },
         fail: (e) {
-          ToastUtil.showError(e.toString());
+          showError(e.toString());
           refreshController.refreshFailed();
           loading = false;
           error = true;

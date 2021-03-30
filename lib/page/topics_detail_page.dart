@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/topic_detail_model.dart';
 import 'package:flutter_eyepetizer/provider/topic_detail_page_model.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/topic_detail_widget_item.dart';
@@ -36,10 +36,10 @@ class _TopicDetailPageState extends State<TopicDetailPage> {
                       _headWidget(model.topicDetailModel),
                       SliverList(
                           delegate:
-                          SliverChildBuilderDelegate((context, index) {
-                            return TopicDetailWidgetItem(
-                                model: model.itemList[index]);
-                          }, childCount: model.itemList.length))
+                              SliverChildBuilderDelegate((context, index) {
+                        return TopicDetailWidgetItem(
+                            model: model.itemList[index]);
+                      }, childCount: model.itemList.length))
                     ],
                   ),
                   retry: model.retry));
@@ -61,7 +61,7 @@ class _TopicDetailPageState extends State<TopicDetailPage> {
       leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
-          onPressed: () => NavigatorManager.back()),
+          onPressed: () => back()),
     );
   }
 
@@ -71,13 +71,11 @@ class _TopicDetailPageState extends State<TopicDetailPage> {
         children: <Widget>[
           Column(
             children: <Widget>[
-              CachedNetworkImage(
-                  width: MediaQuery.of(context).size.width,
-                  height: 250,
-                  imageUrl: topicDetailModel.headerImage,
-                  errorWidget: (context, url, error) =>
-                      Image.asset('images/img_load_fail.png'),
-                  fit: BoxFit.cover),
+              cacheImage(
+                topicDetailModel.headerImage,
+                width: MediaQuery.of(context).size.width,
+                height: 250,
+              ),
               Padding(
                 padding: EdgeInsets.fromLTRB(20, 40, 20, 10),
                 child: Text(

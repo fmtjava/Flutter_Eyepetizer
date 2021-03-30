@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/recommend_model.dart';
 import 'package:flutter_eyepetizer/page/recommend_photo_gallery_page.dart';
 import 'package:flutter_eyepetizer/page/recommend_video_play_page.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
 
 const VIDEO_TYPE = 'video';
 
@@ -18,9 +17,9 @@ class RecommendWidgetItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (item.data.content.type == VIDEO_TYPE) {
-          NavigatorManager.to(RecommendVideoPlayPage(item: item));
+          toPage(RecommendVideoPlayPage(item: item));
         } else {
-          NavigatorManager.to(RecommendPhotoGalleryPage(
+          toPage(RecommendPhotoGalleryPage(
             galleryItems: item.data.content.data.urls,
           ));
         }
@@ -49,7 +48,7 @@ class RecommendWidgetItem extends StatelessWidget {
 
     Widget image = Stack(
       children: <Widget>[
-        ExtendedImage.network(
+        cacheImage(
           item.data.content.data.cover.feed,
           shape: BoxShape.rectangle,
           width: maxWidth,
@@ -74,7 +73,8 @@ class RecommendWidgetItem extends StatelessWidget {
             ))
       ],
     );
-    image = AspectRatio(//约束控件的宽高比，保证控件等比缩放
+    image = AspectRatio(
+      //约束控件的宽高比，保证控件等比缩放
       aspectRatio: width / height,
       child: image,
     );
@@ -106,10 +106,11 @@ class RecommendWidgetItem extends StatelessWidget {
                   color: Colors.transparent,
                   clipBehavior: Clip.antiAlias,
                   borderRadius: BorderRadius.circular(12),
-                  child: CachedNetworkImage(
-                      width: 24,
-                      height: 24,
-                      imageUrl: item.data.content.data.owner.avatar),
+                  child: cacheImage(
+                    item.data.content.data.owner.avatar,
+                    width: 24,
+                    height: 24,
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.all(5),

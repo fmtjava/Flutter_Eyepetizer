@@ -26,7 +26,7 @@ class VideoSearchModel extends BaseChangeNotifierModel {
       }).toList();
       notifyListeners();
     }, fail: (e) {
-      ToastUtil.showError(e.toString());
+      showError(e.toString());
     });
   }
 
@@ -71,7 +71,7 @@ class VideoSearchModel extends BaseChangeNotifierModel {
           refreshController.loadComplete();
         },
         fail: (e) {
-          ToastUtil.showError(e.toString());
+          showError(e.toString());
           loading = false;
           if (!loadMore) error = true;
           refreshController.loadFailed();

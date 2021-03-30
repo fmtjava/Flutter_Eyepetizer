@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/util/date_util.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
 
 class FollowWidgetItem extends StatelessWidget {
   final Item item;
@@ -14,9 +14,9 @@ class FollowWidgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => NavigatorManager.to(VideoDetailPage(data: item.data)),
+        onTap: () => toPage(VideoDetailPage(data: item.data)),
         child: Container(
-          padding: EdgeInsets.only(left: 15,right: last ? 15 : 0),
+          padding: EdgeInsets.only(left: 15, right: last ? 15 : 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -26,11 +26,10 @@ class FollowWidgetItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                     child: Hero(
                         tag: '${item.data.id}${item.data.time}',
-                        child: CachedNetworkImage(
+                        child: cacheImage(
+                          item.data.cover.feed,
                           width: 300,
                           height: 180,
-                          imageUrl: item.data.cover.feed,
-                          fit: BoxFit.cover,
                         )),
                   ),
                   Positioned(
@@ -65,8 +64,7 @@ class FollowWidgetItem extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(top: 3),
                 child: Text(
-                    DateWarpUtils.formatDateMsByYMDHM(
-                        item.data.author.latestReleaseTime),
+                    formatDateMsByYMDHM(item.data.author.latestReleaseTime),
                     style: TextStyle(fontSize: 12, color: Colors.black26)),
               )
             ],

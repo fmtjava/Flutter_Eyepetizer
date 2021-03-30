@@ -71,7 +71,7 @@ class _TabNavigationState extends State<TabNavigation> {
     if (lastTime == null ||
         DateTime.now().difference(lastTime) > Duration(seconds: 2)) {
       lastTime = DateTime.now();
-      ToastUtil.showTip(DString.exit_tip);
+      showTip(DString.exit_tip);
       return false;
     } else {
       SystemNavigator.pop();

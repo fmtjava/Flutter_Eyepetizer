@@ -92,7 +92,7 @@ class _MinePageState extends State<MinePage>
             _settingWidget('我的记录'),
             _settingWidget('我的缓存'),
             _settingWidget('观看记录', callback: () {
-              NavigatorManager.to(WatchHistoryPage());
+              toPage(WatchHistoryPage());
             }),
             _settingWidget('意见反馈')
           ],
@@ -137,15 +137,15 @@ class _MinePageState extends State<MinePage>
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               _bottomWidget('拍照', () {
-                NavigatorManager.back();
+                back();
                 _getImage(ImageSource.camera);
               }),
               _bottomWidget('相册', () {
-                NavigatorManager.back();
+               back();
                 _getImage(ImageSource.gallery);
               }),
               _bottomWidget('取消', () {
-                NavigatorManager.back();
+                back();
               })
             ],
           );
@@ -166,8 +166,8 @@ class _MinePageState extends State<MinePage>
     MineRepository.saveAvatarPath(_imageFile);
   }
 
-  _getAvatarPath() async {
-    var userAvatarPath = await MineRepository.getAvatarPath();
+  _getAvatarPath() {
+    var userAvatarPath = MineRepository.getAvatarPath();
     if (userAvatarPath != null && userAvatarPath.isNotEmpty) {
       setState(() {
         _imageFile = File(userAvatarPath);

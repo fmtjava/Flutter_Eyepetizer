@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/navigation/tab_navigation.dart';
-import 'package:flutter_eyepetizer/util/app_manager.dart';
-import 'package:flutter_splash_screen/flutter_splash_screen.dart';
+import 'package:flutter_eyepetizer/util/app_initialize.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -16,17 +15,27 @@ void main() {
   }
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    hideSplashScreen();
-    AppManager.init();
-    return MaterialApp(
-        title: 'Eyepetizer', navigatorKey: Get.key, home: TabNavigation());
-  }
+    //使用FutureBuilder进行异步初始化
+    return FutureBuilder<void>(
+      future: AppInitialize.init(),
+      builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+        var widget = snapshot.connectionState == ConnectionState.done
+            ? TabNavigation()
+            : Scaffold(
+                body: CircularProgressIndicator(),
+              );
 
-  Future<void> hideSplashScreen() async {
-    Future.delayed(
-        Duration(milliseconds: 2000), () => FlutterSplashScreen.hide());
+        return MaterialApp(
+            title: 'Eyepetizer', navigatorKey: Get.key, home: widget);
+      },
+    );
   }
 }

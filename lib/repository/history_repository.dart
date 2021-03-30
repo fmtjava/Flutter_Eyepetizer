@@ -1,13 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter_eyepetizer/db/CacheManager.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
-import 'package:flutter_eyepetizer/util/app_manager.dart';
 import 'package:flutter_eyepetizer/util/constant.dart';
 
 class HistoryRepository {
-
   static saveWatchHistory(Data data) async {
-    List<String> watchList = AppManager.prefs.getStringList(Constant.watchHistoryList);
+    List<String> watchList =
+        CacheManager.getInstance().get<List<String>>(Constant.watchHistoryList);
     if (watchList == null) {
       watchList = [];
     }
@@ -15,15 +15,16 @@ class HistoryRepository {
     var jsonStr = json.encode(jsonParam);
     if (!watchList.contains(jsonStr)) {
       watchList.add(json.encode(jsonParam));
-      AppManager.prefs.setStringList(Constant.watchHistoryList, watchList);
+      CacheManager.getInstance().set(Constant.watchHistoryList, watchList);
     }
   }
 
-  static Future<List<String>> loadHistoryData() async{
-    return AppManager.prefs.getStringList(Constant.watchHistoryList);
+  static List<String> loadHistoryData() {
+    return CacheManager.getInstance()
+        .get<List<String>>(Constant.watchHistoryList);
   }
 
-  static saveHistoryData(List<String> watchHistoryList) async{
-    AppManager.prefs.setStringList(Constant.watchHistoryList, watchHistoryList);
+  static saveHistoryData(List<String> watchHistoryList) {
+    CacheManager.getInstance().set(Constant.watchHistoryList, watchHistoryList);
   }
 }

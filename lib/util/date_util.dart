@@ -1,17 +1,13 @@
 import 'package:flustars/flustars.dart';
 
-class DateWarpUtils {
-  DateWarpUtils._();
+String formatDateMsByMS(int milliseconds) {
+  return DateUtil.formatDateMs(milliseconds, format: 'mm:ss');
+}
 
-  static String formatDateMsByMS(int milliseconds) {
-    return DateUtil.formatDateMs(milliseconds, format: 'mm:ss');
-  }
+String formatDateMsByYMD(int milliseconds) {
+  return DateUtil.formatDateMs(milliseconds, format: 'yyyy/MM/dd');
+}
 
-  static String formatDateMsByYMD(int milliseconds) {
-    return DateUtil.formatDateMs(milliseconds, format: 'yyyy/MM/dd');
-  }
-
-  static String formatDateMsByYMDHM(int milliseconds) {
-    return DateUtil.formatDateMs(milliseconds, format: 'yyyy/MM/dd HH:mm');
-  }
+String formatDateMsByYMDHM(int milliseconds) {
+  return DateUtil.formatDateMs(milliseconds, format: 'yyyy/MM/dd HH:mm');
 }

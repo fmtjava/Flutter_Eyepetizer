@@ -35,7 +35,7 @@ class HomePageModel extends BaseChangeNotifierModel {
           await loadMore();
         },
         fail: (e) {
-          ToastUtil.showError(e.toString());
+          showError(e.toString());
           refreshController.refreshFailed();
           loading = false;
           error = true;
@@ -61,7 +61,7 @@ class HomePageModel extends BaseChangeNotifierModel {
       refreshController.loadComplete();
       notifyListeners();
     }, fail: (e) {
-      ToastUtil.showError(e.toString());
+      showError(e.toString());
       refreshController.loadFailed();
     });
   }

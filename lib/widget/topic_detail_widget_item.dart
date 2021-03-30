@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/color.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/util/date_util.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:flutter_eyepetizer/util/share_util.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
 
 class TopicDetailWidgetItem extends StatelessWidget {
   final TopicDetailItemData model;
@@ -17,8 +17,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () =>
-            NavigatorManager.to(VideoDetailPage(data: model.data.content.data)),
+        onTap: () => toPage(VideoDetailPage(data: model.data.content.data)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -38,47 +37,46 @@ class TopicDetailWidgetItem extends StatelessWidget {
         Padding(
             padding: EdgeInsets.fromLTRB(20, 20, 10, 0),
             child: ClipOval(
-                child: CachedNetworkImage(
-                  width: 45,
-                  height: 45,
-                  imageUrl:
-                  model.data.header.icon == null ? '' : model.data.header.icon,
-                ))),
+                child: cacheImage(
+              model.data.header.icon == null ? '' : model.data.header.icon,
+              width: 45,
+              height: 45,
+            ))),
         Expanded(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(0, 20, 20, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          padding: EdgeInsets.fromLTRB(0, 20, 20, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                model.data.header.issuerName == null
+                    ? ''
+                    : model.data.header.issuerName,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14),
+              ),
+              Row(
                 children: <Widget>[
                   Text(
-                    model.data.header.issuerName == null
-                        ? ''
-                        : model.data.header.issuerName,
+                    '${formatDateMsByYMD(model.data.header.time)}发布：',
+                    style: TextStyle(color: DColor.hitTextColor, fontSize: 12),
+                  ),
+                  Expanded(
+                      child: Text(
+                    model.data.content.data.title,
                     style: TextStyle(
                         color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        '${DateWarpUtils.formatDateMsByYMD(model.data.header.time)}发布：',
-                        style: TextStyle(color: DColor.hitTextColor, fontSize: 12),
-                      ),
-                      Expanded(
-                          child: Text(
-                            model.data.content.data.title,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.ellipsis,
-                          ))
-                    ],
-                  )
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
+                    overflow: TextOverflow.ellipsis,
+                  ))
                 ],
-              ),
-            ))
+              )
+            ],
+          ),
+        ))
       ],
     );
   }
@@ -112,14 +110,12 @@ class TopicDetailWidgetItem extends StatelessWidget {
           ClipRRect(
               child: Hero(
                   tag:
-                  '${model.data.content.data.id}${model.data.content.data.time}',
-                  child: CachedNetworkImage(
-                      width: MediaQuery.of(context).size.width,
-                      height: 200,
-                      imageUrl: model.data.content.data.cover.feed,
-                      errorWidget: (context, url, error) =>
-                          Image.asset('images/img_load_fail.png'),
-                      fit: BoxFit.cover)), //充满容器，可能会被截断
+                      '${model.data.content.data.id}${model.data.content.data.time}',
+                  child: cacheImage(
+                    model.data.content.data.cover.feed,
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                  )), //充满容器，可能会被截断
               borderRadius: BorderRadius.circular(4)),
           Positioned(
               right: 8,
@@ -130,7 +126,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
                       decoration: BoxDecoration(color: Colors.black54),
                       padding: EdgeInsets.all(5),
                       child: Text(
-                        DateWarpUtils.formatDateMsByMS(
+                        formatDateMsByMS(
                             model.data.content.data.duration * 1000),
                         style: TextStyle(
                             color: Colors.white,
@@ -179,7 +175,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
         ),
         IconButton(
             icon: Icon(Icons.share, color: DColor.hitTextColor),
-            onPressed: () => ShareUtil.share(model.data.content.data.title,
+            onPressed: () => share(model.data.content.data.title,
                 model.data.content.data.webUrl.forWeibo))
       ],
     );

@@ -19,7 +19,7 @@ class TopicDetailPageModel extends BaseChangeNotifierModel {
       loading = false;
       error = false;
     }).catchError((e) {
-      ToastUtil.showError(e.toString());
+      showError(e.toString());
       loading = false;
       error = true;
     }).whenComplete(() => notifyListeners());

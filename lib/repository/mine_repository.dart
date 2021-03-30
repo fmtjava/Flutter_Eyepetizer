@@ -1,14 +1,14 @@
 import 'dart:io';
 
-import 'package:flutter_eyepetizer/util/app_manager.dart';
+import 'package:flutter_eyepetizer/db/CacheManager.dart';
 import 'package:flutter_eyepetizer/util/constant.dart';
 
 class MineRepository {
-  static Future<String> getAvatarPath() async {
-    return AppManager.prefs.getString(Constant.userAvatarPath);
+  static String getAvatarPath() {
+    return CacheManager.getInstance().get<String>(Constant.userAvatarPath);
   }
 
   static saveAvatarPath(File file) async {
-    AppManager.prefs.setString(Constant.userAvatarPath, file.path);
+    CacheManager.getInstance().set(Constant.userAvatarPath, file.path);
   }
 }
