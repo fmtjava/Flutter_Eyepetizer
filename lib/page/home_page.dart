@@ -4,6 +4,7 @@ import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_search_page.dart';
 import 'package:flutter_eyepetizer/provider/home_page_model.dart';
+import 'package:flutter_eyepetizer/widget/appbar_widget.dart';
 import 'package:flutter_eyepetizer/widget/banner_widget.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
@@ -24,16 +25,9 @@ class _HomePageState extends State<HomePage>
     super.build(context);
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(DString.daily_paper,
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold)),
-          brightness: Brightness.light,
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          elevation: 0,
+        appBar: appBar(
+          DString.daily_paper,
+          showBack: false,
           actions: <Widget>[
             Padding(
               padding: EdgeInsets.only(right: 15),

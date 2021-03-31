@@ -1,5 +1,8 @@
 import 'package:chewie/chewie.dart' hide MaterialControls;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_eyepetizer/util/view_util.dart';
+import 'package:orientation/orientation.dart';
 import 'package:video_player/video_player.dart';
 
 import 'customer_video_controls.dart';
@@ -12,6 +15,7 @@ class VideoWidget extends StatefulWidget {
   final bool allowFullScreen;
   final bool allowPlaybackSpeedChanging;
   final double aspectRatio;
+  final Widget overlayUI;
 
   const VideoWidget(
       {Key key,
@@ -20,7 +24,8 @@ class VideoWidget extends StatefulWidget {
       this.looping = false,
       this.aspectRatio = 16 / 9,
       this.allowFullScreen = true,
-      this.allowPlaybackSpeedChanging = false})
+      this.allowPlaybackSpeedChanging = false,
+      this.overlayUI})
       : super(key: key);
 
   @override
@@ -43,8 +48,10 @@ class VideoWidgetState extends State<VideoWidget> {
         allowPlaybackSpeedChanging: widget.allowPlaybackSpeedChanging,
         allowFullScreen: widget.allowFullScreen,
         customControls: MaterialControls(
-          bottomGradient: bottomGradient(),
+          bottomGradient: blackLinearGradient(),
+          overlayUI: widget.overlayUI,
         ));
+    _cheWieController.addListener(_fullScreenListener);
   }
 
   @override
@@ -62,6 +69,7 @@ class VideoWidgetState extends State<VideoWidget> {
 
   @override
   void dispose() {
+    _cheWieController.removeListener(_fullScreenListener);
     _videoPlayerController.dispose();
     _cheWieController.dispose();
     super.dispose();
@@ -75,18 +83,11 @@ class VideoWidgetState extends State<VideoWidget> {
     _videoPlayerController.pause();
   }
 
-  //底部线性渐变
-  bottomGradient({bool fromTop = false}) {
-    return LinearGradient(
-        begin: fromTop ? Alignment.topCenter : Alignment.bottomCenter,
-        end: fromTop ? Alignment.bottomCenter : Alignment.topCenter,
-        colors: [
-          Colors.black54,
-          Colors.black45,
-          Colors.black38,
-          Colors.black26,
-          Colors.black12,
-          Colors.transparent
-        ]);
+  void _fullScreenListener() {
+    Size size = MediaQuery.of(context).size;
+    if (size.width > size.height) {
+      //使用Orientation插件解决ios全屏模式无法返回问题
+      OrientationPlugin.forceOrientation(DeviceOrientation.portraitUp);
+    }
   }
 }

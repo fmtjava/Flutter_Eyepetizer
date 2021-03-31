@@ -4,9 +4,11 @@ import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/provider/video_detail_page_model.dart';
 import 'package:flutter_eyepetizer/repository/history_repository.dart';
+import 'package:flutter_eyepetizer/util/commom_uitl.dart';
 import 'package:flutter_eyepetizer/util/date_util.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:flutter_eyepetizer/util/view_util.dart';
+import 'package:flutter_eyepetizer/widget/appbar_widget.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
@@ -64,12 +66,14 @@ class _VideoDetailPageState extends State<VideoDetailPage>
           return AnnotatedRegion<SystemUiOverlayStyle>(
               child: Scaffold(
                   body: Column(children: <Widget>[
+                _statusBar(),
                 Hero(
                     //Hero动画
                     tag: '${widget.data.id}${widget.data.time}',
                     child: VideoWidget(
                       key: videoKey,
                       url: widget.data.playUrl,
+                      overlayUI: videoAppBar(),
                     )),
                 Expanded(
                     flex: 1,
@@ -280,5 +284,12 @@ class _VideoDetailPageState extends State<VideoDetailPage>
               ])),
               value: SystemUiOverlayStyle.light);
         });
+  }
+
+  _statusBar() {
+    return Container(
+      height: MediaQuery.of(context).padding.top,
+      color: Colors.black,
+    );
   }
 }

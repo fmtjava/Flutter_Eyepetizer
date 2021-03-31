@@ -3,6 +3,7 @@ import 'package:flutter_eyepetizer/provider/watch_history_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:flutter_eyepetizer/widget/appbar_widget.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -16,26 +17,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            leading: GestureDetector(
-              onTap: () => back(),
-              child: Icon(
-                Icons.arrow_back,
-                size: 20,
-                color: Colors.black,
-              ),
-            ),
-            title: Text(
-              DString.watch_history,
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
-            ),
-            brightness: Brightness.light,
-            backgroundColor: Colors.white,
-            centerTitle: true,
-            elevation: 0),
+        appBar: appBar(DString.watch_history),
         body: ProviderWidget<WatchHistoryPageModel>(
             model: WatchHistoryPageModel(),
             onModelInit: (model) {

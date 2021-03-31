@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/page/recommend_page.dart';
 import 'package:flutter_eyepetizer/page/topics_page.dart';
+import 'package:flutter_eyepetizer/widget/appbar_widget.dart';
 import 'package:flutter_eyepetizer/widget/tab_bar_widget.dart';
 
 import 'category_page.dart';
@@ -37,17 +39,7 @@ class _DiscoveryPageState extends State<DiscoveryPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-        appBar: AppBar(
-          title: Text('发现',
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold)),
-          brightness: Brightness.light,
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.white,
-        ),
+        appBar: appBar(DString.discover, showBack: false),
         body: Column(
           children: <Widget>[
             Container(

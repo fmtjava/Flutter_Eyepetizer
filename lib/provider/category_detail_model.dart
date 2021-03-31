@@ -30,7 +30,6 @@ class CategoryDetailModel extends BaseChangeNotifierModel {
     } else {
       url = ApiService.category_video_url +
           "id=$category&udid=d2807c895f0348a180148c9dfa6f2feeac0781b5&deviceModel=Android";
-      print(url);
       getData(url, loadMore);
     }
   }

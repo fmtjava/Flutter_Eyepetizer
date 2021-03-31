@@ -5,6 +5,7 @@ import 'package:flutter_eyepetizer/core/base_state.dart';
 import 'package:flutter_eyepetizer/model/tab_info_model.dart';
 import 'package:flutter_eyepetizer/page/rank_list_page.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
+import 'package:flutter_eyepetizer/widget/appbar_widget.dart';
 import 'package:flutter_eyepetizer/widget/tab_bar_widget.dart';
 
 class RankPage extends StatefulWidget {
@@ -38,17 +39,7 @@ class _RankPageState extends BaseState<RankPage>
     super.build(context);
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(DString.popularity_list,
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold)),
-          brightness: Brightness.light,
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.white,
-        ),
+        appBar: appBar(DString.popularity_list, showBack: false),
         body: Column(
           children: <Widget>[
             TabBarWidget(

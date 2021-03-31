@@ -9,28 +9,20 @@ import 'package:video_player/video_player.dart';
 
 ///自定义播放器UI
 class MaterialControls extends StatefulWidget {
-  //初始化时是否展示loading
   final bool showLoadingOnInitialize;
 
-  //是否展示大播放按钮
   final bool showBigPlayIcon;
 
-  //视频浮层
   final Widget overlayUI;
 
-  //底部渐变
   final Gradient bottomGradient;
-
-  //弹幕浮层
-  final Widget barrageUI;
 
   const MaterialControls(
       {Key key,
       this.showLoadingOnInitialize = true,
       this.showBigPlayIcon = true,
       this.overlayUI,
-      this.bottomGradient,
-      this.barrageUI})
+      this.bottomGradient})
       : super(key: key);
 
   @override
@@ -84,7 +76,7 @@ class _MaterialControlsState extends State<MaterialControls>
           absorbing: _hideStuff,
           child: Stack(
             children: [
-              widget.barrageUI ?? Container(),
+              Container(),
               Column(
                 children: <Widget>[
                   if (_latestValue != null &&
@@ -246,18 +238,20 @@ class _MaterialControlsState extends State<MaterialControls>
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: IconButton(
-                              icon: isFinished
-                                  ? const Icon(Icons.replay, size: 32.0)
-                                  : AnimatedIcon(
-                                      icon: AnimatedIcons.play_pause,
-                                      progress:
-                                          playPauseIconAnimationController,
-                                      size: 32.0,
-                                    ),
-                              onPressed: () {
-                                _playPause();
-                              }),
+                          child: Material(
+                            child: IconButton(
+                                icon: isFinished
+                                    ? const Icon(Icons.replay, size: 32.0)
+                                    : AnimatedIcon(
+                                        icon: AnimatedIcons.play_pause,
+                                        progress:
+                                            playPauseIconAnimationController,
+                                        size: 32.0,
+                                      ),
+                                onPressed: () {
+                                  _playPause();
+                                }),
+                          ),
                         ),
                       ),
                     )

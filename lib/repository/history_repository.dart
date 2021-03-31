@@ -6,11 +6,8 @@ import 'package:flutter_eyepetizer/util/constant.dart';
 
 class HistoryRepository {
   static saveWatchHistory(Data data) async {
-    List<String> watchList =
-        CacheManager.getInstance().get<List<String>>(Constant.watchHistoryList);
-    if (watchList == null) {
-      watchList = [];
-    }
+    List<String> watchList = loadHistoryData();
+
     var jsonParam = data.toJson();
     var jsonStr = json.encode(jsonParam);
     if (!watchList.contains(jsonStr)) {
@@ -20,8 +17,17 @@ class HistoryRepository {
   }
 
   static List<String> loadHistoryData() {
-    return CacheManager.getInstance()
-        .get<List<String>>(Constant.watchHistoryList);
+    List<dynamic> originList = CacheManager.getInstance()
+        .get<List<dynamic>>(Constant.watchHistoryList);
+
+    List<String> watchList;
+
+    if (originList == null) {
+      watchList = [];
+    } else {
+      watchList = originList.map((e) => e.toString()).toList();
+    }
+    return watchList;
   }
 
   static saveHistoryData(List<String> watchHistoryList) {
