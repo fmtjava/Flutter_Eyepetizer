@@ -28,8 +28,7 @@ class _RankListPageState extends State<RankListPage>
         },
         builder: (context, model, child) {
           return LoadingContainer(
-            loading: model.loading,
-            error: model.error,
+            viewState: model.viewState,
             retry: model.retry,
             child: SmartRefresher(
                 controller: model.refreshController,

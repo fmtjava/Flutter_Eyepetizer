@@ -9,8 +9,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 abstract class BaseListState<L, M extends PagingListModel<L, PagingModel<L>>,
         T extends StatefulWidget> extends State<T>
     with AutomaticKeepAliveClientMixin {
-
-  M get viewModel;//真实获取数据的仓库
+  M get viewModel; //真实获取数据的仓库
 
   Widget getContentChild(M model); //真实的分页控件
 
@@ -24,8 +23,7 @@ abstract class BaseListState<L, M extends PagingListModel<L, PagingModel<L>>,
         },
         builder: (context, model, child) {
           return LoadingContainer(
-              loading: model.loading,
-              error: model.error,
+              viewState: model.viewState,
               retry: model.retry,
               child: Container(
                   color: Colors.white,

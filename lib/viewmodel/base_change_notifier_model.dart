@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_eyepetizer/widget/loading_container.dart';
 
 class BaseChangeNotifierModel with ChangeNotifier{
 
   bool _dispose = false;
+  ViewState viewState = ViewState.loading;
 
   @override
   void dispose() {

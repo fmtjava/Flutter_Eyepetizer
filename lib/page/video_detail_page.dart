@@ -77,8 +77,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                 Expanded(
                     flex: 1,
                     child: LoadingContainer(
-                        loading: model.loading,
-                        error: model.error,
+                        viewState: model.viewState,
                         retry: model.retry,
                         child: Container(
                             decoration: BoxDecoration(

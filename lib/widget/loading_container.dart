@@ -2,28 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/color.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
 
+//页面加载的状态
+enum ViewState { loading, content, error }
+
 //多状态视图封装
 class LoadingContainer extends StatelessWidget {
   final Widget child;
-  final bool loading;
-  final bool error;
+  final ViewState viewState;
   final VoidCallback retry;
 
   const LoadingContainer(
       {Key key,
-      @required this.loading,
       @required this.child,
-      this.error = false,
-      @required this.retry})
+      @required this.retry,
+      this.viewState = ViewState.loading})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return !loading
-        ? error
-            ? _errorView
-            : child
-        : _loadView;
+    if (viewState == ViewState.loading) {
+      return _loadView;
+    } else if (viewState == ViewState.error) {
+      return _errorView;
+    } else {
+      return child;
+    }
   }
 
   Widget get _errorView {

@@ -2,11 +2,10 @@ import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:flutter_eyepetizer/viewmodel/base_change_notifier_model.dart';
+import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class VideoSearchModel extends BaseChangeNotifierModel {
-  bool loading = true;
-  bool error = false;
   bool hideKeyWord = false;
   bool hideEmpty = true;
   List<Item> dataList = [];
@@ -51,8 +50,7 @@ class VideoSearchModel extends BaseChangeNotifierModel {
         success: (result) {
           Issue issue = Issue.fromJson(result);
 
-          loading = false;
-          error = false;
+          viewState = ViewState.content;
           total = issue.total;
           if (!loadMore) {
             dataList.clear();
@@ -72,15 +70,15 @@ class VideoSearchModel extends BaseChangeNotifierModel {
         },
         fail: (e) {
           showError(e.toString());
-          loading = false;
-          if (!loadMore) error = true;
+          if (!loadMore) viewState = ViewState.error;
+          ;
           refreshController.loadFailed();
         },
         complete: () => notifyListeners());
   }
 
   _reset() {
-    loading = true;
+    viewState = ViewState.loading;
     notifyListeners();
   }
 

@@ -23,8 +23,7 @@ class _CategoryPageState extends State<CategoryPage>
       },
       builder: (context, model, child) {
         return LoadingContainer(
-          loading: model.loading,
-          error: model.error,
+          viewState: model.viewState,
           retry: model.retry,
           child: Container(
               padding: EdgeInsets.all(5),

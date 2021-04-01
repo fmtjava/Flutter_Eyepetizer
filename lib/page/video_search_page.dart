@@ -134,8 +134,7 @@ class VideoSearchPage extends StatelessWidget {
     return Offstage(
         offstage: model.dataList == null || model.dataList.length == 0,
         child: LoadingContainer(
-            loading: model.loading,
-            error: model.error,
+            viewState: model.viewState,
             retry: model.retry,
             child: Column(children: <Widget>[
               Container(

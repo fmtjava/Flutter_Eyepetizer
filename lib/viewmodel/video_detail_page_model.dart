@@ -2,11 +2,10 @@ import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:flutter_eyepetizer/viewmodel/base_change_notifier_model.dart';
+import 'package:flutter_eyepetizer/widget/loading_container.dart';
 
 class VideoDetailPageModel extends BaseChangeNotifierModel {
   List<Item> itemList = [];
-  bool loading = true;
-  bool error = false;
   int _videoId;
 
   void loadVideoRelateData(int id) {
@@ -14,17 +13,15 @@ class VideoDetailPageModel extends BaseChangeNotifierModel {
     ApiService.requestData('${ApiService.video_related_url}$id').then((res) {
       Issue issue = Issue.fromJson(res);
       itemList = issue.itemList;
-      loading = false;
-      error = false;
+      viewState = ViewState.content;
     }).catchError((e) {
       showError(e.toString());
-      loading = false;
-      error = true;
+      viewState = ViewState.error;
     }).whenComplete(() => notifyListeners());
   }
 
   void retry() {
-    loading = true;
+    viewState = ViewState.loading;
     notifyListeners();
     loadVideoRelateData(_videoId);
   }

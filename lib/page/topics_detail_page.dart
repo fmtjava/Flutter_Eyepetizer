@@ -29,8 +29,7 @@ class _TopicDetailPageState extends State<TopicDetailPage> {
               backgroundColor: Colors.white,
               appBar: appBar(model.topicDetailModel.brief),
               body: LoadingContainer(
-                  loading: model.loading,
-                  error: model.error,
+                  viewState: model.viewState,
                   child: CustomScrollView(
                     slivers: <Widget>[
                       _headWidget(model.topicDetailModel),

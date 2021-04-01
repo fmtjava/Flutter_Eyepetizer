@@ -65,8 +65,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                     ];
                   },
                   body: LoadingContainer(
-                    loading: model.loading,
-                    error: model.error,
+                    viewState: model.viewState,
                     retry: model.retry,
                     child: SmartRefresher(
                         enablePullDown: false,

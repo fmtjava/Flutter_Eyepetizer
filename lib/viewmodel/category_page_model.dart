@@ -2,11 +2,10 @@ import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/category_model.dart';
 import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:flutter_eyepetizer/viewmodel/base_change_notifier_model.dart';
+import 'package:flutter_eyepetizer/widget/loading_container.dart';
 
 class CategoryPageModel extends BaseChangeNotifierModel {
   List<CategoryModel> list = [];
-  bool loading = true;
-  bool error = false;
 
   void loadData() async {
     ApiService.getData(ApiService.category_url,
@@ -16,19 +15,17 @@ class CategoryPageModel extends BaseChangeNotifierModel {
               .map((model) => CategoryModel.fromJson(model))
               .toList();
           this.list = categoryList;
-          loading = false;
-          error = false;
+          viewState = ViewState.content;
         },
         fail: (e) {
           showError(e.toString());
-          loading = false;
-          error = true;
+          viewState = ViewState.error;
         },
         complete: () => notifyListeners());
   }
 
   retry() {
-    loading = true;
+    viewState = ViewState.content;
     notifyListeners();
     loadData();
   }
