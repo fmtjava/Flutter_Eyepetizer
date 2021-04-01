@@ -1,16 +1,11 @@
 import 'package:flutter_eyepetizer/model/paging_model.dart';
 
-class IssueEntity {
+class IssueEntity extends PagingModel<Item> {
   int nextPublishTime;
   String newestIssueType;
-  String nextPageUrl;
   List<Issue> issueList;
 
-  IssueEntity(
-      {this.nextPublishTime,
-      this.newestIssueType,
-      this.nextPageUrl,
-      this.issueList});
+  IssueEntity({this.nextPublishTime, this.newestIssueType});
 
   IssueEntity.fromJson(Map<String, dynamic> json) {
     nextPublishTime = json['nextPublishTime'];
@@ -18,9 +13,11 @@ class IssueEntity {
     nextPageUrl = json['nextPageUrl'];
     if (json['issueList'] != null) {
       issueList = [];
+      itemList = [];
       (json['issueList'] as List).forEach((v) {
         issueList.add(new Issue.fromJson(v));
       });
+      itemList = issueList[0].itemList;
     }
   }
 
@@ -36,7 +33,7 @@ class IssueEntity {
   }
 }
 
-class Issue extends PagingModel<Item>{
+class Issue extends PagingModel<Item> {
   int total;
   int date;
   int publishTime;

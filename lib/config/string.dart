@@ -20,4 +20,8 @@ class DString{
   static const String mime = '我的';
   static const String net_error_tip = '网络请求失败';
   static const String reload_again = '重新加载';
+  static const String login = '登录';
+  static const String register = '注册';
+  static const String please_input_name = '请输入用户名';
+  static const String please_input_password = '请输入密码';
 }
