@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/page/category_detail_page.dart';
-import 'package:flutter_eyepetizer/provider/category_page_model.dart';
+import 'package:flutter_eyepetizer/viewmodel/category_page_model.dart';
 import 'package:flutter_eyepetizer/widget/category_widget_item.dart';
 import 'package:flutter_eyepetizer/widget/loading_container.dart';
 import 'package:flutter_eyepetizer/widget/provider_widget.dart';
