@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/core/base_list_state.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/viewmodel/follow_page_model.dart';
 import 'package:flutter_eyepetizer/widget/follow_page_item.dart';
+import 'package:lib_core/state/base_list_state.dart';
 
 class FollowPage extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/topic_model.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
+import 'package:lib_image/lib_image.dart';
 
 class TopicWidgetItem extends StatelessWidget {
   final TopicItemModel itemModel;

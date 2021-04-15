@@ -5,8 +5,6 @@ class DString{
 
   static const String exit_tip = '再按一次退出';
   static const String news_title = '新鲜资讯';
-  static const String loading_text = '加载中...';
-  static const String load_more_text = '上拉加载更多';
   static const String daily_paper = '日报';
   static const String popularity_list = '人气榜';
   static const String add_follow = '+ 关注';
@@ -18,8 +16,6 @@ class DString{
   static const String discover = '发现';
   static const String hot = '热门';
   static const String mime = '我的';
-  static const String net_error_tip = '网络请求失败';
-  static const String reload_again = '重新加载';
   static const String login = '登录';
   static const String register = '注册';
   static const String please_input_name = '请输入用户名';

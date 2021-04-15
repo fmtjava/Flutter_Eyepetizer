@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/page/watch_history_page.dart';
 import 'package:flutter_eyepetizer/repository/mine_repository.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lib_navigator/lib_navigator.dart';
+import 'package:lib_ui/widget/blur_widget.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -26,47 +26,13 @@ class _MinePageState extends State<MinePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      //Flutter修改状态栏字体颜色
-      value: SystemUiOverlayStyle.dark, //设置状态栏字体颜色
-      child: Container(
-        decoration: BoxDecoration(color: Colors.white),
-        child: SafeArea(
-            //适配刘海屏
-            child: Column(
-          children: <Widget>[
-            GestureDetector(
-              child: Padding(
-                padding: EdgeInsets.only(top: 30),
-                child: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  radius: 44,
-                  backgroundImage: _imageFile == null
-                      ? AssetImage('images/ic_img_avatar.png')
-                      : FileImage(_imageFile),
-                ),
-              ),
-              onTap: () {
-                _showSelectPhotoDialog(context);
-              },
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Text(
-                'fmtjava',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-            ),
-            Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: Text(
-                  '查看个人主页 >',
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
-                )),
-            Padding(
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      child: ListView(
+        children: <Widget>[
+          headWidget,
+           Padding(
               padding: EdgeInsets.only(top: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -88,17 +54,68 @@ class _MinePageState extends State<MinePage>
                 decoration: BoxDecoration(color: Colors.grey),
               ),
             ),
-            _settingWidget('我的消息'),
-            _settingWidget('我的记录'),
-            _settingWidget('我的缓存'),
-            _settingWidget('观看记录', callback: () {
-              toPage(WatchHistoryPage());
-            }),
-            _settingWidget('意见反馈')
-          ],
-        )),
+            ..._settingListWidget()
+        ],
       ),
     );
+  }
+
+  Widget get headWidget {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Positioned.fill(
+          child: Image(
+            image: avatarImage,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Positioned.fill(
+            child: BlurWidget(
+          sigma: 20,
+          color: Colors.white.withOpacity(0.0),
+        )),
+        Column(
+          children: [
+            GestureDetector(
+              child: Padding(
+                padding: EdgeInsets.only(top: 45),
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  radius: 44,
+                  backgroundImage: avatarImage,
+                ),
+              ),
+              onTap: () {
+                _showSelectPhotoDialog(context);
+              },
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text(
+                'fmtjava',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+            ),
+            Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Text(
+                  '查看个人主页 >',
+                  style: TextStyle(fontSize: 12, color: Colors.black26),
+                )),
+          ],
+        )
+      ],
+    );
+  }
+
+  ImageProvider get avatarImage {
+    return _imageFile == null
+        ? AssetImage('images/ic_img_avatar.png')
+        : FileImage(_imageFile);
   }
 
   Widget _operateWidget(String image, String text) {
@@ -116,16 +133,29 @@ class _MinePageState extends State<MinePage>
     );
   }
 
+  _settingListWidget() {
+    return [
+      _settingWidget('我的消息'),
+      _settingWidget('我的记录'),
+      _settingWidget('我的缓存'),
+      _settingWidget('观看记录', callback: () {
+        toPage(WatchHistoryPage());
+      }),
+      _settingWidget('意见反馈')
+    ];
+  }
+
   Widget _settingWidget(String text, {VoidCallback callback}) {
-    return GestureDetector(
-      onTap: callback,
-      child: Padding(
-        padding: EdgeInsets.only(top: 30),
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 16, color: Colors.black87),
+    return InkWell(
+        onTap: callback,
+        child: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.only(top: 30),
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 16, color: Colors.black87),
+          ),
         ),
-      ),
     );
   }
 
@@ -135,21 +165,25 @@ class _MinePageState extends State<MinePage>
         builder: (BuildContext context) {
           return Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              _bottomWidget('拍照', () {
-                back();
-                _getImage(ImageSource.camera);
-              }),
-              _bottomWidget('相册', () {
-               back();
-                _getImage(ImageSource.gallery);
-              }),
-              _bottomWidget('取消', () {
-                back();
-              })
-            ],
+            children: <Widget>[..._bottomListWidget()],
           );
         });
+  }
+
+  _bottomListWidget() {
+    return [
+      _bottomWidget('拍照', () {
+        back();
+        _getImage(ImageSource.camera);
+      }),
+      _bottomWidget('相册', () {
+        back();
+        _getImage(ImageSource.gallery);
+      }),
+      _bottomWidget('取消', () {
+        back();
+      })
+    ];
   }
 
   Widget _bottomWidget(String text, VoidCallback callback) {

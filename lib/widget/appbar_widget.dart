@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
+import 'package:lib_utils/view_util.dart';
 
 appBar(String title, {bool showBack = true, List<Widget> actions}) {
   return AppBar(

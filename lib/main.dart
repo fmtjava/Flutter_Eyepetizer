@@ -1,10 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/navigation/tab_navigation.dart';
-import 'package:flutter_eyepetizer/util/app_initialize.dart';
-import 'package:get/get.dart';
+import 'package:flutter_eyepetizer/app_initialize.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 
 void main() {
   runApp(App());

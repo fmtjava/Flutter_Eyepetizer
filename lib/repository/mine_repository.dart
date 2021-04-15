@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:flutter_eyepetizer/db/CacheManager.dart';
-import 'package:flutter_eyepetizer/util/constant.dart';
+import 'package:flutter_eyepetizer/constant/constant.dart';
+import 'package:lib_cache/cache_manager.dart';
 
 class MineRepository {
   static String getAvatarPath() {

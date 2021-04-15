@@ -1,6 +1,6 @@
 import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
-import 'package:flutter_eyepetizer/viewmodel/paging_list_model.dart';
+import 'package:lib_core/viewmodel/paging_list_model.dart';
 
 class FollowPageModel extends PagingListModel<Item,Issue>{
 

@@ -1,4 +1,5 @@
-import 'package:flutter_eyepetizer/model/paging_model.dart';
+
+import 'package:lib_core/model/paging_model.dart';
 
 class RecommendModel extends PagingModel<RecommendItem>{
   int count;

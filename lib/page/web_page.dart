@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class WebPage extends StatefulWidget {

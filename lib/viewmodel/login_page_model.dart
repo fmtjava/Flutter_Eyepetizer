@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/util/commom_uitl.dart';
+import 'package:lib_utils/commom_uitl.dart';
 
 class LoginPageModel extends ChangeNotifier {
   String userName;

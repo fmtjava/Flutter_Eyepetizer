@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/color.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/topic_detail_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
-import 'package:flutter_eyepetizer/util/date_util.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
-import 'package:flutter_eyepetizer/util/share_util.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
+import 'package:lib_image/lib_image.dart';
+import 'package:lib_ui/widget/remod_more_text_widget.dart';
+import 'package:lib_utils/date_util.dart';
+import 'package:lib_utils/share_util.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 
 class TopicDetailWidgetItem extends StatelessWidget {
   final TopicDetailItemData model;
@@ -82,15 +82,16 @@ class TopicDetailWidgetItem extends StatelessWidget {
   }
 
   Widget _desWidget() {
+    var textStyle = const TextStyle(
+        fontSize: 12, color: Colors.blue, fontWeight: FontWeight.bold);
     return Padding(
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
-      child: Text(
-        model.data.content.data.description,
-        style: TextStyle(fontSize: 14, color: DColor.desTextColor),
-        overflow: TextOverflow.ellipsis,
-        maxLines: 2,
-      ),
-    );
+        padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+        child: ReadMoreTextWidget(
+          model.data.content.data.description,
+          style: TextStyle(fontSize: 14, color: DColor.desTextColor),
+          moreStyle: textStyle,
+          lessStyle: textStyle,
+        ));
   }
 
   Widget _tagWidget() {

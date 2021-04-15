@@ -20,29 +20,34 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #组件化配置
+  lib_cache:
+    path: ./component/lib_cache
+  lib_utils:
+    path: ./component/lib_utils
+  lib_image:
+    path: ./component/lib_image
+  lib_navigator:
+    path: ./component/lib_navigator
+  lib_ui:
+    path: ./component/lib_ui
+  lib_core:
+    path: ./component/lib_core
+  lib_video:
+    path: ./component/lib_video
+  lib_net:
+    path: ./component/lib_net
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  http: ^0.13.0
-  fluttertoast: ^3.1.2
   flutter_swiper: ^1.1.6
-  flustars: ^2.0.1
-  pull_to_refresh: ^1.5.5
-  chewie: ^1.0.0
-  video_player: ^2.0.2
-  screen: ^0.0.5
-  orientation: ^1.3.0
   open_iconic_flutter: ^0.3.0
   flutter_splash_screen: ^0.1.0
-  shared_preferences: ^2.0.4
   flutter_webview_plugin: ^0.3.11
   flutter_slidable: ^0.5.4
-  share: ^0.6.4+3
-  provider: ^5.0.0
   photo_view: ^0.9.2
-  get: ^3.26.0
   loading_more_list: ^3.0.0
-  extended_image: ^3.0.0
   animations: ^1.1.1
   image_picker: ^0.7.2+1
 

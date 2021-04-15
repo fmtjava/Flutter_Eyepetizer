@@ -5,9 +5,9 @@ import 'package:flutter_eyepetizer/page/discovery_page.dart';
 import 'package:flutter_eyepetizer/page/home_page.dart';
 import 'package:flutter_eyepetizer/page/mine_page.dart';
 import 'package:flutter_eyepetizer/page/rank_page.dart';
-import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:flutter_eyepetizer/viewmodel/tab_navigation_model.dart';
-import 'package:flutter_eyepetizer/widget/provider_widget.dart';
+import 'package:lib_core/widget/provider_widget.dart';
+import 'package:lib_utils/toast_util.dart';
 
 class TabNavigation extends StatefulWidget {
   @override

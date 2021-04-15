@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/color.dart';
 import 'package:flutter_eyepetizer/model/news_model.dart';
 import 'package:flutter_eyepetizer/page/web_page.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
+import 'package:lib_image/lib_image.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 
 class NewsTitleWidgetItem extends StatelessWidget {
   final NewsItemModel newsItemModel;

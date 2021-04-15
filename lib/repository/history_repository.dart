@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter_eyepetizer/db/CacheManager.dart';
+import 'package:flutter_eyepetizer/constant/constant.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
-import 'package:flutter_eyepetizer/util/constant.dart';
+import 'package:lib_cache/cache_manager.dart';
 
 class HistoryRepository {
   static saveWatchHistory(Data data) async {

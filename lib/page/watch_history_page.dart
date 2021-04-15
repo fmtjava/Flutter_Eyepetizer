@@ -1,10 +1,10 @@
 import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:lib_core/widget/provider_widget.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 import 'package:flutter_eyepetizer/viewmodel/watch_history_page_model.dart';
 import 'package:flutter_eyepetizer/widget/appbar_widget.dart';
-import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 

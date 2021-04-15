@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/plugin/speech_plugin.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:lib_core/widget/provider_widget.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 import 'package:flutter_eyepetizer/viewmodel/video_search_model.dart';
-import 'package:flutter_eyepetizer/widget/loading_container.dart';
-import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/search_video_widget_item.dart';
+import 'package:lib_ui/widget/loading_container.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class VideoSearchPage extends StatelessWidget {

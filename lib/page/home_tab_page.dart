@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/core/base_list_state.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/viewmodel/home_page_model.dart';
 import 'package:flutter_eyepetizer/widget/banner_widget.dart';
 import 'package:flutter_eyepetizer/widget/rank_widget_item.dart';
+import 'package:lib_core/state/base_list_state.dart';
 
 const TEXT_HEADER_TYPE = 'textHeader';
 

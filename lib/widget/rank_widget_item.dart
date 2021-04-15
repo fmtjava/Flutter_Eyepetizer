@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
-import 'package:flutter_eyepetizer/util/date_util.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
-import 'package:flutter_eyepetizer/util/share_util.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
+import 'package:lib_image/lib_image.dart';
+import 'package:lib_navigator/lib_navigator.dart';
+import 'package:lib_utils/date_util.dart';
+import 'package:lib_utils/share_util.dart';
 
 class RankWidgetItem extends StatelessWidget {
   final Item item;

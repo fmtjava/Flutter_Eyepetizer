@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/recommend_model.dart';
 import 'package:flutter_eyepetizer/repository/recommend_repository.dart';
@@ -24,8 +23,8 @@ class _RecommendPageState extends State<RecommendPage>
         onRefresh: _refresh,
         child: LayoutBuilder(
           builder: (BuildContext c, BoxConstraints data) {
-            final int crossAxisCount =
-                max(data.maxWidth ~/ (ScreenUtil.getScreenW(context) / 2.0), 2);
+            final int crossAxisCount = max(
+                data.maxWidth ~/ (MediaQuery.of(context).size.width / 2.0), 2);
             return LoadingMoreList<RecommendItem>(
               ListConfig<RecommendItem>(
                 extendedListDelegate:

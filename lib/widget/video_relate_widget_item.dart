@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
-import 'package:flutter_eyepetizer/util/date_util.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
+import 'package:lib_image/lib_image.dart';
+import 'package:lib_utils/date_util.dart';
 
 class VideoRelateWidgetItem extends StatelessWidget {
   final Data data;

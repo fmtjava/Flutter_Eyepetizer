@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
+import 'package:lib_image/lib_image.dart';
 
 import 'follow_widget_item.dart';
 

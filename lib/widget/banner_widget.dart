@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
 import 'package:flutter_eyepetizer/viewmodel/home_page_model.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_eyepetizer/page/video_detail_page.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
+import 'package:lib_image/lib_image.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 
 class BannerWidget extends StatelessWidget {
   final HomePageModel model;

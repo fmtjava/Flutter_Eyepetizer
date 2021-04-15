@@ -3,15 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:flutter_eyepetizer/repository/history_repository.dart';
-import 'package:flutter_eyepetizer/util/date_util.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
 import 'package:flutter_eyepetizer/viewmodel/video_detail_page_model.dart';
 import 'package:flutter_eyepetizer/widget/appbar_widget.dart';
-import 'package:flutter_eyepetizer/widget/loading_container.dart';
-import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/video_relate_widget_item.dart';
-import 'package:flutter_eyepetizer/widget/video_widget.dart';
+import 'package:lib_core/widget/provider_widget.dart';
+import 'package:lib_video/video_widget.dart';
+import 'package:lib_image/lib_image.dart';
+import 'package:lib_ui/widget/loading_container.dart';
+import 'package:lib_utils/date_util.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 
 const VIDEO_SMALL_CARD_TYPE = 'videoSmallCard';
 

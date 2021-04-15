@@ -1,5 +1,6 @@
 
-import 'package:flutter_eyepetizer/viewmodel/base_change_notifier_model.dart';
+
+import 'package:lib_core/viewmodel/base_change_notifier_model.dart';
 
 class PhotoGalleryModel extends BaseChangeNotifierModel {
   int currentIndex = 1;

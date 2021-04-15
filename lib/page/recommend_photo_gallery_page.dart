@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
 import 'package:flutter_eyepetizer/viewmodel/photo_gallery_model.dart';
-import 'package:flutter_eyepetizer/widget/provider_widget.dart';
+import 'package:lib_core/widget/provider_widget.dart';
+import 'package:lib_image/lib_image.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 
 class RecommendPhotoGalleryPage extends StatelessWidget {
   final List<String> galleryItems;

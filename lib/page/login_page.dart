@@ -3,7 +3,7 @@ import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:flutter_eyepetizer/viewmodel/login_page_model.dart';
 import 'package:flutter_eyepetizer/widget/appbar_widget.dart';
 import 'package:flutter_eyepetizer/widget/login_input_widget.dart';
-import 'package:flutter_eyepetizer/widget/provider_widget.dart';
+import 'package:lib_core/widget/provider_widget.dart';
 
 class LoginPage extends StatefulWidget {
   @override

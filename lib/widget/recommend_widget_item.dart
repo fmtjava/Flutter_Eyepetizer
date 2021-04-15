@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/model/recommend_model.dart';
 import 'package:flutter_eyepetizer/page/recommend_photo_gallery_page.dart';
 import 'package:flutter_eyepetizer/page/recommend_video_play_page.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
+import 'package:lib_image/lib_image.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 
 const VIDEO_TYPE = 'video';
 

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/model/category_model.dart';
-import 'package:flutter_eyepetizer/util/navigator_manager.dart';
-import 'package:flutter_eyepetizer/util/view_util.dart';
 import 'package:flutter_eyepetizer/viewmodel/category_detail_model.dart';
-import 'package:flutter_eyepetizer/widget/loading_container.dart';
-import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/rank_widget_item.dart';
+import 'package:lib_core/widget/provider_widget.dart';
+import 'package:lib_image/lib_image.dart';
+import 'package:lib_ui/widget/loading_container.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 
 class CategoryDetailPage extends StatefulWidget {
   final CategoryModel categoryModel;

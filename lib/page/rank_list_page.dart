@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/viewmodel/rank_list_page_model.dart';
-import 'package:flutter_eyepetizer/widget/loading_container.dart';
-import 'package:flutter_eyepetizer/widget/provider_widget.dart';
 import 'package:flutter_eyepetizer/widget/rank_widget_item.dart';
+import 'package:lib_core/widget/provider_widget.dart';
+import 'package:lib_ui/widget/loading_container.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RankListPage extends StatefulWidget {

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/api/api_service.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
-import 'package:flutter_eyepetizer/core/base_state.dart';
 import 'package:flutter_eyepetizer/model/tab_info_model.dart';
 import 'package:flutter_eyepetizer/page/rank_list_page.dart';
-import 'package:flutter_eyepetizer/util/toast_util.dart';
 import 'package:flutter_eyepetizer/widget/appbar_widget.dart';
-import 'package:flutter_eyepetizer/widget/tab_bar_widget.dart';
+import 'package:lib_net/http_manager.dart';
+import 'package:lib_ui/widget/tab_bar_widget.dart';
+import 'package:lib_utils/toast_util.dart';
+import 'package:lib_core/state/base_state.dart';
 
 class RankPage extends StatefulWidget {
   @override
@@ -61,7 +62,7 @@ class _RankPageState extends BaseState<RankPage>
   }
 
   void _loadData() async {
-    await ApiService.getData(ApiService.rank_url, success: (result) {
+    await HttpManager.getData(ApiService.rank_url, success: (result) {
       TabInfoModel tabInfoModel = TabInfoModel.fromJson(result);
       setState(() {
         _tabList = tabInfoModel.tabInfo.tabList;
