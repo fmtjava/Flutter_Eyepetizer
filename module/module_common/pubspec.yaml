@@ -12,8 +12,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  lib_core:
+    path: ../../component/lib_core
   lib_utils:
     path: ../../component/lib_utils
+  lib_image:
+    path: ../../component/lib_image
+  lib_navigator:
+    path: ../../component/lib_navigator
 
 dev_dependencies:
   flutter_test:

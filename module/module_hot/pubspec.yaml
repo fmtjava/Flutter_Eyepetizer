@@ -12,6 +12,17 @@ dependencies:
   flutter:
     sdk: flutter
 
+  lib_ui:
+    path: ../../component/lib_ui
+  lib_net:
+    path: ../../component/lib_net
+  lib_core:
+    path: ../../component/lib_core
+  lib_utils:
+    path: ../../component/lib_utils
+  module_common:
+    path: ../module_common
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

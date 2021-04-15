@@ -12,6 +12,19 @@ dependencies:
   flutter:
     sdk: flutter
 
+  lib_ui:
+    path: ../../component/lib_ui
+  lib_cache:
+    path: ../../component/lib_cache
+  lib_navigator:
+    path: ../../component/lib_navigator
+  module_common:
+    path: ../module_common
+
+  image_picker: ^0.7.2+1
+  flutter_slidable: ^0.5.4
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

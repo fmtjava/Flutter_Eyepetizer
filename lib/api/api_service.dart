@@ -9,8 +9,6 @@ class ApiService {
 
   static const community_url = '${base_url}v7/community/tab/rec';
 
-  static const rank_url = '${base_url}v4/rankList';
-
   static const category_url = '${base_url}v4/categories';
 
   static const video_related_url = '${base_url}v4/video/related?id=';
@@ -27,5 +25,4 @@ class ApiService {
   static const search_url = "${base_url}v1/search?query=";
 
   static const category_video_url = '${base_url}v4/categories/videoList?';
-
 }

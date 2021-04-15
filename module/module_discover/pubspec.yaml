@@ -12,6 +12,16 @@ dependencies:
   flutter:
     sdk: flutter
 
+  lib_core:
+    path: ../../component/lib_core
+  module_common:
+    path: ../module_common
+
+  flutter_webview_plugin: ^0.3.11
+  photo_view: ^0.9.2
+  loading_more_list: ^3.0.0
+  animations: ^1.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
