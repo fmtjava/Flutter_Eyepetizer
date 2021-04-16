@@ -62,7 +62,7 @@ class _RankPageState extends BaseState<RankPage>
   }
 
   void _loadData() async {
-    await HttpManager.getData(URLs.rank_url, success: (result) {
+    await HttpManager.getData(URLs.rankUrl, success: (result) {
       TabInfoModel tabInfoModel = TabInfoModel.fromJson(result);
       setState(() {
         _tabList = tabInfoModel.tabInfo.tabList;

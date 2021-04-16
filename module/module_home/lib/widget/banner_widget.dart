@@ -35,7 +35,7 @@ class BannerWidget extends StatelessWidget {
           );
         },
         onTap: (index) {
-          toNamed("detail", model.bannerList[index].data);
+          toNamed("/detail", model.bannerList[index].data);
         },
         itemCount: model.bannerList?.length ?? 0,
         pagination: new SwiperPagination(

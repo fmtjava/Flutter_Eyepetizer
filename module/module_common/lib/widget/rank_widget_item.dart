@@ -1,4 +1,4 @@
-import 'package:/lib_navigator/lib_navigator.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_image/lib_image.dart';
 import 'package:lib_utils/date_util.dart';

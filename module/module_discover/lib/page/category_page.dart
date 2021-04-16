@@ -1,10 +1,11 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/page/category_detail_page.dart';
-import 'package:flutter_eyepetizer/viewmodel/category_page_model.dart';
-import 'package:flutter_eyepetizer/widget/category_widget_item.dart';
 import 'package:lib_core/widget/provider_widget.dart';
 import 'package:lib_ui/widget/loading_container.dart';
+import 'package:module_discover/viewmodel/category_page_model.dart';
+import 'package:module_discover/widget/category_widget_item.dart';
+
+import 'category_detail_page.dart';
 
 class CategoryPage extends StatefulWidget {
   @override

@@ -1,9 +1,9 @@
-import 'package:lib_core/viewmodel/base_change_notifier_model.dart';
 import 'package:lib_net/http_manager.dart';
-import 'package:lib_ui/widget/loading_container.dart';
 import 'package:lib_utils/toast_util.dart';
+import 'package:lib_core/viewmodel/base_change_notifier_model.dart';
+import 'package:lib_ui/widget/loading_container.dart';
 import 'package:module_common/model/common_item_model.dart';
-import 'package:module_discover/constant/api_service.dart';
+import 'package:module_detail/constant/api_service.dart';
 
 class VideoDetailPageModel extends BaseChangeNotifierModel {
   List<Item> itemList = [];

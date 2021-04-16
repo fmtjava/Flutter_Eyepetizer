@@ -1,9 +1,9 @@
+import 'package:module_common/constant/http_constant.dart';
+
 class URLs {
-  static const base_url = 'http://baobab.kaiyanapp.com/api/';
+  static String feedUrl = '${HttpConstant.baseUrl}v2/feed?num=1';
 
-  static const feed_url = '${base_url}v2/feed?num=1';
+  static String keywordUrl = '${HttpConstant.baseUrl}v3/queries/hot';
 
-  static const keyword_url = '${base_url}v3/queries/hot';
-
-  static const search_url = "${base_url}v1/search?query=";
+  static String searchUrl = "${HttpConstant.baseUrl}v1/search?query=";
 }

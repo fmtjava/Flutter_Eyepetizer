@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/model/news_model.dart';
-import 'package:flutter_eyepetizer/viewmodel/news_page_model.dart';
-import 'package:flutter_eyepetizer/widget/news_widget_item.dart';
 import 'package:lib_core/state/base_list_state.dart';
+import 'package:module_discover/model/news_model.dart';
+import 'package:module_discover/viewmodel/news_page_model.dart';
+import 'package:module_discover/widget/news_widget_item.dart';
 
 const TEXT_CARD_TYPE = "textCard";
 const INFORMATION_CARD_TYPE = "informationCard";

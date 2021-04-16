@@ -1,4 +1,5 @@
+import 'package:module_common/constant/http_constant.dart';
+
 class URLs {
-  static const base_url = 'http://baobab.kaiyanapp.com/api/';
-  static const rank_url = '${base_url}v4/rankList';
+  static String rankUrl = '${HttpConstant.baseUrl}v4/rankList';
 }

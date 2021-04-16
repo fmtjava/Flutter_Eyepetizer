@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/model/recommend_model.dart';
-import 'package:flutter_eyepetizer/page/recommend_photo_gallery_page.dart';
-import 'package:flutter_eyepetizer/page/recommend_video_play_page.dart';
 import 'package:lib_image/lib_image.dart';
 import 'package:lib_navigator/lib_navigator.dart';
+import 'package:module_discover/model/recommend_model.dart';
+import 'package:module_discover/page/recommend_photo_gallery_page.dart';
+import 'package:module_discover/page/recommend_video_play_page.dart';
 
 const VIDEO_TYPE = 'video';
 

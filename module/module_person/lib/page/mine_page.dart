@@ -114,14 +114,14 @@ class _MinePageState extends State<MinePage>
 
   ImageProvider get avatarImage {
     return _imageFile == null
-        ? AssetImage('images/ic_img_avatar.png')
+        ? AssetImage('images/ic_img_avatar.png', package: 'module_person')
         : FileImage(_imageFile);
   }
 
   Widget _operateWidget(String image, String text) {
     return Row(
       children: <Widget>[
-        Image.asset(image, width: 20, height: 20),
+        Image.asset(image, width: 20, height: 20, package: 'module_person'),
         Padding(
           padding: EdgeInsets.only(left: 10),
           child: Text(

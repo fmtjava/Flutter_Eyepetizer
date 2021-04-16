@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:lib_utils/toast_util.dart';
 import 'package:loading_more_list/loading_more_list.dart';
+import 'package:module_common/constant/http_constant.dart';
+import 'package:module_discover/constant/api_service.dart';
+import 'package:module_discover/model/recommend_model.dart';
 
 class RecommendRepository extends LoadingMoreBase<RecommendItem> {
   String nextPageUrl;
@@ -28,7 +31,7 @@ class RecommendRepository extends LoadingMoreBase<RecommendItem> {
     if (isloadMoreAction) {
       url = nextPageUrl;
     } else {
-      url = ApiService.community_url;
+      url = URLs.communityUrl;
     }
     bool isSuccess = true;
 

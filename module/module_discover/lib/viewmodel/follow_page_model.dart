@@ -1,12 +1,12 @@
-import 'package:flutter_eyepetizer/api/api_service.dart';
-import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:lib_core/viewmodel/paging_list_model.dart';
+import 'package:module_common/model/common_item_model.dart';
+import 'package:module_discover/constant/api_service.dart';
 
 class FollowPageModel extends PagingListModel<Item,Issue>{
 
   @override
   String getUrl() {
-    return ApiService.follow_url;
+    return URLs.followUrl;
   }
 
   @override

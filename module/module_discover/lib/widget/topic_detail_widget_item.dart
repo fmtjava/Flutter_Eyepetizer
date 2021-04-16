@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/config/color.dart';
-import 'package:flutter_eyepetizer/config/string.dart';
-import 'package:flutter_eyepetizer/model/topic_detail_model.dart';
-import 'package:flutter_eyepetizer/page/video_detail_page.dart';
 import 'package:lib_image/lib_image.dart';
 import 'package:lib_ui/widget/remod_more_text_widget.dart';
 import 'package:lib_utils/date_util.dart';
 import 'package:lib_utils/share_util.dart';
 import 'package:lib_navigator/lib_navigator.dart';
+import 'package:module_discover/constant/color.dart';
+import 'package:module_discover/constant/string.dart';
+import 'package:module_discover/model/topic_detail_model.dart';
 
 class TopicDetailWidgetItem extends StatelessWidget {
   final TopicDetailItemData model;
@@ -17,7 +16,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => toPage(VideoDetailPage(data: model.data.content.data)),
+        onTap: () => toNamed('/detail', model.data.content.data),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -61,7 +60,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     '${formatDateMsByYMD(model.data.header.time)}发布：',
-                    style: TextStyle(color: DColor.hitTextColor, fontSize: 12),
+                    style: TextStyle(color: hitTextColor, fontSize: 12),
                   ),
                   Expanded(
                       child: Text(
@@ -88,7 +87,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
         child: ReadMoreTextWidget(
           model.data.content.data.description,
-          style: TextStyle(fontSize: 14, color: DColor.desTextColor),
+          style: TextStyle(fontSize: 14, color: desTextColor),
           moreStyle: textStyle,
           lessStyle: textStyle,
         ));
@@ -145,37 +144,37 @@ class TopicDetailWidgetItem extends StatelessWidget {
       children: <Widget>[
         Row(
           children: <Widget>[
-            Icon(Icons.favorite_border, size: 20, color: DColor.hitTextColor),
+            Icon(Icons.favorite_border, size: 20, color: hitTextColor),
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text(
                   '${model.data.content.data.consumption.collectionCount}',
-                  style: TextStyle(fontSize: 12, color: DColor.hitTextColor)),
+                  style: TextStyle(fontSize: 12, color: hitTextColor)),
             )
           ],
         ),
         Row(
           children: <Widget>[
-            Icon(Icons.message, size: 20, color: DColor.hitTextColor),
+            Icon(Icons.message, size: 20, color: hitTextColor),
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text('${model.data.content.data.consumption.replyCount}',
-                  style: TextStyle(fontSize: 12, color: DColor.hitTextColor)),
+                  style: TextStyle(fontSize: 12, color: hitTextColor)),
             )
           ],
         ),
         Row(
           children: <Widget>[
-            Icon(Icons.star_border, size: 20, color: DColor.hitTextColor),
+            Icon(Icons.star_border, size: 20, color: hitTextColor),
             Padding(
               padding: EdgeInsets.only(left: 10),
-              child: Text(DString.collect_text,
-                  style: TextStyle(fontSize: 12, color: DColor.hitTextColor)),
+              child: Text(collect_text,
+                  style: TextStyle(fontSize: 12, color: hitTextColor)),
             )
           ],
         ),
         IconButton(
-            icon: Icon(Icons.share, color: DColor.hitTextColor),
+            icon: Icon(Icons.share, color: hitTextColor),
             onPressed: () => share(model.data.content.data.title,
                 model.data.content.data.webUrl.forWeibo))
       ],
@@ -199,7 +198,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
           height: 20,
           padding: EdgeInsets.only(left: 5, right: 5),
           decoration: BoxDecoration(
-              color: DColor.tabBgColor, borderRadius: BorderRadius.circular(4)),
+              color: tabBgColor, borderRadius: BorderRadius.circular(4)),
           child: Text(
             tag.name,
             style: TextStyle(fontSize: 12, color: Colors.blue),

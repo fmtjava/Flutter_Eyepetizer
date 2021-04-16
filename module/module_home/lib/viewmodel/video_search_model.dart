@@ -19,7 +19,7 @@ class VideoSearchModel extends BaseChangeNotifierModel {
       RefreshController(initialRefresh: false);
 
   getKeyWords() {
-    HttpManager.getData(URLs.keyword_url, success: (result) {
+    HttpManager.getData(URLs.keywordUrl, success: (result) {
       List responseList = result as List;
       keyWords = responseList.map((value) {
         return value.toString();
@@ -41,7 +41,7 @@ class VideoSearchModel extends BaseChangeNotifierModel {
       getData(loadMore, url);
     } else {
       _reset();
-      url = URLs.search_url + query;
+      url = URLs.searchUrl + query;
       getData(loadMore, url);
     }
   }
@@ -72,7 +72,6 @@ class VideoSearchModel extends BaseChangeNotifierModel {
         fail: (e) {
           showError(e.toString());
           if (!loadMore) viewState = ViewState.error;
-          ;
           refreshController.loadFailed();
         },
         complete: () => notifyListeners());

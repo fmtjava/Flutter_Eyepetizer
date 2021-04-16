@@ -12,8 +12,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  lib_ui:
+    path: ../../component/lib_ui
+  lib_video:
+    path: ../../component/lib_video
   lib_core:
     path: ../../component/lib_core
+  lib_navigator:
+    path: ../../component/lib_navigator
   module_common:
     path: ../module_common
 

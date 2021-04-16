@@ -13,7 +13,7 @@ class SearchVideoWidgetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          toNamed('detail', item.data);
+          toNamed('/detail', item.data);
         },
         child: Container(
             child: Stack(alignment: Alignment.center, children: <Widget>[

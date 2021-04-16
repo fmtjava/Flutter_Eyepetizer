@@ -16,3 +16,7 @@ void toNamed(String page, dynamic arguments) {
 void back() {
   Get.back();
 }
+
+dynamic arguments() {
+  return Get.arguments;
+}

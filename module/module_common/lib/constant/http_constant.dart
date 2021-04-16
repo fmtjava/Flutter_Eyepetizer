@@ -1,5 +1,7 @@
 class HttpConstant {
-  static Map<String,String> httpHeader = {
+  static String baseUrl = "";
+
+  static Map<String, String> httpHeader = {
     'Accept': 'application/json, text/plain, */*',
     'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'zh-CN,zh;q=0.9',

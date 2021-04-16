@@ -1,14 +1,14 @@
 import 'dart:io';
-import 'package:flutter_eyepetizer/api/api_service.dart';
-import 'package:flutter_eyepetizer/model/news_model.dart';
 import 'package:lib_core/viewmodel/paging_list_model.dart';
+import 'package:module_discover/constant/api_service.dart';
+import 'package:module_discover/model/news_model.dart';
 
 class NewsPageModel extends PagingListModel<NewsItemModel, NewsModel> {
 
   @override
   String getUrl() {
     String deviceModel = Platform.isAndroid ? "Android" : "IOS";
-    return ApiService.news_url + deviceModel;
+    return URLs.newsUrl + deviceModel;
   }
 
   @override

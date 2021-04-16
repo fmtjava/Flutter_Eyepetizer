@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/config/color.dart';
-import 'package:flutter_eyepetizer/model/news_model.dart';
-import 'package:flutter_eyepetizer/page/web_page.dart';
 import 'package:lib_image/lib_image.dart';
 import 'package:lib_navigator/lib_navigator.dart';
+import 'package:module_discover/constant/color.dart';
+import 'package:module_discover/model/news_model.dart';
+import 'package:module_discover/page/web_page.dart';
 
 class NewsTitleWidgetItem extends StatelessWidget {
   final NewsItemModel newsItemModel;
@@ -69,7 +69,7 @@ class NewsContentWidgetItem extends StatelessWidget {
       return Padding(
           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
           child: Text(title,
-              style: TextStyle(color: DColor.desTextColor, fontSize: 12),
+              style: TextStyle(color: desTextColor, fontSize: 12),
               maxLines: 3,
               overflow: TextOverflow.ellipsis));
     }).toList();

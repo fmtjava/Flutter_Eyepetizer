@@ -1,9 +1,9 @@
-import 'package:flutter_eyepetizer/api/api_service.dart';
-import 'package:flutter_eyepetizer/model/issue_model.dart';
 import 'package:lib_core/viewmodel/base_change_notifier_model.dart';
 import 'package:lib_net/http_manager.dart';
 import 'package:lib_ui/widget/loading_container.dart';
 import 'package:lib_utils/toast_util.dart';
+import 'package:module_common/model/common_item_model.dart';
+import 'package:module_discover/constant/api_service.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class CategoryDetailModel extends BaseChangeNotifierModel {
@@ -30,7 +30,7 @@ class CategoryDetailModel extends BaseChangeNotifierModel {
           "&udid=d2807c895f0348a180148c9dfa6f2feeac0781b5&deviceModel=Android";
       getData(url, loadMore);
     } else {
-      url = ApiService.category_video_url +
+      url = URLs.categoryVideoUrl +
           "id=$category&udid=d2807c895f0348a180148c9dfa6f2feeac0781b5&deviceModel=Android";
       getData(url, loadMore);
     }

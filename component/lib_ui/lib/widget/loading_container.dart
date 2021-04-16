@@ -38,6 +38,7 @@ class LoadingContainer extends StatelessWidget {
             'images/ic_error.png',
             width: 100,
             height: 100,
+            package: 'lib_ui',
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8),

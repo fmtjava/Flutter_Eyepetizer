@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/model/recommend_model.dart';
-import 'package:flutter_eyepetizer/repository/recommend_repository.dart';
-import 'package:flutter_eyepetizer/widget/recommend_widget_item.dart';
 import 'package:loading_more_list/loading_more_list.dart';
+import 'package:module_discover/model/recommend_model.dart';
+import 'package:module_discover/repository/recommend_repository.dart';
+import 'package:module_discover/widget/recommend_widget_item.dart';
 
 class RecommendPage extends StatefulWidget {
   @override

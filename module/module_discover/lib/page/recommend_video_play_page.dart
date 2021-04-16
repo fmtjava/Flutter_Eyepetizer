@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_eyepetizer/model/recommend_model.dart';
 import 'package:lib_navigator/lib_navigator.dart';
 import 'package:lib_video/video_widget.dart';
+import 'package:module_discover/model/recommend_model.dart';
 
 class RecommendVideoPlayPage extends StatefulWidget {
   final RecommendItem item;

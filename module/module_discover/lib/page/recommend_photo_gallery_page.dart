@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_eyepetizer/viewmodel/photo_gallery_model.dart';
 import 'package:lib_core/widget/provider_widget.dart';
 import 'package:lib_image/lib_image.dart';
+import 'package:module_discover/viewmodel/photo_gallery_model.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:lib_navigator/lib_navigator.dart';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lib_image/lib_image.dart';
 import 'package:lib_navigator/lib_navigator.dart';
 import 'package:lib_utils/date_util.dart';
+import 'package:module_common/model/common_item_model.dart';
 
 class FollowWidgetItem extends StatelessWidget {
   final Item item;
@@ -12,7 +13,7 @@ class FollowWidgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => toPage(VideoDetailPage(data: item.data)),
+        onTap: () => toNamed('/detail', item.data),
         child: Container(
           padding: EdgeInsets.only(left: 15, right: last ? 15 : 0),
           child: Column(

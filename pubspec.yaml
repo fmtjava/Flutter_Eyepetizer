@@ -1,5 +1,5 @@
 name: flutter_eyepetizer
-description: A new Flutter application.
+description: 一款精美的短视频App.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -11,7 +11,7 @@ description: A new Flutter application.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.1.6+1
+version: 2.0.0+1
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -21,22 +21,18 @@ dependencies:
     sdk: flutter
 
   #组件化配置
-  lib_cache:
-    path: ./component/lib_cache
-  lib_utils:
-    path: ./component/lib_utils
-  lib_image:
-    path: ./component/lib_image
-  lib_navigator:
-    path: ./component/lib_navigator
-  lib_ui:
-    path: ./component/lib_ui
-  lib_core:
-    path: ./component/lib_core
-  lib_video:
-    path: ./component/lib_video
-  lib_net:
-    path: ./component/lib_net
+  module_common:
+    path: ./module/module_common
+  module_home:
+    path: ./module/module_home
+  module_discover:
+    path: ./module/module_discover
+  module_hot:
+    path: ./module/module_hot
+  module_person:
+    path: ./module/module_person
+  module_detail:
+    path: ./module/module_detail
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

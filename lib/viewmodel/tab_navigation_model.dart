@@ -1,5 +1,3 @@
-
-
 import 'package:lib_core/viewmodel/base_change_notifier_model.dart';
 
 class TabNavigationModel extends BaseChangeNotifierModel {

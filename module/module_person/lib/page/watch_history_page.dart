@@ -35,7 +35,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                               child: VideoRelateWidgetItem(
                                 data: model.itemList[index],
                                 callBack: () {
-                                  toNamed('detail', model.itemList[index]);
+                                  toNamed('/detail', model.itemList[index]);
                                 },
                                 titleColor: Colors.black87,
                                 categoryColor: Colors.black26,
@@ -64,7 +64,10 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                     offstage:
                         model.itemList != null && model.itemList.length > 0,
                     child: Center(
-                      child: Image.asset('images/ic_no_data.png'),
+                      child: Image.asset(
+                        'images/ic_no_data.png',
+                        package: 'module_person',
+                      ),
                     ))
               ]);
             }));

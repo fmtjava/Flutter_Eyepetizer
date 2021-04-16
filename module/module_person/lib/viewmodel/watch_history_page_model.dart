@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:lib_core/viewmodel/base_change_notifier_model.dart';
 import 'package:module_common/model/common_item_model.dart';
-import 'package:module_person/repository/history_repository.dart';
+import 'package:module_common/repository/history_repository.dart';
 
 class WatchHistoryPageModel extends BaseChangeNotifierModel {
   List<Data> itemList = [];

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/config/string.dart';
-import 'package:flutter_eyepetizer/page/discovery_page.dart';
-import 'package:flutter_eyepetizer/page/home_page.dart';
-import 'package:flutter_eyepetizer/page/mine_page.dart';
-import 'package:flutter_eyepetizer/page/rank_page.dart';
 import 'package:flutter_eyepetizer/viewmodel/tab_navigation_model.dart';
 import 'package:lib_core/widget/provider_widget.dart';
 import 'package:lib_utils/toast_util.dart';
+import 'package:module_discover/page/discovery_page.dart';
+import 'package:module_home/page/home_page.dart';
+import 'package:module_hot/page/rank_page.dart';
+import 'package:module_person/page/mine_page.dart';
 
 class TabNavigation extends StatefulWidget {
   @override

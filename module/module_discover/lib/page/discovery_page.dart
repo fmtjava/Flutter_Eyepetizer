@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/config/string.dart';
-import 'package:flutter_eyepetizer/page/recommend_page.dart';
-import 'package:flutter_eyepetizer/page/topics_page.dart';
-import 'package:flutter_eyepetizer/widget/appbar_widget.dart';
+import 'package:lib_ui/widget/appbar_widget.dart';
 import 'package:lib_ui/widget/tab_bar_widget.dart';
+import 'package:module_discover/constant/string.dart';
+import 'package:module_discover/page/recommend_page.dart';
+import 'package:module_discover/page/topics_page.dart';
 
 import 'category_page.dart';
 import 'follow_page.dart';
@@ -39,7 +39,7 @@ class _DiscoveryPageState extends State<DiscoveryPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-        appBar: appBar(DString.discover, showBack: false),
+        appBar: appBar(discover_text, showBack: false),
         body: Column(
           children: <Widget>[
             Container(

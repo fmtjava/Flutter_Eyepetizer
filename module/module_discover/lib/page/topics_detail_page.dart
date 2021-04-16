@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/model/topic_detail_model.dart';
-import 'package:flutter_eyepetizer/viewmodel/topic_detail_page_model.dart';
-import 'package:flutter_eyepetizer/widget/appbar_widget.dart';
-import 'package:flutter_eyepetizer/widget/topic_detail_widget_item.dart';
 import 'package:lib_core/widget/provider_widget.dart';
 import 'package:lib_image/lib_image.dart';
+import 'package:lib_ui/widget/appbar_widget.dart';
 import 'package:lib_ui/widget/loading_container.dart';
+import 'package:module_discover/model/topic_detail_model.dart';
+import 'package:module_discover/viewmodel/topic_detail_page_model.dart';
+import 'package:module_discover/widget/topic_detail_widget_item.dart';
 
 class TopicDetailPage extends StatefulWidget {
   final int detailId;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/config/string.dart';
 import 'package:lib_navigator/lib_navigator.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:module_discover/constant/string.dart';
 
 class WebPage extends StatefulWidget {
   final String url;
@@ -71,7 +71,7 @@ class _State extends State<WebPage> {
           ),
         ),
         title: new Text(
-          DString.news_title,
+          news_title,
           style: TextStyle(
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         ),

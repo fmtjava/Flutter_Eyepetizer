@@ -170,6 +170,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.6.3"
+  lib_cache:
+    dependency: "direct main"
+    description:
+      path: "../../component/lib_cache"
+      relative: true
+    source: path
+    version: "0.0.1"
   lib_core:
     dependency: "direct main"
     description:

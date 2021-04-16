@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_eyepetizer/navigation/tab_navigation.dart';
 import 'package:flutter_eyepetizer/app_initialize.dart';
 import 'package:lib_navigator/lib_navigator.dart';
+import 'package:module_detail/page/video_detail_page.dart';
 
 void main() {
   runApp(App());
@@ -14,27 +15,46 @@ void main() {
   }
 }
 
-class App extends StatefulWidget {
-  @override
-  _AppState createState() => _AppState();
-}
-
-class _AppState extends State<App> {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //使用FutureBuilder进行异步初始化
     return FutureBuilder<void>(
       future: AppInitialize.init(),
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         var widget = snapshot.connectionState == ConnectionState.done
             ? TabNavigation()
             : Scaffold(
-                body: CircularProgressIndicator(),
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
               );
-
-        return MaterialApp(
-            title: 'Eyepetizer', navigatorKey: Get.key, home: widget);
+        return GetMaterialAppWidget(
+          child: widget,
+        );
       },
+    );
+  }
+}
+
+class GetMaterialAppWidget extends StatefulWidget {
+  final Widget child;
+
+  const GetMaterialAppWidget({Key key, this.child}) : super(key: key);
+
+  @override
+  _GetMaterialAppWidgetState createState() => _GetMaterialAppWidgetState();
+}
+
+class _GetMaterialAppWidgetState extends State<GetMaterialAppWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      title: 'Eyepetizer',
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => widget.child),
+        GetPage(name: '/detail', page: () => VideoDetailPage()),
+      ],
     );
   }
 }

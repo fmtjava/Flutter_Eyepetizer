@@ -10,7 +10,7 @@ class HomePageModel extends PagingListModel<Item, IssueEntity> {
   IssueEntity getModel(Map<String, dynamic> json) => IssueEntity.fromJson(json);
 
   @override
-  String getUrl() => URLs.feed_url;
+  String getUrl() => URLs.feedUrl;
 
   @override
   void doRefreshDataProcess(List<Item> list) {
