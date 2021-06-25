@@ -1,5 +1,5 @@
 # Eyepetizer
-一款基于Flutter实现的精美仿开眼视频跨平台App,适合新手入门，快速掌握Dart语言的基本语法以及快速上手flutter开发。<br /><br />
+一款基于Flutter + 组件化实现的精美仿开眼视频跨平台App,适合新手入门，快速掌握Dart语言的基本语法以及快速上手flutter开发。<br /><br />
 Kotlin版：[Kotlin_Eyepetizer](https://github.com/fmtjava/Kotlin_Eyepetizer)<br /><br />
 Reactive Native版：[ReactNative_Eyepetizer](https://github.com/fmtjava/ReactNative_Eyepetizer)
 
@@ -60,6 +60,8 @@ Reactive Native版：[ReactNative_Eyepetizer](https://github.com/fmtjava/ReactNa
    <img src="https://www.pgyer.com/app/qrcode/nVnf"/>
  - ios请自行clone项目代码运行  
  # 更新日志
+ ### v2.0.0
+   * 组件化重构项目
  ### v1.1.6
    * 专题列表页面添加列表滚动视频自动播放功能以及跳转视频播放页面无缝续播功能
  ### v1.1.5
