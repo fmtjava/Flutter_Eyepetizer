@@ -1,5 +1,5 @@
-name: module_common
-description: 公共业务模块
+name: module_author
+description: 作者信息模块
 version: 0.0.1
 author:
 homepage:
@@ -12,18 +12,15 @@ dependencies:
   flutter:
     sdk: flutter
 
-  lib_net:
-    path: ../../component/lib_net
+  module_common:
+    path: ../module_common
   lib_core:
     path: ../../component/lib_core
-  lib_cache:
-    path: ../../component/lib_cache
-  lib_utils:
-    path: ../../component/lib_utils
-  lib_image:
-    path: ../../component/lib_image
+  lib_ui:
+    path: ../../component/lib_ui
   lib_navigator:
     path: ../../component/lib_navigator
+
 
 dev_dependencies:
   flutter_test:
@@ -36,8 +33,8 @@ dev_dependencies:
 flutter:
 
   # To add assets to your package, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - images/
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see

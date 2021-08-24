@@ -11,7 +11,7 @@ description: 一款精美的短视频App.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 2.0.0+1
+version: 2.0.1+1
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -33,6 +33,8 @@ dependencies:
     path: ./module/module_person
   module_detail:
     path: ./module/module_detail
+  module_author:
+    path: ./module/module_author
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

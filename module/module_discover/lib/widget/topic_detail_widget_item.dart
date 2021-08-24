@@ -4,6 +4,7 @@ import 'package:lib_ui/widget/remod_more_text_widget.dart';
 import 'package:lib_utils/date_util.dart';
 import 'package:lib_utils/share_util.dart';
 import 'package:lib_navigator/lib_navigator.dart';
+import 'package:module_common/constant/color.dart';
 import 'package:module_discover/constant/color.dart';
 import 'package:module_discover/constant/string.dart';
 import 'package:module_discover/model/topic_detail_model.dart';

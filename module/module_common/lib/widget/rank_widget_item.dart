@@ -113,13 +113,16 @@ class RankWidgetItem extends StatelessWidget {
   }
 
   Widget _authorHeaderImage(Item item) {
-    return ClipOval(
-        clipBehavior: Clip.antiAlias,
-        child: cacheImage(
-            item.data.author == null
-                ? item.data.provider.icon
-                : item.data.author.icon,
-            width: 40,
-            height: 40));
+    return InkWell(
+      child: ClipOval(
+          clipBehavior: Clip.antiAlias,
+          child: cacheImage(
+              item.data.author == null
+                  ? item.data.provider.icon
+                  : item.data.author.icon,
+              width: 40,
+              height: 40)),
+      onTap: () => toNamed('/author', item.data.author.id),
+    );
   }
 }

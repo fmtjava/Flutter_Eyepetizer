@@ -13,6 +13,8 @@ abstract class BaseListState<L, M extends PagingListModel<L, PagingModel<L>>,
 
   Widget getContentChild(M model); //真实的分页控件
 
+  bool get enablePullDown => true;
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -32,6 +34,7 @@ abstract class BaseListState<L, M extends PagingListModel<L, PagingModel<L>>,
                       onRefresh: model.refresh,
                       onLoading: model.loadMore,
                       enablePullUp: true,
+                      enablePullDown: enablePullDown,
                       child: getContentChild(model))));
         });
   }

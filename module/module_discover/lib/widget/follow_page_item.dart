@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lib_image/lib_image.dart';
+import 'package:lib_navigator/lib_navigator.dart';
 import 'package:module_common/model/common_item_model.dart';
 import 'package:module_discover/constant/string.dart';
-
 import 'follow_widget_item.dart';
 
 class FollowPageItem extends StatelessWidget {
@@ -20,12 +20,17 @@ class FollowPageItem extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
             child: Row(
               children: <Widget>[
-                ClipOval(
-                    child: cacheImage(
-                  item.data.header.icon,
-                  width: 40,
-                  height: 40,
-                )),
+                InkWell(
+                  onTap: () {
+                    toNamed('/author', item.data.header.id);
+                  },
+                  child: ClipOval(
+                      child: cacheImage(
+                    item.data.header.icon,
+                    width: 40,
+                    height: 40,
+                  )),
+                ),
                 Expanded(
                     flex: 1,
                     child: Container(

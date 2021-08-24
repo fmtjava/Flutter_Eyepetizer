@@ -1,0 +1,2 @@
+library module_author;
+

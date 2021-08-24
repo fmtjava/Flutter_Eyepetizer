@@ -4,9 +4,9 @@ import 'package:lib_net/http_manager.dart';
 import 'package:lib_ui/widget/appbar_widget.dart';
 import 'package:lib_ui/widget/tab_bar_widget.dart';
 import 'package:lib_utils/toast_util.dart';
+import 'package:module_common/model/tab_info_model.dart';
 import 'package:module_hot/constant/api_service.dart';
 import 'package:module_hot/constant/string.dart';
-import 'package:module_hot/model/tab_info_model.dart';
 import 'package:module_hot/page/rank_list_page.dart';
 
 class RankPage extends StatefulWidget {

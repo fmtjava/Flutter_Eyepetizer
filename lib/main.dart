@@ -5,6 +5,7 @@ import 'package:flutter_eyepetizer/navigation/tab_navigation.dart';
 import 'package:flutter_eyepetizer/app_initialize.dart';
 import 'package:lib_navigator/lib_navigator.dart';
 import 'package:module_detail/page/video_detail_page.dart';
+import 'package:module_author/page/author_page.dart';
 
 void main() {
   runApp(App());
@@ -54,6 +55,7 @@ class _GetMaterialAppWidgetState extends State<GetMaterialAppWidget> {
       getPages: [
         GetPage(name: '/', page: () => widget.child),
         GetPage(name: '/detail', page: () => VideoDetailPage()),
+        GetPage(name: '/author', page: () => AuthorPage()),
       ],
     );
   }

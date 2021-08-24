@@ -199,7 +199,7 @@ packages:
     source: path
     version: "0.0.1"
   lib_net:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../component/lib_net"
       relative: true

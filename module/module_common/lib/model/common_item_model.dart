@@ -572,13 +572,19 @@ class Consumption {
   int shareCount;
   int replyCount;
   int collectionCount;
+  int realCollectionCount;
 
-  Consumption({this.shareCount, this.replyCount, this.collectionCount});
+  Consumption(
+      {this.shareCount,
+      this.replyCount,
+      this.collectionCount,
+      this.realCollectionCount});
 
   Consumption.fromJson(Map<String, dynamic> json) {
     shareCount = json['shareCount'];
     replyCount = json['replyCount'];
     collectionCount = json['collectionCount'];
+    realCollectionCount = json['realCollectionCount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -586,6 +592,7 @@ class Consumption {
     data['shareCount'] = this.shareCount;
     data['replyCount'] = this.replyCount;
     data['collectionCount'] = this.collectionCount;
+    data['realCollectionCount'] = this.realCollectionCount;
     return data;
   }
 }
