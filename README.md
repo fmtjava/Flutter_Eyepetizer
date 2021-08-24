@@ -61,7 +61,7 @@ Reactive Native版：[ReactNative_Eyepetizer](https://github.com/fmtjava/ReactNa
  - ios请自行clone项目代码运行  
  # 更新日志
  ### v2.0.1
-   * 新增作者项目模块
+   * 新增作者详情模块
  ### v2.0.0
    * 组件化重构项目
  ### v1.1.6
