@@ -1,8 +1,10 @@
 name: module_home
 description: 首页模块组件
 version: 0.0.1
-author:
+author: fmtjava
 homepage:
+
+publish_to: 'none'
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

@@ -1,8 +1,10 @@
 name: module_author
 description: 作者信息模块
 version: 0.0.1
-author:
+author: fmtjava
 homepage:
+
+publish_to: 'none'#如果你想发布到pub.dev，请删除这一行
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

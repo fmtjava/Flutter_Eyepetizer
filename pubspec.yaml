@@ -13,6 +13,8 @@ description: 一款精美的短视频App.
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 2.0.1+1
 
+publish_to: 'none'
+
 environment:
   sdk: ">=2.2.2 <3.0.0"
 

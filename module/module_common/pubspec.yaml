@@ -1,8 +1,10 @@
 name: module_common
 description: 公共业务模块
 version: 0.0.1
-author:
+author: fmtjava
 homepage:
+
+publish_to: 'none'
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
