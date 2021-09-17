@@ -1,7 +1,6 @@
 name: module_hot
 description: 热门模块组件
 version: 0.0.1
-author: fmtjava
 homepage:
 
 publish_to: 'none'

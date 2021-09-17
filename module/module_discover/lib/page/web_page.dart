@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lib_navigator/lib_navigator.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:module_discover/constant/string.dart';
@@ -78,7 +79,7 @@ class _State extends State<WebPage> {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0.0,
-        brightness: Brightness.light);
+        systemOverlayStyle: SystemUiOverlayStyle());
   }
 
   Future<bool> _onWillPop() {

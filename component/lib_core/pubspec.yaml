@@ -1,7 +1,6 @@
 name: lib_core
 description: 基础组件库
 version: 0.0.1
-author: fmtjava
 homepage:
 
 publish_to: 'none'
@@ -22,7 +21,7 @@ dependencies:
     path: ../lib_net
 
   provider: ^5.0.0
-  pull_to_refresh: ^1.5.5
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:

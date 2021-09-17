@@ -1,3 +1,2 @@
 library module_detail;
 
-

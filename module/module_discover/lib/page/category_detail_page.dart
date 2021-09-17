@@ -39,7 +39,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                               child:
                                   Icon(Icons.arrow_back, color: Colors.black)),
                           elevation: 0,
-                          brightness: Brightness.light,
+                          systemOverlayStyle: SystemUiOverlayStyle(),
                           backgroundColor: Colors.white,
                           expandedHeight: 200.0,
                           pinned: true,

@@ -1,7 +1,3 @@
 library lib_net;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'package:lib_net/http_manager.dart';

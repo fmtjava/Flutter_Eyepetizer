@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lib_core/widget/provider_widget.dart';
+import 'package:lib_utils/event_bus.dart';
 import 'package:lib_video/video_widget.dart';
 import 'package:lib_image/lib_image.dart';
 import 'package:lib_ui/widget/loading_container.dart';
 import 'package:lib_utils/date_util.dart';
 import 'package:lib_navigator/lib_navigator.dart';
+import 'package:module_common/event/watch_video_event.dart';
 import 'package:module_common/model/common_item_model.dart';
 import 'package:module_common/repository/history_repository.dart';
 import 'package:module_common/widget/video_relate_widget_item.dart';
@@ -37,6 +39,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     data = widget.videoDta == null ? arguments() : widget.videoDta;
     WidgetsBinding.instance.addObserver(this);
     HistoryRepository.saveWatchHistory(data);
+    Bus.getInstance().send(WatchVideoEvent());
   }
 
   @override

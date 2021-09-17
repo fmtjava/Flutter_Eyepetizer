@@ -1,7 +1,6 @@
 name: module_common
 description: 公共业务模块
 version: 0.0.1
-author: fmtjava
 homepage:
 
 publish_to: 'none'

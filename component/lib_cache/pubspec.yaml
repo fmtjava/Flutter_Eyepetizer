@@ -1,7 +1,6 @@
 name: lib_cache
 description: 本地缓存组件
 version: 0.0.1
-author: fmtjava
 homepage:
 
 publish_to: 'none'

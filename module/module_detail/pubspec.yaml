@@ -1,7 +1,6 @@
 name: module_detail
 description: 视频详情页面
 version: 0.0.1
-author: fmtjava
 homepage:
 
 publish_to: 'none'
@@ -16,6 +15,8 @@ dependencies:
 
   lib_ui:
     path: ../../component/lib_ui
+  lib_utils:
+    path: ../../component/lib_utils
   lib_video:
     path: ../../component/lib_video
   lib_core:

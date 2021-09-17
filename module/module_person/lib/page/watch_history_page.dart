@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:lib_core/widget/provider_widget.dart';
 import 'package:lib_navigator/lib_navigator.dart';
 import 'package:lib_ui/widget/appbar_widget.dart';
+import 'package:lib_utils/event_bus.dart';
+import 'package:module_common/event/watch_video_event.dart';
 import 'package:module_common/widget/video_relate_widget_item.dart';
 import 'package:module_person/constant/string.dart';
 import 'package:module_person/viewmodel/watch_history_page_model.dart';
+import 'package:event_bus/event_bus.dart';
 
 class WatchHistoryPage extends StatefulWidget {
   @override
@@ -13,6 +18,9 @@ class WatchHistoryPage extends StatefulWidget {
 }
 
 class _WatchHistoryPageState extends State<WatchHistoryPage> {
+  EventBus eventBus = EventBus();
+  StreamSubscription _subscription;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +29,13 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
             model: WatchHistoryPageModel(),
             onModelInit: (model) {
               model.loadData();
+              if (_subscription == null) {
+                _subscription = Bus.getInstance()
+                    .register<WatchVideoEvent>()
+                    .listen((event) {
+                  model.loadData();
+                });
+              }
             },
             builder: (context, model, child) {
               return Stack(children: <Widget>[
@@ -71,5 +86,11 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                     ))
               ]);
             }));
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
   }
 }

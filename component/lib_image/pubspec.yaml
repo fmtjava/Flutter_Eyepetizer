@@ -1,7 +1,6 @@
 name: lib_image
 description: 图片加载组件
 version: 0.0.1
-author:
 homepage:
 
 environment:
