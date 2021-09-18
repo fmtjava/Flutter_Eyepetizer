@@ -270,9 +270,11 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                         data: model.itemList[index].data,
                                         callBack: () {
                                           videoKey.currentState.pause();
-                                          toPage(VideoDetailPage(
-                                              videoDta:
-                                                  model.itemList[index].data));
+                                          toPage(
+                                              VideoDetailPage(
+                                                  videoDta: model
+                                                      .itemList[index].data),
+                                              preventDuplicates: false);
                                         });
                                   }
                                   return Padding(

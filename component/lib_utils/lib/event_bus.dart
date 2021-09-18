@@ -3,15 +3,15 @@ import 'package:event_bus/event_bus.dart';
 class Bus {
   Bus._();
 
-  static Bus _eventBusWarp;
+  static Bus _bus;
   static EventBus _eventBus;
 
   static Bus getInstance() {
-    if (_eventBusWarp == null) {
-      _eventBusWarp = Bus._();
+    if (_bus == null) {
+      _bus = Bus._();
       _eventBus = EventBus();
     }
-    return _eventBusWarp;
+    return _bus;
   }
 
   void send(event) {
