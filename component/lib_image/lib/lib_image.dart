@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 Widget cacheImage(String url,
     {double width,
       double height,
-      fit: BoxFit.cover,
+      BoxFit fit = BoxFit.cover,
       BorderRadius borderRadius,
       BoxShape shape = BoxShape.rectangle,
       bool clearMemoryCacheWhenDispose = false}) {

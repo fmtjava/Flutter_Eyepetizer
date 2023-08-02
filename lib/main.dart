@@ -8,12 +8,12 @@ import 'package:module_detail/page/video_detail_page.dart';
 import 'package:module_author/page/author_page.dart';
 
 void main() {
-  runApp(App());
   //Flutter沉浸式状态栏
   if (Platform.isAndroid) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+        SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent));
   }
+  runApp(App());
 }
 
 class App extends StatelessWidget {

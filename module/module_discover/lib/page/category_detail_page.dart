@@ -60,7 +60,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                 ),
                                 centerTitle: false,
                                 background: cacheImage(
-                                    widget.categoryModel.headerImage));
+                                    widget.categoryModel.bgPicture));
                           }))
                     ];
                   },
