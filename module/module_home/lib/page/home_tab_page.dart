@@ -60,7 +60,7 @@ class _HomeTabPageState
         decoration: BoxDecoration(color: Colors.white24),
         padding: EdgeInsets.only(top: 15, bottom: 5),
         child: Center(
-            child: Text(item.data.text,
+            child: Text(item.data?.text ?? '',
                 style: TextStyle(
                     fontSize: 18,
                     color: Colors.black87,

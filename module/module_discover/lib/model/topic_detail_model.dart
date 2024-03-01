@@ -1,13 +1,13 @@
 import 'package:module_common/model/common_item_model.dart';
 
 class TopicDetailModel {
-  int id;
-  String headerImage;
-  String brief;
-  String text;
-  String shareLink;
-  List<TopicDetailItemData> itemList;
-  int count;
+  int? id;
+  String? headerImage;
+  String? brief;
+  String? text;
+  String? shareLink;
+  List<TopicDetailItemData>? itemList;
+  int? count;
 
   TopicDetailModel(
       {this.id,
@@ -27,7 +27,7 @@ class TopicDetailModel {
     if (json['itemList'] != null) {
       itemList = [];
       json['itemList'].forEach((v) {
-        itemList.add(new TopicDetailItemData.fromJson(v));
+        itemList!.add(new TopicDetailItemData.fromJson(v));
       });
     }
     count = json['count'];
@@ -41,7 +41,7 @@ class TopicDetailModel {
     data['text'] = this.text;
     data['shareLink'] = this.shareLink;
     if (this.itemList != null) {
-      data['itemList'] = this.itemList.map((v) => v.toJson()).toList();
+      data['itemList'] = this.itemList!.map((v) => v.toJson()).toList();
     }
     data['count'] = this.count;
     return data;
@@ -49,10 +49,10 @@ class TopicDetailModel {
 }
 
 class TopicDetailItemData {
-  String type;
-  ContentDataModel data;
-  int id;
-  int adIndex;
+  String? type;
+  ContentDataModel? data;
+  int? id;
+  int? adIndex;
 
   TopicDetailItemData({this.type, this.data, this.id, this.adIndex});
 
@@ -69,7 +69,7 @@ class TopicDetailItemData {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['type'] = this.type;
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data!.toJson();
     }
     data['id'] = this.id;
     data['adIndex'] = this.adIndex;
@@ -78,9 +78,9 @@ class TopicDetailItemData {
 }
 
 class ContentDataModel {
-  String dataType;
-  Header header;
-  ContentModel content;
+  String? dataType;
+  Header? header;
+  ContentModel? content;
 
   ContentDataModel({this.dataType, this.header, this.content});
 
@@ -97,27 +97,27 @@ class ContentDataModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['dataType'] = this.dataType;
     if (this.header != null) {
-      data['header'] = this.header.toJson();
+      data['header'] = this.header!.toJson();
     }
     if (this.content != null) {
-      data['content'] = this.content.toJson();
+      data['content'] = this.content!.toJson();
     }
     return data;
   }
 }
 
 class Header {
-  int id;
-  String actionUrl;
+  int? id;
+  String? actionUrl;
   Null labelList;
-  String icon;
-  String iconType;
-  int time;
-  bool showHateVideo;
-  String followType;
-  int tagId;
-  String issuerName;
-  bool topShow;
+  String? icon;
+  String? iconType;
+  int? time;
+  bool? showHateVideo;
+  String? followType;
+  int? tagId;
+  String? issuerName;
+  bool? topShow;
 
   Header(
       {this.id,
@@ -164,8 +164,8 @@ class Header {
 }
 
 class ContentModel {
-  String type;
-  Data data;
+  String? type;
+  Data? data;
 
   ContentModel({this.type, this.data});
 
@@ -178,7 +178,7 @@ class ContentModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['type'] = this.type;
     if (this.data != null) {
-      data['header'] = this.data.toJson();
+      data['header'] = this.data!.toJson();
     }
     return data;
   }

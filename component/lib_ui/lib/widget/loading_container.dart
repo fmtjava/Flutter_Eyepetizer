@@ -12,9 +12,9 @@ class LoadingContainer extends StatelessWidget {
   final VoidCallback retry;
 
   const LoadingContainer(
-      {Key key,
-      @required this.child,
-      @required this.retry,
+      {Key? key,
+      required this.child,
+      required this.retry,
       this.viewState = ViewState.loading})
       : super(key: key);
 
@@ -44,7 +44,7 @@ class LoadingContainer extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8),
             child: Text(
               net_error_tip,
-              style: TextStyle(color:hitTextColor, fontSize: 18),
+              style: TextStyle(color: hitTextColor, fontSize: 18),
             ),
           ),
           Padding(

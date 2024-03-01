@@ -8,13 +8,14 @@ import 'package:module_discover/page/web_page.dart';
 class NewsTitleWidgetItem extends StatelessWidget {
   final NewsItemModel newsItemModel;
 
-  const NewsTitleWidgetItem({Key key, this.newsItemModel}) : super(key: key);
+  const NewsTitleWidgetItem({Key? key, required this.newsItemModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 10, top: 5),
-      child: Text(newsItemModel.data.text,
+      child: Text(newsItemModel.data?.text ?? '',
           style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -26,16 +27,19 @@ class NewsTitleWidgetItem extends StatelessWidget {
 class NewsContentWidgetItem extends StatelessWidget {
   final NewsItemModel newsItemModel;
 
-  const NewsContentWidgetItem({Key key, this.newsItemModel}) : super(key: key);
+  const NewsContentWidgetItem({Key? key, required this.newsItemModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          String url = Uri.decodeComponent(newsItemModel.data.actionUrl
-              .substring(newsItemModel.data.actionUrl.indexOf("url")));
-          url = url.substring(4, url.length);
-          toPage(WebPage(url: url));
+          if (newsItemModel.data?.actionUrl != null) {
+            String url = Uri.decodeComponent(newsItemModel.data!.actionUrl!
+                .substring(newsItemModel.data!.actionUrl!.indexOf("url")));
+            url = url.substring(4, url.length);
+            toPage(WebPage(url: url));
+          }
         },
         child: Padding(
             padding: EdgeInsets.all(10),
@@ -50,14 +54,16 @@ class NewsContentWidgetItem extends StatelessWidget {
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.only(bottom: 10),
-                        child: cacheImage(newsItemModel.data.backgroundImage,
+                        child: cacheImage(
+                            newsItemModel.data?.backgroundImage ?? '',
                             width: MediaQuery.of(context).size.width,
                             height: 140,
                             fit: BoxFit.fill),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: _getTitleList(newsItemModel.data.titleList),
+                        children:
+                            _getTitleList(newsItemModel.data?.titleList ?? []),
                       )
                     ],
                   )),

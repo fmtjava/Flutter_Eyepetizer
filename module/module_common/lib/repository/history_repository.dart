@@ -18,8 +18,8 @@ class HistoryRepository {
   }
 
   static List<String> loadHistoryData() {
-    List<dynamic> originList =
-        CacheManager.getInstance().get<List<dynamic>>(watch_history_list_key);
+    List<dynamic>? originList =
+        CacheManager.getInstance().get<List<dynamic>?>(watch_history_list_key);
 
     List<String> watchList;
 

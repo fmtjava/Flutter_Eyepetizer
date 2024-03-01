@@ -13,12 +13,12 @@ class MaterialControls extends StatefulWidget {
 
   final bool showBigPlayIcon;
 
-  final Widget overlayUI;
+  final Widget? overlayUI;
 
-  final Gradient bottomGradient;
+  final Gradient? bottomGradient;
 
   const MaterialControls(
-      {Key key,
+      {Key? key,
       this.showLoadingOnInitialize = true,
       this.showBigPlayIcon = true,
       this.overlayUI,
@@ -33,29 +33,29 @@ class MaterialControls extends StatefulWidget {
 
 class _MaterialControlsState extends State<MaterialControls>
     with SingleTickerProviderStateMixin {
-  VideoPlayerValue _latestValue;
-  double _latestVolume;
+  late VideoPlayerValue _latestValue;
+  double? _latestVolume;
   bool _hideStuff = true;
-  Timer _hideTimer;
-  Timer _initTimer;
-  Timer _showAfterExpandCollapseTimer;
+  Timer? _hideTimer;
+  Timer? _initTimer;
+  Timer? _showAfterExpandCollapseTimer;
   bool _dragging = false;
   bool _displayTapped = false;
 
   final barHeight = 48.0;
   final marginSize = 5.0;
 
-  VideoPlayerController controller;
-  ChewieController chewieController;
-  AnimationController playPauseIconAnimationController;
+  late VideoPlayerController controller;
+  ChewieController? chewieController;
+  AnimationController? playPauseIconAnimationController;
 
   @override
   Widget build(BuildContext context) {
     if (_latestValue.hasError) {
-      return chewieController.errorBuilder != null
-          ? chewieController.errorBuilder(
+      return chewieController?.errorBuilder != null
+          ? chewieController!.errorBuilder!(
               context,
-              chewieController.videoPlayerController.value.errorDescription,
+              chewieController!.videoPlayerController.value.errorDescription!,
             )
           : const Center(
               child: Icon(
@@ -118,7 +118,7 @@ class _MaterialControlsState extends State<MaterialControls>
   void didChangeDependencies() {
     final _oldController = chewieController;
     chewieController = ChewieController.of(context);
-    controller = chewieController.videoPlayerController;
+    controller = chewieController!.videoPlayerController;
 
     playPauseIconAnimationController ??= AnimationController(
       vsync: this,
@@ -138,7 +138,7 @@ class _MaterialControlsState extends State<MaterialControls>
   AnimatedOpacity _buildBottomBar(
     BuildContext context,
   ) {
-    final iconColor = Theme.of(context).textTheme.button.color;
+    final iconColor = Theme.of(context).textTheme.labelLarge?.color;
 
     return AnimatedOpacity(
       opacity: _hideStuff ? 0.0 : 1.0,
@@ -151,18 +151,18 @@ class _MaterialControlsState extends State<MaterialControls>
         child: Row(
           children: <Widget>[
             _buildPlayPause(controller),
-            if (chewieController.isLive)
+            if (chewieController!.isLive)
               const SizedBox()
             else
               _buildProgressBar(),
-            if (chewieController.isLive)
+            if (chewieController!.isLive)
               const Expanded(child: Text('LIVE'))
             else
               _buildPosition(iconColor),
-            if (chewieController.allowPlaybackSpeedChanging)
+            if (chewieController!.allowPlaybackSpeedChanging)
               _buildSpeedButton(controller),
-            if (chewieController.allowMuting) _buildMuteButton(controller),
-            if (chewieController.allowFullScreen) _buildExpandButton(),
+            if (chewieController!.allowMuting) _buildMuteButton(controller),
+            if (chewieController!.allowFullScreen) _buildExpandButton(),
           ],
         ),
       ),
@@ -184,7 +184,7 @@ class _MaterialControlsState extends State<MaterialControls>
           ),
           child: Center(
             child: Icon(
-              chewieController.isFullScreen
+              chewieController!.isFullScreen
                   ? Icons.fullscreen_exit_rounded
                   : Icons.fullscreen_rounded,
               color: Colors.white,
@@ -245,7 +245,7 @@ class _MaterialControlsState extends State<MaterialControls>
                                     : AnimatedIcon(
                                         icon: AnimatedIcons.play_pause,
                                         progress:
-                                            playPauseIconAnimationController,
+                                            playPauseIconAnimationController!,
                                         size: 32.0,
                                       ),
                                 onPressed: () {
@@ -275,7 +275,7 @@ class _MaterialControlsState extends State<MaterialControls>
           isScrollControlled: true,
           useRootNavigator: true,
           builder: (context) => _PlaybackSpeedDialog(
-            speeds: chewieController.playbackSpeeds,
+            speeds: chewieController!.playbackSpeeds,
             selected: _latestValue.playbackSpeed,
           ),
         );
@@ -363,7 +363,7 @@ class _MaterialControlsState extends State<MaterialControls>
   }
 
   ///播放时间
-  Widget _buildPosition(Color iconColor) {
+  Widget _buildPosition(Color? iconColor) {
     final position = _latestValue != null && _latestValue.position != null
         ? _latestValue.position
         : Duration.zero;
@@ -396,11 +396,11 @@ class _MaterialControlsState extends State<MaterialControls>
     _updateState();
 
     if ((controller.value != null && controller.value.isPlaying) ||
-        chewieController.autoPlay) {
+        chewieController!.autoPlay) {
       _startHideTimer();
     }
 
-    if (chewieController.showControlsOnInitialize) {
+    if (chewieController!.showControlsOnInitialize) {
       _initTimer = Timer(const Duration(milliseconds: 200), () {
         setState(() {
           _hideStuff = false;
@@ -410,14 +410,14 @@ class _MaterialControlsState extends State<MaterialControls>
   }
 
   void _onExpandCollapse() {
-    if (chewieController.videoPlayerController.value.size == null) {
+    if (chewieController!.videoPlayerController.value.size == null) {
       print('_onExpandCollapse:videoPlayerController.value.size is null.');
       return;
     }
     setState(() {
       _hideStuff = true;
 
-      chewieController.toggleFullScreen();
+      chewieController!.toggleFullScreen();
       _showAfterExpandCollapseTimer =
           Timer(const Duration(milliseconds: 300), () {
         setState(() {
@@ -437,7 +437,7 @@ class _MaterialControlsState extends State<MaterialControls>
 
     setState(() {
       if (controller.value.isPlaying) {
-        playPauseIconAnimationController.reverse();
+        playPauseIconAnimationController?.reverse();
         _hideStuff = false;
         _hideTimer?.cancel();
         controller.pause();
@@ -447,13 +447,13 @@ class _MaterialControlsState extends State<MaterialControls>
         if (!controller.value.isInitialized) {
           controller.initialize().then((_) {
             controller.play();
-            playPauseIconAnimationController.forward();
+            playPauseIconAnimationController?.forward();
           });
         } else {
           if (isFinished) {
             controller.seekTo(const Duration());
           }
-          playPauseIconAnimationController.forward();
+          playPauseIconAnimationController?.forward();
           controller.play();
         }
       }
@@ -495,7 +495,7 @@ class _MaterialControlsState extends State<MaterialControls>
 
             _startHideTimer();
           },
-          colors: chewieController.materialProgressColors ??
+          colors: chewieController?.materialProgressColors ??
               ChewieProgressColors(
                   playedColor: Theme.of(context).colorScheme.secondary,
                   handleColor: Theme.of(context).colorScheme.secondary,
@@ -525,9 +525,9 @@ class _MaterialControlsState extends State<MaterialControls>
 
 class _PlaybackSpeedDialog extends StatelessWidget {
   const _PlaybackSpeedDialog({
-    Key key,
-    @required List<double> speeds,
-    @required double selected,
+    Key? key,
+    required List<double> speeds,
+    required double selected,
   })  : _speeds = speeds,
         _selected = selected,
         super(key: key);

@@ -11,7 +11,10 @@ class RankWidgetItem extends StatelessWidget {
   final bool showDivider;
 
   const RankWidgetItem(
-      {Key key, this.item, this.showCategory = true, this.showDivider = true})
+      {Key? key,
+      required this.item,
+      this.showCategory = true,
+      this.showDivider = true})
       : super(key: key);
 
   @override
@@ -28,8 +31,8 @@ class RankWidgetItem extends StatelessWidget {
               children: <Widget>[
                 ClipRRect(
                     child: Hero(
-                        tag: '${item.data.id}${item.data.time}',
-                        child: cacheImage(item.data.cover.feed,
+                        tag: '${item.data?.id}${item.data?.time}',
+                        child: cacheImage(item.data?.cover?.feed ?? '',
                             width: MediaQuery.of(context).size.width,
                             height: 200)), //充满容器，可能会被截断
                     borderRadius: BorderRadius.circular(4)),
@@ -45,7 +48,7 @@ class RankWidgetItem extends StatelessWidget {
                                 height: 44,
                                 width: 44,
                                 alignment: AlignmentDirectional.center,
-                                child: Text(item.data.category,
+                                child: Text(item.data?.category ?? '',
                                     style: TextStyle(
                                         fontSize: 14, color: Colors.white)))))),
                 Positioned(
@@ -57,7 +60,7 @@ class RankWidgetItem extends StatelessWidget {
                             decoration: BoxDecoration(color: Colors.black54),
                             padding: EdgeInsets.all(5),
                             child: Text(
-                              formatDateMsByMS(item.data.duration * 1000),
+                              formatDateMsByMS(item.data?.duration ?? 0 * 1000),
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
@@ -80,7 +83,7 @@ class RankWidgetItem extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(item.data.title,
+                          Text(item.data?.title ?? '',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 14,
@@ -89,16 +92,18 @@ class RankWidgetItem extends StatelessWidget {
                           Padding(
                               padding: EdgeInsets.only(top: 2),
                               child: Text(
-                                  item.data.author == null
-                                      ? item.data.description
-                                      : item.data.author.name,
+                                  (item.data?.author == null
+                                          ? item.data?.description
+                                          : item.data?.author?.name) ??
+                                      "",
                                   style: TextStyle(
                                       color: Color(0xff9a9a9a), fontSize: 12)))
                         ],
                       ))),
               IconButton(
                   icon: Icon(Icons.share, color: Colors.black38),
-                  onPressed: () => share(item.data.title, item.data.playUrl))
+                  onPressed: () =>
+                      share(item.data?.title ?? '', item.data?.playUrl ?? ''))
             ],
           ),
         ),
@@ -117,12 +122,13 @@ class RankWidgetItem extends StatelessWidget {
       child: ClipOval(
           clipBehavior: Clip.antiAlias,
           child: cacheImage(
-              item.data.author == null
-                  ? item.data.provider.icon
-                  : item.data.author.icon,
+              (item.data?.author == null
+                      ? item.data?.provider?.icon
+                      : item.data?.author?.icon) ??
+                  "",
               width: 40,
               height: 40)),
-      onTap: () => toNamed('/author', item.data.author.id),
+      onTap: () => toNamed('/author', item.data?.author?.id),
     );
   }
 }

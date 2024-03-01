@@ -7,7 +7,7 @@ import 'package:module_detail/constant/api_service.dart';
 
 class VideoDetailPageModel extends BaseChangeNotifierModel {
   List<Item> itemList = [];
-  int _videoId;
+  late int _videoId;
 
   void loadVideoRelateData(int id) {
     _videoId = id;

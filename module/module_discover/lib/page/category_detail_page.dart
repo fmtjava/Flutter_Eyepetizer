@@ -12,7 +12,8 @@ import 'package:lib_navigator/lib_navigator.dart';
 class CategoryDetailPage extends StatefulWidget {
   final CategoryModel categoryModel;
 
-  const CategoryDetailPage({Key key, this.categoryModel}) : super(key: key);
+  const CategoryDetailPage({Key? key, required this.categoryModel})
+      : super(key: key);
 
   @override
   _CategoryDetailPageState createState() => _CategoryDetailPageState();
@@ -24,7 +25,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: ProviderWidget<CategoryDetailModel>(
-            model: CategoryDetailModel(widget.categoryModel.id),
+            model: CategoryDetailModel(widget.categoryModel.id ?? 0),
             onModelInit: (model) {
               model.loadMore(loadMore: false);
             },
@@ -52,7 +53,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                             return FlexibleSpaceBar(
                                 //可折叠状态栏
                                 title: Text(
-                                  widget.categoryModel.name,
+                                  widget.categoryModel.name ?? '',
                                   style: TextStyle(
                                       color: model.expend
                                           ? Colors.white
@@ -60,7 +61,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                 ),
                                 centerTitle: false,
                                 background: cacheImage(
-                                    widget.categoryModel.bgPicture));
+                                    widget.categoryModel.bgPicture ?? ''));
                           }))
                     ];
                   },

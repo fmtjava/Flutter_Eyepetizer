@@ -7,7 +7,7 @@ import 'package:module_discover/constant/string.dart';
 class WebPage extends StatefulWidget {
   final String url;
 
-  const WebPage({Key key, this.url}) : super(key: key);
+  const WebPage({Key? key, required this.url}) : super(key: key);
 
   @override
   _State createState() => _State();
@@ -55,7 +55,7 @@ class _State extends State<WebPage> {
     });
   }
 
-  Widget _appBar() {
+  PreferredSizeWidget _appBar() {
     return AppBar(
         leading: GestureDetector(
           onTap: () {

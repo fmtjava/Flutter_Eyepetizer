@@ -19,7 +19,7 @@ class WatchHistoryPage extends StatefulWidget {
 
 class _WatchHistoryPageState extends State<WatchHistoryPage> {
   EventBus eventBus = EventBus();
-  StreamSubscription _subscription;
+  StreamSubscription? _subscription;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,18 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                       child: ListView.separated(
                           itemBuilder: (context, index) {
                             return Slidable(
-                              actionPane: SlidableDrawerActionPane(),
+                              startActionPane: ActionPane(
+                                motion: const DrawerMotion(),
+                                extentRatio: 0.25,
+                                children: [
+                                  SlidableAction(
+                                    label: 'Archive',
+                                    backgroundColor: Colors.blue,
+                                    icon: Icons.archive,
+                                    onPressed: (context) {},
+                                  ),
+                                ],
+                              ),
                               child: VideoRelateWidgetItem(
                                 data: model.itemList[index],
                                 callBack: () {
@@ -56,13 +67,18 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                                 categoryColor: Colors.black26,
                                 openHero: true,
                               ),
-                              secondaryActions: <Widget>[
-                                IconSlideAction(
-                                  color: Colors.red,
-                                  icon: Icons.delete,
-                                  onTap: () => model.remove(index),
-                                )
-                              ],
+                              endActionPane: ActionPane(
+                                motion: const DrawerMotion(),
+                                extentRatio: 0.25,
+                                children: [
+                                  SlidableAction(
+                                    label: 'Delete',
+                                    backgroundColor: Colors.red,
+                                    icon: Icons.delete,
+                                    onPressed: (context) => model.remove(index),
+                                  ),
+                                ],
+                              ),
                             );
                           },
                           separatorBuilder: (context, index) {
@@ -90,7 +106,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
 
   @override
   void dispose() {
-    _subscription.cancel();
+    _subscription?.cancel();
     super.dispose();
   }
 }

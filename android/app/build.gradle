@@ -1,14 +1,15 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader('UTF-8') { reader ->
         localProperties.load(reader)
     }
-}
-
-def flutterRoot = localProperties.getProperty('flutter.sdk')
-if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
@@ -21,58 +22,11 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-
 android {
-    compileSdkVersion 31
-    ndkVersion "21.1.6352462"
+    namespace "com.example.eyepetizer"
+    compileSdk flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
 
-    lintOptions {
-        disable 'InvalidPackage'
-    }
-
-    defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.flutter.flutter_eyepetizer"
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    signingConfigs {
-        release {
-            keyAlias 'eye'
-            keyPassword 'eye123456'
-            storeFile file('../eye')
-            storePassword 'eye123456'
-        }
-    }
-
-
-    buildTypes {
-        debug {
-            signingConfig signingConfigs.release
-        }
-
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.release
-        }
-    }
-    packagingOptions {
-        // 确保app与speech_plugin都依赖的libflutter.so libapp.so merge时不冲突@https://github.com/card-io/card.io-Android-SDK/issues/186#issuecomment-427552552
-        pickFirst 'lib/x86_64/libflutter.so'
-        pickFirst 'lib/x86_64/libapp.so'
-        pickFirst 'lib/x86/libflutter.so'
-        pickFirst 'lib/arm64-v8a/libflutter.so'
-        pickFirst 'lib/arm64-v8a/libapp.so'
-        pickFirst 'lib/armeabi-v7a/libapp.so'
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -81,15 +35,33 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.example.eyepetizer"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
+        }
+    }
 }
 
 flutter {
     source '../..'
 }
 
-dependencies {
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation project(path: ':speech_plugin')
-}
+dependencies {}

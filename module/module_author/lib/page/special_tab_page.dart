@@ -7,7 +7,7 @@ import 'package:module_common/model/common_item_model.dart';
 class SpecialTabPage extends StatefulWidget {
   final apiUrl;
 
-  const SpecialTabPage({Key key, this.apiUrl}) : super(key: key);
+  const SpecialTabPage({Key? key, this.apiUrl}) : super(key: key);
 
   @override
   _SpecialTabPageState createState() => _SpecialTabPageState();

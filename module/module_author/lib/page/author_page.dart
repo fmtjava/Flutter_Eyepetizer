@@ -15,7 +15,7 @@ import 'package:module_common/model/tab_info_model.dart';
 import 'special_tab_page.dart';
 
 class AuthorPage extends StatefulWidget {
-  const AuthorPage({Key key}) : super(key: key);
+  const AuthorPage({Key? key}) : super(key: key);
 
   @override
   _AuthorPageState createState() => _AuthorPageState();
@@ -23,11 +23,11 @@ class AuthorPage extends StatefulWidget {
 
 class _AuthorPageState extends BaseState<AuthorPage>
     with TickerProviderStateMixin {
-  ScrollController _scrollController;
-  int authorId;
+  late ScrollController _scrollController;
+  late int authorId;
   ViewState viewState = ViewState.loading;
-  PgcInfo pgcInfo;
-  TabController _tabController;
+  late PgcInfo? pgcInfo;
+  late TabController _tabController;
 
   List<TabInfoItem> tabList = [];
   List<Widget> pageList = [];
@@ -67,7 +67,7 @@ class _AuthorPageState extends BaseState<AuthorPage>
       TabInfoModel tabInfoModel = TabInfoModel.fromJson(result);
       setState(() {
         viewState = ViewState.content;
-        tabList = tabInfoModel.tabInfo.tabList;
+        tabList = tabInfoModel.tabInfo?.tabList ?? [];
         if (tabList.length == 2) {
           pageList = [
             HomeTabPage(apiUrl: tabList[0].apiUrl),
@@ -82,7 +82,7 @@ class _AuthorPageState extends BaseState<AuthorPage>
         }
         pgcInfo = tabInfoModel.pgcInfo;
         _tabController = TabController(
-            length: tabInfoModel.tabInfo.tabList.length, vsync: this);
+            length: tabInfoModel.tabInfo?.tabList?.length ?? 0, vsync: this);
       });
     }, fail: (e) {
       viewState = ViewState.error;
@@ -126,7 +126,7 @@ class _AuthorPageState extends BaseState<AuthorPage>
             color: isShrink ? Colors.black : Colors.white),
       ),
       title: Text(
-        pgcInfo.name,
+        pgcInfo?.name ?? '',
         style: TextStyle(
           color: isShrink ? Colors.black : Colors.white,
         ),
@@ -136,11 +136,11 @@ class _AuthorPageState extends BaseState<AuthorPage>
         decoration: BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.cover,
-                image: pgcInfo.cover == null
+                image: pgcInfo?.cover == null
                     ? AssetImage('images/ic_default_header_bg.png',
                         package: 'module_author')
                     : cachedNetworkImageProvider(
-                        pgcInfo.cover,
+                        pgcInfo?.cover ?? '',
                       ))),
         padding: EdgeInsets.only(
             top: MediaQuery.of(context).padding.top + kToolbarHeight),
@@ -151,7 +151,8 @@ class _AuthorPageState extends BaseState<AuthorPage>
                 Padding(
                   padding: EdgeInsets.all(15),
                   child: ClipOval(
-                    child: cacheImage(pgcInfo.icon, height: 40, width: 40),
+                    child:
+                        cacheImage(pgcInfo?.icon ?? '', height: 40, width: 40),
                   ),
                 ),
                 Expanded(
@@ -159,13 +160,13 @@ class _AuthorPageState extends BaseState<AuthorPage>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      pgcInfo.description,
+                      pgcInfo?.description ?? '',
                       style: TextStyle(fontSize: 14, color: Colors.white),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      pgcInfo.brief,
+                      pgcInfo?.brief ?? '',
                       style: TextStyle(fontSize: 12, color: Colors.white),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -179,9 +180,9 @@ class _AuthorPageState extends BaseState<AuthorPage>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _infoWidget('${pgcInfo.videoCount}', author_works),
-                  _infoWidget('${pgcInfo.followCount}', author_flows),
-                  _infoWidget('${pgcInfo.shareCount}', author_share),
+                  _infoWidget('${pgcInfo?.videoCount}', author_works),
+                  _infoWidget('${pgcInfo?.followCount}', author_flows),
+                  _infoWidget('${pgcInfo?.shareCount}', author_share),
                 ],
               ),
             )

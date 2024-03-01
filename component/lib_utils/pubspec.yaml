@@ -4,16 +4,16 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.19.2 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  fluttertoast: ^8.2.2
+  fluttertoast: ^8.2.4
   flustars: ^2.0.1
-  share: ^0.6.4+3
+  share: ^2.0.4
   event_bus: ^2.0.0
 
 dev_dependencies:

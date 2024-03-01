@@ -5,10 +5,10 @@ import 'package:lib_utils/date_util.dart';
 import 'package:module_common/model/common_item_model.dart';
 
 class SpecialHorizontalWidgetItem extends StatelessWidget {
-  final Item item;
+  final Item? item;
   final isLast;
 
-  const SpecialHorizontalWidgetItem({Key key, this.isLast, this.item})
+  const SpecialHorizontalWidgetItem({Key? key, this.isLast, this.item})
       : super(key: key);
 
   @override
@@ -19,15 +19,15 @@ class SpecialHorizontalWidgetItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: () => toNamed("/detail", item.data),
+            onTap: () => toNamed("/detail", item?.data),
             child: Hero(
-              tag: '${item.data.id}${item.data.time}',
+              tag: '${item?.data?.id}${item?.data?.time}',
               child: Stack(
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
                     child: cacheImage(
-                      item.data.cover.feed,
+                      item?.data?.cover?.feed ?? '',
                       width: 300,
                       height: 180,
                     ),
@@ -43,7 +43,7 @@ class SpecialHorizontalWidgetItem extends StatelessWidget {
                                 topRight: Radius.circular(15),
                                 bottomRight: Radius.circular(15))),
                         child: Text(
-                          item.data.category,
+                          item?.data?.category ?? '',
                           style: TextStyle(color: Colors.white, fontSize: 12),
                         ),
                       )),
@@ -56,7 +56,7 @@ class SpecialHorizontalWidgetItem extends StatelessWidget {
                             color: Colors.black26,
                             borderRadius: BorderRadius.circular(4)),
                         child: Text(
-                          formatDateMsByMS(item.data.duration * 1000),
+                          formatDateMsByMS(item?.data?.duration ?? 0 * 1000),
                           style: TextStyle(color: Colors.white, fontSize: 12),
                         ),
                       ))
@@ -67,12 +67,12 @@ class SpecialHorizontalWidgetItem extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 5, bottom: 5),
             child: Text(
-              item.data.title,
+              item?.data?.title ?? '',
               style: const TextStyle(color: Colors.black87, fontSize: 14),
             ),
           ),
           Text(
-            formatDateMsByYMDHM(item.data.author.latestReleaseTime),
+            formatDateMsByYMDHM(item?.data?.author?.latestReleaseTime ?? 0),
             style: const TextStyle(color: Colors.black38, fontSize: 12),
           ),
         ],

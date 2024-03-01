@@ -18,8 +18,8 @@ class DiscoveryPage extends StatefulWidget {
 
 class _DiscoveryPageState extends State<DiscoveryPage>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  TabController _tabController;
-  PageController _pageController;
+  late TabController _tabController;
+  late PageController _pageController;
 
   @override
   void initState() {

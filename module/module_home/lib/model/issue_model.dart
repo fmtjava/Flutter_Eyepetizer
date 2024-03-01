@@ -2,9 +2,9 @@ import 'package:lib_core/model/paging_model.dart';
 import 'package:module_common/model/common_item_model.dart';
 
 class IssueEntity extends PagingModel<Item> {
-  int nextPublishTime;
-  String newestIssueType;
-  List<Issue> issueList;
+  int? nextPublishTime;
+  String? newestIssueType;
+  List<Issue> issueList = [];
 
   IssueEntity({this.nextPublishTime, this.newestIssueType});
 
@@ -28,7 +28,7 @@ class IssueEntity extends PagingModel<Item> {
     data['newestIssueType'] = this.newestIssueType;
     data['nextPageUrl'] = this.nextPageUrl;
     if (this.issueList != null) {
-      data['issueList'] = this.issueList.map((v) => v.toJson()).toList();
+      data['issueList'] = this.issueList!.map((v) => v.toJson()).toList();
     }
     return data;
   }

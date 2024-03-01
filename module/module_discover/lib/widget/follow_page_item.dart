@@ -8,7 +8,7 @@ import 'follow_widget_item.dart';
 class FollowPageItem extends StatelessWidget {
   final Item item;
 
-  const FollowPageItem({Key key, this.item}) : super(key: key);
+  const FollowPageItem({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +22,11 @@ class FollowPageItem extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    toNamed('/author', item.data.header.id);
+                    toNamed('/author', item.data?.header?.id);
                   },
                   child: ClipOval(
                       child: cacheImage(
-                    item.data.header.icon,
+                    item.data?.header?.icon ?? '',
                     width: 40,
                     height: 40,
                   )),
@@ -38,12 +38,12 @@ class FollowPageItem extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(item.data.header.title,
+                            Text(item.data?.header?.title ?? '',
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 14)),
                             Padding(
                               padding: EdgeInsets.only(top: 3),
-                              child: Text(item.data.header.description,
+                              child: Text(item.data?.header?.description ?? '',
                                   style: TextStyle(
                                       color: Colors.black26, fontSize: 12),
                                   maxLines: 1,
@@ -68,12 +68,12 @@ class FollowPageItem extends StatelessWidget {
           Container(
             height: 230,
             child: ListView.builder(
-                itemCount: item.data.itemList.length,
+                itemCount: item.data?.itemList?.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return FollowWidgetItem(
-                      item: item.data.itemList[index],
-                      last: index == item.data.itemList.length - 1);
+                      item: item.data?.itemList?[index],
+                      last: index == (item.data?.itemList?.length ?? 0) - 1);
                 }),
           )
         ],

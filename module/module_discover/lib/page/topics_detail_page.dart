@@ -10,7 +10,7 @@ import 'package:module_discover/widget/topic_detail_widget_item.dart';
 class TopicDetailPage extends StatefulWidget {
   final int detailId;
 
-  const TopicDetailPage({Key key, this.detailId}) : super(key: key);
+  const TopicDetailPage({Key? key, required this.detailId}) : super(key: key);
 
   @override
   _TopicDetailPageState createState() => _TopicDetailPageState();
@@ -27,7 +27,7 @@ class _TopicDetailPageState extends State<TopicDetailPage> {
         builder: (context, model, child) {
           return Scaffold(
               backgroundColor: Colors.white,
-              appBar: appBar(model.topicDetailModel.brief),
+              appBar: appBar(model.topicDetailModel.brief ?? ''),
               body: LoadingContainer(
                   viewState: model.viewState,
                   child: CustomScrollView(
@@ -37,8 +37,8 @@ class _TopicDetailPageState extends State<TopicDetailPage> {
                           delegate:
                               SliverChildBuilderDelegate((context, index) {
                         return TopicDetailWidgetItem(
-                            model: model.itemList[index]);
-                      }, childCount: model.itemList.length))
+                            model: model.itemList?[index]);
+                      }, childCount: model.itemList?.length))
                     ],
                   ),
                   retry: model.retry));
@@ -52,14 +52,14 @@ class _TopicDetailPageState extends State<TopicDetailPage> {
           Column(
             children: <Widget>[
               cacheImage(
-                topicDetailModel.headerImage,
+                topicDetailModel.headerImage ?? '',
                 width: MediaQuery.of(context).size.width,
                 height: 250,
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(20, 40, 20, 10),
                 child: Text(
-                  topicDetailModel.text,
+                  topicDetailModel.text ?? '',
                   style: TextStyle(fontSize: 12, color: Color(0xff9a9a9a)),
                 ),
               ),
@@ -78,7 +78,7 @@ class _TopicDetailPageState extends State<TopicDetailPage> {
                   height: 50,
                   alignment: Alignment.center,
                   child: Text(
-                    topicDetailModel.brief,
+                    topicDetailModel.brief ?? '',
                     style: TextStyle(
                         fontSize: 14,
                         color: Colors.black,

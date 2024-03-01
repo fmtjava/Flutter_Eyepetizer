@@ -7,9 +7,9 @@ import 'package:module_discover/model/topic_detail_model.dart';
 
 class TopicDetailPageModel extends BaseChangeNotifierModel {
   TopicDetailModel topicDetailModel = TopicDetailModel();
-  List<TopicDetailItemData> itemList = [];
+  List<TopicDetailItemData>? itemList = [];
 
-  int _id;
+  late int _id;
 
   void loadTopicDetailData(int id) {
     _id = id;

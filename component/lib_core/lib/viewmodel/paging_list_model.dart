@@ -9,7 +9,7 @@ import 'base_change_notifier_model.dart';
 abstract class PagingListModel<T, M extends PagingModel<T>>
     extends BaseChangeNotifierModel {
   List<T> itemList = []; //集合数组
-  String nextPageUrl; //下一页请求链接
+  String? nextPageUrl; //下一页请求链接
   RefreshController refreshController = //上拉加载/下拉刷新控制器
       RefreshController(initialRefresh: false);
 
@@ -22,7 +22,7 @@ abstract class PagingListModel<T, M extends PagingModel<T>>
           viewState = ViewState.content;
           nextPageUrl = getNextUrl(model);
           refreshController.refreshCompleted();
-          refreshController.footerMode.value = LoadStatus.canLoading;
+          refreshController.footerMode!.value = LoadStatus.canLoading;
           doExtraAfterRefresh();
         },
         fail: (e) {
@@ -40,7 +40,7 @@ abstract class PagingListModel<T, M extends PagingModel<T>>
       return;
     }
 
-    HttpManager.getData(nextPageUrl, success: (json) {
+    HttpManager.getData(nextPageUrl!, success: (json) {
       M model = getModel(json);
       doLoadMoreDataProcess(model.itemList);
       itemList.addAll(model.itemList);
@@ -74,7 +74,7 @@ abstract class PagingListModel<T, M extends PagingModel<T>>
   String getUrl();
 
   //上拉加载更多请求地址
-  String getNextUrl(M model) {
+  String? getNextUrl(M model) {
     return model.nextPageUrl;
   }
 

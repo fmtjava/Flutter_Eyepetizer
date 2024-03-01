@@ -5,9 +5,9 @@ import 'package:module_common/model/common_item_model.dart';
 import 'author_common_horizontal_widget_item.dart';
 
 class SpecialWidgetItem extends StatelessWidget {
-  final Item item;
+  final Item? item;
 
-  const SpecialWidgetItem({Key key, this.item}) : super(key: key);
+  const SpecialWidgetItem({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +23,11 @@ class SpecialWidgetItem extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     print("点了");
-                    toNamed('/author', item.data.header.id);
+                    toNamed('/author', item?.data?.header?.id);
                   },
                   child: ClipOval(
                     child: cacheImage(
-                      item.data.header.icon,
+                      item?.data?.header?.icon ?? '',
                       width: 40,
                       height: 40,
                     ),
@@ -35,26 +35,26 @@ class SpecialWidgetItem extends StatelessWidget {
                 ),
                 Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.data.header.title,
-                            style: const TextStyle(
-                                color: Colors.black87, fontSize: 14),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 3),
-                            child: Text(
-                              item.data.header.description,
-                              style: const TextStyle(
-                                  color: Colors.black38, fontSize: 12),
-                            ),
-                          )
-                        ],
+                  padding: EdgeInsets.only(left: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item?.data?.header?.title ?? '',
+                        style: const TextStyle(
+                            color: Colors.black87, fontSize: 14),
                       ),
-                    ))
+                      Padding(
+                        padding: EdgeInsets.only(top: 3),
+                        child: Text(
+                          item?.data?.header?.description ?? '',
+                          style: const TextStyle(
+                              color: Colors.black38, fontSize: 12),
+                        ),
+                      )
+                    ],
+                  ),
+                ))
               ],
             ),
           ),

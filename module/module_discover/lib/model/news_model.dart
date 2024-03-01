@@ -1,10 +1,9 @@
-
 import 'package:lib_core/model/paging_model.dart';
 
 class NewsModel extends PagingModel<NewsItemModel> {
-  int count;
-  int total;
-  bool adExist;
+  int? count;
+  int? total;
+  bool? adExist;
 
   NewsModel({this.count, this.total, this.adExist});
 
@@ -35,10 +34,10 @@ class NewsModel extends PagingModel<NewsItemModel> {
 }
 
 class NewsItemModel {
-  String type;
-  Data data;
-  int id;
-  int adIndex;
+  String? type;
+  Data? data;
+  int? id;
+  int? adIndex;
 
   NewsItemModel({this.type, this.data, this.id, this.adIndex});
 
@@ -53,7 +52,7 @@ class NewsItemModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['type'] = this.type;
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data!.toJson();
     }
     data['id'] = this.id;
     data['adIndex'] = this.adIndex;
@@ -62,13 +61,13 @@ class NewsItemModel {
 }
 
 class Data {
-  String dataType;
-  int id;
-  String type;
-  String text;
-  String actionUrl;
-  List<String> titleList;
-  String backgroundImage;
+  String? dataType;
+  int? id;
+  String? type;
+  String? text;
+  String? actionUrl;
+  List<String>? titleList;
+  String? backgroundImage;
 
   Data(
       {this.dataType,
@@ -85,7 +84,7 @@ class Data {
     type = json['type'];
     text = json['text'];
     actionUrl = json['actionUrl'];
-    if(json['titleList'] !=null){
+    if (json['titleList'] != null) {
       titleList = json['titleList'].cast<String>();
     }
     backgroundImage = json['backgroundImage'];

@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 
 //封装带缓存的Image
 Widget cacheImage(String url,
-    {double width,
-      double height,
-      BoxFit fit = BoxFit.cover,
-      BorderRadius borderRadius,
-      BoxShape shape = BoxShape.rectangle,
-      bool clearMemoryCacheWhenDispose = false}) {
+    {double? width,
+    double? height,
+    BoxFit fit = BoxFit.cover,
+    BorderRadius? borderRadius,
+    BoxShape shape = BoxShape.rectangle,
+    bool clearMemoryCacheWhenDispose = false}) {
   return ExtendedImage.network(
     url,
     shape: shape,
@@ -19,7 +19,7 @@ Widget cacheImage(String url,
     fit: fit,
     borderRadius: borderRadius,
     clearMemoryCacheWhenDispose:
-    clearMemoryCacheWhenDispose, //图片从 tree 中移除，清掉内存缓存，以减少内存压力
+        clearMemoryCacheWhenDispose, //图片从 tree 中移除，清掉内存缓存，以减少内存压力
   );
 }
 

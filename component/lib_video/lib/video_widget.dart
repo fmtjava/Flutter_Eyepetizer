@@ -2,7 +2,7 @@ import 'package:chewie/chewie.dart' hide MaterialControls;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lib_utils/view_util.dart';
-import 'package:orientation/orientation.dart';
+// import 'package:orientation/orientation.dart';
 import 'package:video_player/video_player.dart';
 
 import 'customer_video_controls.dart';
@@ -15,11 +15,11 @@ class VideoWidget extends StatefulWidget {
   final bool allowFullScreen;
   final bool allowPlaybackSpeedChanging;
   final double aspectRatio;
-  final Widget overlayUI;
+  final Widget? overlayUI;
 
   const VideoWidget(
-      {Key key,
-      this.url,
+      {Key? key,
+      required this.url,
       this.autoPlay = true,
       this.looping = false,
       this.aspectRatio = 16 / 9,
@@ -33,13 +33,14 @@ class VideoWidget extends StatefulWidget {
 }
 
 class VideoWidgetState extends State<VideoWidget> {
-  VideoPlayerController _videoPlayerController;
-  ChewieController _cheWieController;
+  late VideoPlayerController _videoPlayerController;
+  late ChewieController _cheWieController;
 
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.network(widget.url);
+    _videoPlayerController =
+        VideoPlayerController.networkUrl(Uri.parse(widget.url));
     _cheWieController = ChewieController(
         videoPlayerController: _videoPlayerController,
         autoPlay: widget.autoPlay,
@@ -87,7 +88,7 @@ class VideoWidgetState extends State<VideoWidget> {
     Size size = MediaQuery.of(context).size;
     if (size.width > size.height) {
       //使用Orientation插件解决ios全屏模式无法返回问题
-      OrientationPlugin.forceOrientation(DeviceOrientation.portraitUp);
+      // OrientationPlugin.forceOrientation(DeviceOrientation.portraitUp);
     }
   }
 }
