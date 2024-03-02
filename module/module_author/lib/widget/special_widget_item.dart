@@ -22,7 +22,6 @@ class SpecialWidgetItem extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    print("点了");
                     toNamed('/author', item?.data?.header?.id);
                   },
                   child: ClipOval(

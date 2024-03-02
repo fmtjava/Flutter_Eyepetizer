@@ -1,6 +1,4 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_eyepetizer/navigation/tab_navigation.dart';
 import 'package:flutter_eyepetizer/app_initialize.dart';
@@ -11,13 +9,6 @@ import 'package:module_author/page/author_page.dart';
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  //Flutter沉浸式状态栏
-  if (Platform.isAndroid) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-    // SystemChrome.setSystemUIOverlayStyle(
-    //     SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent));
-  }
   runApp(App());
 }
 
