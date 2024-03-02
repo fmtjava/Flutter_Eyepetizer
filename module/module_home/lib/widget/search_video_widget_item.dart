@@ -7,7 +7,7 @@ import 'package:module_common/model/common_item_model.dart';
 class SearchVideoWidgetItem extends StatelessWidget {
   final Item item;
 
-  const SearchVideoWidgetItem({Key key, this.item}) : super(key: key);
+  const SearchVideoWidgetItem({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +18,16 @@ class SearchVideoWidgetItem extends StatelessWidget {
         child: Container(
             child: Stack(alignment: Alignment.center, children: <Widget>[
           Hero(
-              tag: '${item.data.id}${item.data.time}',
+              tag: '${item.data?.id}${item.data?.time}',
               child: cacheImage(
-                item.data.cover.feed,
+                item.data?.cover?.feed ?? '',
                 width: double.infinity, //撑满整个屏幕
                 height: 220,
               )),
           Positioned(
               child: Column(children: <Widget>[
             Text(
-              item.data.title,
+              item.data?.title ?? '',
               maxLines: 1,
               style: TextStyle(
                   fontSize: 14,
@@ -42,7 +42,7 @@ class SearchVideoWidgetItem extends StatelessWidget {
                       decoration: BoxDecoration(color: Colors.black54),
                       padding: EdgeInsets.all(5),
                       child: Text(
-                        formatDateMsByMS(item.data.duration * 1000),
+                        formatDateMsByMS(item.data?.duration ?? 0 * 1000),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,

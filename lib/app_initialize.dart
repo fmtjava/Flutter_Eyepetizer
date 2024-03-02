@@ -1,4 +1,6 @@
-import 'package:flutter_splash_screen/flutter_splash_screen.dart';
+import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:lib_cache/cache_manager.dart';
 import 'package:module_common/constant/http_constant.dart';
 
@@ -9,7 +11,12 @@ class AppInitialize {
   static Future<void> init() async {
     await CacheManager.preInit();
     HttpConstant.baseUrl = 'http://baobab.kaiyanapp.com/api/';
-    Future.delayed(
-        Duration(milliseconds: 2000), () => FlutterSplashScreen.hide());
+    Future.delayed(Duration(milliseconds: 2000), () {
+      FlutterNativeSplash.remove();
+      if (Platform.isIOS) {
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+            overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+      }
+    });
   }
 }

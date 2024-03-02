@@ -9,7 +9,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class CategoryDetailModel extends BaseChangeNotifierModel {
   int category;
   List<Item> itemList = [];
-  String _nextPageUrl;
+  String? _nextPageUrl;
   bool loading = true;
   bool error = false;
   RefreshController refreshController =
@@ -26,8 +26,9 @@ class CategoryDetailModel extends BaseChangeNotifierModel {
         refreshController.loadNoData();
         return;
       }
-      url = _nextPageUrl +
-          "&udid=d2807c895f0348a180148c9dfa6f2feeac0781b5&deviceModel=Android";
+      url = _nextPageUrl ??
+          '' +
+              "&udid=d2807c895f0348a180148c9dfa6f2feeac0781b5&deviceModel=Android";
       getData(url, loadMore);
     } else {
       url = URLs.categoryVideoUrl +
@@ -55,7 +56,7 @@ class CategoryDetailModel extends BaseChangeNotifierModel {
         complete: () => notifyListeners());
   }
 
-  retry(){
+  retry() {
     loading = true;
     notifyListeners();
     loadMore(loadMore: false);

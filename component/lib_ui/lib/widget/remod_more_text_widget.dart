@@ -11,14 +11,14 @@ class ReadMoreTextWidget extends StatelessWidget {
   final String text;
   final String trimCollapsedText;
   final String trimExpandedText;
-  final TextStyle style;
-  final TextStyle moreStyle;
-  final TextStyle lessStyle;
+  final TextStyle? style;
+  final TextStyle? moreStyle;
+  final TextStyle? lessStyle;
   final int trimLines;
   final TrimTypeMode trimMode;
 
   const ReadMoreTextWidget(this.text,
-      {Key key,
+      {Key? key,
       this.trimCollapsedText = more_text,
       this.trimExpandedText = less_text,
       this.style,

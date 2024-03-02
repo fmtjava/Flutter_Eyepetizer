@@ -4,17 +4,17 @@ import 'package:lib_ui/config/color.dart';
 //通用的TabBar封装
 class TabBarWidget extends StatelessWidget {
   final List<Widget> tabs;
-  final TabController tabController;
+  final TabController? tabController;
   final Color labelColor;
   final Color unselectedLabelColor;
   final Color indicatorColor;
   final double fontSize;
   final TabBarIndicatorSize indicatorSize;
-  final ValueChanged<int> onTap;
+  final ValueChanged<int>? onTap;
 
   const TabBarWidget(
-      {Key key,
-      this.tabs,
+      {Key? key,
+      required this.tabs,
       this.tabController,
       this.labelColor = Colors.black,
       this.unselectedLabelColor = hitTextColor,
@@ -35,6 +35,6 @@ class TabBarWidget extends StatelessWidget {
         indicatorColor: indicatorColor,
         indicatorSize: indicatorSize,
         tabs: tabs,
-        onTap: (index) => onTap(index));
+        onTap: (index) => onTap?.call(index));
   }
 }

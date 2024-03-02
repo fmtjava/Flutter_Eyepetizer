@@ -1,12 +1,12 @@
 import 'package:lib_core/model/paging_model.dart';
 
 class Issue extends PagingModel<Item> {
-  int total;
-  int date;
-  int publishTime;
-  int releaseTime;
-  int count;
-  String type;
+  int? total;
+  int? date;
+  int? publishTime;
+  int? releaseTime;
+  int? count;
+  String? type;
 
   Issue(
       {this.total,
@@ -25,7 +25,7 @@ class Issue extends PagingModel<Item> {
     if (json['itemList'] != null) {
       itemList = [];
       (json['itemList'] as List).forEach((v) {
-        itemList.add(new Item.fromJson(v));
+        itemList!.add(new Item.fromJson(v));
       });
     }
     type = json['type'];
@@ -40,7 +40,7 @@ class Issue extends PagingModel<Item> {
     data['releaseTime'] = this.releaseTime;
     data['count'] = this.count;
     if (this.itemList != null) {
-      data['itemList'] = this.itemList.map((v) => v.toJson()).toList();
+      data['itemList'] = this.itemList!.map((v) => v.toJson()).toList();
     }
     data['type'] = this.type;
     data['nextPageUrl'] = this.nextPageUrl;
@@ -49,10 +49,10 @@ class Issue extends PagingModel<Item> {
 }
 
 class Item {
-  Data data;
-  int adIndex;
-  int id;
-  String type;
+  Data? data;
+  int? adIndex;
+  int? id;
+  String? type;
 
   Item({this.data, this.adIndex, this.id, this.type});
 
@@ -66,7 +66,7 @@ class Item {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data!.toJson();
     }
     data['adIndex'] = this.adIndex;
     data['id'] = this.id;
@@ -76,37 +76,37 @@ class Item {
 }
 
 class Data {
-  int date;
-  int releaseTime;
-  String description;
-  bool collected;
-  String remark;
-  String title;
-  String type;
-  String playUrl;
-  Cover cover;
-  int duration;
-  String descriptionEditor;
-  String xLibrary;
-  Provide provider;
-  int id;
-  bool ad;
-  Author author;
-  String dataType;
-  int searchWeight;
-  Consumption consumption;
-  bool played;
-  List<Tag> tags;
-  List<PlayInfo> playInfo;
-  bool ifLimitVideo;
-  WebUrl webUrl;
-  String category;
-  int idx;
-  String resourceType;
-  String text;
-  Header header;
-  List<Item> itemList;
-  String time = DateTime.now().toString();
+  int? date;
+  int? releaseTime;
+  String? description;
+  bool? collected;
+  String? remark;
+  String? title;
+  String? type;
+  String? playUrl;
+  Cover? cover;
+  int? duration;
+  String? descriptionEditor;
+  String? xLibrary;
+  Provide? provider;
+  int? id;
+  bool? ad;
+  Author? author;
+  String? dataType;
+  int? searchWeight;
+  Consumption? consumption;
+  bool? played;
+  List<Tag>? tags;
+  List<PlayInfo>? playInfo;
+  bool? ifLimitVideo;
+  WebUrl? webUrl;
+  String? category;
+  int? idx;
+  String? resourceType;
+  String? text;
+  Header? header;
+  List<Item>? itemList;
+  String? time = DateTime.now().toString();
 
   Data(
       {this.date,
@@ -169,13 +169,13 @@ class Data {
     if (json['tags'] != null) {
       tags = [];
       (json['tags'] as List).forEach((v) {
-        tags.add(new Tag.fromJson(v));
+        tags!.add(new Tag.fromJson(v));
       });
     }
     if (json['playInfo'] != null) {
       playInfo = [];
       (json['playInfo'] as List).forEach((v) {
-        playInfo.add(new PlayInfo.fromJson(v));
+        playInfo!.add(new PlayInfo.fromJson(v));
       });
     }
     ifLimitVideo = json['ifLimitVideo'];
@@ -190,7 +190,7 @@ class Data {
     if (json['itemList'] != null) {
       itemList = [];
       (json['itemList'] as List).forEach((v) {
-        itemList.add(new Item.fromJson(v));
+        itemList!.add(new Item.fromJson(v));
       });
     }
   }
@@ -206,54 +206,54 @@ class Data {
     data['type'] = this.type;
     data['playUrl'] = this.playUrl;
     if (this.cover != null) {
-      data['cover'] = this.cover.toJson();
+      data['cover'] = this.cover!.toJson();
     }
     data['duration'] = this.duration;
     data['descriptionEditor'] = this.descriptionEditor;
     data['library'] = this.xLibrary;
     if (this.provider != null) {
-      data['provider'] = this.provider.toJson();
+      data['provider'] = this.provider!.toJson();
     }
     data['id'] = this.id;
     data['ad'] = this.ad;
     if (this.author != null) {
-      data['author'] = this.author.toJson();
+      data['author'] = this.author!.toJson();
     }
     data['dataType'] = this.dataType;
     data['searchWeight'] = this.searchWeight;
     if (this.consumption != null) {
-      data['consumption'] = this.consumption.toJson();
+      data['consumption'] = this.consumption!.toJson();
     }
     data['played'] = this.played;
     if (this.tags != null) {
-      data['tags'] = this.tags.map((v) => v.toJson()).toList();
+      data['tags'] = this.tags!.map((v) => v.toJson()).toList();
     }
     if (this.playInfo != null) {
-      data['playInfo'] = this.playInfo.map((v) => v.toJson()).toList();
+      data['playInfo'] = this.playInfo!.map((v) => v.toJson()).toList();
     }
     data['ifLimitVideo'] = this.ifLimitVideo;
     if (this.webUrl != null) {
-      data['webUrl'] = this.webUrl.toJson();
+      data['webUrl'] = this.webUrl!.toJson();
     }
     data['category'] = this.category;
     data['idx'] = this.idx;
     data['resourceType'] = this.resourceType;
     data['text'] = this.text;
     if (this.header != null) {
-      data['header'] = this.header.toJson();
+      data['header'] = this.header!.toJson();
     }
     if (this.itemList != null) {
-      data['itemList'] = this.itemList.map((v) => v.toJson()).toList();
+      data['itemList'] = this.itemList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Cover {
-  String feed;
-  String detail;
-  String blurred;
-  String homepage;
+  String? feed;
+  String? detail;
+  String? blurred;
+  String? homepage;
 
   Cover({this.feed, this.detail, this.blurred, this.homepage});
 
@@ -275,8 +275,8 @@ class Cover {
 }
 
 class WebUrl {
-  String forWeibo;
-  String raw;
+  String? forWeibo;
+  String? raw;
 
   WebUrl({this.forWeibo, this.raw});
 
@@ -294,12 +294,12 @@ class WebUrl {
 }
 
 class PlayInfo {
-  String name;
-  int width;
-  List<IssueIssuelistItemlistDataPlayinfoUrllist> urlList;
-  String type;
-  String url;
-  int height;
+  String? name;
+  int? width;
+  late List<IssueIssuelistItemlistDataPlayinfoUrllist>? urlList;
+  String? type;
+  String? url;
+  int? height;
 
   PlayInfo(
       {this.name, this.width, this.urlList, this.type, this.url, this.height});
@@ -310,7 +310,7 @@ class PlayInfo {
     if (json['urlList'] != null) {
       urlList = [];
       (json['urlList'] as List).forEach((v) {
-        urlList.add(new IssueIssuelistItemlistDataPlayinfoUrllist.fromJson(v));
+        urlList!.add(new IssueIssuelistItemlistDataPlayinfoUrllist.fromJson(v));
       });
     }
     type = json['type'];
@@ -323,7 +323,7 @@ class PlayInfo {
     data['name'] = this.name;
     data['width'] = this.width;
     if (this.urlList != null) {
-      data['urlList'] = this.urlList.map((v) => v.toJson()).toList();
+      data['urlList'] = this.urlList!.map((v) => v.toJson()).toList();
     }
     data['type'] = this.type;
     data['url'] = this.url;
@@ -333,19 +333,19 @@ class PlayInfo {
 }
 
 class Author {
-  IssueIssuelistItemlistDataAuthorShield shield;
-  bool expert;
-  int approvedNotReadyVideoCount;
-  String icon;
-  String link;
-  String description;
-  int videoNum;
-  IssueIssuelistItemlistDataAuthorFollow follow;
-  int recSort;
-  bool ifPgc;
-  String name;
-  int latestReleaseTime;
-  int id;
+  IssueIssuelistItemlistDataAuthorShield? shield;
+  bool? expert;
+  int? approvedNotReadyVideoCount;
+  String? icon;
+  String? link;
+  String? description;
+  int? videoNum;
+  IssueIssuelistItemlistDataAuthorFollow? follow;
+  int? recSort;
+  bool? ifPgc;
+  String? name;
+  int? latestReleaseTime;
+  int? id;
 
   Author(
       {this.shield,
@@ -385,7 +385,7 @@ class Author {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.shield != null) {
-      data['shield'] = this.shield.toJson();
+      data['shield'] = this.shield!.toJson();
     }
     data['expert'] = this.expert;
     data['approvedNotReadyVideoCount'] = this.approvedNotReadyVideoCount;
@@ -394,7 +394,7 @@ class Author {
     data['description'] = this.description;
     data['videoNum'] = this.videoNum;
     if (this.follow != null) {
-      data['follow'] = this.follow.toJson();
+      data['follow'] = this.follow!.toJson();
     }
     data['recSort'] = this.recSort;
     data['ifPgc'] = this.ifPgc;
@@ -406,9 +406,9 @@ class Author {
 }
 
 class IssueIssuelistItemlistDataPlayinfoUrllist {
-  int size;
-  String name;
-  String url;
+  int? size;
+  String? name;
+  String? url;
 
   IssueIssuelistItemlistDataPlayinfoUrllist({this.size, this.name, this.url});
 
@@ -429,9 +429,9 @@ class IssueIssuelistItemlistDataPlayinfoUrllist {
 }
 
 class IssueIssuelistItemlistDataAuthorShield {
-  int itemId;
-  String itemType;
-  bool shielded;
+  int? itemId;
+  String? itemType;
+  bool? shielded;
 
   IssueIssuelistItemlistDataAuthorShield(
       {this.itemId, this.itemType, this.shielded});
@@ -452,9 +452,9 @@ class IssueIssuelistItemlistDataAuthorShield {
 }
 
 class IssueIssuelistItemlistDataAuthorFollow {
-  int itemId;
-  String itemType;
-  bool followed;
+  int? itemId;
+  String? itemType;
+  bool? followed;
 
   IssueIssuelistItemlistDataAuthorFollow(
       {this.itemId, this.itemType, this.followed});
@@ -475,13 +475,13 @@ class IssueIssuelistItemlistDataAuthorFollow {
 }
 
 class Tag {
-  String tagRecType;
-  String headerImage;
-  String actionUrl;
-  int communityIndex;
-  String name;
-  int id;
-  String bgPicture;
+  String? tagRecType;
+  String? headerImage;
+  String? actionUrl;
+  int? communityIndex;
+  String? name;
+  int? id;
+  String? bgPicture;
 
   Tag(
       {this.tagRecType,
@@ -516,16 +516,16 @@ class Tag {
 }
 
 class Header {
-  String actionUrl;
-  String description;
-  bool expert;
-  String icon;
-  String iconType;
-  int id;
-  bool ifPgc;
-  bool ifShowNotificationIcon;
-  String title;
-  int uid;
+  String? actionUrl;
+  String? description;
+  bool? expert;
+  String? icon;
+  String? iconType;
+  int? id;
+  bool? ifPgc;
+  bool? ifShowNotificationIcon;
+  String? title;
+  int? uid;
 
   Header(
       {this.actionUrl,
@@ -569,10 +569,10 @@ class Header {
 }
 
 class Consumption {
-  int shareCount;
-  int replyCount;
-  int collectionCount;
-  int realCollectionCount;
+  int? shareCount;
+  int? replyCount;
+  int? collectionCount;
+  int? realCollectionCount;
 
   Consumption(
       {this.shareCount,
@@ -598,9 +598,9 @@ class Consumption {
 }
 
 class Provide {
-  String icon;
-  String name;
-  String alias;
+  String? icon;
+  String? name;
+  String? alias;
 
   Provide({this.icon, this.name, this.alias});
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:lib_image/lib_image.dart';
 import 'package:lib_navigator/lib_navigator.dart';
 import 'package:module_home/viewmodel/home_page_model.dart';
@@ -7,7 +7,7 @@ import 'package:module_home/viewmodel/home_page_model.dart';
 class BannerWidget extends StatelessWidget {
   final HomePageModel model;
 
-  const BannerWidget({Key key, this.model}) : super(key: key);
+  const BannerWidget({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class BannerWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: cachedNetworkImageProvider(
-                            model.bannerList[index].data.cover.feed),
+                            model.bannerList[index].data?.cover?.feed ?? ''),
                         fit: BoxFit.cover)),
               ),
               Positioned(
@@ -29,7 +29,7 @@ class BannerWidget extends StatelessWidget {
                   child: Container(
                       padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
                       decoration: BoxDecoration(color: Colors.black12),
-                      child: Text(model.bannerList[index].data.title,
+                      child: Text(model.bannerList[index].data?.title ?? '',
                           style: TextStyle(color: Colors.white, fontSize: 12))))
             ],
           );

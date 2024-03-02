@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 ///本地缓存管理类
 class CacheManager {
-  SharedPreferences _preferences;
+  late SharedPreferences _preferences;
 
   CacheManager._();
 
@@ -10,13 +10,13 @@ class CacheManager {
     this._preferences = preferences;
   }
 
-  static CacheManager _instance;
+  static CacheManager? _instance;
 
   static CacheManager getInstance() {
     if (_instance == null) {
       _instance = CacheManager._();
     }
-    return _instance;
+    return _instance!;
   }
 
   //预初始化，防止get时，SharedPreferences还未初始化完毕
@@ -25,7 +25,7 @@ class CacheManager {
       var preferences = await SharedPreferences.getInstance();
       _instance = CacheManager._pre(preferences);
     }
-    return _instance;
+    return _instance!;
   }
 
   set(String key, Object value) {
@@ -45,6 +45,6 @@ class CacheManager {
   }
 
   T get<T>(String key) {
-    return _preferences.get(key);
+    return _preferences.get(key) as T;
   }
 }

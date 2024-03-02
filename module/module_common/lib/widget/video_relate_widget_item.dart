@@ -4,16 +4,16 @@ import 'package:lib_utils/date_util.dart';
 import 'package:module_common/model/common_item_model.dart';
 
 class VideoRelateWidgetItem extends StatelessWidget {
-  final Data data;
+  final Data? data;
   final VoidCallback callBack;
   final Color titleColor;
   final Color categoryColor;
   final bool openHero;
 
   const VideoRelateWidgetItem(
-      {Key key,
+      {Key? key,
       this.data,
-      this.callBack,
+      required this.callBack,
       this.titleColor = Colors.white,
       this.categoryColor = Colors.white,
       this.openHero = false})
@@ -44,7 +44,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
                               decoration: BoxDecoration(color: Colors.black54),
                               padding: EdgeInsets.all(3),
                               child: Text(
-                                formatDateMsByMS(data.duration * 1000),
+                                formatDateMsByMS(data?.duration ?? 0 * 1000),
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 10,
@@ -59,7 +59,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(data.title,
+                        Text(data?.title ?? '',
                             style: TextStyle(
                               color: titleColor,
                               fontSize: 14,
@@ -68,7 +68,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(top: 15),
                           child:
-                              Text('#${data.category} / ${data.author?.name}',
+                              Text('#${data?.category} / ${data?.author?.name}',
                                   style: TextStyle(
                                     color: categoryColor,
                                     fontSize: 12,
@@ -84,7 +84,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
 
   Widget _coverWidget() {
     if (openHero) {
-      return Hero(tag: '${data.id}${data.time}', child: _imageWidget());
+      return Hero(tag: '${data?.id}${data?.time}', child: _imageWidget());
     } else {
       return _imageWidget();
     }
@@ -92,7 +92,7 @@ class VideoRelateWidgetItem extends StatelessWidget {
 
   Widget _imageWidget() {
     return cacheImage(
-      data.cover.detail,
+      data?.cover?.detail ?? '',
       width: 135,
       height: 80,
     );

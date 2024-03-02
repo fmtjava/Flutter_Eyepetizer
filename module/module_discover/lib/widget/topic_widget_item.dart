@@ -5,7 +5,7 @@ import 'package:module_discover/model/topic_model.dart';
 class TopicWidgetItem extends StatelessWidget {
   final TopicItemModel itemModel;
 
-  const TopicWidgetItem({Key key, this.itemModel}) : super(key: key);
+  const TopicWidgetItem({Key? key, required this.itemModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class TopicWidgetItem extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: ClipRRect(
                 child: cacheImage(
-                  itemModel.data.image,
+                  itemModel.data?.image ?? '',
                   width: MediaQuery.of(context).size.width,
                   height: 200,
                 ), //充满容器，可能会被截断

@@ -8,7 +8,7 @@ import 'package:module_discover/constant/api_service.dart';
 import 'package:module_discover/model/recommend_model.dart';
 
 class RecommendRepository extends LoadingMoreBase<RecommendItem> {
-  String nextPageUrl;
+  String? nextPageUrl;
   bool _hasMore = true;
   bool forceRefresh = false;
   Utf8Decoder utf8decoder = Utf8Decoder();
@@ -29,7 +29,7 @@ class RecommendRepository extends LoadingMoreBase<RecommendItem> {
   Future<bool> loadData([bool isloadMoreAction = false]) async {
     String url = '';
     if (isloadMoreAction) {
-      url = nextPageUrl;
+      url = nextPageUrl ?? '';
     } else {
       url = URLs.communityUrl;
     }

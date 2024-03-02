@@ -1,14 +1,11 @@
-
-
 import 'package:lib_core/model/paging_model.dart';
 
-class TopicModel extends PagingModel<TopicItemModel>{
-  int count;
-  int total;
-  bool adExist;
+class TopicModel extends PagingModel<TopicItemModel> {
+  int? count;
+  int? total;
+  bool? adExist;
 
-  TopicModel(
-      {this.count, this.total, this.adExist});
+  TopicModel({this.count, this.total, this.adExist});
 
   TopicModel.fromJson(Map<String, dynamic> json) {
     if (json['itemList'] != null) {
@@ -37,8 +34,8 @@ class TopicModel extends PagingModel<TopicItemModel>{
 }
 
 class TopicItemModel {
-  String type;
-  Data data;
+  String? type;
+  Data? data;
 
   TopicItemModel({this.type, this.data});
 
@@ -51,35 +48,35 @@ class TopicItemModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['type'] = this.type;
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data!.toJson();
     }
     return data;
   }
 }
 
 class Data {
-  String dataType;
-  int id;
-  String title;
-  String description;
-  String image;
-  String actionUrl;
-  bool shade;
-  Label label;
+  String? dataType;
+  int? id;
+  String? title;
+  String? description;
+  String? image;
+  String? actionUrl;
+  bool? shade;
+  Label? label;
   Null header;
-  bool autoPlay;
+  bool? autoPlay;
 
   Data(
       {this.dataType,
-        this.id,
-        this.title,
-        this.description,
-        this.image,
-        this.actionUrl,
-        this.shade,
-        this.label,
-        this.header,
-        this.autoPlay});
+      this.id,
+      this.title,
+      this.description,
+      this.image,
+      this.actionUrl,
+      this.shade,
+      this.label,
+      this.header,
+      this.autoPlay});
 
   Data.fromJson(Map<String, dynamic> json) {
     dataType = json['dataType'];
@@ -104,7 +101,7 @@ class Data {
     data['actionUrl'] = this.actionUrl;
     data['shade'] = this.shade;
     if (this.label != null) {
-      data['label'] = this.label.toJson();
+      data['label'] = this.label!.toJson();
     }
     data['header'] = this.header;
     data['autoPlay'] = this.autoPlay;
@@ -113,8 +110,8 @@ class Data {
 }
 
 class Label {
-  String text;
-  String card;
+  String? text;
+  String? card;
   Null detail;
 
   Label({this.text, this.card, this.detail});

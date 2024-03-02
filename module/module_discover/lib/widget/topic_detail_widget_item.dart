@@ -10,14 +10,14 @@ import 'package:module_discover/constant/string.dart';
 import 'package:module_discover/model/topic_detail_model.dart';
 
 class TopicDetailWidgetItem extends StatelessWidget {
-  final TopicDetailItemData model;
+  final TopicDetailItemData? model;
 
-  const TopicDetailWidgetItem({Key key, this.model}) : super(key: key);
+  const TopicDetailWidgetItem({Key? key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => toNamed('/detail', model.data.content.data),
+        onTap: () => toNamed('/detail', model?.data?.content?.data),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -38,7 +38,10 @@ class TopicDetailWidgetItem extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(20, 20, 10, 0),
             child: ClipOval(
                 child: cacheImage(
-              model.data.header.icon == null ? '' : model.data.header.icon,
+              (model?.data?.header?.icon == null
+                      ? ''
+                      : model?.data?.header?.icon) ??
+                  '',
               width: 45,
               height: 45,
             ))),
@@ -49,9 +52,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                model.data.header.issuerName == null
-                    ? ''
-                    : model.data.header.issuerName,
+                '${model?.data?.header?.issuerName == null ? '' : model?.data?.header?.issuerName}',
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -60,12 +61,12 @@ class TopicDetailWidgetItem extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Text(
-                    '${formatDateMsByYMD(model.data.header.time)}发布：',
+                    '${formatDateMsByYMD(model?.data?.header?.time ?? 0)}发布：',
                     style: TextStyle(color: hitTextColor, fontSize: 12),
                   ),
                   Expanded(
                       child: Text(
-                    model.data.content.data.title,
+                    model?.data?.content?.data?.title ?? '',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 12,
@@ -87,7 +88,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
     return Padding(
         padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
         child: ReadMoreTextWidget(
-          model.data.content.data.description,
+          model?.data?.content?.data?.description ?? '',
           style: TextStyle(fontSize: 14, color: desTextColor),
           moreStyle: textStyle,
           lessStyle: textStyle,
@@ -111,9 +112,9 @@ class TopicDetailWidgetItem extends StatelessWidget {
           ClipRRect(
               child: Hero(
                   tag:
-                      '${model.data.content.data.id}${model.data.content.data.time}',
+                      '${model?.data?.content?.data?.id}${model?.data?.content?.data?.time}',
                   child: cacheImage(
-                    model.data.content.data.cover.feed,
+                    model?.data?.content?.data?.cover?.feed ?? '',
                     width: MediaQuery.of(context).size.width,
                     height: 200,
                   )), //充满容器，可能会被截断
@@ -128,7 +129,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
                       padding: EdgeInsets.all(5),
                       child: Text(
                         formatDateMsByMS(
-                            model.data.content.data.duration * 1000),
+                            model?.data?.content?.data?.duration ?? 0 * 1000),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
@@ -149,7 +150,7 @@ class TopicDetailWidgetItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text(
-                  '${model.data.content.data.consumption.collectionCount}',
+                  '${model?.data?.content?.data?.consumption?.collectionCount}',
                   style: TextStyle(fontSize: 12, color: hitTextColor)),
             )
           ],
@@ -159,7 +160,8 @@ class TopicDetailWidgetItem extends StatelessWidget {
             Icon(Icons.message, size: 20, color: hitTextColor),
             Padding(
               padding: EdgeInsets.only(left: 10),
-              child: Text('${model.data.content.data.consumption.replyCount}',
+              child: Text(
+                  '${model?.data?.content?.data?.consumption?.replyCount}',
                   style: TextStyle(fontSize: 12, color: hitTextColor)),
             )
           ],
@@ -176,8 +178,8 @@ class TopicDetailWidgetItem extends StatelessWidget {
         ),
         IconButton(
             icon: Icon(Icons.share, color: hitTextColor),
-            onPressed: () => share(model.data.content.data.title,
-                model.data.content.data.webUrl.forWeibo))
+            onPressed: () => share(model?.data?.content?.data?.title ?? '',
+                model?.data?.content?.data?.webUrl?.forWeibo ?? ''))
       ],
     );
   }
@@ -191,8 +193,8 @@ class TopicDetailWidgetItem extends StatelessWidget {
     );
   }
 
-  List<Widget> _getTagWidgetList(TopicDetailItemData itemData) {
-    List<Widget> widgetList = itemData.data.content.data.tags.map((tag) {
+  List<Widget> _getTagWidgetList(TopicDetailItemData? itemData) {
+    List<Widget>? widgetList = itemData?.data?.content?.data?.tags?.map((tag) {
       return Container(
           margin: EdgeInsets.only(right: 5),
           alignment: Alignment.center,
@@ -201,10 +203,12 @@ class TopicDetailWidgetItem extends StatelessWidget {
           decoration: BoxDecoration(
               color: tabBgColor, borderRadius: BorderRadius.circular(4)),
           child: Text(
-            tag.name,
+            tag.name ?? '',
             style: TextStyle(fontSize: 12, color: Colors.blue),
           ));
     }).toList();
-    return widgetList.length > 3 ? widgetList.sublist(0, 3) : widgetList;
+    return (widgetList != null && widgetList.length > 3)
+        ? widgetList!.sublist(0, 3)
+        : widgetList!;
   }
 }

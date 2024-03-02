@@ -18,9 +18,9 @@ import 'package:module_detail/widget/appbar_widget.dart';
 const VIDEO_SMALL_CARD_TYPE = 'videoSmallCard';
 
 class VideoDetailPage extends StatefulWidget {
-  final Data videoDta;
+  final Data? videoDta;
 
-  const VideoDetailPage({Key key, this.videoDta}) : super(key: key);
+  const VideoDetailPage({Key? key, this.videoDta}) : super(key: key);
 
   @override
   _VideoDetailPageState createState() => _VideoDetailPageState();
@@ -30,7 +30,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     with WidgetsBindingObserver {
   final GlobalKey<VideoWidgetState> videoKey = GlobalKey();
 
-  Data data;
+  late Data data;
 
   @override
   void initState() {
@@ -47,9 +47,9 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     //AppLifecycleState当前页面的状态(是否可见)
     if (state == AppLifecycleState.paused) {
       //页面不可见时,暂停视频
-      videoKey.currentState.pause();
+      videoKey.currentState?.pause();
     } else if (state == AppLifecycleState.resumed) {
-      videoKey.currentState.play();
+      videoKey.currentState?.play();
     }
   }
 
@@ -65,7 +65,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     return ProviderWidget<VideoDetailPageModel>(
         model: VideoDetailPageModel(),
         onModelInit: (model) {
-          model.loadVideoRelateData(data.id);
+          model.loadVideoRelateData(data.id ?? 0);
         },
         builder: (context, model, child) {
           return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -77,7 +77,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                     tag: '${data.id}${data.time}',
                     child: VideoWidget(
                       key: videoKey,
-                      url: data.playUrl,
+                      url: data.playUrl ?? '',
                       overlayUI: videoAppBar(),
                     )),
                 Expanded(
@@ -91,7 +91,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                     //背景图片
                                     fit: BoxFit.cover,
                                     image: cachedNetworkImageProvider(
-                                        '${data.cover.blurred}}/thumbnail/${MediaQuery.of(context).size.height}x${MediaQuery.of(context).size.width}'))),
+                                        '${data.cover?.blurred}}/thumbnail/${MediaQuery.of(context).size.height}x${MediaQuery.of(context).size.width}'))),
                             child: CustomScrollView(
                               //CustomScrollView结合Sliver可以防止滚动冲突
                               slivers: <Widget>[
@@ -104,7 +104,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                             padding: EdgeInsets.only(
                                                 left: 10, top: 10),
                                             child: Text(
-                                              data.title,
+                                              data.title ?? '',
                                               style: TextStyle(
                                                   fontSize: 18,
                                                   color: Colors.white,
@@ -114,14 +114,14 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                             padding: EdgeInsets.only(
                                                 left: 10, top: 10),
                                             child: Text(
-                                                '#${data.category} / ${formatDateMsByYMDHM(data.author.latestReleaseTime)}',
+                                                '#${data.category} / ${formatDateMsByYMDHM(data.author?.latestReleaseTime ?? 0)}',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 12))),
                                         Padding(
                                             padding: EdgeInsets.only(
                                                 left: 10, top: 10, right: 10),
-                                            child: Text(data.description,
+                                            child: Text(data.description ?? '',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 14))),
@@ -142,7 +142,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                       padding: EdgeInsets.only(
                                                           left: 3),
                                                       child: Text(
-                                                        '${data.consumption.collectionCount}',
+                                                        '${data.consumption?.collectionCount}',
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 13),
@@ -166,7 +166,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                             EdgeInsets.only(
                                                                 left: 3),
                                                         child: Text(
-                                                          '${data.consumption.shareCount}',
+                                                          '${data.consumption?.shareCount}',
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -192,7 +192,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                             EdgeInsets.only(
                                                                 left: 3),
                                                         child: Text(
-                                                          '${data.consumption.replyCount}',
+                                                          '${data.consumption?.replyCount}',
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -214,7 +214,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                               padding: EdgeInsets.all(10),
                                               child: ClipOval(
                                                 child: cacheImage(
-                                                    data.author.icon,
+                                                    data.author?.icon ?? '',
                                                     height: 40,
                                                     width: 40),
                                               )),
@@ -224,7 +224,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: <Widget>[
-                                                  Text(data.author.name,
+                                                  Text(data.author?.name ?? '',
                                                       style: TextStyle(
                                                           fontSize: 15,
                                                           color: Colors.white)),
@@ -233,7 +233,8 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                                           top: 3),
                                                       child: Text(
                                                           data.author
-                                                              .description,
+                                                                  ?.description ??
+                                                              '',
                                                           style: TextStyle(
                                                               fontSize: 13,
                                                               color: Colors
@@ -269,7 +270,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                     return VideoRelateWidgetItem(
                                         data: model.itemList[index].data,
                                         callBack: () {
-                                          videoKey.currentState.pause();
+                                          videoKey.currentState?.pause();
                                           toPage(
                                               VideoDetailPage(
                                                   videoDta: model
@@ -280,7 +281,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                                   return Padding(
                                       padding: EdgeInsets.all(10),
                                       child: Text(
-                                        model.itemList[index].data.text,
+                                        model.itemList[index].data?.text ?? '',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

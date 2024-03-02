@@ -8,7 +8,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class RankListPage extends StatefulWidget {
   final String apiUrl;
 
-  const RankListPage({Key key, this.apiUrl}) : super(key: key);
+  const RankListPage({Key? key, required this.apiUrl}) : super(key: key);
 
   @override
   _RankListPageState createState() => _RankListPageState();
@@ -50,5 +50,4 @@ class _RankListPageState extends State<RankListPage>
 
   @override
   bool get wantKeepAlive => true; //设置页面缓存
-
 }

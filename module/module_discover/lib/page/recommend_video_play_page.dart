@@ -7,7 +7,8 @@ import 'package:module_discover/model/recommend_model.dart';
 class RecommendVideoPlayPage extends StatefulWidget {
   final RecommendItem item;
 
-  const RecommendVideoPlayPage({Key key, this.item}) : super(key: key);
+  const RecommendVideoPlayPage({Key? key, required this.item})
+      : super(key: key);
 
   @override
   _RecommendVideoPlayPageState createState() => _RecommendVideoPlayPageState();
@@ -26,9 +27,9 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
-      videoKey.currentState.pause();
+      videoKey.currentState?.pause();
     } else if (state == AppLifecycleState.resumed) {
-      videoKey.currentState.play();
+      videoKey.currentState?.play();
     }
   }
 
@@ -44,10 +45,9 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
               Align(
                   child: VideoWidget(
                 key: videoKey,
-                url: widget.item.data.content.data.playUrl,
+                url: widget.item.data?.content?.data?.playUrl ?? '',
                 aspectRatio: _getAspectRatio(),
-                allowFullScreen: !(widget.item.data.content.data.height >
-                    widget.item.data.content.data.width),
+                allowFullScreen: !allowFullScreen(),
               )),
               Positioned(
                   left: 10,
@@ -73,11 +73,18 @@ class _RecommendVideoPlayPageState extends State<RecommendVideoPlayPage>
     );
   }
 
+  bool allowFullScreen() {
+    var height = widget.item.data?.content?.data?.height;
+    var width = widget.item.data?.content?.data?.width;
+    if (height != null && width != null && height > width) {
+      return true;
+    }
+    return false;
+  }
+
   double _getAspectRatio() {
     double aspectRatio = 16 / 9;
-    bool allowFullScreen = widget.item.data.content.data.height >
-        widget.item.data.content.data.width;
-    if (allowFullScreen) {
+    if (allowFullScreen()) {
       final size = MediaQuery.of(context).size;
       final width = size.width;
       final height = size.height;

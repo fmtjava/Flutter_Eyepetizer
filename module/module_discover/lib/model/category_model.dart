@@ -1,24 +1,24 @@
 class CategoryModel {
-  int id;
-  String name;
+  int? id;
+  String? name;
   Null alias;
-  String description;
-  String bgPicture;
-  String bgColor;
-  String headerImage;
-  int defaultAuthorId;
-  int tagId;
+  String? description;
+  String? bgPicture;
+  String? bgColor;
+  String? headerImage;
+  int? defaultAuthorId;
+  int? tagId;
 
   CategoryModel(
       {this.id,
-        this.name,
-        this.alias,
-        this.description,
-        this.bgPicture,
-        this.bgColor,
-        this.headerImage,
-        this.defaultAuthorId,
-        this.tagId});
+      this.name,
+      this.alias,
+      this.description,
+      this.bgPicture,
+      this.bgColor,
+      this.headerImage,
+      this.defaultAuthorId,
+      this.tagId});
 
   CategoryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

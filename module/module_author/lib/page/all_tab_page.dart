@@ -7,7 +7,7 @@ import 'package:module_common/model/common_item_model.dart';
 class AllTabPage extends StatefulWidget {
   final apiUrl;
 
-  const AllTabPage({Key key, this.apiUrl}) : super(key: key);
+  const AllTabPage({Key? key, this.apiUrl}) : super(key: key);
 
   @override
   _AllTabPageState createState() => _AllTabPageState();

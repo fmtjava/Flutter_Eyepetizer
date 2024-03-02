@@ -10,17 +10,17 @@ const VIDEO_TYPE = 'video';
 class RecommendWidgetItem extends StatelessWidget {
   final RecommendItem item;
 
-  const RecommendWidgetItem({Key key, this.item}) : super(key: key);
+  const RecommendWidgetItem({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (item.data.content.type == VIDEO_TYPE) {
+        if (item.data?.content?.type == VIDEO_TYPE) {
           toPage(RecommendVideoPlayPage(item: item));
         } else {
           toPage(RecommendPhotoGalleryPage(
-            galleryItems: item.data.content.data.urls,
+            galleryItems: item.data?.content?.data?.urls ?? [],
           ));
         }
       },
@@ -39,17 +39,19 @@ class RecommendWidgetItem extends StatelessWidget {
 
   _imageItem(BuildContext context) {
     var maxWidth = MediaQuery.of(context).size.width;
-    var width = item.data.content.data.width == 0
-        ? maxWidth
-        : item.data.content.data.width;
-    var height = item.data.content.data.height == 0
-        ? maxWidth
-        : item.data.content.data.height;
+    var width = (item.data?.content?.data?.width == 0
+            ? maxWidth
+            : item.data?.content?.data?.width) ??
+        0;
+    var height = (item.data?.content?.data?.height == 0
+            ? maxWidth
+            : item.data?.content?.data?.height) ??
+        0;
 
     Widget image = Stack(
       children: <Widget>[
         cacheImage(
-          item.data.content.data.cover.feed,
+          item.data?.content?.data?.cover?.feed ?? '',
           shape: BoxShape.rectangle,
           width: maxWidth,
           fit: BoxFit.cover,
@@ -61,10 +63,10 @@ class RecommendWidgetItem extends StatelessWidget {
             top: 5,
             right: 5,
             child: Offstage(
-              offstage: item.data.content.data.urls != null &&
-                  item.data.content.data.urls.length == 1,
+              offstage: item.data?.content?.data?.urls != null &&
+                  item.data?.content?.data?.urls?.length == 1,
               child: Icon(
-                item.data.content.type == VIDEO_TYPE
+                item.data?.content?.type == VIDEO_TYPE
                     ? Icons.play_circle_outline
                     : Icons.photo_library,
                 color: Colors.white,
@@ -85,7 +87,7 @@ class RecommendWidgetItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.fromLTRB(6, 10, 6, 10),
       child: Text(
-        item.data.content.data.description,
+        item.data?.content?.data?.description ?? '',
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(fontSize: 14, color: Colors.black87),
@@ -107,7 +109,7 @@ class RecommendWidgetItem extends StatelessWidget {
                   clipBehavior: Clip.antiAlias,
                   borderRadius: BorderRadius.circular(12),
                   child: cacheImage(
-                    item.data.content.data.owner.avatar,
+                    item.data?.content?.data?.owner?.avatar ?? '',
                     width: 24,
                     height: 24,
                   ),
@@ -116,7 +118,7 @@ class RecommendWidgetItem extends StatelessWidget {
                   padding: EdgeInsets.all(5),
                   width: 80,
                   child: Text(
-                    item.data.content.data.owner.nickname,
+                    item.data?.content?.data?.owner?.nickname ?? '',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 12),
@@ -134,7 +136,7 @@ class RecommendWidgetItem extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 3),
                   child: Text(
-                    '${item.data.content.data.consumption.collectionCount}',
+                    '${item.data?.content?.data?.consumption?.collectionCount}',
                     style: TextStyle(fontSize: 12),
                   ),
                 )

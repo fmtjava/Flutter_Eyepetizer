@@ -16,11 +16,11 @@ class TabNavigation extends StatefulWidget {
 
 class _TabNavigationState extends State<TabNavigation> {
   PageController _pageController = PageController();
-  DateTime lastTime;
+  DateTime? lastTime;
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    return PopScope(
         child: Scaffold(
           body: PageView(
             controller: _pageController,
@@ -64,12 +64,13 @@ class _TabNavigationState extends State<TabNavigation> {
                 );
               }),
         ),
-        onWillPop: _onWillPop);
+        canPop: true,
+        onPopInvoked: _onWillPop);
   }
 
-  Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop(didPop) async {
     if (lastTime == null ||
-        DateTime.now().difference(lastTime) > Duration(seconds: 2)) {
+        DateTime.now().difference(lastTime!) > Duration(seconds: 2)) {
       lastTime = DateTime.now();
       showTip(DString.exit_tip);
       return false;

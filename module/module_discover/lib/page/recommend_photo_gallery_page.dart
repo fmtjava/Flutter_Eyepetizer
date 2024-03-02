@@ -10,7 +10,7 @@ import 'package:lib_navigator/lib_navigator.dart';
 class RecommendPhotoGalleryPage extends StatelessWidget {
   final List<String> galleryItems;
 
-  const RecommendPhotoGalleryPage({Key key, this.galleryItems})
+  const RecommendPhotoGalleryPage({Key? key, required this.galleryItems})
       : super(key: key);
 
   @override
@@ -29,8 +29,8 @@ class RecommendPhotoGalleryPage extends StatelessWidget {
                           PhotoViewGallery.builder(
                             builder: (BuildContext context, int index) =>
                                 PhotoViewGalleryPageOptions(
-                                    imageProvider:
-                                    cachedNetworkImageProvider(galleryItems[index]),
+                                    imageProvider: cachedNetworkImageProvider(
+                                        galleryItems[index]),
                                     initialScale:
                                         PhotoViewComputedScale.contained * 1,
                                     minScale:

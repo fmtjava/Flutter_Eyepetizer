@@ -6,7 +6,7 @@ homepage:
 publish_to: 'none'#如果你想发布到pub.dev，请删除这一行
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.19.2 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:

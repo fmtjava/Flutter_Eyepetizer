@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 //自定义SliverPersistentHeaderDelegate保证child滑动顶部时吸顶
 class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
   final TabBar child;
 
-  StickyTabBarDelegate({@required this.child});
+  StickyTabBarDelegate({required this.child});
 
   @override
   Widget build(

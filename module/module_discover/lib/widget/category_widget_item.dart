@@ -5,14 +5,15 @@ import 'package:module_discover/model/category_model.dart';
 class CategoryWidgetItem extends StatelessWidget {
   final CategoryModel categoryModel;
 
-  const CategoryWidgetItem({Key key, this.categoryModel}) : super(key: key);
+  const CategoryWidgetItem({Key? key, required this.categoryModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(children: <Widget>[
       ClipRRect(
           borderRadius: BorderRadius.circular(4),
-          child: cacheImage(categoryModel.bgPicture)),
+          child: cacheImage(categoryModel.bgPicture ?? '')),
       Center(
           child: Text('#${categoryModel.name}',
               style: TextStyle(

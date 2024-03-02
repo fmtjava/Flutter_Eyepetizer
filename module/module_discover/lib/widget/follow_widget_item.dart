@@ -5,15 +5,16 @@ import 'package:lib_utils/date_util.dart';
 import 'package:module_common/model/common_item_model.dart';
 
 class FollowWidgetItem extends StatelessWidget {
-  final Item item;
+  final Item? item;
   final bool last;
 
-  const FollowWidgetItem({Key key, this.item, this.last}) : super(key: key);
+  const FollowWidgetItem({Key? key, this.item, required this.last})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => toNamed('/detail', item.data),
+        onTap: () => toNamed('/detail', item?.data),
         child: Container(
           padding: EdgeInsets.only(left: 15, right: last ? 15 : 0),
           child: Column(
@@ -24,9 +25,9 @@ class FollowWidgetItem extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
                     child: Hero(
-                        tag: '${item.data.id}${item.data.time}',
+                        tag: '${item?.data?.id}${item?.data?.time}',
                         child: cacheImage(
-                          item.data.cover.feed,
+                          item?.data?.cover?.feed ?? '',
                           width: 300,
                           height: 180,
                         )),
@@ -41,7 +42,7 @@ class FollowWidgetItem extends StatelessWidget {
                               decoration: BoxDecoration(color: Colors.white54),
                               alignment: AlignmentDirectional.center,
                               child: Text(
-                                item.data.category,
+                                item?.data?.category ?? '',
                                 style: TextStyle(
                                     fontSize: 13,
                                     color: Colors.black,
@@ -52,7 +53,7 @@ class FollowWidgetItem extends StatelessWidget {
               Container(
                 width: 300,
                 padding: EdgeInsets.only(top: 3),
-                child: Text(item.data.title,
+                child: Text(item?.data?.title ?? '',
                     style: TextStyle(
                         fontSize: 14,
                         color: Colors.black,
@@ -63,7 +64,8 @@ class FollowWidgetItem extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(top: 3),
                 child: Text(
-                    formatDateMsByYMDHM(item.data.author.latestReleaseTime),
+                    formatDateMsByYMDHM(
+                        item?.data?.author?.latestReleaseTime ?? 0),
                     style: TextStyle(fontSize: 12, color: Colors.black26)),
               )
             ],

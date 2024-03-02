@@ -17,7 +17,7 @@ const VIDEO_COLLECTION_WITH_BRIEF = "videoCollectionWithBrief";
 class HomeTabPage extends StatefulWidget {
   final apiUrl;
 
-  const HomeTabPage({Key key, this.apiUrl}) : super(key: key);
+  const HomeTabPage({Key? key, this.apiUrl}) : super(key: key);
 
   @override
   _HomeTabPageState createState() => _HomeTabPageState();
@@ -33,7 +33,7 @@ class _HomeTabPageState
           case VIDEO_COLLECTION_OF_HORIZONTAL_SCROLL_CARD:
             return _horizontalScrollCardItem(item);
           case TEXT_HEADER:
-            return _titleItem(item.data.text);
+            return _titleItem(item.data?.text ?? '');
           case VIDEO:
             return VideoRelateWidgetItem(
               data: item.data,
@@ -71,7 +71,7 @@ class _HomeTabPageState
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(
-            item.data.text,
+            item.data?.text ?? '',
             style: TextStyle(
                 color: Colors.blueAccent, fontWeight: FontWeight.bold),
           ),
@@ -88,7 +88,7 @@ class _HomeTabPageState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _titleItem(item.data.header.title),
+        _titleItem(item.data?.header?.title ?? ''),
         AuthorCommonHorizontalWidgetItem(
           item: item,
         ),

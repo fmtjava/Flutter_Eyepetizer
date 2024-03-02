@@ -8,8 +8,8 @@ class LoadMoreWidget extends StatefulWidget {
   final String loadMoreText;
 
   const LoadMoreWidget(
-      {Key key,
-      this.isLoadMore,
+      {Key? key,
+      this.isLoadMore = false,
       this.loadingText = loading_text,
       this.loadMoreText = load_more_text})
       : super(key: key);

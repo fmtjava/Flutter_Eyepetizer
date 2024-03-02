@@ -16,8 +16,8 @@ class RankPage extends StatefulWidget {
 
 class _RankPageState extends BaseState<RankPage>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  TabController _tabController;
-  PageController _pageController;
+  late TabController _tabController;
+  late PageController _pageController;
   List<TabInfoItem> _tabList = [];
 
   @override
@@ -55,7 +55,7 @@ class _RankPageState extends BaseState<RankPage>
                     controller: _pageController,
                     onPageChanged: (index) => _tabController.index = index,
                     children: _tabList.map((TabInfoItem tabInfoItem) {
-                      return RankListPage(apiUrl: tabInfoItem.apiUrl);
+                      return RankListPage(apiUrl: tabInfoItem.apiUrl ?? '');
                     }).toList())),
           ],
         ));
@@ -65,8 +65,11 @@ class _RankPageState extends BaseState<RankPage>
     await HttpManager.getData(URLs.rankUrl, success: (result) {
       TabInfoModel tabInfoModel = TabInfoModel.fromJson(result);
       setState(() {
-        _tabList = tabInfoModel.tabInfo.tabList;
-        _tabController = TabController(length: _tabList.length, vsync: this);
+        if (tabInfoModel.tabInfo != null &&
+            tabInfoModel.tabInfo?.tabList != null) {
+          _tabList = tabInfoModel.tabInfo!.tabList!;
+          _tabController = TabController(length: _tabList.length, vsync: this);
+        }
       });
     }, fail: (e) {
       showError(e.toString());

@@ -19,7 +19,7 @@ class _TopicsPageState
         return OpenContainer(closedBuilder: (context, action) {
           return TopicWidgetItem(itemModel: model.itemList[index]);
         }, openBuilder: (context, action) {
-          return TopicDetailPage(detailId: model.itemList[index].data.id);
+          return TopicDetailPage(detailId: model.itemList[index].data?.id ?? 0);
         });
       },
       itemCount: model.itemList.length);

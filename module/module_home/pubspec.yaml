@@ -6,7 +6,7 @@ homepage:
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.19.2 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -22,8 +22,8 @@ dependencies:
   module_common:
     path: ../module_common
 
-  flutter_swiper: ^1.1.6
-  animations: ^1.1.1
+  flutter_swiper_null_safety: ^1.0.2
+  animations: ^2.0.11
 
 dev_dependencies:
   flutter_test:

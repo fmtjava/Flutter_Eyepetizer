@@ -1,29 +1,7 @@
-buildscript {
-    repositories {
-        //google()
-        //jcenter()
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
-    }
-}
-
 allprojects {
     repositories {
-        //google()
-        //jcenter()
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
-
-        maven {
-            url 'http://download.flutter.io'
-        }
+        google()
+        mavenCentral()
     }
 }
 
@@ -35,6 +13,6 @@ subprojects {
     project.evaluationDependsOn(':app')
 }
 
-task clean(type: Delete) {
+tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }

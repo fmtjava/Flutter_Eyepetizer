@@ -52,7 +52,7 @@ class _RecommendPageState extends State<RecommendPage>
     _recommendRepository.dispose();
   }
 
-  Future<void> _refresh() async {
+  Future<bool> _refresh() async {
     return _recommendRepository.refresh().whenComplete(() => null);
   }
 

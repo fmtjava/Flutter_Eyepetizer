@@ -9,7 +9,7 @@ import 'package:lib_utils/share_util.dart';
 class AllWidgetItem extends StatelessWidget {
   final Item item;
 
-  const AllWidgetItem({Key key, this.item}) : super(key: key);
+  const AllWidgetItem({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,10 @@ class AllWidgetItem extends StatelessWidget {
           Row(
             children: [
               InkWell(
-                onTap: () => toNamed('/author', item.data.author.id),
+                onTap: () => toNamed('/author', item.data?.author?.id),
                 child: ClipOval(
                   child: cacheImage(
-                    item.data.author.icon,
+                    item.data?.author?.icon ?? '',
                     width: 40,
                     height: 40,
                   ),
@@ -37,14 +37,14 @@ class AllWidgetItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      item.data.author.name,
+                      item.data?.author?.name ?? '',
                       style:
                           const TextStyle(color: Colors.black87, fontSize: 14),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 3),
                       child: Text(
-                        item.data.author.description,
+                        item.data?.author?.description ?? '',
                         style: const TextStyle(
                           color: Colors.black38,
                           fontSize: 12,
@@ -62,11 +62,11 @@ class AllWidgetItem extends StatelessWidget {
           InkWell(
             onTap: () => toNamed("/detail", item.data),
             child: Hero(
-              tag: '${item.data.id}${item.data.time}',
+              tag: '${item.data?.id}${item.data?.time}',
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(4),
                 child: cacheImage(
-                  item.data.cover.feed,
+                  item.data?.cover?.feed ?? '',
                   width: MediaQuery.of(context).size.width,
                   height: 180,
                 ),
@@ -86,7 +86,7 @@ class AllWidgetItem extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 10, bottom: 10),
       child: ReadMoreTextWidget(
-        item.data.description,
+        item.data?.description ?? '',
         style: TextStyle(fontSize: 14, color: Colors.black54),
         moreStyle: textStyle,
         lessStyle: textStyle,
@@ -105,7 +105,7 @@ class AllWidgetItem extends StatelessWidget {
   }
 
   List<Widget> _getTagWidgetList() {
-    List<Widget> widgetList = item.data.tags.map((tag) {
+    List<Widget>? widgetList = item.data?.tags?.map((tag) {
       return Container(
           margin: EdgeInsets.only(right: 5),
           alignment: Alignment.center,
@@ -114,11 +114,13 @@ class AllWidgetItem extends StatelessWidget {
           decoration: BoxDecoration(
               color: tabBgColor, borderRadius: BorderRadius.circular(4)),
           child: Text(
-            tag.name,
+            tag.name ?? '',
             style: TextStyle(fontSize: 12, color: Colors.blue),
           ));
     }).toList();
-    return widgetList.length > 3 ? widgetList.sublist(0, 3) : widgetList;
+    return (widgetList != null && widgetList.length > 3)
+        ? widgetList.sublist(0, 3)
+        : widgetList!;
   }
 
   Widget _consumptionWidget() {
@@ -130,7 +132,7 @@ class AllWidgetItem extends StatelessWidget {
             Icon(Icons.favorite_border, size: 20, color: Colors.black54),
             Padding(
               padding: EdgeInsets.only(left: 10),
-              child: Text('${item.data.consumption.collectionCount}',
+              child: Text('${item.data?.consumption?.collectionCount}',
                   style: TextStyle(fontSize: 12, color: Colors.black54)),
             )
           ],
@@ -140,7 +142,7 @@ class AllWidgetItem extends StatelessWidget {
             Icon(Icons.star_border, size: 20, color: Colors.black54),
             Padding(
               padding: EdgeInsets.only(left: 10),
-              child: Text('${item.data.consumption.realCollectionCount}',
+              child: Text('${item.data?.consumption?.realCollectionCount}',
                   style: TextStyle(fontSize: 12, color: Colors.black54)),
             )
           ],
@@ -150,14 +152,15 @@ class AllWidgetItem extends StatelessWidget {
             Icon(Icons.mode_comment_outlined, size: 20, color: Colors.black54),
             Padding(
               padding: EdgeInsets.only(left: 10),
-              child: Text('${item.data.consumption.replyCount}',
+              child: Text('${item.data?.consumption?.replyCount}',
                   style: TextStyle(fontSize: 12, color: Colors.black54)),
             )
           ],
         ),
         IconButton(
             icon: Icon(Icons.share_outlined, color: Colors.black54),
-            onPressed: () => share(item.data.title, item.data.playUrl))
+            onPressed: () =>
+                share(item.data?.title ?? '', item.data?.playUrl ?? ''))
       ],
     );
   }

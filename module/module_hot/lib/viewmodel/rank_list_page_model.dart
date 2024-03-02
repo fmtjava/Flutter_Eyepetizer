@@ -7,7 +7,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RankListPageModel extends BaseChangeNotifierModel {
   List<Item> itemList = [];
-  String apiUrl;
+  late String apiUrl;
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 

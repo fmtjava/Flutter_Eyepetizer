@@ -10,7 +10,7 @@ class VideoSearchModel extends BaseChangeNotifierModel {
   bool hideKeyWord = false;
   bool hideEmpty = true;
   List<Item> dataList = [];
-  String _nextPageUrl;
+  String? _nextPageUrl;
   List<String> keyWords = [];
   String query = '';
   int total = 0;
@@ -37,7 +37,7 @@ class VideoSearchModel extends BaseChangeNotifierModel {
         refreshController.loadNoData();
         return;
       }
-      url = _nextPageUrl;
+      url = _nextPageUrl!;
       getData(loadMore, url);
     } else {
       _reset();
@@ -52,7 +52,7 @@ class VideoSearchModel extends BaseChangeNotifierModel {
           Issue issue = Issue.fromJson(result);
 
           viewState = ViewState.content;
-          total = issue.total;
+          total = issue.total ?? 0;
           if (!loadMore) {
             dataList.clear();
             dataList.addAll(issue.itemList);
@@ -62,7 +62,7 @@ class VideoSearchModel extends BaseChangeNotifierModel {
             hideEmpty = true;
           }
           dataList.removeWhere((item) {
-            return item.data.cover == null;
+            return item.data?.cover == null;
           });
           _nextPageUrl = issue.nextPageUrl;
           hideKeyWord = true;

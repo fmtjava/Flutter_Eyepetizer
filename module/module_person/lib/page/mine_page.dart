@@ -113,9 +113,9 @@ class _MinePageState extends State<MinePage>
   }
 
   ImageProvider get avatarImage {
-    return _imageFile == null
+    return (_imageFile == null
         ? AssetImage('images/ic_img_avatar.png', package: 'module_person')
-        : FileImage(_imageFile);
+        : FileImage(_imageFile)) as ImageProvider;
   }
 
   Widget _operateWidget(String image, String text) {
@@ -145,7 +145,7 @@ class _MinePageState extends State<MinePage>
     ];
   }
 
-  Widget _settingWidget(String text, {VoidCallback callback}) {
+  Widget _settingWidget(String text, {VoidCallback? callback}) {
     return InkWell(
       onTap: callback,
       child: Container(
@@ -193,9 +193,9 @@ class _MinePageState extends State<MinePage>
 
   //模拟头像选择修改，目前存储在本地，实际开发应当上传到云存储平台
   _getImage(ImageSource source) async {
-    var imageFile = await picker.getImage(source: source);
+    var imageFile = await picker.pickImage(source: source);
     setState(() {
-      _imageFile = File(imageFile.path);
+      _imageFile = File(imageFile?.path ?? '');
     });
     MineRepository.saveAvatarPath(_imageFile);
   }

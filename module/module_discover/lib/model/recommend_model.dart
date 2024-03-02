@@ -1,13 +1,11 @@
-
 import 'package:lib_core/model/paging_model.dart';
 
-class RecommendModel extends PagingModel<RecommendItem>{
-  int count;
-  int total;
-  bool adExist;
+class RecommendModel extends PagingModel<RecommendItem> {
+  int? count;
+  int? total;
+  bool? adExist;
 
-  RecommendModel(
-      {this.count, this.total, this.adExist});
+  RecommendModel({this.count, this.total, this.adExist});
 
   RecommendModel.fromJson(Map<String, dynamic> json) {
     if (json['itemList'] != null) {
@@ -36,8 +34,8 @@ class RecommendModel extends PagingModel<RecommendItem>{
 }
 
 class RecommendItem {
-  String type;
-  Data data;
+  String? type;
+  Data? data;
   RecommendItem({this.type, this.data});
 
   RecommendItem.fromJson(Map<String, dynamic> json) {
@@ -49,21 +47,18 @@ class RecommendItem {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['type'] = this.type;
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data?.toJson();
     }
     return data;
   }
 }
 
 class Data {
-  String dataType;
-  Header header;
-  CommunityModel content;
+  String? dataType;
+  Header? header;
+  CommunityModel? content;
 
-  Data(
-      {this.dataType,
-      this.header,
-      this.content});
+  Data({this.dataType, this.header, this.content});
 
   Data.fromJson(Map<String, dynamic> json) {
     dataType = json['dataType'];
@@ -78,24 +73,24 @@ class Data {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['dataType'] = this.dataType;
     if (this.header != null) {
-      data['header'] = this.header.toJson();
+      data['header'] = this.header?.toJson();
     }
     if (this.content != null) {
-      data['content'] = this.content.toJson();
+      data['content'] = this.content?.toJson();
     }
     return data;
   }
 }
 
 class Header {
-  int id;
-  String actionUrl;
-  String icon;
-  String iconType;
-  bool showHateVideo;
-  String followType;
-  String issuerName;
-  bool topShow;
+  int? id;
+  String? actionUrl;
+  String? icon;
+  String? iconType;
+  bool? showHateVideo;
+  String? followType;
+  String? issuerName;
+  bool? topShow;
 
   Header(
       {this.id,
@@ -133,8 +128,8 @@ class Header {
 }
 
 class CommunityModel {
-  String type;
-  ContentData data;
+  String? type;
+  ContentData? data;
 
   CommunityModel({this.type, this.data});
 
@@ -147,39 +142,39 @@ class CommunityModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['type'] = this.type;
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data?.toJson();
     }
     return data;
   }
 }
 
 class ContentData {
-  String dataType;
-  int id;
-  String title;
-  String description;
-  String library;
-  List<Tags> tags;
-  Consumption consumption;
-  String resourceType;
-  int uid;
-  bool collected;
-  bool reallyCollected;
-  Owner owner;
-  Cover cover;
-  String checkStatus;
-  String area;
-  String city;
-  bool ifMock;
-  String validateStatus;
-  String validateResult;
-  bool addWatermark;
-  String url;
-  String playUrl;
-  int width;
-  int height;
-  List<String> urls;
-  List<String> urlsWithWatermark;
+  String? dataType;
+  int? id;
+  String? title;
+  String? description;
+  String? library;
+  List<Tags>? tags;
+  Consumption? consumption;
+  String? resourceType;
+  int? uid;
+  bool? collected;
+  bool? reallyCollected;
+  Owner? owner;
+  Cover? cover;
+  String? checkStatus;
+  String? area;
+  String? city;
+  bool? ifMock;
+  String? validateStatus;
+  String? validateResult;
+  bool? addWatermark;
+  String? url;
+  String? playUrl;
+  int? width;
+  int? height;
+  List<String>? urls;
+  List<String>? urlsWithWatermark;
 
   ContentData(
       {this.dataType,
@@ -203,9 +198,9 @@ class ContentData {
       this.validateResult,
       this.addWatermark,
       this.url,
-        this.playUrl,
-        this.width,
-        this.height,
+      this.playUrl,
+      this.width,
+      this.height,
       this.urls,
       this.urlsWithWatermark});
 
@@ -218,7 +213,7 @@ class ContentData {
     if (json['tags'] != null) {
       tags = [];
       json['tags'].forEach((v) {
-        tags.add(new Tags.fromJson(v));
+        tags?.add(new Tags.fromJson(v));
       });
     }
     consumption = json['consumption'] != null
@@ -240,9 +235,11 @@ class ContentData {
     url = json['url'];
     width = json['width'];
     height = json['height'];
-    playUrl = json['playUrl'] != null ?json['playUrl']:null;
-    urls = json['urls'] != null ?json['urls'].cast<String>():null;
-    urlsWithWatermark = json['urlsWithWatermark'] != null ?json['urlsWithWatermark'].cast<String>():null;
+    playUrl = json['playUrl'] != null ? json['playUrl'] : null;
+    urls = json['urls'] != null ? json['urls'].cast<String>() : null;
+    urlsWithWatermark = json['urlsWithWatermark'] != null
+        ? json['urlsWithWatermark'].cast<String>()
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -253,23 +250,23 @@ class ContentData {
     data['description'] = this.description;
     data['library'] = this.library;
     if (this.tags != null) {
-      data['tags'] = this.tags.map((v) => v.toJson()).toList();
+      data['tags'] = this.tags!.map((v) => v.toJson()).toList();
     }
     if (this.consumption != null) {
-      data['consumption'] = this.consumption.toJson();
+      data['consumption'] = this.consumption!.toJson();
     }
     data['resourceType'] = this.resourceType;
     data['uid'] = this.uid;
     data['collected'] = this.collected;
     data['reallyCollected'] = this.reallyCollected;
     if (this.owner != null) {
-      data['owner'] = this.owner.toJson();
+      data['owner'] = this.owner!.toJson();
     }
     if (this.playUrl != null) {
       data['playUrl'] = this.playUrl;
     }
     if (this.cover != null) {
-      data['cover'] = this.cover.toJson();
+      data['cover'] = this.cover!.toJson();
     }
     data['checkStatus'] = this.checkStatus;
     data['area'] = this.area;
@@ -281,10 +278,10 @@ class ContentData {
     data['url'] = this.url;
     data['width'] = this.width;
     data['height'] = this.height;
-    if(this.urls !=null){
+    if (this.urls != null) {
       data['urls'] = this.urls;
     }
-    if(this.urlsWithWatermark !=null){
+    if (this.urlsWithWatermark != null) {
       data['urlsWithWatermark'] = this.urlsWithWatermark;
     }
     return data;
@@ -292,15 +289,15 @@ class ContentData {
 }
 
 class Tags {
-  int id;
-  String name;
-  String actionUrl;
-  String desc;
-  String bgPicture;
-  String headerImage;
-  String tagRecType;
-  bool haveReward;
-  bool ifNewest;
+  int? id;
+  String? name;
+  String? actionUrl;
+  String? desc;
+  String? bgPicture;
+  String? headerImage;
+  String? tagRecType;
+  bool? haveReward;
+  bool? ifNewest;
 
   Tags(
       {this.id,
@@ -341,10 +338,10 @@ class Tags {
 }
 
 class Consumption {
-  int collectionCount;
-  int shareCount;
-  int replyCount;
-  int realCollectionCount;
+  int? collectionCount;
+  int? shareCount;
+  int? replyCount;
+  int? realCollectionCount;
 
   Consumption(
       {this.collectionCount,
@@ -370,22 +367,21 @@ class Consumption {
 }
 
 class Owner {
-  String nickname;
-  String avatar;
-  String userType;
-  bool ifPgc;
-  String description;
-  String area;
-  String gender;
-  String cover;
-  String actionUrl;
-  bool followed;
-  bool limitVideoOpen;
-  bool expert;
+  String? nickname;
+  String? avatar;
+  String? userType;
+  bool? ifPgc;
+  String? description;
+  String? area;
+  String? gender;
+  String? cover;
+  String? actionUrl;
+  bool? followed;
+  bool? limitVideoOpen;
+  bool? expert;
 
   Owner(
-      {
-      this.nickname,
+      {this.nickname,
       this.avatar,
       this.userType,
       this.ifPgc,
@@ -432,8 +428,8 @@ class Owner {
 }
 
 class Cover {
-  String feed;
-  String detail;
+  String? feed;
+  String? detail;
 
   Cover({this.feed, this.detail});
 

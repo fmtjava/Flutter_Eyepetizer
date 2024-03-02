@@ -6,7 +6,7 @@ homepage:
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.19.2 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -24,9 +24,9 @@ dependencies:
   module_common:
     path: ../module_common
 
-  image_picker: ^0.7.2+1
-  flutter_slidable: ^0.5.4
-  provider: ^5.0.0
+  image_picker: ^1.0.7
+  flutter_slidable: ^3.0.1
+  provider: ^6.1.2
 
 
 dev_dependencies:
